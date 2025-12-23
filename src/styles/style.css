@@ -4456,6 +4456,13 @@ h1 .hero__title-script {
   body .what-we-do-section .what-we-do-content-wrapper {
     gap: 0;
   }
+  body .full-width-testimonial-audio .testimonial-audio-controls .testimonial-audio-navigation.arrow-navigation .arrow-navigation__arrow {
+    width: 3.5rem;
+    height: 3.5rem;
+  }
+  body .full-width-testimonial-audio .testimonial-audio-quote {
+    min-height: 18vh;
+  }
 }
 @media (min-width: 1800px) {
   html {
