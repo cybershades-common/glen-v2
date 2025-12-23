@@ -41,6 +41,7 @@
     const navItems = megaMenu.querySelectorAll('.mega-menu__nav-item');
     const circleImage = megaMenu.querySelector('.mega-menu__circle-image');
     const footerLinks = megaMenu.querySelectorAll('.mega-menu__footer-links a, .mega-menu__social a');
+    const desktopQuickLinks = document.querySelector('.site-header .header-quick-links');
     
     // Mobile-only elements
     const mobileQuickLinksBtn = megaMenu.querySelector('#mobileQuickLinksToggle');
@@ -60,6 +61,16 @@
         { y: 0, opacity: 1 },
         0.1
       );
+
+    // animate desktop quick links right after nav items
+    if (desktopQuickLinks) {
+      menuTimeline.fromTo(
+        desktopQuickLinks,
+        { y: -40, opacity: 0 },
+        { y: 0, opacity: 1, duration: 0.4, ease: 'power2.out' },
+        '>-0.8' // immediately after nav items
+      );
+    }
 
     // Add footer links animation (same as menu items, starts after nav items)
     if (footerLinks && footerLinks.length > 0) {
@@ -137,6 +148,13 @@
       if (footerLinks && footerLinks.length > 0) {
         gsap.set(footerLinks, {
           y: 100,
+          opacity: 0
+        });
+      }
+
+      if (desktopQuickLinks) {
+        gsap.set(desktopQuickLinks, {
+          y: -40,
           opacity: 0
         });
       }

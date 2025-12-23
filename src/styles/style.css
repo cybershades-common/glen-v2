@@ -447,6 +447,8 @@ body.mega-menu-open .site-header .header-actions .header-icon.header-profile svg
 }
 body.mega-menu-open .site-header .header-quick-links {
   display: flex;
+  opacity: 1;
+  transform: translateY(0);
 }
 body.mega-menu-open .site-header .header-icon--white {
   color: #183153;
@@ -500,6 +502,8 @@ body.mega-menu-open .site-header .hamburger .hamburger .line:nth-child(3) {
   justify-content: center;
   max-width: 327px;
   margin: 0 auto;
+  opacity: 0;
+  transform: translateY(-0.75rem);
 }
 .header-quick-links button {
   width: 100%;
