@@ -4358,6 +4358,14 @@ h1 .hero__title-script {
   body .three-stages-section {
     padding: 4.75rem 0 6.25rem;
   }
+  body .three-stages-section .graph-image {
+    text-align: center;
+    margin: 0.5rem 0;
+  }
+  body .three-stages-section .graph-image img {
+    max-width: 96%;
+    margin: auto;
+  }
   body .testimonial-audio-slide .container-fluid > .row {
     gap: 3rem 0;
   }
@@ -4401,9 +4409,7 @@ h1 .hero__title-script {
     width: 100%;
   }
   body .three-stages-section .three-stages-diagram {
-    transform: scale(0.55);
-    margin: -34%;
-    margin-left: -73%;
+    display: none;
   }
   body .masked-image-content-block__cta {
     align-self: center;
