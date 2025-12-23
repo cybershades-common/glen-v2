@@ -46,6 +46,7 @@
 
 .desktop-only {
   display: block;
+
   @media (max-width: 991px) {
     display: none;
   }
@@ -53,6 +54,7 @@
 
 .mobile-only {
   display: none;
+
   .hero__mobile-actions {
     position: relative;
     z-index: 11111;
@@ -61,6 +63,7 @@
 
 @media (min-width:992px) and (max-width:1400px) {
   body {
+
     .masked-image-content-block__title,
     .masked-image-content-block__title-bold,
     .masked-image-content-block__title-script {
@@ -80,43 +83,55 @@
 @media (min-width:768px) and (max-width:992px) {
   html {
     font-size: 13px;
+
     body {
       .full-width-video-promo {
         height: auto;
       }
-      h2, h2 span {
+
+      h2,
+      h2 span {
         font-size: 2.75rem;
       }
+
       .section .edge-image {
         &.bottom-edge {
           bottom: -1px;
         }
       }
+
       .wellbeing-section {
         .wellbeing-content-row {
           justify-content: center;
         }
       }
+
       .three-stages-section {
         padding: 6.25rem 0;
+
         .container-fluid {
           padding: 0 2.5rem;
+
           .three-stages-content {
             flex-direction: row;
             justify-content: space-between;
+
             .three-stages-description {
               width: 70%;
             }
           }
+
           .three-stages-cards {
             flex-direction: row;
             padding: 0;
+
             .three-stages-card {
               max-width: 48%;
             }
           }
         }
       }
+
       .cottage-garden-section {
         min-height: 50vh;
       }
@@ -128,7 +143,17 @@
   body {
     .three-stages-section {
       padding: 4.75rem 0 6.25rem;
+
+      .graph-image {
+        text-align: center;
+        margin: 1rem 0;
+        img{
+          max-width: 92%;
+          margin: auto;
+        }
+      }
     }
+
     .testimonial-audio-slide {
       .container-fluid {
         >.row {
@@ -136,6 +161,7 @@
         }
       }
     }
+
     .masked-image-block {
       flex-direction: column-reverse;
       gap: 2rem;
@@ -146,13 +172,16 @@
       }
 
     }
+
     .masked-image-content-block {
       padding: 1.5rem 0 5rem;
     }
+
     .breadcrumb-wrap {
       padding: 1rem;
       margin-bottom: 5rem;
     }
+
     .site-header {
       height: 5rem;
       min-height: 5rem;
@@ -163,33 +192,38 @@
         }
       }
     }
+
     .header-quick-links {
       display: none;
       opacity: 0;
       pointer-events: none;
     }
+
     .mega-menu__nav-item {
       a {
         font-size: 2.5rem;
       }
     }
+
     .mobile-only {
       display: block;
     }
+
     .three-stages-section .three-stages-list,
     .three-stages-section .three-stages-item,
     .three-stages-section .three-stages-line {
       max-width: 100%;
       width: 100%;
     }
+
     .three-stages-section .three-stages-diagram {
-      transform: scale(0.55);
-      margin: -34%;
-      margin-left: -73%;
+      display: none;
     }
+
     .masked-image-content-block__cta {
       align-self: center;
     }
+
     .full-width-image-words-animation {
       min-height: auto;
       height: 80vh;
@@ -203,16 +237,20 @@
         }
       }
     }
+
     .five-as-section {
       padding: 1rem 0 2rem;
     }
+
     .full-width-video-promo {
       height: inherit;
     }
+
     .wellbeing-section .five-as-section__image-wrapper {
       max-width: 85%;
       margin: 2.5rem auto;
     }
+
     .glenaeon-education-section .body-base-blocks {
       flex-direction: column;
 
@@ -220,19 +258,24 @@
         flex: 100% 0 0;
       }
     }
+
     .site-footer .container-fluid .footer__acknowledgement {
       margin-bottom: 2rem;
     }
+
     .edge-position {
       position: relative;
+
       &.bottom-edge {
         margin-top: -1.25rem;
       }
+
       &.top-edge {
         margin-bottom: -0.35rem;
       }
     }
-    .what-we-do-section .what-we-do-content-wrapper{
+
+    .what-we-do-section .what-we-do-content-wrapper {
       gap: 0;
     }
   }
