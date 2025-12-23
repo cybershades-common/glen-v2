@@ -3076,11 +3076,47 @@
       return CSS.supports('clip-path', insetValue) || CSS.supports('-webkit-clip-path', insetValue);
     }
 
+    const PRELOADER_CONFIG = {
+      desktop: {
+        logoWidth: '33vw',
+        logoTop: '50%',
+        logoLeft: '50%',
+        blobScale: 1,
+        blobRiseTarget: 40,
+        blobInitialY: 110,
+        animationDuration: 3.5
+      },
+      mobile: {
+        logoWidth: '66vw',
+        logoTop: '52%',
+        logoLeft: '50%',
+        blobScale: 3,
+        blobRiseTarget: 80,
+        blobInitialY: 110,
+        animationDuration: 3
+      }
+    };
+
+    const isMobilePreloader = window.matchMedia('(max-width: 768px)').matches;
+    const preloaderSettings = isMobilePreloader ? PRELOADER_CONFIG.mobile : PRELOADER_CONFIG.desktop;
+
     // Track animation and loading states
     let riseAnimationComplete = false;
     let pageLoaded = false;
     const preloaderCurtain = document.getElementById('preloader');
     const useCurtainClipReveal = preloaderCurtain && supportsCurtainClip();
+    const logoEl = document.querySelector('.logo');
+    if (logoEl) {
+      if (preloaderSettings.logoWidth) {
+        logoEl.style.width = preloaderSettings.logoWidth;
+      }
+      if (preloaderSettings.logoTop) {
+        logoEl.style.top = preloaderSettings.logoTop;
+      }
+      if (preloaderSettings.logoLeft) {
+        logoEl.style.left = preloaderSettings.logoLeft;
+      }
+    }
 
     if (useCurtainClipReveal) {
       const curtainClipValue = 'inset(0 0 var(--curtain-clip-value, 0%) 0)';
@@ -3103,15 +3139,16 @@
     });
 
     gsap.set('#gradient-blob', {
-      yPercent: 110,
-      opacity: 1
+      yPercent: preloaderSettings.blobInitialY,
+      opacity: 1,
+      scale: preloaderSettings.blobScale
     });
 
     // Start animation immediately - no delay
     gsap.to('#gradient-blob', {
-      yPercent: 40,
-      scale: 1,
-      duration: 3.5,
+      yPercent: preloaderSettings.blobRiseTarget,
+      scale: preloaderSettings.blobScale,
+      duration: preloaderSettings.animationDuration,
       ease: 'none',
       delay: 0,
       onComplete: function () {
