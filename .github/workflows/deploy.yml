@@ -44,6 +44,20 @@ jobs:
             echo "✗ CSS build failed"
             exit 1
           fi
+
+      - name: Prepare GitHub Pages bundle
+        run: |
+          rm -rf .gh-pages
+          mkdir -p .gh-pages
+          rsync -av \
+            --exclude='.git/' \
+            --exclude='.github/' \
+            --exclude='node_modules/' \
+            --exclude='.gh-pages/' \
+            --exclude='.vscode/' \
+            --exclude='.DS_Store' \
+            ./ .gh-pages
+          ls -a .gh-pages
       
       - name: Setup Pages
         uses: actions/configure-pages@v4
@@ -51,7 +65,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: '.'
+          path: '.gh-pages'
 
   deploy:
     environment:
