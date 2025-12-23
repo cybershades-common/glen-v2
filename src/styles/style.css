@@ -4315,6 +4315,7 @@ h1 .hero__title-script {
   }
   body .breadcrumb-wrap {
     padding: 1rem;
+    margin-bottom: 5rem;
   }
   body .site-header {
     height: 5rem;
@@ -4386,6 +4387,9 @@ h1 .hero__title-script {
   }
   body .edge-position.top-edge {
     margin-bottom: -0.35rem;
+  }
+  body .what-we-do-section .what-we-do-content-wrapper {
+    gap: 0;
   }
 }
 @media (min-width: 1800px) {
