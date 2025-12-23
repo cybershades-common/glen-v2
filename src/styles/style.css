@@ -363,6 +363,7 @@ h6,
   left: 0;
   right: 0;
   background: transparent;
+  background: none;
 }
 .site-header.sticky {
   position: fixed;
@@ -414,9 +415,6 @@ body.scroll-down.is-offset-top .site-header {
   }
   body:not(.is-offset-top) .site-header {
     background-color: transparent;
-  }
-  body.is-offset-top .site-header {
-    background-color: #ffffff;
   }
 }
 body.mega-menu-open .site-header {
@@ -2946,12 +2944,28 @@ h1 .hero__title-script {
 .staff-section .grid.row > div {
   padding: 0 1.5625rem;
 }
+.staff-section .grid.row > div.is-hidden {
+  display: none !important;
+}
+.staff-section .grid.row > div.is-filtering-in,
+.staff-section .grid.row > div.is-filtering-out {
+  display: block !important;
+}
+.staff-section .grid.row > div.is-filtering-in .grid_card {
+  animation: staff-card-in 0.36s ease forwards;
+}
+.staff-section .grid.row > div.is-filtering-out .grid_card {
+  animation: staff-card-out 0.36s ease forwards;
+}
 .staff-section .grid.row > div .grid_card {
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
   width: 100%;
+  clip-path: inset(0 0 0 0);
+  -webkit-clip-path: inset(0 0 0 0);
+  will-change: clip-path, opacity, transform;
 }
 .staff-section .grid.row > div .grid_card .image {
   width: 100%;
@@ -2968,8 +2982,8 @@ h1 .hero__title-script {
   right: 0;
 }
 .staff-section .grid.row > div .grid_card .image > img {
-  width: 98%;
-  height: 99%;
+  width: 99%;
+  height: 98%;
   object-fit: cover;
   border-radius: 50%;
   margin: 0.125rem;
@@ -3004,6 +3018,34 @@ h1 .hero__title-script {
 @media (max-width: 767px) {
   .staff-section .grid.row > div .grid_card .position {
     font-size: 0.8125rem;
+  }
+}
+@keyframes staff-card-in {
+  from {
+    opacity: 0;
+    transform: translateY(-40px) scale(0.98);
+    clip-path: inset(0 0 100% 0);
+    -webkit-clip-path: inset(0 0 100% 0);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    clip-path: inset(0 0 0 0);
+    -webkit-clip-path: inset(0 0 0 0);
+  }
+}
+@keyframes staff-card-out {
+  from {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    clip-path: inset(0 0 0 0);
+    -webkit-clip-path: inset(0 0 0 0);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(-35px) scale(0.95);
+    clip-path: inset(0 0 100% 0);
+    -webkit-clip-path: inset(0 0 100% 0);
   }
 }
 .five-as-section {

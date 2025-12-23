@@ -72,6 +72,7 @@
     padding: @spacing-sm @spacing-md;
     cursor: pointer;
     transition: background-color @transition-base, color @transition-base, border-color @transition-base;
+  
     border: none;
 
     &:hover {
@@ -101,12 +102,32 @@
     >div {
       padding: 0 1.5625rem;
 
+      &.is-hidden {
+        display: none !important;
+      }
+
+      &.is-filtering-in,
+      &.is-filtering-out {
+        display: block !important;
+      }
+
+      &.is-filtering-in .grid_card {
+        animation: staff-card-in 0.36s ease forwards;
+      }
+
+      &.is-filtering-out .grid_card {
+        animation: staff-card-out 0.36s ease forwards;
+      }
+
       .grid_card {
         display: flex;
         flex-direction: column;
         align-items: center;
         text-align: center;
         width: 100%;
+        clip-path: inset(0 0 0 0);
+        -webkit-clip-path: inset(0 0 0 0);
+        will-change: clip-path, opacity, transform;
 
 
         .image {
@@ -127,8 +148,8 @@
 
           >img {
 
-            width: 98%;
-            height: 99%;
+            width: 99%;
+            height: 98%;
             object-fit: cover;
             border-radius: 50%;
             margin: 0.125rem;
@@ -149,6 +170,7 @@
           line-height: 1.3;
           color: @color-blue-dark;
           margin: 0 0 0.3125rem;
+          
 
           @media (max-width: (@breakpoint-md - 1)) {
             font-size: 1rem;
@@ -170,5 +192,35 @@
         }
       }
     }
+  }
+}
+
+@keyframes staff-card-in {
+  from {
+    opacity: 0;
+    transform: translateY(-40px) scale(0.98);
+    clip-path: inset(0 0 100% 0);
+    -webkit-clip-path: inset(0 0 100% 0);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    clip-path: inset(0 0 0 0);
+    -webkit-clip-path: inset(0 0 0 0);
+  }
+}
+
+@keyframes staff-card-out {
+  from {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    clip-path: inset(0 0 0 0);
+    -webkit-clip-path: inset(0 0 0 0);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(-35px) scale(0.95);
+    clip-path: inset(0 0 100% 0);
+    -webkit-clip-path: inset(0 0 100% 0);
   }
 }
