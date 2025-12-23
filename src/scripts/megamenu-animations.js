@@ -42,6 +42,7 @@
     const circleImage = megaMenu.querySelector('.mega-menu__circle-image');
     const footerLinks = megaMenu.querySelectorAll('.mega-menu__footer-links a, .mega-menu__social a');
     const desktopQuickLinks = document.querySelector('.site-header .header-quick-links');
+    const quickLinksDesktopOnly = window.matchMedia('(min-width: 769px)').matches;
     
     // Mobile-only elements
     const mobileQuickLinksBtn = megaMenu.querySelector('#mobileQuickLinksToggle');
@@ -63,7 +64,7 @@
       );
 
     // animate desktop quick links right after nav items
-    if (desktopQuickLinks) {
+    if (desktopQuickLinks && quickLinksDesktopOnly) {
       menuTimeline.fromTo(
         desktopQuickLinks,
         { y: -40, opacity: 0 },
@@ -152,7 +153,7 @@
         });
       }
 
-      if (desktopQuickLinks) {
+      if (desktopQuickLinks && quickLinksDesktopOnly) {
         gsap.set(desktopQuickLinks, {
           y: -40,
           opacity: 0
