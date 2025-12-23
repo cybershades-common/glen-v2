@@ -52,6 +52,95 @@ if (hasScrollTrigger) {
   gsap.registerPlugin(ScrollTrigger, ScrollSmoother);
 }
 
+const SCROLL_SMOOTHER_BREAKPOINT = 1024;
+let scrollSmootherInstance = null;
+let scrollSmootherWatchersAttached = false;
+let desktopMediaQuery = null;
+let pointerFineMediaQuery = null;
+let reduceMotionMediaQuery = null;
+
+if (typeof window !== 'undefined' && typeof window.matchMedia === 'function') {
+  desktopMediaQuery = window.matchMedia(`(min-width: ${SCROLL_SMOOTHER_BREAKPOINT}px)`);
+  pointerFineMediaQuery = window.matchMedia('(pointer: fine)');
+  reduceMotionMediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+}
+
+function shouldEnableScrollSmoother() {
+  if (typeof ScrollSmoother === 'undefined') return false;
+
+  const matchesDesktop = desktopMediaQuery ? desktopMediaQuery.matches : window.innerWidth >= SCROLL_SMOOTHER_BREAKPOINT;
+  const hasFinePointer = pointerFineMediaQuery ? pointerFineMediaQuery.matches : true;
+  const prefersReducedMotion = reduceMotionMediaQuery ? reduceMotionMediaQuery.matches : false;
+
+  return matchesDesktop && hasFinePointer && !prefersReducedMotion;
+}
+
+function setScrollSmootherBodyState(isEnabled) {
+  const body = document.body;
+  if (!body) return;
+  body.classList.toggle('smoother-enabled', Boolean(isEnabled));
+}
+
+function updateScrollSmootherInstance() {
+  if (!shouldEnableScrollSmoother()) {
+    if (scrollSmootherInstance) {
+      scrollSmootherInstance.kill();
+      scrollSmootherInstance = null;
+      setScrollSmootherBodyState(false);
+      // Remove inline props so native scrolling feels normal again
+      gsap.set('#smooth-wrapper, #smooth-content', { clearProps: 'all' });
+      if (typeof ScrollTrigger !== 'undefined') {
+        ScrollTrigger.refresh();
+      }
+    } else {
+      setScrollSmootherBodyState(false);
+    }
+    return;
+  }
+
+  if (!scrollSmootherInstance) {
+    scrollSmootherInstance = ScrollSmoother.create({
+      wrapper: '#smooth-wrapper',
+      content: '#smooth-content',
+      smooth: 1,
+      effects: true,
+      smoothTouch: false
+    });
+    setScrollSmootherBodyState(true);
+
+    if (typeof ScrollTrigger !== 'undefined') {
+      ScrollTrigger.refresh();
+    }
+  }
+}
+
+function initScrollSmootherManager() {
+  if (typeof ScrollSmoother === 'undefined') {
+    return;
+  }
+
+  updateScrollSmootherInstance();
+
+  if (scrollSmootherWatchersAttached) {
+    return;
+  }
+
+  const mediaQueries = [desktopMediaQuery, pointerFineMediaQuery, reduceMotionMediaQuery].filter(Boolean);
+
+  mediaQueries.forEach(mq => {
+    if (typeof mq.addEventListener === 'function') {
+      mq.addEventListener('change', updateScrollSmootherInstance);
+    } else if (typeof mq.addListener === 'function') {
+      mq.addListener(updateScrollSmootherInstance);
+    }
+  });
+
+  window.addEventListener('resize', updateScrollSmootherInstance);
+  window.addEventListener('orientationchange', updateScrollSmootherInstance);
+
+  scrollSmootherWatchersAttached = true;
+}
+
 function initVideoTestimonialsAnimations() {
   if (videoTestimonialsAnimationsInitialized) return;
   const section = document.querySelector(VIDEO_SECTION_SELECTOR);
@@ -270,12 +359,8 @@ function initAnimations() {
   if (typeof gsap === 'undefined') {
     return;
   }
-// create the scrollSmoother before your scrollTriggers
-ScrollSmoother.create({
-	smooth: 1, // how long (in seconds) it takes to "catch up" to the native scroll position
-	effects: true, // looks for data-speed and data-lag attributes on elements
-	smoothTouch: 0.1 // much shorter smoothing time on touch devices (default is NO smoothing on touch devices)
-});
+  // Create the ScrollSmoother (desktop/fine pointer only) before ScrollTriggers
+  initScrollSmootherManager();
   initMarqueeAnimation();
   initVideoTestimonialsAnimations();
   initRevealAnimations();

@@ -9,7 +9,14 @@
   width: 100%;
   padding: .675rem 1.125rem 1rem;
   min-height: @header-height;
-  transition: background @transition-base, box-shadow @transition-base, border-bottom @transition-base, transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  transition: background-color 0.45s ease, box-shadow @transition-base, border-bottom @transition-base, transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+
+  .header-logo svg path,
+  .header-actions .header-icon svg path,
+  .hamburger .line,
+  .menu-button__text {
+    transition: color 0.45s ease, fill 0.45s ease, stroke 0.45s ease, background-color 0.45s ease;
+  }
 
   // Transparent variant (sits on colored/textured background)
   .header-logo {
@@ -112,6 +119,25 @@ body.scroll-down.is-offset-top {
   .site-header {
     transform: translateY(-100%);
     transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+}
+
+@media (max-width: 991.98px) {
+  .site-header {
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+  }
+
+  body:not(.is-offset-top) {
+    .site-header {
+      background-color: fade(@color-sand-20, 20%);
+    }
+  }
+
+  body.is-offset-top {
+    .site-header {
+      background-color: fade(@color-white, 96%);
+    }
   }
 }
 

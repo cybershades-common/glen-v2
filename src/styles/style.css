@@ -4430,12 +4430,15 @@ html [contenteditable="true"] {
   display: none;
 }
 #smooth-content {
-  position: fixed;
   margin: 0;
   padding: 0;
   min-height: 100vh;
   background: url(../../assets/images/section-bg.jpg);
   background-size: 100%;
+}
+
+.smoother-enabled #smooth-content {
+  position: fixed;
 }
 #smooth-content a:focus,
 #smooth-content input:focus {

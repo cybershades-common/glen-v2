@@ -40,108 +40,87 @@
   // ==========================================================================
 
   function initStickyHeader() {
+    const MOBILE_BREAKPOINT = 1024; // px
+    const MOBILE_HIDE_OFFSET = 120;
+    const MOBILE_REVEAL_DELTA = 80;
 
-  let isOffsetTop = false;
+    const header = document.querySelector('.site-header');
+    const wrapper = document.querySelector('.wrapper');
+    let headerHeight = header?.offsetHeight || 0;
+    let isOffsetTop = false;
+    let lastScrollTop = 0;
+    let lastMobileTriggerScroll = 0;
 
-  let lastScrollTop = 0;
-
-  let lastMobileTriggerScroll = 0;
- 
-  function scroll_offset(scroll) {
-
-    if (scroll > 0) {
-
-      if (!isOffsetTop) {
-
-        document.body.classList.add('is-offset-top');
-
-        isOffsetTop = true;
-
-      }
-
-    } else {
-
-      if (isOffsetTop) {
-
-        document.body.classList.remove('is-offset-top');
-
-        isOffsetTop = false;
-
-      }
-
+    function applyHeaderCompensation(enable) {
+      if (!wrapper || !headerHeight) return;
+      wrapper.style.paddingTop = enable ? `${headerHeight}px` : '';
     }
 
-  }
- 
-  function handleScroll() {
-
-    const currentScrollY =
-
-      window.pageYOffset || document.documentElement.scrollTop;
- 
-    scroll_offset(currentScrollY);
- 
-    const isMobile = window.innerWidth <68;
- 
-    if (isMobile) {
-
-      // 📱 MOBILE LOGIC (100px gap before showing)
-
-      if (currentScrollY > lastScrollTop) {
-
-        // scrolling down
-
-        document.body.classList.add('scroll-down');
-
-        lastMobileTriggerScroll = currentScrollY;
-
-      } else {
-
-        // scrolling up
-
-        if (lastMobileTriggerScroll - currentScrollY >= 0) {
-
-          document.body.classList.remove('scroll-down');
-
+    function toggleOffsetTop(scroll) {
+      if (scroll > 0) {
+        if (!isOffsetTop) {
+          document.body.classList.add('is-offset-top');
+          applyHeaderCompensation(true);
+          isOffsetTop = true;
         }
-
+      } else if (isOffsetTop) {
+        document.body.classList.remove('is-offset-top');
+        applyHeaderCompensation(false);
+        isOffsetTop = false;
       }
- 
-      const header = document.querySelector('.site-header');
-
-      if (header) {
-
-        header.classList.toggle('is-scrolled-mobile', currentScrollY > 0);
-
-      }
-
-    } else {
-
-      // 🖥 DESKTOP LOGIC (instant show on scroll up)
-
-      if (currentScrollY > lastScrollTop && currentScrollY > 80) {
-
-        document.body.classList.add('scroll-down');
-
-      } else {
-
-        document.body.classList.remove('scroll-down');
-
-      }
-
     }
- 
-    lastScrollTop = currentScrollY <= 0 ? 0 : currentScrollY;
 
+    function shouldUseMobileBehavior() {
+      return window.matchMedia(`(max-width: ${MOBILE_BREAKPOINT - 1}px)`).matches;
+    }
+
+    function handleScroll() {
+      const currentScrollY = window.pageYOffset || document.documentElement.scrollTop;
+      toggleOffsetTop(currentScrollY);
+
+      const isMobile = shouldUseMobileBehavior();
+      const isScrollingDown = currentScrollY > lastScrollTop;
+
+      if (isMobile) {
+        if (header) {
+          header.classList.toggle('is-scrolled-mobile', currentScrollY > 0);
+        }
+        if (isScrollingDown && currentScrollY > MOBILE_HIDE_OFFSET) {
+          document.body.classList.add('scroll-down');
+          lastMobileTriggerScroll = currentScrollY;
+        } else if (!isScrollingDown) {
+          const scrolledUpDistance = lastMobileTriggerScroll - currentScrollY;
+          if (scrolledUpDistance >= MOBILE_REVEAL_DELTA || currentScrollY <= MOBILE_HIDE_OFFSET) {
+            document.body.classList.remove('scroll-down');
+            lastMobileTriggerScroll = currentScrollY;
+          }
+        } else if (currentScrollY <= MOBILE_HIDE_OFFSET) {
+          document.body.classList.remove('scroll-down');
+          lastMobileTriggerScroll = currentScrollY;
+        }
+      } else {
+        // Desktop behavior: hide header immediately on scroll down beyond 80px
+        if (isScrollingDown && currentScrollY > 80) {
+          document.body.classList.add('scroll-down');
+        } else {
+          document.body.classList.remove('scroll-down');
+        }
+      }
+
+      lastScrollTop = currentScrollY <= 0 ? 0 : currentScrollY;
+    }
+
+    // Initial state
+    toggleOffsetTop(window.scrollY);
+    lastMobileTriggerScroll = window.scrollY;
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    window.addEventListener('resize', () => {
+      headerHeight = header?.offsetHeight || headerHeight;
+      applyHeaderCompensation(isOffsetTop);
+      handleScroll();
+    });
   }
- 
-  // Initial check
-
-  scroll_offset(window.scrollY);
- 
-  window.addEventListener('scroll', handleScroll, { passive: true });
-
-}
 
  
   // ==========================================================================
