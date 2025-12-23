@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>GSAP Gradient Preloader</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+ 
+  <!-- GSAP CDN -->
+<script src="https://unpkg.com/gsap@3/dist/gsap.min.js"></script>
+ 
+  <style>
+
+    :root {
+
+      --tertiary-yellow-40: #FFF1B0;
+
+      --secondary-yellow: #FFDD39;
+
+      --tertiary-coral: #DB574E;
+
+    }
+ 
+    html, body {
+
+      margin: 0;
+
+      padding: 0;
+
+      height: 100%;
+
+    }
+ 
+    body {
+
+      font-family: system-ui, sans-serif;
+
+    }
+ 
+    /* Preloader */
+
+    #preloader {
+
+      position: fixed;
+
+      inset: 0;
+
+      background: #ffffff;
+
+      z-index: 9999;
+
+      overflow: hidden;
+
+      display: flex;
+
+      align-items: flex-end;
+
+      justify-content: center;
+ 
+      transform-origin: bottom;
+
+      will-change: transform;
+    }
+
+    /* Logo styles */
+    #preloader-logo {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      opacity: 0;
+      width: 320px;
+      max-width: 60vw;
+      z-index: 2;
+      pointer-events: none;
+    }
+
+    /* Curtain styles */
+    #preloader-curtain {
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 100%;
+      height: 100%;
+      background: #fff;
+      z-index: 3;
+      transform: translateY(100%);
+      will-change: transform;
+
+    }
+ 
+    /* Gradient blob */
+
+    .gradient-rise {
+
+      width: 93.5rem;
+
+      height: 93.5rem;
+
+      border-radius: 93.5rem;
+
+      background: radial-gradient(
+
+        50% 50% at 50% 50%,
+
+        var(--tertiary-yellow-40) 0%,
+
+        var(--secondary-yellow) 35.58%,
+
+        #FFAAA5 66.35%,
+
+        var(--tertiary-coral) 100%
+
+      );
+
+      filter: blur(160.76539611816406px);
+ 
+      transform: translateY(100%) scale(0.9);
+
+      will-change: transform;
+
+    }
+ 
+    /* Demo content */
+
+    .page-content {
+
+      min-height: 200vh;
+
+      padding: 4rem;
+
+    }
+</style>
+</head>
+ 
+<body>
+ 
+  <!-- Preloader -->
+  <div id="preloader">
+    <div class="gradient-rise"></div>
+    <img id="preloader-logo" src="assets/images/Logo%20Landscape%20Simple.png" alt="Logo" />
+    <div id="preloader-curtain"></div>
+  </div>
+ 
+
+  <!-- White background overlay to prevent website showing during curtain animation -->
+  <div id="preloader-bg" style="position:fixed;inset:0;background:#fff;z-index:9998;transition:opacity 0.01s;pointer-events:none;"></div>
+
+  <!-- Page Content -->
+  <div class="page-content">
+    <h1 style="font-size:3rem;margin-bottom:2rem;">Welcome to Glenaeon Demo</h1>
+    <p style="font-size:1.5rem;max-width:700px;">This is a demonstration of a smooth sunrise preloader, logo fade-in, and curtain reveal effect using GSAP. The content below is for layout demonstration and fills the screen for a more realistic preview.</p>
+    <div style="display:flex;flex-wrap:wrap;gap:2rem;margin-top:3rem;justify-content:center;">
+      <div style="background:#f5f5f5;padding:2rem 1.5rem;border-radius:1rem;min-width:320px;flex:1 1 320px;max-width:400px;">
+        <h2>Section 1</h2>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque euismod, nisi eu consectetur.</p>
+      </div>
+      <div style="background:#f5f5f5;padding:2rem 1.5rem;border-radius:1rem;min-width:320px;flex:1 1 320px;max-width:400px;">
+        <h2>Section 2</h2>
+        <p>Vivamus luctus urna sed urna ultricies ac tempor dui sagittis. In condimentum facilisis porta.</p>
+      </div>
+      <div style="background:#f5f5f5;padding:2rem 1.5rem;border-radius:1rem;min-width:320px;flex:1 1 320px;max-width:400px;">
+        <h2>Section 3</h2>
+        <p>Morbi in sem quis dui placerat ornare. Pellentesque odio nisi, euismod in, pharetra a, ultricies in, diam.</p>
+      </div>
+    </div>
+    <div style="margin-top:4rem;text-align:center;">
+      <img src="assets/images/Logo%20Landscape%20Simple.png" alt="Logo" style="width:300px;max-width:80vw;opacity:0.15;" />
+    </div>
+  </div>
+ 
+  <script>
+
+    // Animation sequence: sunrise, logo fade, curtain reveal
+    window.addEventListener("load", () => {
+      const tl = gsap.timeline({ defaults: { ease: "power4.inOut" } });
+
+      // 1. Sunrise rises slowly and stays centered
+      tl.to(".gradient-rise", {
+        y: "55%",
+        scale: 1,
+        duration: 4.5 // slower rise
+      })
+      // 2. Sunrise stays in center while logo fades in
+      .to("#preloader-logo", {
+        opacity: 1,
+        duration: 1.2
+      }, ">-2") // logo starts appearing just after sunrise is centered
+      // 3. Curtain reveals from bottom to top
+      .to("#preloader-curtain", {
+        y: "0%",
+        duration: 1.1
+      })
+      // 4. Fade out white background overlay after curtain is up
+      .to("#preloader-bg", {
+        opacity: 0,
+        duration: 0.01,
+        onComplete: () => {
+          const bg = document.getElementById("preloader-bg");
+          if (bg) bg.remove();
+        }
+      }, ">-1.05")
+      // 5. Remove preloader from DOM
+      .add(() => {
+        document.getElementById("preloader").remove();
+      });
+    });
+</script>
+ 
+</body>
+</html>
+
+ 
