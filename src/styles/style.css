@@ -4419,7 +4419,7 @@ h1 .hero__title-script {
 }
 html {
   scroll-behavior: smooth;
-  caret-color: transparent ;
+  caret-color: transparent;
 }
 html input,
 html textarea,
@@ -5469,7 +5469,7 @@ button {
 .full-width-testimonial-audio .testimonial-audio-slide {
   position: relative;
   min-height: 100%;
-  padding: 13rem  0;
+  padding: 13rem 0;
 }
 .full-width-testimonial-audio .testimonial-audio-slide::before {
   content: '';
@@ -6695,10 +6695,10 @@ button {
   position: relative;
 }
 .edge-position.bottom-edge {
-  margin-top: -15px;
+  margin-top: -1.5rem;
   z-index: 5;
 }
 .edge-position.top-edge {
-  margin-top: -15px;
+  margin-bottom: -1.125rem;
   z-index: 5;
 }
