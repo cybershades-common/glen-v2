@@ -4375,14 +4375,17 @@ h1 .hero__title-script {
   body .glenaeon-education-section .body-base-blocks .body-base {
     flex: 100% 0 0;
   }
-  body .section .edge-image.bottom-edge {
-    bottom: -1px;
-  }
-  body .section .edge-image.top-edge {
-    top: -1px;
-  }
   body .site-footer .container-fluid .footer__acknowledgement {
     margin-bottom: 2rem;
+  }
+  body .edge-position {
+    position: relative;
+  }
+  body .edge-position.bottom-edge {
+    margin-top: -1.25rem;
+  }
+  body .edge-position.top-edge {
+    margin-bottom: -0.35rem;
   }
 }
 @media (min-width: 1800px) {
@@ -4534,7 +4537,6 @@ button {
   font-style: normal;
   font-weight: 400;
   line-height: 130%;
-  /* 26px */
   margin: 0;
   letter-spacing: -0.4px;
 }
