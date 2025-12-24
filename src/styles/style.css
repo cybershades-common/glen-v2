@@ -3218,6 +3218,12 @@ h1 .hero__title-script {
   margin: auto;
   background: url(../../assets/images/hover-bg.svg) center no-repeat;
   background-size: contain;
+  transform: scale(1);
+  transition: transform 250ms ease;
+}
+.five-as-section__nav-item--active::after {
+  transform: scale(1.1);
+  animation: button-svg-grow 0.3s ease forwards;
 }
 @media (max-width: 767px) {
   .five-as-section__nav-item {
@@ -3227,11 +3233,35 @@ h1 .hero__title-script {
 .five-as-section__content-wrapper {
   margin-top: 3.75rem;
   align-items: center;
+  position: relative;
+  min-height: 400px;
 }
 @media (max-width: 991px) {
   .five-as-section__content-wrapper {
     margin-top: 2.5rem;
+    min-height: 350px;
   }
+}
+.five-as-section__tab-content {
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 250ms ease, visibility 250ms ease;
+  clip-path: inset(0 0 0 0);
+  -webkit-clip-path: inset(0 0 0 0);
+  will-change: clip-path, opacity, transform;
+}
+.five-as-section__tab-content.is-active {
+  opacity: 1;
+  visibility: visible;
+}
+.five-as-section__tab-content.is-filtering-in {
+  animation: five-as-content-in 0.36s ease forwards;
+}
+.five-as-section__tab-content.is-filtering-out {
+  animation: five-as-content-out 0.36s ease forwards;
+}
+.five-as-section__tab-content.is-hidden {
+  display: none !important;
 }
 .five-as-section__content {
   display: flex;
@@ -3368,6 +3398,42 @@ h1 .hero__title-script {
   .five-as-section__image-wrapper {
     margin: 0 auto 2rem;
     max-width: 85%;
+  }
+}
+@keyframes button-svg-grow {
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(1.1);
+  }
+}
+@keyframes five-as-content-in {
+  from {
+    opacity: 0;
+    transform: translateY(-40px) scale(0.98);
+    clip-path: inset(0 0 100% 0);
+    -webkit-clip-path: inset(0 0 100% 0);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    clip-path: inset(0 0 0 0);
+    -webkit-clip-path: inset(0 0 0 0);
+  }
+}
+@keyframes five-as-content-out {
+  from {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    clip-path: inset(0 0 0 0);
+    -webkit-clip-path: inset(0 0 0 0);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(-35px) scale(0.95);
+    clip-path: inset(0 0 100% 0);
+    -webkit-clip-path: inset(0 0 100% 0);
   }
 }
 .nurturing-start-section {

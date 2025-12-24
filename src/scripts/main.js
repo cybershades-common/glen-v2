@@ -22,6 +22,7 @@
     initVideoTestimonials();
     initCoCurricularCarousel();
     initStaffFilters();
+    initFiveAsTabs();
     // initFeaturesCardsSlider();
    
   });
@@ -813,6 +814,161 @@
         }, animationDuration);
       }
     });
+  }
+
+  // ==========================================================================
+  // FIVE A'S SECTION TABS
+  // ==========================================================================
+
+  function initFiveAsTabs() {
+    const fiveAsSection = document.querySelector('.five-as-section');
+    if (!fiveAsSection) return;
+
+    const filterButtons = Array.from(fiveAsSection.querySelectorAll('.five-as-section__nav-item'));
+    const tabContents = Array.from(fiveAsSection.querySelectorAll('.five-as-section__tab-content'));
+    if (!filterButtons.length || !tabContents.length) return;
+
+    const animationTimers = new WeakMap();
+    const animationDuration = 360;
+    let refreshTimeoutId = null;
+
+    const scheduleScrollRefresh = (delay = 0) => {
+      if (refreshTimeoutId) {
+        clearTimeout(refreshTimeoutId);
+      }
+
+      refreshTimeoutId = setTimeout(() => {
+        try {
+          const smootherInstance =
+            window.ScrollSmoother &&
+            typeof window.ScrollSmoother.get === 'function' &&
+            window.ScrollSmoother.get();
+          if (smootherInstance && typeof smootherInstance.refresh === 'function') {
+            smootherInstance.refresh();
+          }
+        } catch (error) {
+          console.warn('ScrollSmoother refresh failed:', error);
+        }
+
+        if (window.ScrollTrigger && typeof window.ScrollTrigger.refresh === 'function') {
+          window.ScrollTrigger.refresh();
+        }
+      }, delay);
+    };
+
+    let activeFilter =
+      fiveAsSection.querySelector('.five-as-section__nav-item--active')?.getAttribute('data-filter') || 'active-wilderness';
+
+    filterButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        const filterValue = button.getAttribute('data-filter') || 'active-wilderness';
+        if (filterValue === activeFilter) return;
+        activeFilter = filterValue;
+        filterButtons.forEach(btn => btn.classList.toggle('five-as-section__nav-item--active', btn === button));
+        applyFilter(filterValue);
+      });
+    });
+
+    applyFilter(activeFilter, { skipAnimation: true });
+
+    function clearTimer(content) {
+      const timer = animationTimers.get(content);
+      if (timer) {
+        clearTimeout(timer);
+        animationTimers.delete(content);
+      }
+    }
+
+    function showContent(content, skipAnimation) {
+      clearTimer(content);
+      content.classList.remove('is-hidden');
+      content.style.display = '';
+
+      if (skipAnimation) {
+        content.classList.remove('is-filtering-in', 'is-filtering-out');
+        content.classList.add('is-active');
+        return;
+      }
+
+      content.classList.remove('is-filtering-out');
+      content.classList.add('is-filtering-in', 'is-active');
+      const timer = setTimeout(() => {
+        content.classList.remove('is-filtering-in');
+        animationTimers.delete(content);
+      }, animationDuration);
+      animationTimers.set(content, timer);
+    }
+
+    function hideContent(content, skipAnimation) {
+      clearTimer(content);
+
+      if (skipAnimation) {
+        content.classList.add('is-hidden');
+        content.classList.remove('is-filtering-in', 'is-filtering-out', 'is-active');
+        content.style.display = 'none';
+        return;
+      }
+
+      content.classList.remove('is-filtering-in', 'is-active');
+      content.classList.add('is-filtering-out');
+      const timer = setTimeout(() => {
+        content.classList.remove('is-filtering-out');
+        content.classList.add('is-hidden');
+        content.style.display = 'none';
+        animationTimers.delete(content);
+      }, animationDuration);
+      animationTimers.set(content, timer);
+    }
+
+    function applyFilter(filterValue, options = {}) {
+      const { skipAnimation = false } = options;
+
+      if (skipAnimation) {
+        tabContents.forEach(content => {
+          const contentFilter = content.getAttribute('data-tab');
+          const shouldShow = contentFilter === filterValue;
+
+          if (shouldShow) {
+            showContent(content, true);
+          } else {
+            hideContent(content, true);
+          }
+        });
+        scheduleScrollRefresh(0);
+        return;
+      }
+
+      const contentsToHide = tabContents.filter(content => {
+        const contentFilter = content.getAttribute('data-tab');
+        return contentFilter !== filterValue && content.classList.contains('is-active');
+      });
+      const contentsToShow = tabContents.filter(content => {
+        const contentFilter = content.getAttribute('data-tab');
+        return contentFilter === filterValue;
+      });
+
+      if (!contentsToShow.length && !contentsToHide.length) return;
+
+      contentsToHide.forEach(content => hideContent(content, false));
+
+      const startShow = () => {
+        tabContents.forEach(content => {
+          const contentFilter = content.getAttribute('data-tab');
+          const shouldShow = contentsToShow.includes(content);
+          if (shouldShow) {
+            showContent(content, false);
+          } else {
+            content.classList.add('is-hidden');
+            content.style.display = 'none';
+          }
+        });
+      };
+
+      setTimeout(() => {
+        startShow();
+        scheduleScrollRefresh(animationDuration + 50);
+      }, animationDuration);
+    }
   }
 
 

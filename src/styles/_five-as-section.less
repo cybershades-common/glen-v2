@@ -161,7 +161,14 @@
         margin: auto;
         background: url(../../assets/images/hover-bg.svg) center no-repeat;
         background-size: contain;
+        transform: scale(1);
+        transition: transform @transition-base;
       }
+    }
+
+    &--active::after {
+      transform: scale(1.1);
+      animation: button-svg-grow 0.3s ease forwards;
     }
 
     @media (max-width: (@breakpoint-md - 1)) {
@@ -173,9 +180,39 @@
   &__content-wrapper {
     margin-top: @spacing-2xl;
     align-items: center;
+    position: relative;
+    min-height: 400px;
 
     @media (max-width: (@breakpoint-lg - 1)) {
       margin-top: @spacing-xl;
+      min-height: 350px;
+    }
+  }
+
+  // Tab Content
+  &__tab-content {
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity @transition-base, visibility @transition-base;
+    clip-path: inset(0 0 0 0);
+    -webkit-clip-path: inset(0 0 0 0);
+    will-change: clip-path, opacity, transform;
+
+    &.is-active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    &.is-filtering-in {
+      animation: five-as-content-in 0.36s ease forwards;
+    }
+
+    &.is-filtering-out {
+      animation: five-as-content-out 0.36s ease forwards;
+    }
+
+    &.is-hidden {
+      display: none !important;
     }
   }
 
@@ -349,5 +386,45 @@
   .five-as-section__image-wrapper {
     margin: 0 auto 2rem;
     max-width: 85%;
+  }
+}
+
+// Animations
+@keyframes button-svg-grow {
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(1.1);
+  }
+}
+
+@keyframes five-as-content-in {
+  from {
+    opacity: 0;
+    transform: translateY(-40px) scale(0.98);
+    clip-path: inset(0 0 100% 0);
+    -webkit-clip-path: inset(0 0 100% 0);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    clip-path: inset(0 0 0 0);
+    -webkit-clip-path: inset(0 0 0 0);
+  }
+}
+
+@keyframes five-as-content-out {
+  from {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    clip-path: inset(0 0 0 0);
+    -webkit-clip-path: inset(0 0 0 0);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(-35px) scale(0.95);
+    clip-path: inset(0 0 100% 0);
+    -webkit-clip-path: inset(0 0 100% 0);
   }
 }
