@@ -104,7 +104,8 @@ function updateScrollSmootherInstance() {
       content: '#smooth-content',
       smooth: 1,
       effects: true,
-      smoothTouch: false
+      smoothTouch: false,
+      normalizeScroll: true
     });
     setScrollSmootherBodyState(true);
 
@@ -114,32 +115,32 @@ function updateScrollSmootherInstance() {
   }
 }
 
-function initScrollSmootherManager() {
-  if (typeof ScrollSmoother === 'undefined') {
-    return;
-  }
+// function initScrollSmootherManager() {
+//   if (typeof ScrollSmoother === 'undefined') {
+//     return;
+//   }
 
-  updateScrollSmootherInstance();
+//   updateScrollSmootherInstance();
 
-  if (scrollSmootherWatchersAttached) {
-    return;
-  }
+//   if (scrollSmootherWatchersAttached) {
+//     return;
+//   }
 
-  const mediaQueries = [desktopMediaQuery, pointerFineMediaQuery, reduceMotionMediaQuery].filter(Boolean);
+//   const mediaQueries = [desktopMediaQuery, pointerFineMediaQuery, reduceMotionMediaQuery].filter(Boolean);
 
-  mediaQueries.forEach(mq => {
-    if (typeof mq.addEventListener === 'function') {
-      mq.addEventListener('change', updateScrollSmootherInstance);
-    } else if (typeof mq.addListener === 'function') {
-      mq.addListener(updateScrollSmootherInstance);
-    }
-  });
+//   mediaQueries.forEach(mq => {
+//     if (typeof mq.addEventListener === 'function') {
+//       mq.addEventListener('change', updateScrollSmootherInstance);
+//     } else if (typeof mq.addListener === 'function') {
+//       mq.addListener(updateScrollSmootherInstance);
+//     }
+//   });
 
-  window.addEventListener('resize', updateScrollSmootherInstance);
-  window.addEventListener('orientationchange', updateScrollSmootherInstance);
+//   window.addEventListener('resize', updateScrollSmootherInstance);
+//   window.addEventListener('orientationchange', updateScrollSmootherInstance);
 
-  scrollSmootherWatchersAttached = true;
-}
+//   scrollSmootherWatchersAttached = true;
+// }
 
 function initVideoTestimonialsAnimations() {
   if (videoTestimonialsAnimationsInitialized) return;
@@ -360,7 +361,7 @@ function initAnimations() {
     return;
   }
   // Create the ScrollSmoother (desktop/fine pointer only) before ScrollTriggers
-  initScrollSmootherManager();
+  // initScrollSmootherManager();
   initMarqueeAnimation();
   initVideoTestimonialsAnimations();
   initRevealAnimations();

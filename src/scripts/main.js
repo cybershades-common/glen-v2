@@ -54,7 +54,7 @@
 
     function applyHeaderCompensation(enable) {
       if (!wrapper || !headerHeight) return;
-      wrapper.style.paddingTop = enable ? `${headerHeight}px` : '';
+      // wrapper.style.paddingTop = enable ? `${headerHeight}px` : '';
     }
 
     function toggleOffsetTop(scroll) {
