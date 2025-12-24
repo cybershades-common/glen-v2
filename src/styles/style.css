@@ -556,7 +556,7 @@ body.mega-menu-open .site-header .hamburger .hamburger .line:nth-child(3) {
 .header-quick-links-dropdown.is-open {
   clip-path: inset(0 0 0% 0);
   transform: translateX(-50%);
-  border-radius: 0 0 10px 10px;
+  border-radius: 10px;
 }
 .header-quick-links-dropdown a {
   display: flex;
@@ -582,7 +582,6 @@ body.mega-menu-open .site-header .hamburger .hamburger .line:nth-child(3) {
     left: 50%;
     transform: translateX(-50%);
     width: 100%;
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
     border-radius: 10px;
     border: none;
     padding-bottom: 2rem;
