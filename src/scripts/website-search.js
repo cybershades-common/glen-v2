@@ -237,26 +237,41 @@
     modal.innerHTML = `
       <div class="search-modal-backdrop"></div>
       <div class="search-modal-content">
-        <div class="search-modal-header">
-          <div class="search-input-container">
-            <input type="text" class="search-modal-input" placeholder="Search Glenaeon..." autocomplete="off">
-            <button class="search-modal-close" aria-label="Close search">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M18 6L6 18M6 6l12 12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-              </svg>
-            </button>
+        <div class="search-hero-banner">
+          <div class="search-hero-content">
+            <h1 class="search-hero-title">Search Glenaeon</h1>
+            <p class="search-hero-subtitle">Find information about our school, programs, and community</p>
+            <div class="search-input-container">
+              <div class="search-input-wrapper">
+                <svg class="search-input-icon" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                  <path d="M17.5 17.5L13.875 13.875M15.8333 9.16667C15.8333 12.8486 12.8486 15.8333 9.16667 15.8333C5.48477 15.8333 2.5 12.8486 2.5 9.16667C2.5 5.48477 5.48477 2.5 9.16667 2.5C12.8486 2.5 15.8333 5.48477 15.8333 9.16667Z" stroke="currentColor" stroke-width="1.66667" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                <input type="text" class="search-modal-input" placeholder="What are you looking for?" autocomplete="off">
+              </div>
+              <button class="search-modal-close" aria-label="Close search">
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                  <path d="M15 5L5 15M5 5l10 10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                </svg>
+              </button>
+            </div>
           </div>
         </div>
         <div class="search-modal-body">
-          <div class="search-results"></div>
-          <div class="search-no-results" style="display: none;">
-            <p>No results found. Try searching for:</p>
+          <div class="search-suggestions-section">
+            <h3>Popular Pages</h3>
             <div class="search-suggestions">
-              <button type="button" data-search="learning">Learning</button>
-              <button type="button" data-search="admissions">Admissions</button>
-              <button type="button" data-search="early childhood">Early Childhood</button>
-              <button type="button" data-search="high school">High School</button>
-              <button type="button" data-search="contact">Contact</button>
+              <button type="button" class="btn-primary-blue" data-search="learning">Learning Programs</button>
+              <button type="button" class="btn-primary-coral" data-search="admissions">Admissions</button>
+              <button type="button" class="btn-primary-blue" data-search="early childhood">Early Childhood</button>
+              <button type="button" class="btn-primary-coral" data-search="high school">High School</button>
+              <button type="button" class="btn-primary-blue" data-search="contact">Contact Us</button>
+            </div>
+          </div>
+          <div class="search-results" style="display: none;"></div>
+          <div class="search-no-results" style="display: none;">
+            <div class="no-results-content">
+              <h3>No results found</h3>
+              <p>Try searching with different keywords or explore these popular pages:</p>
             </div>
           </div>
         </div>
@@ -267,18 +282,22 @@
   }
 
   function displayResults(results, container) {
-    const noResults = container.closest('.search-modal-body')?.querySelector('.search-no-results');
+    const modalBody = container.closest('.search-modal-body');
+    const noResults = modalBody?.querySelector('.search-no-results');
+    const suggestionsSection = modalBody?.querySelector('.search-suggestions-section');
+    
     if (results.length === 0) {
       container.innerHTML = '';
-      if (noResults) {
-        noResults.style.display = 'block';
-      }
+      container.style.display = 'none';
+      if (suggestionsSection) suggestionsSection.style.display = 'none';
+      if (noResults) noResults.style.display = 'block';
       return;
     }
 
-    if (noResults) {
-      noResults.style.display = 'none';
-    }
+    // Hide suggestions and no results when we have actual results
+    if (suggestionsSection) suggestionsSection.style.display = 'none';
+    if (noResults) noResults.style.display = 'none';
+    container.style.display = 'flex';
     
     container.innerHTML = results.map(result => `
       <div class="search-result-item" data-url="${result.targetUrl}">
@@ -328,11 +347,22 @@
 
       // Search input events
       searchInput.addEventListener('input', (e) => {
-        clearTimeout(debounceTimer);
-        debounceTimer = setTimeout(() => {
-          const results = performSearch(e.target.value);
-          displayResults(results, resultsContainer);
-        }, 200);
+        const query = e.target.value.trim();
+        const suggestionsSection = searchModal.querySelector('.search-suggestions-section');
+        
+        if (query.length === 0) {
+          // Show suggestions when input is empty
+          resultsContainer.style.display = 'none';
+          resultsContainer.innerHTML = '';
+          if (suggestionsSection) suggestionsSection.style.display = 'block';
+        } else {
+          // Search when user types
+          clearTimeout(debounceTimer);
+          debounceTimer = setTimeout(() => {
+            const results = performSearch(query);
+            displayResults(results, resultsContainer);
+          }, 200);
+        }
       });
 
       searchInput.addEventListener('keydown', (e) => {
@@ -365,27 +395,117 @@
       });
     }
 
-    const modalTransitionDuration = 350;
+    const modalTransitionDuration = 600;
+    let currentSearchButton = null;
 
-    function openModal() {
+    function openModal(triggerElement = null) {
+      // Check if mobile and prevent modal on mobile devices
+      const isMobile = window.innerWidth <= 768 || 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+      
+      if (isMobile) {
+        // On mobile, just return early and let the native search input work
+        return;
+      }
+      
       if (!searchModal) createModal();
+      currentSearchButton = triggerElement;
+      
       if (!searchModal.classList.contains('active')) {
         searchModal.classList.add('active');
       }
-      requestAnimationFrame(() => {
-        searchModal.classList.add('is-visible');
-      });
 
       document.body.style.overflow = 'hidden';
-      setTimeout(() => searchInput?.focus(), 200);
+      
+      // GSAP Animation: Slide down from header
+      if (typeof gsap !== 'undefined') {
+        const content = searchModal.querySelector('.search-modal-content');
+        const heroTitle = searchModal.querySelector('.search-hero-title');
+        const heroSubtitle = searchModal.querySelector('.search-hero-subtitle');
+        const inputContainer = searchModal.querySelector('.search-input-container');
+        const suggestions = searchModal.querySelector('.search-suggestions-section');
+        
+        // Check if mobile
+        const isMobile = window.innerWidth <= 768;
+        const startY = isMobile ? -200 : -220;
+        
+        // Set initial states immediately to prevent flickering
+        gsap.set(searchModal, { opacity: 0, visibility: 'visible' });
+        gsap.set(content, { y: startY, opacity: 0, force3D: true });
+        gsap.set([heroTitle, heroSubtitle, inputContainer], { y: 30, opacity: 0, force3D: true });
+        gsap.set(suggestions, { y: 20, opacity: 0, force3D: true });
+        
+        // Create timeline with immediate start
+        const tl = gsap.timeline();
+        
+        // Start animations immediately
+        tl.to(searchModal, { opacity: 1, duration: 0.4, ease: "power2.out" }, 0)
+          // Slide in the banner from header with smooth easing
+          .to(content, { y: 0, opacity: 1, duration: 0.7, ease: "power3.out", force3D: true }, 0.1)
+          // Animate content elements with smooth stagger
+          .to(heroTitle, { y: 0, opacity: 1, duration: 0.5, ease: "power3.out", force3D: true }, 0.3)
+          .to(heroSubtitle, { y: 0, opacity: 1, duration: 0.5, ease: "power3.out", force3D: true }, 0.4)
+          .to(inputContainer, { y: 0, opacity: 1, duration: 0.5, ease: "power3.out", force3D: true }, 0.5)
+          .to(suggestions, { y: 0, opacity: 1, duration: 0.5, ease: "power3.out", force3D: true }, 0.6)
+          .call(() => {
+            // Focus input after animation completes
+            if (searchInput) {
+              searchInput.focus();
+            }
+          });
+      } else {
+        // Fallback for when GSAP is not available
+        requestAnimationFrame(() => {
+          searchModal.classList.add('is-visible');
+          setTimeout(() => searchInput?.focus(), 400);
+        });
+      }
     }
 
     function closeModal() {
       if (!searchModal || !searchModal.classList.contains('active')) return;
 
-      searchModal.classList.remove('is-visible');
-      setTimeout(() => {
-        if (!searchModal.classList.contains('is-visible')) {
+      // GSAP Animation: Slide up to header
+      if (typeof gsap !== 'undefined') {
+        const content = searchModal.querySelector('.search-modal-content');
+        const suggestions = searchModal.querySelector('.search-suggestions-section');
+        const resultsDiv = searchModal.querySelector('.search-results');
+        
+        // Check if mobile
+        const isMobile = window.innerWidth <= 768;
+        const endY = isMobile ? -200 : -220;
+        
+        // Create close timeline
+        const tl = gsap.timeline({
+          onComplete: () => {
+            searchModal.classList.remove('active');
+            document.body.style.overflow = '';
+            if (searchInput) {
+              searchInput.value = '';
+            }
+            if (resultsContainer) {
+              resultsContainer.innerHTML = '';
+              resultsContainer.style.display = 'none';
+            }
+            const noResults = searchModal.querySelector('.search-no-results');
+            if (noResults) {
+              noResults.style.display = 'none';
+            }
+            const suggestionsSection = searchModal.querySelector('.search-suggestions-section');
+            if (suggestionsSection) {
+              suggestionsSection.style.display = 'block';
+            }
+            currentSearchButton = null;
+          }
+        });
+        
+        // Animate content out and slide up smoothly
+        tl.to([suggestions, resultsDiv], { y: -20, opacity: 0, duration: 0.2, ease: "power2.in", force3D: true }, 0)
+          .to(content, { y: endY, opacity: 0, duration: 0.5, ease: "power3.in", force3D: true }, 0.1)
+          .to(searchModal, { opacity: 0, duration: 0.3, ease: "power2.in" }, 0.3);
+      } else {
+        // Fallback
+        searchModal.classList.remove('is-visible');
+        setTimeout(() => {
           searchModal.classList.remove('active');
           document.body.style.overflow = '';
           if (searchInput) {
@@ -394,38 +514,61 @@
           if (resultsContainer) {
             resultsContainer.innerHTML = '';
           }
-          const noResults = searchModal.querySelector('.search-no-results');
-          if (noResults) {
-            noResults.style.display = 'none';
-          }
-        }
-      }, modalTransitionDuration);
+          currentSearchButton = null;
+        }, modalTransitionDuration);
+      }
     }
 
     // Initialize all search triggers
     function initializeSearchTriggers() {
-      // Header search buttons
+      // Header search buttons (desktop only)
       const headerSearchButtons = document.querySelectorAll('.header-search');
       headerSearchButtons.forEach(btn => {
-        btn.addEventListener('click', openModal);
+        btn.addEventListener('click', (e) => {
+          e.preventDefault();
+          // Check if mobile before opening modal
+          const isMobile = window.innerWidth <= 768 || 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+          if (!isMobile) {
+            openModal(btn);
+          }
+        });
       });
 
       // Footer search inputs
       const footerSearchInputs = document.querySelectorAll('.mega-menu__footer .form-control');
       footerSearchInputs.forEach(input => {
-        input.addEventListener('focus', openModal);
-        input.addEventListener('click', openModal);
+        input.addEventListener('focus', () => {
+          // Check if mobile before opening modal
+          const isMobile = window.innerWidth <= 768 || 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+          if (!isMobile) {
+            openModal(input);
+          }
+        });
+        
+        input.addEventListener('click', () => {
+          // Check if mobile before opening modal
+          const isMobile = window.innerWidth <= 768 || 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+          if (!isMobile) {
+            openModal(input);
+          }
+        });
         
         // Also handle direct typing in footer input
         input.addEventListener('input', (e) => {
-          if (!searchModal || !searchModal.classList.contains('active')) {
-            openModal();
+          const isMobile = window.innerWidth <= 768 || 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+          
+          if (!isMobile) {
+            // Desktop: Open modal and sync search
+            if (!searchModal || !searchModal.classList.contains('active')) {
+              openModal(input);
+            }
+            if (searchInput && e.target.value) {
+              searchInput.value = e.target.value;
+              const results = performSearch(e.target.value);
+              displayResults(results, resultsContainer);
+            }
           }
-          if (searchInput && e.target.value) {
-            searchInput.value = e.target.value;
-            const results = performSearch(e.target.value);
-            displayResults(results, resultsContainer);
-          }
+          // Mobile: Let the native search input work normally (no modal interference)
         });
       });
     }
@@ -447,21 +590,18 @@
         display: flex;
         align-items: flex-start;
         justify-content: center;
-        padding: 6vh 1rem 2rem;
-        background: rgba(7, 12, 26, 0.55);
+        padding-top: 120px;
+        background: rgba(15, 23, 42, 0.8);
         backdrop-filter: blur(8px);
         opacity: 0;
         visibility: hidden;
         pointer-events: none;
-        transition: opacity 0.3s ease, visibility 0.3s ease;
+        transform: translateZ(0);
+        will-change: opacity;
       }
 
       .glenaeon-search-modal.active {
         visibility: visible;
-      }
-
-      .glenaeon-search-modal.is-visible {
-        opacity: 1;
         pointer-events: auto;
       }
 
@@ -471,199 +611,340 @@
 
       .search-modal-content {
         position: relative;
-        width: min(680px, 100%);
-        background: #fff;
-        border-radius: 1rem;
-        border: 1px solid #e4e7ef;
-        box-shadow: 0 25px 65px rgba(8, 13, 28, 0.18);
+        width: min(900px, 100%);
+        max-height: 90vh;
+        background: #ffffff;
+        border-radius: 16px;
+        box-shadow: 
+          0 25px 50px rgba(24, 49, 83, 0.25),
+          0 10px 30px rgba(24, 49, 83, 0.15);
         overflow: hidden;
-        transform: translateY(24px);
-        opacity: 0;
-        transition: transform 0.35s ease, opacity 0.35s ease;
+        transform: translateZ(0);
+        will-change: transform, opacity;
       }
 
-      .glenaeon-search-modal.is-visible .search-modal-content {
-        transform: translateY(0);
-        opacity: 1;
+      .search-hero-banner {
+        background: #183153;
+        padding: 3rem 2rem 2rem;
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+        border-radius: 16px 16px 0 0;
       }
 
-      .search-modal-header {
-        padding: 1.5rem;
-        border-bottom: 1px solid #eef1f7;
-        background: #fdfdfd;
+      .search-hero-content {
+        position: relative;
+        z-index: 1;
+      }
+
+      .search-hero-title {
+        margin: 0 0 0.5rem 0;
+        font-size: 2.5rem;
+        font-weight: 700;
+        color: #ffffff;
+        letter-spacing: -0.02em;
+      }
+
+      .search-hero-subtitle {
+        margin: 0 0 2rem 0;
+        font-size: 1.1rem;
+        color: rgba(255, 255, 255, 0.8);
+        font-weight: 400;
+        line-height: 1.5;
       }
 
       .search-input-container {
         display: flex;
         align-items: center;
-        gap: 0.75rem;
+        gap: 1rem;
+        max-width: 600px;
+        margin: 0 auto;
+      }
+
+      .search-input-wrapper {
+        flex: 1;
+        position: relative;
+        display: flex;
+        align-items: center;
+        background: rgba(255, 255, 255, 0.95);
+        border-radius: 16px;
+        padding: 0 1.5rem;
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        transition: all 0.3s ease;
+      }
+
+      .search-input-wrapper:focus-within {
+        background: #ffffff;
+        box-shadow: 
+          0 0 0 3px rgba(219, 87, 78, 0.15),
+          0 8px 32px rgba(24, 49, 83, 0.12);
+        border-color: rgba(219, 87, 78, 0.3);
+      }
+
+      .search-input-icon {
+        color: #64748b;
+        margin-right: 1rem;
+        flex-shrink: 0;
       }
 
       .search-modal-input {
         flex: 1;
-        height: 3.25rem;
-        border-radius: 999px;
-        padding: 0 1.25rem;
-        font-size: 1rem;
-        color: #16223b;
-        border: 1px solid #d5dae6;
-        background: #f6f7fb;
-        transition: border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+        height: 3.5rem;
+        border: none;
+        background: transparent;
+        font-size: 1.1rem;
+        color: #1e293b;
+        font-weight: 400;
+        outline: none;
       }
 
       .search-modal-input::placeholder {
-        color: #8b93a7;
-      }
-
-      .search-modal-input:focus {
-        outline: none;
-        border-color: #db574e;
-        background: #fff;
-        box-shadow: 0 0 0 3px rgba(219, 87, 78, 0.15);
+        color: #64748b;
+        font-weight: 400;
       }
 
       .search-modal-close {
-        width: 2.75rem;
-        height: 2.75rem;
-        border-radius: 50%;
-        border: 1px solid #e4e7ef;
-        background: #fff;
-        color: #6a7285;
+        width: 3rem;
+        height: 3rem;
+        border-radius: 12px;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        background: rgba(255, 255, 255, 0.1);
+        color: rgba(255, 255, 255, 0.9);
         cursor: pointer;
         display: inline-flex;
         align-items: center;
         justify-content: center;
-        transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+        backdrop-filter: blur(10px);
+        transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
       }
 
       .search-modal-close:hover {
-        background: #172444;
-        color: #fff;
-        border-color: #172444;
-        transform: translateY(-1px);
+        background: rgba(255, 255, 255, 0.2);
+        color: #ffffff;
+        border-color: rgba(255, 255, 255, 0.3);
+        transform: scale(1.05);
       }
 
       .search-modal-body {
-        max-height: min(50vh, 440px);
+        max-height: 60vh;
         overflow-y: auto;
-        padding: 1.25rem 1.5rem;
+        padding: 2rem;
         background: #fff;
+      }
+
+      .search-suggestions-section {
+        margin-bottom: 1rem;
+      }
+
+      .search-suggestions-section h3 {
+        margin: 0 0 1.5rem 0;
+        font-size: 1.25rem;
+        font-weight: 600;
+        color: #1e293b;
+        text-align: center;
       }
 
       .search-results {
         display: flex;
         flex-direction: column;
-        gap: 0.75rem;
+        gap: 1rem;
       }
 
       .search-result-item {
-        padding: 1rem 1.15rem;
-        border-radius: 0.9rem;
-        border: 1px solid #eef0f6;
-        background: #fdfdfd;
+        padding: 1.5rem;
+        border-radius: 16px;
+        border: 1px solid #e2e8f0;
+        background: #ffffff;
         cursor: pointer;
-        transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+        transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        position: relative;
+        overflow: hidden;
       }
 
       .search-result-item:hover {
-        border-color: rgba(219, 87, 78, 0.7);
-        background: #fff;
-        box-shadow: 0 10px 30px rgba(15, 23, 42, 0.08);
+        border-color: #db574e;
+        background: #f8fafc;
+        box-shadow: 
+          0 8px 24px rgba(219, 87, 78, 0.12),
+          0 4px 12px rgba(219, 87, 78, 0.08);
         transform: translateY(-2px);
       }
 
       .search-result-title {
-        margin: 0 0 0.35rem 0;
-        font-size: 1.05rem;
+        margin: 0 0 0.5rem 0;
+        font-size: 1.2rem;
         font-weight: 600;
-        color: #15213a;
+        color: #1e293b;
+        position: relative;
+        z-index: 1;
       }
 
       .search-result-snippet {
-        margin: 0 0 0.45rem 0;
-        font-size: 0.92rem;
-        color: #5c6480;
-        line-height: 1.5;
+        margin: 0 0 0.75rem 0;
+        font-size: 1rem;
+        color: #64748b;
+        line-height: 1.6;
+        position: relative;
+        z-index: 1;
       }
 
       .search-result-snippet mark {
-        background: rgba(219, 87, 78, 0.15);
-        color: #15213a;
-        padding: 0.05rem 0.2rem;
-        border-radius: 0.4rem;
+        background: rgba(219, 87, 78, 0.1);
+        color: #183153;
+        padding: 0.1rem 0.3rem;
+        border-radius: 6px;
+        font-weight: 500;
       }
 
       .search-result-url {
-        font-size: 0.82rem;
-        color: #8b93a7;
-        letter-spacing: 0.03em;
+        font-size: 0.9rem;
+        color: #94a3b8;
+        letter-spacing: 0.025em;
+        position: relative;
+        z-index: 1;
       }
 
       .search-no-results {
         text-align: center;
-        padding: 2rem 1rem;
-        color: #5c6480;
+        padding: 3rem 1rem;
       }
 
-      .search-no-results p {
-        margin-bottom: 1rem;
+      .no-results-content h3 {
+        margin: 0 0 1rem 0;
+        font-size: 1.5rem;
+        font-weight: 600;
+        color: #1e293b;
+      }
+
+      .no-results-content p {
+        margin: 0 0 2rem 0;
         font-size: 1rem;
-        color: #1b2742;
+        color: #64748b;
+        line-height: 1.5;
       }
 
       .search-suggestions {
         display: flex;
         flex-wrap: wrap;
-        gap: 0.5rem;
+        gap: 0.75rem;
         justify-content: center;
       }
 
-      .search-suggestions button {
-        padding: 0.45rem 1rem;
-        border-radius: 999px;
-        border: 1px solid #e4e7ef;
-        background: #f6f7fb;
-        color: #4b5675;
+      .search-suggestions .btn-primary-blue,
+      .search-suggestions .btn-primary-coral {
+        padding: 0.75rem 1.5rem;
+        border-radius: 12px;
         cursor: pointer;
-        font-size: 0.9rem;
-        transition: border-color 0.2s ease, background 0.2s ease, color 0.2s ease;
+        font-size: 0.95rem;
+        font-weight: 500;
+        transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        border: none;
+        text-decoration: none;
       }
 
-      .search-suggestions button:hover {
-        border-color: #db574e;
-        background: rgba(219, 87, 78, 0.12);
-        color: #15213a;
+      .search-suggestions .btn-primary-blue:hover,
+      .search-suggestions .btn-primary-coral:hover {
+        transform: translateY(-1px);
       }
 
       .search-modal-body::-webkit-scrollbar {
-        width: 6px;
+        width: 8px;
       }
 
       .search-modal-body::-webkit-scrollbar-thumb {
-        background: rgba(21, 33, 58, 0.25);
-        border-radius: 999px;
+        background: rgba(148, 163, 184, 0.3);
+        border-radius: 4px;
+      }
+
+      .search-modal-body::-webkit-scrollbar-thumb:hover {
+        background: rgba(148, 163, 184, 0.5);
       }
 
       @media (max-width: 768px) {
         .glenaeon-search-modal {
-          padding: 4vh 0.5rem 1.5rem;
+          display: none !important;
+          visibility: hidden !important;
         }
 
         .search-modal-content {
-          border-radius: 0.85rem;
+          border-radius: 16px;
+          width: 100%;
+          max-height: 90vh;
         }
 
-        .search-modal-header {
-          padding: 1.25rem;
+        .search-hero-banner {
+          padding: 2rem 1.5rem 1.5rem;
+        }
+
+        .search-hero-title {
+          font-size: 2rem;
+        }
+
+        .search-hero-subtitle {
+          font-size: 1rem;
+          margin-bottom: 1.5rem;
+        }
+
+        .search-input-container {
+          flex-direction: column;
+          gap: 1rem;
+        }
+
+        .search-input-wrapper {
+          width: 100%;
         }
 
         .search-modal-input {
+          height: 3.25rem;
+          font-size: 1rem;
+        }
+
+        .search-modal-close {
+          width: 100%;
           height: 3rem;
+        }
+
+        .search-modal-body {
+          max-height: calc(90vh - 200px);
+          padding: 1.5rem;
+        }
+
+        .search-result-item {
+          padding: 1.25rem;
+          border-radius: 12px;
+        }
+
+        .search-result-title {
+          font-size: 1.1rem;
+        }
+
+        .search-result-snippet {
+          font-size: 0.95rem;
+        }
+
+        .search-suggestions {
+          gap: 0.5rem;
+        }
+
+        .search-suggestions .btn-primary-blue,
+        .search-suggestions .btn-primary-coral {
+          padding: 0.75rem 1.25rem;
+          font-size: 0.9rem;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .search-hero-title {
+          font-size: 1.75rem;
+        }
+
+        .search-hero-subtitle {
           font-size: 0.95rem;
         }
 
         .search-modal-body {
-          max-height: calc(100vh - 11rem);
+          padding: 1rem;
         }
       }
     `;
