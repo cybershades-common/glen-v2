@@ -86,7 +86,7 @@
   .play-button {
     position: absolute;
     right: 17.7%;
-    bottom: -14%;
+    bottom: -40%;
     transform: translateY(-50%);
     width: 185.85px;
     height: 187.169px;
@@ -579,11 +579,12 @@ h1 {
   }
 }
 
-@media (min-width:768px) and (max-width:992px){
-     h1 .hero__title-script {
-      font-size: clamp(2.5rem, 7vw, 5rem);
-    }
+@media (min-width:768px) and (max-width:992px) {
+  h1 .hero__title-script {
+    font-size: clamp(2.5rem, 7vw, 5rem);
+  }
 }
+
 
 
 @media (max-width:767px) {
@@ -591,6 +592,31 @@ h1 {
   .hero {
     .bottom-edge {
       bottom: -6px;
+    }
+
+    .hero__content {
+      position: relative;
+      width: 100%;
+      height: 81vh;
+      z-index: 2;
+      display: flex;
+      padding: 1rem 0 3rem;
+
+      h1{
+        font-size: 3.5rem;
+      }
+
+      .hero__description {
+        position: relative;
+        left: inherit;
+        top: inherit;
+        padding: 0;
+        margin-bottom: 4rem;
+      }
+    }
+
+    .arrow-navigation {
+      display: none;
     }
   }
 
