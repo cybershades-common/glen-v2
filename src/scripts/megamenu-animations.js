@@ -67,7 +67,7 @@
     if (desktopQuickLinks && quickLinksDesktopOnly) {
       menuTimeline.fromTo(
         desktopQuickLinks,
-        { y: -40, opacity: 0 },
+        { y: 0, opacity: 0 },
         { y: 0, opacity: 1, duration: 0.4, ease: 'power2.out' },
         '>-0.8' // immediately after nav items
       );
