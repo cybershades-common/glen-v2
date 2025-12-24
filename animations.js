@@ -71,8 +71,11 @@ function shouldEnableScrollSmoother() {
   const matchesDesktop = desktopMediaQuery ? desktopMediaQuery.matches : window.innerWidth >= SCROLL_SMOOTHER_BREAKPOINT;
   const hasFinePointer = pointerFineMediaQuery ? pointerFineMediaQuery.matches : true;
   const prefersReducedMotion = reduceMotionMediaQuery ? reduceMotionMediaQuery.matches : false;
+  
+  // Additional check to prevent ScrollSmoother on touch devices
+  const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
 
-  return matchesDesktop && hasFinePointer && !prefersReducedMotion;
+  return matchesDesktop && hasFinePointer && !prefersReducedMotion && !isTouchDevice;
 }
 
 function setScrollSmootherBodyState(isEnabled) {
