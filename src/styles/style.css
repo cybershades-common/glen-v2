@@ -4475,10 +4475,10 @@ h1 .hero__title-script {
     position: relative;
   }
   body .edge-position.bottom-edge {
-    margin-top: -1.25rem;
+    margin-top: -1.125rem;
   }
   body .edge-position.top-edge {
-    margin-bottom: -0.25rem;
+    margin-bottom: -0.1875rem;
   }
   body .what-we-do-section .what-we-do-content-wrapper {
     gap: 0;
@@ -4489,6 +4489,9 @@ h1 .hero__title-script {
   }
   body .full-width-testimonial-audio .testimonial-audio-quote {
     min-height: 18vh;
+  }
+  body .co-curricular-carousel {
+    height: 70vh;
   }
 }
 @media (min-width: 1800px) {
