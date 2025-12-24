@@ -669,6 +669,31 @@
 
       const animationTimers = new WeakMap();
       const animationDuration = 360;
+      let refreshTimeoutId = null;
+
+      const scheduleScrollRefresh = (delay = 0) => {
+        if (refreshTimeoutId) {
+          clearTimeout(refreshTimeoutId);
+        }
+
+        refreshTimeoutId = setTimeout(() => {
+          try {
+            const smootherInstance =
+              window.ScrollSmoother &&
+              typeof window.ScrollSmoother.get === 'function' &&
+              window.ScrollSmoother.get();
+            if (smootherInstance && typeof smootherInstance.refresh === 'function') {
+              smootherInstance.refresh();
+            }
+          } catch (error) {
+            console.warn('ScrollSmoother refresh failed:', error);
+          }
+
+          if (window.ScrollTrigger && typeof window.ScrollTrigger.refresh === 'function') {
+            window.ScrollTrigger.refresh();
+          }
+        }, delay);
+      };
 
       let activeFilter =
         section.querySelector('.filter-tab.filter-tab--active')?.getAttribute('data-filter') || 'all';
@@ -754,6 +779,7 @@
               hideCard(card, true);
             }
           });
+          scheduleScrollRefresh(0);
           return;
         }
 
@@ -781,7 +807,10 @@
           });
         };
 
-        setTimeout(startShow, animationDuration);
+        setTimeout(() => {
+          startShow();
+          scheduleScrollRefresh(animationDuration + 50);
+        }, animationDuration);
       }
     });
   }
