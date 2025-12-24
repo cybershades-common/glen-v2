@@ -3064,7 +3064,7 @@
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.1/dist/ScrollSmoother.min.js"></script>
-  <script>
+ <script>
 
 
     function supportsCurtainClip() {
@@ -3076,23 +3076,26 @@
       return CSS.supports('clip-path', insetValue) || CSS.supports('-webkit-clip-path', insetValue);
     }
 
+    // --------------------------------------------------------------------
+    // Preloader knobs (adjust values here instead of deep in the logic)
+    // --------------------------------------------------------------------
     const PRELOADER_CONFIG = {
       desktop: {
         logoWidth: '33vw',
         logoTop: '50%',
         logoLeft: '50%',
         blobScale: 1,
-        blobRiseTarget: 40,
+        blobRiseTarget: 40, // yPercent
         blobInitialY: 110,
         animationDuration: 3.5
       },
       mobile: {
         logoWidth: '66vw',
-        logoTop: '52%',
+        logoTop: '72%',
         logoLeft: '50%',
-        blobScale: 3,
+        blobScale: 1.7,
         blobRiseTarget: 80,
-        blobInitialY: 110,
+        blobInitialY: 200,
         animationDuration: 3
       }
     };
