@@ -1591,6 +1591,18 @@ body.mega-menu-open {
     color: #1c3666;
     background: transparent;
     border: none;
+    outline: none;
+    box-shadow: none;
+  }
+  .mega-menu .mega-menu__inner .mega-menu__footer .input-group input:focus {
+    outline: none;
+    box-shadow: none;
+    border: none;
+  }
+  .mega-menu .mega-menu__inner .mega-menu__footer .input-group input:active {
+    outline: none;
+    box-shadow: none;
+    border: none;
   }
   .mega-menu .mega-menu__inner .mega-menu__footer .input-group .input-group-text {
     background: none;
