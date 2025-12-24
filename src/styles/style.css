@@ -4583,7 +4583,7 @@ h1 .hero__title-script {
     height: 70vh;
   }
 }
-@media (max-width: 380px) {
+@media (max-width: 400px) {
   html {
     font-size: 15px;
   }
