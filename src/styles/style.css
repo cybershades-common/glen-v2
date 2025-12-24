@@ -1095,6 +1095,8 @@ body.mega-menu-open .site-header .hamburger .hamburger .line:nth-child(3) {
 .mega-menu__nav-item a .menu-text-normal {
   opacity: 1;
   transition: opacity 0.2s ease;
+  position: relative;
+  display: inline-block;
 }
 .mega-menu__nav-item a .menu-text-script {
   position: absolute;
@@ -1109,13 +1111,23 @@ body.mega-menu-open .site-header .hamburger .hamburger .line:nth-child(3) {
   color: #db574e;
   transition: opacity 0.2s ease;
   pointer-events: none;
+  display: inline-block;
   max-width: 100%;
 }
 .mega-menu__nav-item a:hover .menu-text-normal {
   opacity: 0;
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
 }
 .mega-menu__nav-item a:hover .menu-text-script {
   opacity: 1;
+  position: relative;
+  top: auto;
+  left: auto;
+  transform: none;
+  pointer-events: auto;
 }
 .mega-menu__nav-item a:hover .mega-menu__nav-arrow {
   opacity: 1;
@@ -1124,9 +1136,18 @@ body.mega-menu-open .site-header .hamburger .hamburger .line:nth-child(3) {
 }
 .mega-menu__nav-item a.is-active .menu-text-normal {
   opacity: 0;
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
 }
 .mega-menu__nav-item a.is-active .menu-text-script {
   opacity: 1;
+  position: relative;
+  top: auto;
+  left: auto;
+  transform: none;
+  pointer-events: auto;
 }
 .mega-menu__nav-item a.is-active .mega-menu__nav-arrow {
   opacity: 1;
@@ -4393,6 +4414,11 @@ h1 .hero__title-script {
     padding-top: 6rem;
   }
   body .header-quick-links {
+    display: none;
+    opacity: 0;
+    pointer-events: none;
+  }
+  body body.mega-menu-open .site-header .header-quick-links {
     display: none;
     opacity: 0;
     pointer-events: none;

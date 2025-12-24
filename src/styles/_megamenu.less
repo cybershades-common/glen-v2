@@ -267,6 +267,8 @@
     .menu-text-normal {
       opacity: 1;
       transition: opacity 0.2s ease;
+      position: relative;
+      display: inline-block;
     }
 
     .menu-text-script {
@@ -282,7 +284,7 @@
       color: @color-coral;
       transition: opacity 0.2s ease;
       pointer-events: none;
-
+      display: inline-block;
       max-width: 100%;
     }
 
@@ -290,11 +292,21 @@
     &:hover {
       .menu-text-normal {
         opacity: 0;
+        position: absolute;
+        left: 0;
+        top: 50%;
+        transform: translateY(-50%);
       }
 
       .menu-text-script {
         opacity: 1;
+        position: relative;
+        top: auto;
+        left: auto;
+        transform: none;
+        pointer-events: auto;
       }
+
 
       .mega-menu__nav-arrow {
         opacity: 1;
@@ -307,10 +319,19 @@
     &.is-active {
       .menu-text-normal {
         opacity: 0;
+        position: absolute;
+        left: 0;
+        top: 50%;
+        transform: translateY(-50%);
       }
 
       .menu-text-script {
         opacity: 1;
+        position: relative;
+        top: auto;
+        left: auto;
+        transform: none;
+        pointer-events: auto;
       }
 
       .mega-menu__nav-arrow {
