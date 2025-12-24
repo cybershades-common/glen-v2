@@ -4529,6 +4529,9 @@ h1 .hero__title-script {
   body .mobile-only {
     display: block;
   }
+  body .mobile-only input[placeholder*="Search Glenaeon"] {
+    pointer-events: none;
+  }
   body .three-stages-section .three-stages-list,
   body .three-stages-section .three-stages-item,
   body .three-stages-section .three-stages-line {
