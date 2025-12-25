@@ -442,14 +442,14 @@ function initRevealAnimations() {
 if (typeof ScrollTrigger !== 'undefined') {
   // Refresh on window resize (already standard practice)
   window.addEventListener('resize', () => {
-    ScrollTrigger.refresh();
+    // ScrollTrigger.refresh();
   });
   
   // Gentle refresh on page visibility change (handles soft refresh)
   document.addEventListener('visibilitychange', () => {
     if (!document.hidden) {
       requestAnimationFrame(() => {
-        ScrollTrigger.refresh();
+        // ScrollTrigger.refresh();
       });
     }
   });
