@@ -498,7 +498,7 @@ body.mega-menu-open .site-header .hamburger .hamburger .line:nth-child(3) {
   flex-grow: 1;
   display: none;
   justify-content: center;
-  max-width: 327px;
+  max-width: 20.5rem;
   margin: 0 auto;
   z-index: 1;
 }
