@@ -1670,6 +1670,11 @@ body.mega-menu-open {
   width: 100%;
   z-index: 1;
 }
+@media (min-width: 992px) and (max-width: 1200px) {
+  .hero .bottom-edge {
+    bottom: -1rem;
+  }
+}
 .hero .hero__slider {
   position: absolute;
   inset: 0;
@@ -1713,38 +1718,24 @@ body.mega-menu-open {
   }
 }
 .hero .play-button {
+  display: flex;
+  width: 11.61563rem;
+  height: 11.69806rem;
+  padding: 0.16494rem 0.10994rem;
+  align-items: center;
+  gap: 0.43975rem;
   position: absolute;
-  right: 17.7%;
-  bottom: -40%;
-  transform: translateY(-50%);
-  width: 185.85px;
-  height: 187.169px;
-  padding: 0;
   border: none;
   background: transparent;
   cursor: pointer;
   z-index: 3;
+  right: 17.875vw;
+  bottom: -4rem;
 }
 .hero .play-button:focus-visible {
   outline: 2px solid #ffffff;
   outline-offset: 4px;
   border-radius: 50%;
-}
-@media (max-width: 1199px) {
-  .hero .play-button {
-    width: 150px;
-    height: 151px;
-  }
-}
-@media (max-width: 991px) {
-  .hero .play-button {
-    right: 5%;
-    top: auto;
-    bottom: 8%;
-    transform: none;
-    width: 120px;
-    height: 121px;
-  }
 }
 @media (max-width: 767px) {
   .hero .play-button {
@@ -1920,13 +1911,13 @@ h1 .hero__title-script {
 }
 .arrow-navigation {
   position: absolute;
-  right: 80px;
-  bottom: 80px;
   display: flex;
   gap: 13px;
   align-items: center;
   z-index: 4;
   pointer-events: none;
+  bottom: -4rem;
+  right: 0;
 }
 .arrow-navigation button {
   pointer-events: auto;
@@ -2033,10 +2024,8 @@ h1 .hero__title-script {
     display: flex;
     flex-direction: column;
     gap: 0.625rem;
-    position: absolute;
     width: 100%;
     z-index: 3;
-    bottom: 0;
   }
 }
 .hero__video-btn {
@@ -2112,7 +2101,12 @@ h1 .hero__title-script {
     width: 100%;
     z-index: 2;
     display: flex;
-    padding: 1rem 0 3rem;
+    padding: 1rem 0 0;
+  }
+  .hero .hero__content > .row {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
   }
   .hero .hero__content h1 {
     font-size: 3.5rem;
@@ -2122,7 +2116,7 @@ h1 .hero__title-script {
     left: inherit;
     top: inherit;
     padding: 0;
-    margin-bottom: 4rem;
+    margin-bottom: 1.125rem;
   }
   .hero .arrow-navigation {
     display: none;
@@ -2130,7 +2124,6 @@ h1 .hero__title-script {
   .hero .hero__slider .hero__slide-overlay .container-fluid {
     display: flex;
     height: 100%;
-    padding-bottom: 2rem;
   }
   .internal-page .hero .hero__slider .hero__slide-overlay {
     padding-bottom: 2rem;
@@ -4847,7 +4840,7 @@ h1 .hero__title-script {
     font-size: 15px;
   }
   .hero .hero__content .hero__description {
-    margin-bottom: 10rem;
+    margin-bottom: 1rem;
   }
 }
 @media (min-width: 1800px) {

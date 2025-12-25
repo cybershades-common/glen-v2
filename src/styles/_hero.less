@@ -25,6 +25,9 @@
     width: 100%;
     z-index: 1;
 
+    @media (min-width:992px) and (max-width:1200px){
+      bottom: -1rem;
+    }
 
   }
 
@@ -84,17 +87,20 @@
   }
 
   .play-button {
+
+    display: flex;
+    width: 11.61563rem;
+    height: 11.69806rem;
+    padding: 0.16494rem 0.10994rem;
+    align-items: center;
+    gap: 0.43975rem;
     position: absolute;
-    right: 17.7%;
-    bottom: -40%;
-    transform: translateY(-50%);
-    width: 185.85px;
-    height: 187.169px;
-    padding: 0;
     border: none;
     background: transparent;
     cursor: pointer;
     z-index: 3;
+    right: 17.875vw;
+    bottom: -4rem;
 
     // Hover effect handled by icon itself
 
@@ -103,21 +109,8 @@
       outline-offset: 4px;
       border-radius: 50%;
     }
-
-    // Responsive sizing
-    @media (max-width: (@breakpoint-xl - 1)) {
-      width: 150px;
-      height: 151px;
-    }
-
-    @media (max-width: (@breakpoint-lg - 1)) {
-      right: 5%;
-      top: auto;
-      bottom: 8%;
-      transform: none;
-      width: 120px;
-      height: 121px;
-    }
+  
+   
 
     @media (max-width: (@breakpoint-md - 1)) {
       display: none;
@@ -353,13 +346,14 @@ h1 {
 
 .arrow-navigation {
   position: absolute;
-  right: @arrow-group-right;
-  bottom: @arrow-group-bottom;
+ 
   display: flex;
   gap: @arrow-gap;
   align-items: center;
   z-index: 4; // Above play button
   pointer-events: none; // Allow clicks to pass through container
+      bottom: -4rem;
+      right: 0;
 
   // Enable pointer events on buttons
   button {
@@ -501,11 +495,9 @@ h1 {
   @media (max-width: (@breakpoint-md - 1)) {
     display: flex;
     flex-direction: column;
-    gap: @spacing-sm;
-    position: absolute;
+    gap: @spacing-sm;   
     width: 100%;
-    z-index: 3;
-    bottom: 0;
+    z-index: 3;    
   }
 }
 
@@ -601,7 +593,13 @@ h1 {
       width: 100%;
       z-index: 2;
       display: flex;
-      padding: 1rem 0 3rem;
+      padding: 1rem 0 0;
+
+      >.row {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+}
 
       h1 {
         font-size: 3.5rem;
@@ -612,7 +610,7 @@ h1 {
         left: inherit;
         top: inherit;
         padding: 0;
-        margin-bottom: 4rem;
+        margin-bottom: 1.125rem;
       }
     }
 
@@ -623,8 +621,7 @@ h1 {
     .hero__slider .hero__slide-overlay {
       .container-fluid {
         display: flex;
-        height: 100%;
-        padding-bottom: 2rem;
+        height: 100%;  
       }
     }
   }
