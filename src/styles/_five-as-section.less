@@ -119,6 +119,7 @@
     margin-top: 3.125rem;
     margin-bottom: @spacing-xl;
     flex-wrap: wrap;
+    gap: 1rem;
 
     @media (max-width: (@breakpoint-md - 1)) {
 
@@ -135,13 +136,11 @@
     letter-spacing: -0.03125rem;
     color: @color-white;
     background: transparent;
-    border: none;
-    flex: 1;
-
+    border: none;  
     cursor: pointer;
     transition: color @transition-base;
     position: relative;
-    padding: 1rem 0;
+    padding: 0 1rem;
 
     // &:hover {
     //   color: @color-coral;
@@ -149,6 +148,8 @@
     &--active {
       color: @color-white;
       position: relative;
+      width: 16.5rem;
+      height: 2.6875rem;
 
       &::after {
         position: absolute;

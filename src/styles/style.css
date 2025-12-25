@@ -3219,6 +3219,7 @@ h1 .hero__title-script {
   margin-top: 3.125rem;
   margin-bottom: 2.5rem;
   flex-wrap: wrap;
+  gap: 1rem;
 }
 @media (max-width: 767px) {
   .five-as-section__nav {
@@ -3235,15 +3236,16 @@ h1 .hero__title-script {
   color: #ffffff;
   background: transparent;
   border: none;
-  flex: 1;
   cursor: pointer;
   transition: color 250ms ease;
   position: relative;
-  padding: 1rem 0;
+  padding: 0 1rem;
 }
 .five-as-section__nav-item--active {
   color: #ffffff;
   position: relative;
+  width: 16.5rem;
+  height: 2.6875rem;
 }
 .five-as-section__nav-item--active::after {
   position: absolute;
