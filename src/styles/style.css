@@ -4128,17 +4128,16 @@ h1 .hero__title-script {
 .three-campuses-section {
   position: relative;
   width: 100%;
-  min-height: 65.8125rem;
+  min-height: 100vh;
   overflow: hidden;
-  padding: 4.5rem 0 0;
+  padding: 5rem;
 }
 .three-campuses-section__background {
   position: absolute;
-  top: calc(50% + 0.90625rem);
-  left: calc(50% + 4.070625rem);
-  transform: translate(-50%, -50%);
-  width: 103.441625rem;
-  height: 65.8125rem;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100%;
   z-index: 0;
   filter: blur(1.25rem);
 }
@@ -4146,7 +4145,7 @@ h1 .hero__title-script {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: 50% 50%;
+  object-position: center;
 }
 .three-campuses-section__overlay {
   position: absolute;
