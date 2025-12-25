@@ -4596,6 +4596,14 @@ h1 .hero__title-script {
   body .co-curricular-carousel {
     height: 70vh;
   }
+  body .five-as-section__nav {
+    gap: 1rem 0;
+    padding: 0 1rem;
+  }
+  body .five-as-section__nav-item {
+    min-width: 7rem;
+    white-space: nowrap;
+  }
 }
 @media (max-width: 400px) {
   html {
