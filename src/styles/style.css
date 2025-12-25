@@ -2101,6 +2101,9 @@ h1 .hero__title-script {
   }
 }
 @media (max-width: 767px) {
+  .hero {
+    max-height: 100vh;
+  }
   .hero .bottom-edge {
     bottom: -6px;
   }
