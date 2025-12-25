@@ -4132,6 +4132,236 @@ h1 .hero__title-script {
     margin: 5rem 0;
   }
 }
+.three-campuses-section {
+  position: relative;
+  width: 100%;
+  min-height: 65.8125rem;
+  overflow: hidden;
+  padding: 4.5rem 0 0;
+}
+.three-campuses-section__background {
+  position: absolute;
+  top: calc(50% + 0.90625rem);
+  left: calc(50% + 4.070625rem);
+  transform: translate(-50%, -50%);
+  width: 103.441625rem;
+  height: 65.8125rem;
+  z-index: 0;
+  filter: blur(1.25rem);
+}
+.three-campuses-section__bg-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 50%;
+}
+.three-campuses-section__overlay {
+  position: absolute;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.4);
+  pointer-events: none;
+}
+.three-campuses-section .container-fluid {
+  position: relative;
+  z-index: 1;
+}
+.three-campuses-section__top-line {
+  position: absolute;
+  top: 1.2425rem;
+  left: -3.680625rem;
+  width: 100rem;
+  height: 0;
+  z-index: 2;
+}
+.three-campuses-section__line-image {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-width: none;
+  position: absolute;
+  inset: -3.125rem 0 0 0;
+}
+.three-campuses-section__line-image--rotated {
+  transform: rotate(180deg);
+}
+.three-campuses-section__bottom-line {
+  position: absolute;
+  bottom: 0;
+  left: -3.680625rem;
+  width: 100rem;
+  height: 0;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.three-campuses-section__title-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 0 auto 2.4375rem;
+  width: 45.0625rem;
+  max-width: 100%;
+  text-align: center;
+  position: relative;
+  z-index: 2;
+  padding: 0 1rem;
+}
+.three-campuses-section__title-script {
+  font-family: 'Born Ready', cursive;
+  font-size: 3.75rem;
+  font-weight: 400;
+  line-height: 1;
+  color: #ffffff;
+  margin: 0;
+  position: relative;
+}
+.three-campuses-section__title-bold {
+  font-family: 'Averta', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-size: 3.75rem;
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -0.075rem;
+  text-transform: uppercase;
+  color: #ffffff;
+  margin: 0;
+  position: relative;
+}
+.three-campuses-section .row {
+  position: relative;
+  z-index: 2;
+  margin-top: 0;
+}
+.three-campuses-section .row > [class*="col-"] {
+  padding-left: 2.9375rem;
+  padding-right: 2.9375rem;
+}
+.three-campuses-section__card {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  align-items: center;
+  width: 100%;
+  position: relative;
+}
+.three-campuses-section__card-image-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 28.9223125rem;
+  width: 100%;
+  position: relative;
+}
+.three-campuses-section__card-image-wrapper--rotate-1 {
+  transform: rotate(2.5deg);
+}
+.three-campuses-section__card-image-wrapper--rotate-2 {
+  transform: rotate(357.5deg);
+}
+.three-campuses-section__card-image-wrapper--rotate-3 {
+  transform: rotate(2.5deg);
+}
+.three-campuses-section__card-image-inner {
+  width: 100%;
+  height: 27.996875rem;
+  overflow: hidden;
+  border-radius: 1rem;
+  position: relative;
+}
+.three-campuses-section__card-image {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 50%;
+  border-radius: 1rem;
+  pointer-events: none;
+}
+.three-campuses-section__card-content {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
+  text-align: left;
+}
+.three-campuses-section__card-title-script {
+  font-family: 'Born Ready', cursive;
+  font-size: 1.5625rem;
+  font-weight: 400;
+  line-height: 0.9;
+  color: #ffffff;
+  margin: 0 0 0.625rem;
+  width: 100%;
+}
+.three-campuses-section__card-title-bold {
+  font-family: 'Averta', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-size: 2.1875rem;
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: 0;
+  text-transform: uppercase;
+  color: #ffffff;
+  margin: 0 0 0.625rem;
+  width: 100%;
+}
+.three-campuses-section__card-description {
+  font-family: 'Averta', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-size: 1.25rem;
+  font-weight: 400;
+  line-height: 1.3;
+  letter-spacing: -0.025rem;
+  color: #ffffff;
+  margin: 0;
+  width: 100%;
+}
+@media (max-width: 992px) {
+  .three-campuses-section__card-image-wrapper {
+    height: auto;
+    min-height: 20rem;
+  }
+  .three-campuses-section__card-image-inner {
+    height: auto;
+    min-height: 18rem;
+    padding: 6rem 2rem;
+  }
+  .three-campuses-section__title-script,
+  .three-campuses-section__title-bold {
+    font-size: 2.5rem;
+  }
+}
+@media (max-width: 768px) {
+  .three-campuses-section {
+    padding: 3rem 0 0;
+  }
+  .three-campuses-section__title-wrapper {
+    margin-bottom: 2rem;
+  }
+  .three-campuses-section__title-script,
+  .three-campuses-section__title-bold {
+    font-size: 2rem;
+  }
+  .three-campuses-section__card {
+    margin-bottom: 2rem;
+  }
+  .three-campuses-section__card-image-wrapper {
+    min-height: 16rem;
+  }
+  .three-campuses-section__card-image-inner {
+    min-height: 14rem;
+    padding: 4rem 1.5rem;
+  }
+  .three-campuses-section__card-title-script {
+    font-size: 1.25rem;
+  }
+  .three-campuses-section__card-title-bold {
+    font-size: 1.75rem;
+  }
+  .three-campuses-section__card-description {
+    font-size: 1rem;
+  }
+}
 .site-footer {
   /* background-image: url('../../assets/images/section-bg.jpg');
   background-size: cover;
