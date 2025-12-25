@@ -613,7 +613,7 @@
         position: relative;
         width: min(900px, 100%);
         max-height: 90vh;
-        background: #ffffff;
+        background: #183153;
         border-radius: 16px;
         box-shadow: 
           0 25px 50px rgba(24, 49, 83, 0.25),
@@ -731,6 +731,7 @@
         overflow-y: auto;
         padding: 2rem;
         background: #fff;
+        border-radius: 0 0 16px 16px;
       }
 
       .search-suggestions-section {
