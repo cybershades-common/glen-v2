@@ -1706,7 +1706,7 @@ body.mega-menu-open {
 @media (max-width: 767px) {
   .hero .hero__slider .hero__slide-overlay {
     background: rgba(0, 0, 0, 0.3);
-    padding: 6rem 0;
+    padding: 6rem 0 2rem;
     align-items: flex-start;
     position: relative;
     height: 100%;
@@ -2126,6 +2126,11 @@ h1 .hero__title-script {
   }
   .hero .arrow-navigation {
     display: none;
+  }
+  .hero .hero__slider .hero__slide-overlay .container-fluid {
+    display: flex;
+    height: 100%;
+    padding-bottom: 2rem;
   }
   .internal-page .hero .hero__slider .hero__slide-overlay {
     padding-bottom: 2rem;

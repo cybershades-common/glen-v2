@@ -70,7 +70,7 @@
 
         @media (max-width: (@breakpoint-md - 1)) {
           background: rgba(0, 0, 0, 0.3);
-          padding: 6rem 0;
+          padding: 6rem 0 2rem;
           align-items: flex-start;
           position: relative;
           height: 100%;
@@ -591,18 +591,19 @@ h1 {
 
   .hero {
     max-height: 100vh;
+
     .bottom-edge {
       bottom: -6px;
     }
 
     .hero__content {
       position: relative;
-      width: 100%;    
+      width: 100%;
       z-index: 2;
       display: flex;
       padding: 1rem 0 3rem;
 
-      h1{
+      h1 {
         font-size: 3.5rem;
       }
 
@@ -617,6 +618,14 @@ h1 {
 
     .arrow-navigation {
       display: none;
+    }
+
+    .hero__slider .hero__slide-overlay {
+      .container-fluid {
+        display: flex;
+        height: 100%;
+        padding-bottom: 2rem;
+      }
     }
   }
 
