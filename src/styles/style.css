@@ -1931,8 +1931,8 @@ h1 .hero__title-script {
 }
 .arrow-navigation__arrow {
   position: relative;
-  width: 47px;
-  height: 47px;
+  width: 3.5rem;
+  height: 3.5rem;
   padding: 0;
   border: none;
   background: transparent;
@@ -2884,10 +2884,10 @@ h1 .hero__title-script {
 }
 .co-curricular-carousel .navigation .arrow-navigation__arrow {
   position: relative;
-  width: 47px;
-  height: 47px;
-  min-width: 47px;
-  min-height: 47px;
+  width: 3.5rem;
+  height: 3.5rem;
+  min-width: 3.5rem;
+  min-height: 3.5rem;
 }
 @media (max-width: 767px) {
   .co-curricular-carousel .navigation.arrow-navigation {
@@ -5188,104 +5188,6 @@ button {
     margin: 1rem 0;
   }
 }
-.what-we-do-section .masked-logo-gradient {
-  position: absolute;
-  width: 120px;
-  height: 120px;
-  background: linear-gradient(180deg, var(--tertiary-cyan-dark, #1F9EDB) 0%, var(--primary-blue, #005E9C) 100%);
-  mask-image: url('https://www.figma.com/api/mcp/asset/aa95b6bd-7851-4c1c-9a9e-88d8fbdd75fb');
-  mask-size: contain;
-  mask-position: center;
-  mask-repeat: no-repeat;
-  mask-clip: border-box;
-  -webkit-mask-image: url('https://www.figma.com/api/mcp/asset/aa95b6bd-7851-4c1c-9a9e-88d8fbdd75fb');
-  -webkit-mask-size: contain;
-  -webkit-mask-position: center;
-  -webkit-mask-repeat: no-repeat;
-  grid-column: 1;
-  grid-row: 1;
-  top: 0;
-  left: 0;
-}
-@media (max-width: 991px) {
-  .what-we-do-section .masked-logo-gradient {
-    width: 100%;
-    height: 100%;
-    mask-size: contain;
-    mask-position: center;
-    -webkit-mask-size: contain;
-    -webkit-mask-position: center;
-    margin: 0;
-  }
-}
-.what-we-do-section .masked-logo-image {
-  position: relative;
-  grid-column: 1;
-  grid-row: 1;
-  mix-blend-mode: multiply;
-  mask-image: url('https://www.figma.com/api/mcp/asset/aa95b6bd-7851-4c1c-9a9e-88d8fbdd75fb');
-  mask-size: 95.275px 93.866px;
-  mask-repeat: no-repeat;
-  mask-clip: border-box;
-  -webkit-mask-image: url('https://www.figma.com/api/mcp/asset/aa95b6bd-7851-4c1c-9a9e-88d8fbdd75fb');
-  -webkit-mask-size: 95.275px 93.866px;
-  -webkit-mask-repeat: no-repeat;
-}
-@media (max-width: 991px) {
-  .what-we-do-section .masked-logo-image {
-    mask-size: contain;
-    mask-position: center;
-    -webkit-mask-size: contain;
-    -webkit-mask-position: center;
-  }
-}
-.what-we-do-section .masked-logo-image .masked-logo-img {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  max-width: none;
-  object-fit: cover;
-  object-position: 50% 50%;
-  pointer-events: none;
-}
-.what-we-do-section .masked-logo-image-1 {
-  width: 120px;
-  height: 120px;
-  mask-position: center;
-  -webkit-mask-position: center;
-  top: 0;
-  left: 0;
-}
-.what-we-do-section .masked-logo-image-1 .masked-logo-img {
-  opacity: 0.5;
-}
-@media (max-width: 991px) {
-  .what-we-do-section .masked-logo-image-1 {
-    width: 100%;
-    height: 100%;
-    margin: 0;
-    mask-position: center;
-    -webkit-mask-position: center;
-  }
-}
-.what-we-do-section .masked-logo-image-2 {
-  width: 120px;
-  height: 120px;
-  mask-position: center;
-  -webkit-mask-position: center;
-  top: 0;
-  left: 0;
-}
-@media (max-width: 991px) {
-  .what-we-do-section .masked-logo-image-2 {
-    width: 100%;
-    height: 100%;
-    margin: 0;
-    mask-position: center;
-    -webkit-mask-position: center;
-  }
-}
 @media (max-width: 991px) {
   .what-we-do-section .row {
     text-align: center;
@@ -6206,10 +6108,10 @@ button {
 }
 @media (max-width: 767px) {
   .full-width-testimonial-audio .testimonial-audio-navigation .arrow-navigation__arrow {
-    width: 48px;
-    height: 48px;
-    min-width: 48px;
-    min-height: 48px;
+    width: 3.5rem;
+    height: 3.5rem;
+    min-width: 3.5rem;
+    min-height: 3.5rem;
   }
 }
 @media (max-width: 767px) {
