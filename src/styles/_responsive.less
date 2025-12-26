@@ -314,10 +314,28 @@
       gap: 1rem 0;
       padding: 0 1rem;
     }
-    .five-as-section__nav-item{
-      min-width:7rem;
+
+    .five-as-section__nav-item {
+      min-width: 7rem;
       white-space: nowrap;
     }
+  }
+}
+
+@media (min-width:680px) and (max-width:992px) {
+  body {
+    .edge-position {
+      &.top-edge {
+        margin-bottom: -0.875rem;
+      }
+
+      &.bottom-edge {
+        margin-top: -1.25rem;
+      }
+    }
+  }
+  .full-width-testimonial-audio .testimonial-audio-quote{
+    min-height: 16rem;
   }
 }
 

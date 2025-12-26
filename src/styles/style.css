@@ -2278,7 +2278,7 @@ h1 .hero__title-script {
   .full-width-image-words-animation,
   .full-width-image-words-animation .container-fluid {
     height: 50vh;
-    min-height: 50vh;
+    min-height: 450px;
   }
 }
 .video-card,
@@ -2955,6 +2955,7 @@ h1 .hero__title-script {
 @media (min-width: 768px) and (max-width: 992px) {
   .co-curricular-carousel {
     height: 50vh;
+    min-height: 450px;
   }
 }
 .staff-section {
@@ -3092,11 +3093,6 @@ h1 .hero__title-script {
   border-radius: 50%;
   margin: 0.125rem;
 }
-@media (max-width: 575px) {
-  .staff-section .grid.row > div .grid_card .image {
-    max-width: 80%;
-  }
-}
 .staff-section .grid.row > div .grid_card .name {
   font-family: 'Averta', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   font-weight: 600;
@@ -3150,6 +3146,21 @@ h1 .hero__title-script {
     transform: translateY(-35px) scale(0.95);
     clip-path: inset(0 0 100% 0);
     -webkit-clip-path: inset(0 0 100% 0);
+  }
+}
+@media (max-width: 767px) {
+  .staff-section .grid.row {
+    margin: inherit;
+  }
+  .staff-section .grid.row > div {
+    padding: inherit;
+  }
+  .staff-section .grid.row > div .grid_card .image {
+    max-width: 90%;
+    margin: 0 auto 1.25rem;
+  }
+  .staff-section .grid.row > div .grid_card .image > img {
+    width: 98%;
   }
 }
 .five-as-section {
@@ -4855,6 +4866,9 @@ h1 .hero__title-script {
 @media (max-width: 767px) {
   .site-footer .footer__newsletter {
     margin-bottom: 5rem;
+    gap: 1rem;
+    display: flex;
+    flex-direction: column;
   }
   .site-footer .footer__bottom div > div {
     flex-direction: column;
@@ -5099,6 +5113,17 @@ h1 .hero__title-script {
   body .five-as-section__nav-item {
     min-width: 7rem;
     white-space: nowrap;
+  }
+}
+@media (min-width: 680px) and (max-width: 992px) {
+  body .edge-position.top-edge {
+    margin-bottom: -0.875rem;
+  }
+  body .edge-position.bottom-edge {
+    margin-top: -1.25rem;
+  }
+  .full-width-testimonial-audio .testimonial-audio-quote {
+    min-height: 16rem;
   }
 }
 @media (max-width: 400px) {
@@ -6253,6 +6278,7 @@ button {
   width: 249px;
   height: 39px;
   background: #ffffff;
+  mask-image: url('https://www.figma.com/api/mcp/asset/1a2c95c1-4489-4efd-a707-34757d71a156');
   mask-position: 5.858px 3px;
   mask-size: 475px 30px;
   mask-repeat: no-repeat;
