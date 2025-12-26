@@ -1,11 +1,278 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-  </head>
-  <body>
-    Anshul Soni
-  </body>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Arc Carousel (Screenshot Shape - Fixed)</title>
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
+
+  <style>
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{
+      min-height:100vh;
+      display:grid;
+      place-items:center;
+      background:#f1ede5;
+      font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial;
+      overflow-x:hidden;
+      color:#1b1b1b;
+    }
+
+    .section{
+      width:min(1200px, 96vw);
+      padding:50px 0 58px;
+      position:relative;
+    }
+
+    .heading{ text-align:center; margin-bottom:14px; }
+    .heading .script{
+      font-size:34px;
+      font-style:italic;
+      color:#234c78;
+      opacity:.9;
+      line-height:1.1;
+    }
+    .heading .title{
+      font-size:44px;
+      font-weight:900;
+      letter-spacing:1px;
+      color:#1f436c;
+      text-transform:uppercase;
+      line-height:1.05;
+      margin-top:4px;
+    }
+
+    .swiper{
+      width:100%;
+      overflow:visible; /* show all cards */
+      padding:34px 0 28px;
+    }
+    .swiper-wrapper{ align-items:center; }
+
+    .swiper-slide{
+      width:280px;
+      height:360px;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      transform-origin:center center;
+      will-change:transform, opacity;
+    }
+
+    .card{
+      width:100%;
+      height:100%;
+      border-radius:18px;
+      overflow:hidden;
+      position:relative;
+      border:6px solid rgba(255,255,255,.92);
+      box-shadow: 0 18px 42px rgba(0,0,0,.18);
+      background:#ddd;
+    }
+    .card img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      display:block;
+      transform:scale(1.02);
+    }
+
+    .meta{
+      position:absolute;
+      left:14px; right:14px; bottom:14px;
+      display:flex;
+      justify-content:space-between;
+      align-items:flex-end;
+      gap:10px;
+      color:#fff;
+      text-shadow:0 10px 25px rgba(0,0,0,.55);
+    }
+    .name{ font-weight:900; font-size:16px; line-height:1.1; }
+    .sub{ font-size:12px; opacity:.92; margin-top:2px; }
+
+    .play{
+      width:44px; height:44px; border-radius:999px;
+      display:grid; place-items:center;
+      background:#d94b3b;
+      box-shadow: 0 12px 26px rgba(217,75,59,.28);
+      flex:0 0 auto;
+    }
+    .play:before{
+      content:"";
+      width:0;height:0;
+      border-left:11px solid #fff;
+      border-top:7px solid transparent;
+      border-bottom:7px solid transparent;
+      margin-left:2px;
+    }
+
+    .cta-row{ display:flex; justify-content:center; margin-top:22px; }
+    .cta{
+      border:0;
+      padding:12px 18px;
+      border-radius:10px;
+      background:#d94b3b;
+      color:#fff;
+      font-weight:800;
+      cursor:pointer;
+      box-shadow: 0 14px 28px rgba(217,75,59,.22);
+    }
+
+    @media (max-width: 860px){
+      .heading .script{font-size:28px}
+      .heading .title{font-size:34px}
+      .swiper-slide{width:240px;height:320px}
+    }
+    @media (max-width: 520px){
+      .swiper-slide{width:215px;height:300px}
+    }
+  </style>
+</head>
+
+<body>
+  <section class="section">
+    <div class="heading">
+      <div class="script">Hear from our</div>
+      <div class="title">Preschoolers</div>
+    </div>
+
+    <div class="swiper arc-swiper">
+      <div class="swiper-wrapper">
+
+        <div class="swiper-slide"><div class="card">
+          <img src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?q=80&w=1200&auto=format&fit=crop" alt="">
+          <div class="meta"><div><div class="name">Jordan</div><div class="sub">Year 12 Student</div></div><div class="play"></div></div>
+        </div></div>
+
+        <div class="swiper-slide"><div class="card">
+          <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=1200&auto=format&fit=crop" alt="">
+          <div class="meta"><div><div class="name">Mila</div><div class="sub">Year 5 Student</div></div><div class="play"></div></div>
+        </div></div>
+
+        <div class="swiper-slide"><div class="card">
+          <img src="https://images.unsplash.com/photo-1544717305-996b815c338c?q=80&w=1200&auto=format&fit=crop" alt="">
+          <div class="meta"><div><div class="name">Jordan</div><div class="sub">Year 12 Student</div></div><div class="play"></div></div>
+        </div></div>
+
+        <div class="swiper-slide"><div class="card">
+          <img src="https://images.unsplash.com/photo-1596464716127-f2a82984de30?q=80&w=1200&auto=format&fit=crop" alt="">
+          <div class="meta"><div><div class="name">Sunny ’24</div><div class="sub">Year 7 Student</div></div><div class="play"></div></div>
+        </div></div>
+
+        <div class="swiper-slide"><div class="card">
+          <img src="https://images.unsplash.com/photo-1503454537195-1dcabb73ffb9?q=80&w=1200&auto=format&fit=crop" alt="">
+          <div class="meta"><div><div class="name">Alexis</div><div class="sub">Year 4 Student</div></div><div class="play"></div></div>
+        </div></div>
+
+      </div>
+    </div>
+
+    <div class="cta-row"><button class="cta">View all Testimonials</button></div>
+  </section>
+
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+  <script>
+    /******************************************************************
+     EASY KNOBS (adjust these)
+     ******************************************************************/
+    const KNOBS = {
+      // ✅ screenshot: center lower, sides higher
+      curveHeightPx: 18,   // 10–24
+      curvePower: 1.45,    // 1.2–1.8 (lower=flatter)
+
+      // tilt like screenshot (subtle)
+      tiltDeg: 8,          // 5–10
+      tiltPower: 1.05,     // 0.9–1.2
+
+      // tiny outward fan (optional)
+      fanOutPx: 4,         // 0–14
+      fanPower: 1.0,
+
+      // keep ALL visible
+      fadeEnabled: false,
+      sideOpacity: 1,
+
+      // slight scale focus
+      scaleEnabled: true,
+      centerScale: 1.02,
+      sideScale: 0.98,
+      scalePower: 1.15,
+
+      // allow all slides to render nicely
+      maxProgress: 3.5
+    };
+
+    const swiper = new Swiper(".arc-swiper", {
+      slidesPerView: "auto",
+      centeredSlides: true,
+      spaceBetween: 28,
+      loop: true,
+      speed: 650,
+      grabCursor: true,
+      watchSlidesProgress: true,
+      autoplay: {
+        delay: 2400,
+        disableOnInteraction: false,
+      },
+      on: {
+        init() { applyShape(this); },
+        setTranslate() { applyShape(this); },
+        setTransition(sw, duration) {
+          sw.slides.forEach(s => s.style.transitionDuration = duration + "ms");
+        }
+      }
+    });
+
+    function applyShape(sw){
+      const k = KNOBS;
+
+      sw.slides.forEach((slide) => {
+        let p = slide.progress;
+        p = clamp(p, -k.maxProgress, k.maxProgress);
+
+        const abs = Math.abs(p);
+        const sign = p < 0 ? -1 : 1;
+
+        // normalize 0..1
+        const tCurve = Math.pow(clamp(abs, 0, 1), k.curvePower);
+        const tTilt  = Math.pow(clamp(abs, 0, 1), k.tiltPower);
+        const tFan   = Math.pow(clamp(abs, 0, 1), k.fanPower);
+        const tScale = Math.pow(clamp(abs, 0, 1), k.scalePower);
+
+        // ✅ FIXED CURVE:
+        // center = max drop down (positive y), sides = near 0
+        const y = (1 - tCurve) * k.curveHeightPx;
+
+        // tilt outward
+        const rot = sign * tTilt * k.tiltDeg;
+
+        // slight horizontal fan
+        const x = sign * tFan * k.fanOutPx;
+
+        // scale (subtle)
+        let scale = 1;
+        if (k.scaleEnabled){
+          scale = lerp(k.centerScale, k.sideScale, tScale);
+        }
+
+        // opacity (disabled by default)
+        let opacity = 1;
+        if (k.fadeEnabled){
+          const tFade = Math.pow(clamp(abs, 0, 1), 1.2);
+          opacity = lerp(1, k.sideOpacity, tFade);
+        }
+
+        slide.style.opacity = opacity.toFixed(3);
+        slide.style.zIndex = String(1000 - Math.round(abs * 80));
+        slide.style.transform =
+          `translate3d(${x}px, ${y}px, 0) rotate(${rot}deg) scale(${scale})`;
+      });
+    }
+
+    function clamp(v, a, b){ return Math.max(a, Math.min(b, v)); }
+    function lerp(a,b,t){ return a + (b-a)*t; }
+  </script>
+</body>
 </html>
