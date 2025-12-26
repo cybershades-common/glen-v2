@@ -3042,11 +3042,6 @@ h1 .hero__title-script {
   border-radius: 50%;
   margin: 0.125rem;
 }
-@media (max-width: 575px) {
-  .staff-section .grid.row > div .grid_card .image {
-    max-width: 80%;
-  }
-}
 .staff-section .grid.row > div .grid_card .name {
   font-family: 'Averta', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   font-weight: 600;
@@ -3100,6 +3095,21 @@ h1 .hero__title-script {
     transform: translateY(-35px) scale(0.95);
     clip-path: inset(0 0 100% 0);
     -webkit-clip-path: inset(0 0 100% 0);
+  }
+}
+@media (max-width: 767px) {
+  .staff-section .grid.row {
+    margin: inherit;
+  }
+  .staff-section .grid.row > div {
+    padding: inherit;
+  }
+  .staff-section .grid.row > div .grid_card .image {
+    max-width: 90%;
+    margin: 0 auto 1.25rem;
+  }
+  .staff-section .grid.row > div .grid_card .image > img {
+    width: 98%;
   }
 }
 .five-as-section {
