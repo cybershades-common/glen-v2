@@ -306,15 +306,18 @@
       };
 
       cardList.forEach(card => {
-      const video = card.querySelector('.testimonial-video');
+      const video = card.querySelector('.testimonial-video, .learner-video');
       // Support both old and new class names
       const controlButton = card.querySelector('.video-card-play-button, .play-button');
       if (!video || !controlButton) return;
 
       const isDesktopCard = Boolean(card.closest('.desktop-only'));
-      setupDefaultState(video, isDesktopCard);
+      const isMomentsCard = Boolean(card.closest('.moments-section'));
+      const shouldHaveHover = isDesktopCard || (isMomentsCard && window.innerWidth >= 1024);
+      
+      setupDefaultState(video, shouldHaveHover);
 
-      if (isDesktopCard) {
+      if (shouldHaveHover) {
         card.addEventListener('mouseenter', () => handleDesktopHover(video, controlButton, true));
         card.addEventListener('mouseleave', () => handleDesktopHover(video, controlButton, false));
       }
@@ -325,7 +328,7 @@
 
         const isActive = controlButton.classList.contains('is-active');
         if (isActive) {
-          resetVideo(card, video, controlButton, isDesktopCard);
+          resetVideo(card, video, controlButton, shouldHaveHover);
         } else {
           playWithAudio(card, video, controlButton);
         }
@@ -333,7 +336,7 @@
 
       video.addEventListener('ended', () => {
         if (controlButton.classList.contains('is-active')) {
-          resetVideo(card, video, controlButton, isDesktopCard);
+          resetVideo(card, video, controlButton, shouldHaveHover);
         }
       });
     });

@@ -1,278 +1,697 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Arc Carousel (Screenshot Shape - Fixed)</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Preschooler Testimonial Carousel</title>
+    <!-- Swiper CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #e8dfd0;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+            overflow-x: hidden;
+        }
 
-  <style>
-    *{box-sizing:border-box;margin:0;padding:0}
-    body{
-      min-height:100vh;
-      display:grid;
-      place-items:center;
-      background:#f1ede5;
-      font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial;
-      overflow-x:hidden;
-      color:#1b1b1b;
-    }
+        .container {
+            width: 100%;
+            max-width: 1400px;
+        }
 
-    .section{
-      width:min(1200px, 96vw);
-      padding:50px 0 58px;
-      position:relative;
-    }
+        .header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
 
-    .heading{ text-align:center; margin-bottom:14px; }
-    .heading .script{
-      font-size:34px;
-      font-style:italic;
-      color:#234c78;
-      opacity:.9;
-      line-height:1.1;
-    }
-    .heading .title{
-      font-size:44px;
-      font-weight:900;
-      letter-spacing:1px;
-      color:#1f436c;
-      text-transform:uppercase;
-      line-height:1.05;
-      margin-top:4px;
-    }
+        .header-subtitle {
+            color: #1e3a5f;
+            font-family: Georgia, serif;
+            font-style: italic;
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
 
-    .swiper{
-      width:100%;
-      overflow:visible; /* show all cards */
-      padding:34px 0 28px;
-    }
-    .swiper-wrapper{ align-items:center; }
+        .header-title {
+            color: #1e3a5f;
+            font-weight: bold;
+            font-size: 3.5rem;
+            letter-spacing: 0.1em;
+        }
 
-    .swiper-slide{
-      width:280px;
-      height:360px;
-      display:flex;
-      justify-content:center;
-      align-items:center;
-      transform-origin:center center;
-      will-change:transform, opacity;
-    }
+        .carousel-wrapper {
+            position: relative;
+            height: 850px; /* Increased from 650px to 850px for more vertical space */
+            margin-bottom: 3rem;
+            overflow: visible; /* Changed to visible to allow cards to go under screen edges */
+            width: 100%;
+            padding: 100px 0; /* Add padding top and bottom for card movement space */
+        }
 
-    .card{
-      width:100%;
-      height:100%;
-      border-radius:18px;
-      overflow:hidden;
-      position:relative;
-      border:6px solid rgba(255,255,255,.92);
-      box-shadow: 0 18px 42px rgba(0,0,0,.18);
-      background:#ddd;
-    }
-    .card img{
-      width:100%;
-      height:100%;
-      object-fit:cover;
-      display:block;
-      transform:scale(1.02);
-    }
+        /* Mobile responsive styles */
+        @media (max-width: 768px) {
+            .carousel-wrapper {
+                height: 700px; /* Increased mobile height too */
+                overflow: visible; /* Changed to visible for mobile card movement */
+                padding: 80px 0; /* Add padding for mobile too */
+            }
+            
+            .card {
+                width: 220px;
+                height: 330px;
+            }
+            
+            .container {
+                padding: 1rem;
+            }
+            
+            .header-subtitle {
+                font-size: 1.5rem;
+            }
+            
+            .header-title {
+                font-size: 2.5rem;
+            }
+        }
 
-    .meta{
-      position:absolute;
-      left:14px; right:14px; bottom:14px;
-      display:flex;
-      justify-content:space-between;
-      align-items:flex-end;
-      gap:10px;
-      color:#fff;
-      text-shadow:0 10px 25px rgba(0,0,0,.55);
-    }
-    .name{ font-weight:900; font-size:16px; line-height:1.1; }
-    .sub{ font-size:12px; opacity:.92; margin-top:2px; }
+        .nav-button {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: white;
+            border: none;
+            border-radius: 50%;
+            width: 48px;
+            height: 48px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            z-index: 10;
+            transition: background-color 0.3s;
+        }
 
-    .play{
-      width:44px; height:44px; border-radius:999px;
-      display:grid; place-items:center;
-      background:#d94b3b;
-      box-shadow: 0 12px 26px rgba(217,75,59,.28);
-      flex:0 0 auto;
-    }
-    .play:before{
-      content:"";
-      width:0;height:0;
-      border-left:11px solid #fff;
-      border-top:7px solid transparent;
-      border-bottom:7px solid transparent;
-      margin-left:2px;
-    }
+        .nav-button:hover {
+            background-color: #f3f4f6;
+        }
 
-    .cta-row{ display:flex; justify-content:center; margin-top:22px; }
-    .cta{
-      border:0;
-      padding:12px 18px;
-      border-radius:10px;
-      background:#d94b3b;
-      color:#fff;
-      font-weight:800;
-      cursor:pointer;
-      box-shadow: 0 14px 28px rgba(217,75,59,.22);
-    }
+        .nav-button:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+            background-color: #f9fafb;
+        }
 
-    @media (max-width: 860px){
-      .heading .script{font-size:28px}
-      .heading .title{font-size:34px}
-      .swiper-slide{width:240px;height:320px}
-    }
-    @media (max-width: 520px){
-      .swiper-slide{width:215px;height:300px}
-    }
-  </style>
+        .nav-button:disabled:hover {
+            background-color: #f9fafb;
+        }
+
+        .nav-button.prev {
+            left: 5%;
+        }
+
+        .nav-button.next {
+            right: 5%;
+        }
+
+        .nav-button svg {
+            width: 24px;
+            height: 24px;
+            stroke: #1e3a5f;
+            stroke-width: 2;
+            fill: none;
+        }
+
+        /* Override default Swiper styles to maintain our design */
+        .swiper {
+            width: 100%;
+            height: 100%;
+            overflow: visible;
+        }
+
+        .swiper-wrapper {
+            align-items: center;
+        }
+
+        .swiper-slide {
+            width: 256px;
+            height: 384px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .card {
+            position: relative;
+            width: 256px;
+            height: 384px;
+            cursor: grab;
+            user-select: none;
+            will-change: transform;
+        }
+
+        .card:active {
+            cursor: grabbing;
+        }
+
+        .card.no-transition {
+            transition: none !important;
+        }
+
+        .card.with-transition {
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            background: white;
+            border-radius: 1rem;
+            overflow: hidden;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            border: 4px solid white;
+            pointer-events: none;
+        }
+
+        .card-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .play-button {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: #e74c3c;
+            border: none;
+            border-radius: 50%;
+            width: 64px;
+            height: 64px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+            transition: background-color 0.3s;
+            pointer-events: all;
+        }
+
+        .play-button:hover {
+            background-color: #c0392b;
+        }
+
+        .play-icon {
+            width: 0;
+            height: 0;
+            border-left: 20px solid white;
+            border-top: 12px solid transparent;
+            border-bottom: 12px solid transparent;
+            margin-left: 4px;
+        }
+
+        .card-info {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.7), transparent);
+            padding: 1.5rem 1rem;
+        }
+
+        .card-name {
+            color: white;
+            font-weight: bold;
+            font-size: 1.25rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .card-year {
+            color: white;
+            font-size: 0.875rem;
+            opacity: 0.9;
+        }
+
+        .cta-wrapper {
+            text-align: center;
+        }
+
+        .cta-button {
+            background-color: #e74c3c;
+            color: white;
+            border: none;
+            padding: 0.875rem 2rem;
+            border-radius: 0.375rem;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s;
+        }
+
+        .cta-button:hover {
+            background-color: #c0392b;
+        }
+
+        .controls {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            max-width: 300px;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+
+        /* Hide controls on mobile for cleaner experience */
+        @media (max-width: 768px) {
+            .controls {
+                display: none;
+            }
+        }
+
+        .controls h3 {
+            margin-bottom: 15px;
+            color: #1e3a5f;
+            font-size: 1rem;
+        }
+
+        .control-group {
+            margin-bottom: 12px;
+        }
+
+        .control-group label {
+            display: block;
+            font-size: 0.85rem;
+            color: #333;
+            margin-bottom: 5px;
+        }
+
+        .control-group input {
+            width: 100%;
+            padding: 5px;
+        }
+
+        .control-group small {
+            display: block;
+            color: #666;
+            font-size: 0.75rem;
+            margin-top: 2px;
+        }
+    </style>
 </head>
-
 <body>
-  <section class="section">
-    <div class="heading">
-      <div class="script">Hear from our</div>
-      <div class="title">Preschoolers</div>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <h2 class="header-subtitle">Hear from our</h2>
+            <h1 class="header-title">PRESCHOOLERS</h1>
+        </div>
+
+        <!-- Carousel -->
+        <div class="carousel-wrapper">
+            <div class="swiper" id="carouselSwiper">
+                <div class="swiper-wrapper">
+                    <!-- Cards -->
+                    <div class="swiper-slide">
+                        <div class="card" data-index="0">
+                            <div class="card-inner">
+                                <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=400&h=500&fit=crop" alt="Student" class="card-image">
+                                <button class="play-button">
+                                    <div class="play-icon"></div>
+                                </button>
+                                <div class="card-info">
+                                    <h3 class="card-name">Emma</h3>
+                                    <p class="card-year">Year 10 Student</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="swiper-slide">
+                        <div class="card" data-index="1">
+                            <div class="card-inner">
+                                <img src="https://images.unsplash.com/photo-1503454537195-1dcabb73ffb9?w=400&h=500&fit=crop" alt="Student" class="card-image">
+                                <button class="play-button">
+                                    <div class="play-icon"></div>
+                                </button>
+                                <div class="card-info">
+                                    <h3 class="card-name">Jordan</h3>
+                                    <p class="card-year">Year 10 Student</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="swiper-slide">
+                        <div class="card" data-index="2">
+                            <div class="card-inner">
+                                <img src="https://images.unsplash.com/photo-1488426862026-3ee34a7d66df?w=400&h=500&fit=crop" alt="Student" class="card-image">
+                                <button class="play-button">
+                                    <div class="play-icon"></div>
+                                </button>
+                                <div class="card-info">
+                                    <h3 class="card-name">Sunny '24</h3>
+                                    <p class="card-year">Year 7 Student</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="swiper-slide">
+                        <div class="card" data-index="3">
+                            <div class="card-inner">
+                                <img src="https://images.unsplash.com/photo-1531983412531-1f49a365ffed?w=400&h=500&fit=crop" alt="Student" class="card-image">
+                                <button class="play-button">
+                                    <div class="play-icon"></div>
+                                </button>
+                                <div class="card-info">
+                                    <h3 class="card-name">Alexis</h3>
+                                    <p class="card-year">Year 4 Student</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="swiper-slide">
+                        <div class="card" data-index="4">
+                            <div class="card-inner">
+                                <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=400&h=500&fit=crop" alt="Student" class="card-image">
+                                <button class="play-button">
+                                    <div class="play-icon"></div>
+                                </button>
+                                <div class="card-info">
+                                    <h3 class="card-name">Olivia</h3>
+                                    <p class="card-year">Year 8 Student</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="swiper-slide">
+                        <div class="card" data-index="5">
+                            <div class="card-inner">
+                                <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=500&fit=crop" alt="Student" class="card-image">
+                                <button class="play-button">
+                                    <div class="play-icon"></div>
+                                </button>
+                                <div class="card-info">
+                                    <h3 class="card-name">Lucas</h3>
+                                    <p class="card-year">Year 9 Student</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="swiper-slide">
+                        <div class="card" data-index="6">
+                            <div class="card-inner">
+                                <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?w=400&h=500&fit=crop" alt="Student" class="card-image">
+                                <button class="play-button">
+                                    <div class="play-icon"></div>
+                                </button>
+                                <div class="card-info">
+                                    <h3 class="card-name">Sophia</h3>
+                                    <p class="card-year">Year 6 Student</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="swiper-slide">
+                        <div class="card" data-index="7">
+                            <div class="card-inner">
+                                <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=400&h=500&fit=crop" alt="Student" class="card-image">
+                                <button class="play-button">
+                                    <div class="play-icon"></div>
+                                </button>
+                                <div class="card-info">
+                                    <h3 class="card-name">Mason</h3>
+                                    <p class="card-year">Year 5 Student</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="swiper-slide">
+                        <div class="card" data-index="8">
+                            <div class="card-inner">
+                                <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=400&h=500&fit=crop" alt="Student" class="card-image">
+                                <button class="play-button">
+                                    <div class="play-icon"></div>
+                                </button>
+                                <div class="card-info">
+                                    <h3 class="card-name">Isabella</h3>
+                                    <p class="card-year">Year 7 Student</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- CTA Button -->
+        <div class="cta-wrapper">
+            <button class="cta-button">View all Testimonials</button>
+        </div>
     </div>
 
-    <div class="swiper arc-swiper">
-      <div class="swiper-wrapper">
-
-        <div class="swiper-slide"><div class="card">
-          <img src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?q=80&w=1200&auto=format&fit=crop" alt="">
-          <div class="meta"><div><div class="name">Jordan</div><div class="sub">Year 12 Student</div></div><div class="play"></div></div>
-        </div></div>
-
-        <div class="swiper-slide"><div class="card">
-          <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=1200&auto=format&fit=crop" alt="">
-          <div class="meta"><div><div class="name">Mila</div><div class="sub">Year 5 Student</div></div><div class="play"></div></div>
-        </div></div>
-
-        <div class="swiper-slide"><div class="card">
-          <img src="https://images.unsplash.com/photo-1544717305-996b815c338c?q=80&w=1200&auto=format&fit=crop" alt="">
-          <div class="meta"><div><div class="name">Jordan</div><div class="sub">Year 12 Student</div></div><div class="play"></div></div>
-        </div></div>
-
-        <div class="swiper-slide"><div class="card">
-          <img src="https://images.unsplash.com/photo-1596464716127-f2a82984de30?q=80&w=1200&auto=format&fit=crop" alt="">
-          <div class="meta"><div><div class="name">Sunny ’24</div><div class="sub">Year 7 Student</div></div><div class="play"></div></div>
-        </div></div>
-
-        <div class="swiper-slide"><div class="card">
-          <img src="https://images.unsplash.com/photo-1503454537195-1dcabb73ffb9?q=80&w=1200&auto=format&fit=crop" alt="">
-          <div class="meta"><div><div class="name">Alexis</div><div class="sub">Year 4 Student</div></div><div class="play"></div></div>
-        </div></div>
-
-      </div>
+    <!-- Control Panel -->
+    <div class="controls">
+        <h3>🎛️ Carousel Controls</h3>
+        
+        <div class="control-group">
+            <label>Horizontal Spacing: <span id="spacingValue">45</span>%</label>
+            <input type="range" id="spacing" min="20" max="80" value="45" step="5">
+        </div>
+        
+        <div class="control-group">
+            <label>Curve Height: <span id="curveValue">1.5</span>%</label>
+            <input type="range" id="curve" min="0" max="10" value="1.5" step="0.1">
+            <small>Vertical displacement from center</small>
+        </div>
+        
+        <div class="control-group">
+            <label>Tilt Angle: <span id="tiltValue">3</span>°</label>
+            <input type="range" id="tilt" min="0" max="15" value="3" step="1">
+            <small>Card rotation angle</small>
+        </div>
+        
+        <div class="control-group">
+            <label>Center Position: <span id="centerValue">50</span>%</label>
+            <input type="range" id="centerPos" min="40" max="60" value="50" step="1">
+            <small>Center card horizontal position</small>
+        </div>
+        
+        <hr style="margin: 20px 0; border: 1px solid #eee;">
+        <h4 style="margin-bottom: 15px; color: #1e3a5f; font-size: 0.9rem;">📐 Individual Card Positions</h4>
+        
+        <div class="control-group">
+            <label>Card 1 (Emma): <span id="card0Value">0</span>px</label>
+            <input type="range" id="card0" min="-150" max="150" value="0" step="10">
+        </div>
+        
+        <div class="control-group">
+            <label>Card 2 (Jordan): <span id="card1Value">0</span>px</label>
+            <input type="range" id="card1" min="-150" max="150" value="0" step="10">
+        </div>
+        
+        <div class="control-group">
+            <label>Card 3 (Sunny): <span id="card2Value">0</span>px</label>
+            <input type="range" id="card2" min="-150" max="150" value="0" step="10">
+        </div>
+        
+        <div class="control-group">
+            <label>Card 4 (Alexis): <span id="card3Value">0</span>px</label>
+            <input type="range" id="card3" min="-150" max="150" value="0" step="10">
+        </div>
+        
+        <div class="control-group">
+            <label>Card 5 (Olivia): <span id="card4Value">0</span>px</label>
+            <input type="range" id="card4" min="-150" max="150" value="0" step="10">
+        </div>
+        
+        <div class="control-group">
+            <label>Card 6 (Lucas): <span id="card5Value">0</span>px</label>
+            <input type="range" id="card5" min="-150" max="150" value="0" step="10">
+        </div>
+        
+        <div class="control-group">
+            <label>Card 7 (Sophia): <span id="card6Value">0</span>px</label>
+            <input type="range" id="card6" min="-150" max="150" value="0" step="10">
+        </div>
+        
+        <div class="control-group">
+            <label>Card 8 (Mason): <span id="card7Value">0</span>px</label>
+            <input type="range" id="card7" min="-150" max="150" value="0" step="10">
+        </div>
+        
+        <div class="control-group">
+            <label>Card 9 (Isabella): <span id="card8Value">0</span>px</label>
+            <input type="range" id="card8" min="-150" max="150" value="0" step="10">
+        </div>
     </div>
 
-    <div class="cta-row"><button class="cta">View all Testimonials</button></div>
-  </section>
+    <!-- Swiper JS -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script>
+        // ============================================
+        // 🎛️ CONFIGURATION
+        // ============================================
+        
+        // Check if mobile
+        const isMobile = window.innerWidth <= 768;
+        
+        let CONFIG = {
+            spacing: isMobile ? 50 : 55,         // Increased spacing: Mobile 50%, Desktop 45%
+            curveHeight: isMobile ? 1 : 1.5,     // Flattened curve by 50%: Mobile 1%, Desktop 1.5%
+            tiltAngle: isMobile ? 3 : 5,         // Mobile: less tilt
+            centerPosition: 50,                   // Keep center position same
+            cardScale: 1.0,                      // All cards same size (keep at 1.0)
+            // Individual card vertical positions
+            cardOffsets: [0, 0, 0, 0, 0, 0, 0, 0, 0] // 9 cards with 0 offset by default
+        };
 
-  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+        // Update controls
+        document.getElementById('spacing').addEventListener('input', (e) => {
+            CONFIG.spacing = parseFloat(e.target.value);
+            document.getElementById('spacingValue').textContent = CONFIG.spacing;
+            updateSwiperConfig();
+        });
 
-  <script>
-    /******************************************************************
-     EASY KNOBS (adjust these)
-     ******************************************************************/
-    const KNOBS = {
-      // ✅ screenshot: center lower, sides higher
-      curveHeightPx: 18,   // 10–24
-      curvePower: 1.45,    // 1.2–1.8 (lower=flatter)
+        document.getElementById('curve').addEventListener('input', (e) => {
+            CONFIG.curveHeight = parseFloat(e.target.value);
+            document.getElementById('curveValue').textContent = CONFIG.curveHeight;
+            updateSwiperConfig();
+        });
 
-      // tilt like screenshot (subtle)
-      tiltDeg: 8,          // 5–10
-      tiltPower: 1.05,     // 0.9–1.2
+        document.getElementById('tilt').addEventListener('input', (e) => {
+            CONFIG.tiltAngle = parseFloat(e.target.value);
+            document.getElementById('tiltValue').textContent = CONFIG.tiltAngle;
+            updateSwiperConfig();
+        });
 
-      // tiny outward fan (optional)
-      fanOutPx: 4,         // 0–14
-      fanPower: 1.0,
+        document.getElementById('centerPos').addEventListener('input', (e) => {
+            CONFIG.centerPosition = parseFloat(e.target.value);
+            document.getElementById('centerValue').textContent = CONFIG.centerPosition;
+            updateSwiperConfig();
+        });
 
-      // keep ALL visible
-      fadeEnabled: false,
-      sideOpacity: 1,
-
-      // slight scale focus
-      scaleEnabled: true,
-      centerScale: 1.02,
-      sideScale: 0.98,
-      scalePower: 1.15,
-
-      // allow all slides to render nicely
-      maxProgress: 3.5
-    };
-
-    const swiper = new Swiper(".arc-swiper", {
-      slidesPerView: "auto",
-      centeredSlides: true,
-      spaceBetween: 28,
-      loop: true,
-      speed: 650,
-      grabCursor: true,
-      watchSlidesProgress: true,
-      autoplay: {
-        delay: 2400,
-        disableOnInteraction: false,
-      },
-      on: {
-        init() { applyShape(this); },
-        setTranslate() { applyShape(this); },
-        setTransition(sw, duration) {
-          sw.slides.forEach(s => s.style.transitionDuration = duration + "ms");
-        }
-      }
-    });
-
-    function applyShape(sw){
-      const k = KNOBS;
-
-      sw.slides.forEach((slide) => {
-        let p = slide.progress;
-        p = clamp(p, -k.maxProgress, k.maxProgress);
-
-        const abs = Math.abs(p);
-        const sign = p < 0 ? -1 : 1;
-
-        // normalize 0..1
-        const tCurve = Math.pow(clamp(abs, 0, 1), k.curvePower);
-        const tTilt  = Math.pow(clamp(abs, 0, 1), k.tiltPower);
-        const tFan   = Math.pow(clamp(abs, 0, 1), k.fanPower);
-        const tScale = Math.pow(clamp(abs, 0, 1), k.scalePower);
-
-        // ✅ FIXED CURVE:
-        // center = max drop down (positive y), sides = near 0
-        const y = (1 - tCurve) * k.curveHeightPx;
-
-        // tilt outward
-        const rot = sign * tTilt * k.tiltDeg;
-
-        // slight horizontal fan
-        const x = sign * tFan * k.fanOutPx;
-
-        // scale (subtle)
-        let scale = 1;
-        if (k.scaleEnabled){
-          scale = lerp(k.centerScale, k.sideScale, tScale);
+        // Add individual card position controls
+        for (let i = 0; i < 9; i++) {
+            document.getElementById(`card${i}`).addEventListener('input', (e) => {
+                CONFIG.cardOffsets[i] = parseFloat(e.target.value);
+                document.getElementById(`card${i}Value`).textContent = CONFIG.cardOffsets[i];
+                applyIndividualCardPositions();
+            });
         }
 
-        // opacity (disabled by default)
-        let opacity = 1;
-        if (k.fadeEnabled){
-          const tFade = Math.pow(clamp(abs, 0, 1), 1.2);
-          opacity = lerp(1, k.sideOpacity, tFade);
+        function updateSwiperConfig() {
+            if (swiper) {
+                swiper.destroy();
+            }
+            initSwiper();
         }
 
-        slide.style.opacity = opacity.toFixed(3);
-        slide.style.zIndex = String(1000 - Math.round(abs * 80));
-        slide.style.transform =
-          `translate3d(${x}px, ${y}px, 0) rotate(${rot}deg) scale(${scale})`;
-      });
-    }
+        function applyIndividualCardPositions() {
+            if (!swiper) return;
+            
+            // Apply individual vertical offsets to each card
+            swiper.slides.forEach((slide, index) => {
+                const card = slide.querySelector('.card');
+                if (card && CONFIG.cardOffsets[index] !== undefined) {
+                    const existingTransform = card.style.transform || '';
+                    // Remove any existing translateY and add the new one
+                    const cleanTransform = existingTransform.replace(/translateY\([^)]*\)/g, '').trim();
+                    card.style.transform = `${cleanTransform} translateY(${CONFIG.cardOffsets[index]}px)`.trim();
+                }
+            });
+        }
 
-    function clamp(v, a, b){ return Math.max(a, Math.min(b, v)); }
-    function lerp(a,b,t){ return a + (b-a)*t; }
-  </script>
+        function initSwiper() {
+            // Initialize Swiper with creative effect for arc layout
+            swiper = new Swiper('#carouselSwiper', {
+                effect: 'creative',
+                grabCursor: true,
+                centeredSlides: true,
+                slidesPerView: 'auto',
+                spaceBetween: 30,
+                loop: false,
+                initialSlide: 4,
+                speed: 600,
+                
+                creativeEffect: {
+                    limitProgress: 5,
+                    shadowPerProgress: false,
+                    progressMultiplier: 1,
+                    
+                    prev: {
+                        translate: [`-${CONFIG.spacing * 2}%`, `${CONFIG.curveHeight * 10}px`, 0],
+                        rotate: [0, 0, -CONFIG.tiltAngle],
+                        scale: 1.0,
+                        opacity: 1.0
+                    },
+                    next: {
+                        translate: [`${CONFIG.spacing * 2}%`, `${CONFIG.curveHeight * 10}px`, 0],
+                        rotate: [0, 0, CONFIG.tiltAngle],
+                        scale: 1.0,
+                        opacity: 1.0
+                    }
+                },
+                
+                // Mobile responsive
+                breakpoints: {
+                    320: {
+                        spaceBetween: 20,
+                        creativeEffect: {
+                            prev: {
+                                translate: [`-${CONFIG.spacing * 3}%`, `${CONFIG.curveHeight * 8}px`, 0],
+                                rotate: [0, 0, -CONFIG.tiltAngle * 0.8],
+                                scale: 1.0,
+                                opacity: 1.0
+                            },
+                            next: {
+                                translate: [`${CONFIG.spacing * 3}%`, `${CONFIG.curveHeight * 8}px`, 0],
+                                rotate: [0, 0, CONFIG.tiltAngle * 0.8],
+                                scale: 1.0,
+                                opacity: 1.0
+                            }
+                        }
+                    },
+                    768: {
+                        spaceBetween: 30,
+                    }
+                }
+            });
+        }
+
+        let swiper;
+        
+        // Initialize when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            initSwiper();
+            // Apply individual card positions after initialization
+            setTimeout(() => {
+                applyIndividualCardPositions();
+            }, 100);
+        });
+    </script>
 </body>
 </html>

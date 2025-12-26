@@ -228,4 +228,93 @@ document.addEventListener('DOMContentLoaded', function() {
     // MOMENTS ARC CAROUSEL
     // ==========================================================================
     
+    // Check if mobile for moments carousel
+    const isMomentsMobile = window.innerWidth <= 768;
+    
+    // Configuration for moments carousel
+    let MOMENTS_CONFIG = {
+        spacing: isMomentsMobile ? 36 : 55,
+        curveHeight: isMomentsMobile ? 1 : 1.5,
+        tiltAngle: isMomentsMobile ? 4 : 3,
+        // Individual card vertical positions (5 cards)
+        cardOffsets: [0, 0, 0, 0, 0]
+    };
+
+    // Initialize moments arc carousel
+    const momentsCarousel = document.querySelector('.moments-arc-carousel');
+    if (momentsCarousel) {
+        const momentsSwiper = new Swiper('.moments-arc-carousel', {
+            effect: 'creative',
+            grabCursor: true,
+            centeredSlides: true,
+            slidesPerView: 'auto',
+            spaceBetween: 30,
+            loop: false,
+            initialSlide: 2, // Start with center card
+            speed: 600,
+            
+            creativeEffect: {
+                limitProgress: 5,
+                shadowPerProgress: false,
+                progressMultiplier: 1,
+                
+                prev: {
+                    translate: [`-${MOMENTS_CONFIG.spacing * 2}%`, `${MOMENTS_CONFIG.curveHeight * 10}px`, 0],
+                    rotate: [0, 0, -MOMENTS_CONFIG.tiltAngle],
+                    scale: 1.0,
+                    opacity: 1.0
+                },
+                next: {
+                    translate: [`${MOMENTS_CONFIG.spacing * 2}%`, `${MOMENTS_CONFIG.curveHeight * 10}px`, 0],
+                    rotate: [0, 0, MOMENTS_CONFIG.tiltAngle],
+                    scale: 1.0,
+                    opacity: 1.0
+                }
+            },
+            
+            // Mobile responsive
+            breakpoints: {
+                320: {
+                    spaceBetween: 20,
+                    creativeEffect: {
+                        prev: {
+                            translate: [`-${MOMENTS_CONFIG.spacing * 3}%`, `${MOMENTS_CONFIG.curveHeight * 8}px`, 0],
+                            rotate: [0, 0, -MOMENTS_CONFIG.tiltAngle * 0.8],
+                            scale: 1.0,
+                            opacity: 1.0
+                        },
+                        next: {
+                            translate: [`${MOMENTS_CONFIG.spacing * 3}%`, `${MOMENTS_CONFIG.curveHeight * 8}px`, 0],
+                            rotate: [0, 0, MOMENTS_CONFIG.tiltAngle * 0.8],
+                            scale: 1.0,
+                            opacity: 1.0
+                        }
+                    }
+                },
+                768: {
+                    spaceBetween: 30,
+                }
+            }
+        });
+
+        // Function to apply individual card positions for moments
+        function applyMomentsCardPositions() {
+            if (!momentsSwiper) return;
+            
+            momentsSwiper.slides.forEach((slide, index) => {
+                const card = slide.querySelector('.moments-card');
+                if (card && MOMENTS_CONFIG.cardOffsets[index] !== undefined) {
+                    const existingTransform = card.style.transform || '';
+                    const cleanTransform = existingTransform.replace(/translateY\([^)]*\)/g, '').trim();
+                    card.style.transform = `${cleanTransform} translateY(${MOMENTS_CONFIG.cardOffsets[index]}px)`.trim();
+                }
+            });
+        }
+
+        // Apply card positions after initialization
+        setTimeout(() => {
+            applyMomentsCardPositions();
+        }, 100);
+    }
+    
     });

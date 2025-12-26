@@ -4430,13 +4430,10 @@ h1 .hero__title-script {
 }
 @media (max-width: 767px) {
   .three-campuses-section .row > [class*="col-"] {
-    padding: 1.25rem;
+    padding: 0 1.25rem;
   }
   .three-campuses-section p.lead {
     padding: 0;
-    margin: 0;
-  }
-  .three-campuses-section__title-wrapper {
     margin: 0;
   }
 }
@@ -4468,12 +4465,14 @@ h1 .hero__title-script {
 .moments-section .moments-carousel-wrapper {
   position: relative;
   width: 100%;
-  height: 650px;
+  height: 850px;
   display: flex;
   align-items: center;
   justify-content: center;
   perspective: 2000px;
   margin-bottom: 60px;
+  padding: 100px 0;
+  overflow: visible;
 }
 .moments-section .moments-arc-carousel {
   width: 100%;
@@ -4492,7 +4491,7 @@ h1 .hero__title-script {
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.6s ease;
+  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
   transform-style: preserve-3d;
   flex-shrink: 0;
   will-change: transform;
@@ -4500,12 +4499,17 @@ h1 .hero__title-script {
   -webkit-backface-visibility: hidden;
   transform: translateZ(0);
   -webkit-transform: translateZ(0);
+  opacity: 1 !important;
 }
 .moments-section .moments-card {
   width: 335px;
   height: 562.5px;
   position: relative;
   transform-origin: center center;
+  opacity: 1 !important;
+}
+.moments-section .moments-card * {
+  opacity: 1 !important;
 }
 .moments-section .moments-card .card {
   width: 100%;
@@ -4554,6 +4558,31 @@ h1 .hero__title-script {
   color: #cc342a;
   text-decoration: underline;
 }
+@media (min-width: 992px) {
+  .moments-section .moments-arc-carousel .swiper-slide {
+    opacity: 1 !important;
+    visibility: visible !important;
+  }
+  .moments-section .moments-card {
+    opacity: 1 !important;
+    visibility: visible !important;
+  }
+  .moments-section .moments-card .video-card-overlay,
+  .moments-section .moments-card .video-card-content,
+  .moments-section .moments-card .video-card-info,
+  .moments-section .moments-card .video-card-play-wrapper,
+  .moments-section .moments-card .video-testimonials .card-overlay,
+  .moments-section .moments-card .video-testimonials .card-content,
+  .moments-section .moments-card .video-testimonials .card-info,
+  .moments-section .moments-card .video-testimonials .play-button-wrapper,
+  .moments-section .moments-card .moments-section .moments-card .card-overlay,
+  .moments-section .moments-card .moments-section .moments-card .card-content,
+  .moments-section .moments-card .moments-section .moments-card .card-info,
+  .moments-section .moments-card .moments-section .moments-card .play-button-wrapper {
+    opacity: 1 !important;
+    visibility: visible !important;
+  }
+}
 @media (max-width: 991px) {
   .moments-section {
     padding: 60px 0;
@@ -4568,7 +4597,8 @@ h1 .hero__title-script {
     font-size: 45px;
   }
   .moments-section .moments-carousel-wrapper {
-    height: 550px;
+    height: 750px;
+    padding: 80px 0;
   }
   .moments-section .moments-arc-carousel .swiper-slide {
     width: 280px !important;
@@ -4598,7 +4628,8 @@ h1 .hero__title-script {
     letter-spacing: -0.8px;
   }
   .moments-section .moments-carousel-wrapper {
-    height: 450px;
+    height: 650px;
+    padding: 60px 0;
   }
   .moments-section .moments-arc-carousel .swiper-slide {
     width: 240px !important;

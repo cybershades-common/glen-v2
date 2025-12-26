@@ -36,12 +36,14 @@
   .moments-carousel-wrapper {
     position: relative;
     width: 100%;
-    height: 650px;
+    height: 850px; // Increased from 650px to 850px for more vertical space
     display: flex;
     align-items: center;
     justify-content: center;
     perspective: 2000px;
     margin-bottom: 60px;
+    padding: 100px 0; // Add padding top and bottom for card movement space
+    overflow: visible; // Allow cards to move beyond boundaries
   }
 
   // Swiper Container
@@ -63,7 +65,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.6s ease;
+      transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
       transform-style: preserve-3d;
       flex-shrink: 0;
       will-change: transform;
@@ -71,6 +73,7 @@
       -webkit-backface-visibility: hidden;
       transform: translateZ(0);
       -webkit-transform: translateZ(0);
+      opacity: 1 !important; // Force visibility for all slides
     }
   }
 
@@ -80,56 +83,216 @@
     height: 562.5px;
     position: relative;
     transform-origin: center center;
+    opacity: 1 !important; // Force visibility for all cards
+    
+    // Ensure all child elements are visible
+    * {
+      opacity: 1 !important;
+    }
 
-    // Use reusable video-card component with legacy class name support
+    // Direct styles matching backup-internal.html structure
     .card {
-      &:extend(.video-card all);
       width: 100%;
       height: 100%;
+      position: relative;
+      border-radius: 20px;
+      overflow: hidden;
+      cursor: grab;
+      user-select: none;
+      will-change: transform;
+      background: white;
+      box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+      
+      &:active {
+        cursor: grabbing;
+      }
     }
 
     .card-inner {
-      &:extend(.video-card-inner all);
+      position: relative;
+      width: 100%;
+      height: 100%;
+      border-radius: 20px;
+      overflow: hidden;
+    }
+    
+    .media {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      border-radius: 20px;
       
-      .media {
-        &:extend(.video-card-media all);
+      video {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center;
       }
     }
 
     .card-overlay {
-      &:extend(.video-card-overlay all);
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      margin: auto;
+      background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 67.244%, rgba(0, 0, 0, 0.65) 100%);
+      border-radius: 20px;
+      pointer-events: none;
+      z-index: 1;
+      padding: 2rem;
+      display: flex;
+      align-items: flex-end;
+      // Remove any transform animations
+      transform: none !important;
+      transition: none !important;
     }
 
     .card-content {
-      &:extend(.video-card-content all);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      width: 100%;
+      // Remove any transform animations
+      transform: none !important;
+      transition: none !important;
     }
 
     .card-info {
-      &:extend(.video-card-info all);
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+      // Remove any transform animations
+      transform: none !important;
+      transition: none !important;
     }
 
     .card-name {
-      &:extend(.video-card-name all);
+      font-family: @font-family-averta;
+      font-size: 1.25rem;
+      font-weight: @font-weight-bold;
+      line-height: 1.2;
+      letter-spacing: -0.025rem;
+      color: @base-white;
+      margin: 0;
+      // Remove any transform animations
+      transform: none !important;
+      transition: none !important;
     }
 
     .card-title {
-      &:extend(.video-card-title all);
+      font-family: @font-family-averta;
+      font-size: 0.875rem;
+      font-weight: @font-weight-regular;
+      line-height: 1.3;
+      letter-spacing: -0.0125rem;
+      color: @base-white;
+      margin: 0;
+      opacity: 0.9;
+      // Remove any transform animations
+      transform: none !important;
+      transition: none !important;
     }
 
     .play-button-wrapper {
-      &:extend(.video-card-play-wrapper all);
+      pointer-events: all;
+      // Remove any transform animations
+      transform: none !important;
+      transition: none !important;
     }
 
     .play-button {
-      &:extend(.video-card-play-button all);
+      background: transparent;
+      border: none;
+      padding: 0;
+      cursor: pointer;
+      position: relative;
+      // Remove hover animations but keep basic transitions
+      transition: none !important;
+      transform: none !important;
+      
+      &:hover {
+        // Remove hover transform
+        transform: none !important;
+      }
     }
 
     .play-button-circle {
-      &:extend(.video-card-play-circle all);
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background-color: @primary-coral;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      // Remove background color transition
+      transition: none !important;
+      box-shadow: 0 4px 12px rgba(231, 76, 60, 0.4);
+      // Remove any transform animations
+      transform: none !important;
     }
 
     .play-button-icon {
-      &:extend(.video-card-play-icon all);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      // Remove any transform animations
+      transform: none !important;
+      transition: none !important;
+      
+      .icon-play {
+        opacity: 1;
+        // Remove opacity transition
+        transition: none !important;
+        transform: none !important;
+        
+        &::before {
+          content: '';
+          width: 0;
+          height: 0;
+          border-left: 12px solid white;
+          border-top: 8px solid transparent;
+          border-bottom: 8px solid transparent;
+          margin-left: 2px;
+        }
+      }
+      
+      .icon-close {
+        position: absolute;
+        opacity: 0;
+        // Remove opacity transition
+        transition: none !important;
+        transform: none !important;
+        
+        svg {
+          width: 16px;
+          height: 16px;
+          stroke: white;
+          stroke-width: 2;
+          fill: none;
+        }
+      }
+    }
+
+    .play-button.is-active {
+      .play-button-circle {
+        background-color: darken(@primary-coral, 10%);
+      }
+      
+      .icon-play {
+        opacity: 0;
+      }
+      
+      .icon-close {
+        opacity: 1;
+      }
     }
   }
 
@@ -187,7 +350,30 @@
     }
   }
 
-  // Responsive Styles
+  // Responsive Styles  
+  @media (min-width: @breakpoint-lg) {
+    // Desktop specific overrides to ensure visibility
+    .moments-arc-carousel {
+      .swiper-slide {
+        opacity: 1 !important;
+        visibility: visible !important;
+      }
+    }
+    
+    .moments-card {
+      opacity: 1 !important;
+      visibility: visible !important;
+      
+      .video-card-overlay,
+      .video-card-content,
+      .video-card-info,
+      .video-card-play-wrapper {
+        opacity: 1 !important;
+        visibility: visible !important;
+      }
+    }
+  }
+
   @media (max-width: (@breakpoint-lg - 1)) {
     padding: 60px 0;
 
@@ -204,7 +390,8 @@
     }
 
     .moments-carousel-wrapper {
-      height: 550px;
+      height: 750px; // Increased mobile height too
+      padding: 80px 0; // Add padding for mobile too
     }
 
     .moments-arc-carousel .swiper-slide {
@@ -240,7 +427,8 @@
     }
 
     .moments-carousel-wrapper {
-      height: 450px;
+      height: 650px; // Increased mobile height too
+      padding: 60px 0; // Add padding for mobile too
     }
 
     .moments-arc-carousel .swiper-slide {
