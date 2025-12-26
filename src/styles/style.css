@@ -4428,15 +4428,16 @@ h1 .hero__title-script {
 .three-campuses-section.without-bg * {
   color: var(--tertiary-blue-dark, #1C3666);
 }
+.three-campuses-section .row.image-cards-row > div {
+  padding-left: 2.9375rem;
+  padding-right: 2.9375rem;
+}
 @media (max-width: 767px) {
   .three-campuses-section .row > [class*="col-"] {
-    padding: 1.25rem;
+    padding: 0 1.25rem;
   }
   .three-campuses-section p.lead {
     padding: 0;
-    margin: 0;
-  }
-  .three-campuses-section__title-wrapper {
     margin: 0;
   }
 }
