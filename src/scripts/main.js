@@ -262,49 +262,53 @@
   // ==========================================================================
 
   function initVideoTestimonials() {
-    const section = document.querySelector('.video-testimonials');
-    if (!section) return;
+    // Initialize video cards universally - works for video-testimonials and moments sections
+    const sections = document.querySelectorAll('.video-testimonials, .moments-section');
+    if (!sections.length) return;
 
-    let cards = section.querySelectorAll('.card');
-    if (!cards.length) return;
+    sections.forEach(section => {
+      // Support both old and new class names for backward compatibility
+      let cards = section.querySelectorAll('.video-card, .card');
+      if (!cards.length) return;
 
-    // Initialize Swiper for Mobile
-    const videoTestimonialsSwiperContainer = section.querySelector('.video-testimonials-swiper .swiper');
-    let mobileSwiper = null;
-    if (videoTestimonialsSwiperContainer && typeof Swiper !== 'undefined') {
-      const slideCount = videoTestimonialsSwiperContainer.querySelectorAll('.swiper-slide').length;
-      mobileSwiper = new Swiper(videoTestimonialsSwiperContainer, {
-        slidesPerView: 1.25,
-        spaceBetween: 20,
-        loop: slideCount >= 3,
-        autoplay: false,
-        breakpoints: {
-          320: {
-            slidesPerView: 1.25,
-            spaceBetween: 16
-          },
-          768: {
-            slidesPerView: 1.25,
-            spaceBetween: 20
+      // Initialize Swiper for Mobile (only for video-testimonials section)
+      const videoTestimonialsSwiperContainer = section.querySelector('.video-testimonials-swiper .swiper');
+      let mobileSwiper = null;
+      if (videoTestimonialsSwiperContainer && typeof Swiper !== 'undefined') {
+        const slideCount = videoTestimonialsSwiperContainer.querySelectorAll('.swiper-slide').length;
+        mobileSwiper = new Swiper(videoTestimonialsSwiperContainer, {
+          slidesPerView: 1.25,
+          spaceBetween: 20,
+          loop: slideCount >= 3,
+          autoplay: false,
+          breakpoints: {
+            320: {
+              slidesPerView: 1.25,
+              spaceBetween: 16
+            },
+            768: {
+              slidesPerView: 1.25,
+              spaceBetween: 20
+            }
           }
-        }
-      });
-      cards = section.querySelectorAll('.card');
-    }
+        });
+        cards = section.querySelectorAll('.video-card, .card');
+      }
 
-    const cardList = Array.from(cards);
+      const cardList = Array.from(cards);
 
-    // ==========================================================================
-    // VIDEO TESTIMONIAL INLINE CONTROLS - START
-    // ==========================================================================
-    const activeState = {
-      video: null,
-      button: null
-    };
+      // ==========================================================================
+      // VIDEO CARD INLINE CONTROLS - START (Universal for all video cards)
+      // ==========================================================================
+      const activeState = {
+        video: null,
+        button: null
+      };
 
-    cardList.forEach(card => {
+      cardList.forEach(card => {
       const video = card.querySelector('.testimonial-video');
-      const controlButton = card.querySelector('.play-button');
+      // Support both old and new class names
+      const controlButton = card.querySelector('.video-card-play-button, .play-button');
       if (!video || !controlButton) return;
 
       const isDesktopCard = Boolean(card.closest('.desktop-only'));
@@ -339,7 +343,7 @@
         if (activeState.video && activeState.button) {
           const slide = activeState.video.closest('.swiper-slide');
           if (slide && !slide.classList.contains('swiper-slide-active')) {
-            const activeCard = activeState.button.closest('.card');
+            const activeCard = activeState.button.closest('.video-card, .card');
             resetVideo(activeCard, activeState.video, activeState.button, false);
           }
         }
@@ -347,7 +351,7 @@
         const activeSlide = section.querySelector('.video-testimonials-swiper .swiper-slide-active');
         if (activeSlide) {
           const slideVideo = activeSlide.querySelector('.testimonial-video');
-          const slideButton = activeSlide.querySelector('.play-button');
+          const slideButton = activeSlide.querySelector('.video-card-play-button, .play-button');
           if (slideVideo && slideButton && !slideButton.classList.contains('is-active')) {
             slideVideo.play().catch(() => {});
           }
@@ -355,74 +359,75 @@
       });
     }
 
-    function setupDefaultState(video, isDesktopCard) {
-      video.muted = true;
-      video.loop = true;
-
-      if (isDesktopCard) {
-        video.pause();
-        video.currentTime = 0;
-      } else {
-        requestAnimationFrame(() => {
-          video.play().catch(() => {});
-        });
-      }
-    }
-
-    function handleDesktopHover(video, button, isHovering) {
-      if (button.classList.contains('is-active')) return;
-
-      if (isHovering) {
+      function setupDefaultState(video, isDesktopCard) {
         video.muted = true;
+        video.loop = true;
+
+        if (isDesktopCard) {
+          video.pause();
+          video.currentTime = 0;
+        } else {
+          requestAnimationFrame(() => {
+            video.play().catch(() => {});
+          });
+        }
+      }
+
+      function handleDesktopHover(video, button, isHovering) {
+        if (button.classList.contains('is-active')) return;
+
+        if (isHovering) {
+          video.muted = true;
+          video.play().catch(() => {});
+        } else {
+          video.pause();
+          video.currentTime = 0;
+        }
+      }
+
+      function playWithAudio(card, video, button) {
+        if (activeState.video && activeState.video !== video && activeState.button) {
+          const activeCard = activeState.button.closest('.video-card, .card');
+          const isDesktopActive = Boolean(activeCard && activeCard.closest('.desktop-only'));
+          resetVideo(activeCard, activeState.video, activeState.button, isDesktopActive);
+        }
+
+        activeState.video = video;
+        activeState.button = button;
+
+        button.classList.add('is-active');
+        button.setAttribute('aria-pressed', 'true');
+        button.setAttribute('aria-label', 'Close video with sound');
+        video.loop = false;
+        video.muted = false;
+        video.currentTime = 0;
         video.play().catch(() => {});
-      } else {
+      }
+
+      function resetVideo(card, video, button, isDesktopCard) {
+        if (!video || !button) return;
+
+        button.classList.remove('is-active');
+        button.setAttribute('aria-pressed', 'false');
+        button.setAttribute('aria-label', 'Play video with sound');
+        video.muted = true;
+        video.loop = true;
         video.pause();
         video.currentTime = 0;
+
+        if (!isDesktopCard) {
+          video.play().catch(() => {});
+        }
+
+        if (activeState.video === video) {
+          activeState.video = null;
+          activeState.button = null;
+        }
       }
-    }
-
-    function playWithAudio(card, video, button) {
-      if (activeState.video && activeState.video !== video && activeState.button) {
-        const activeCard = activeState.button.closest('.card');
-        const isDesktopActive = Boolean(activeCard && activeCard.closest('.desktop-only'));
-        resetVideo(activeCard, activeState.video, activeState.button, isDesktopActive);
-      }
-
-      activeState.video = video;
-      activeState.button = button;
-
-      button.classList.add('is-active');
-      button.setAttribute('aria-pressed', 'true');
-      button.setAttribute('aria-label', 'Close video with sound');
-      video.loop = false;
-      video.muted = false;
-      video.currentTime = 0;
-      video.play().catch(() => {});
-    }
-
-    function resetVideo(card, video, button, isDesktopCard) {
-      if (!video || !button) return;
-
-      button.classList.remove('is-active');
-      button.setAttribute('aria-pressed', 'false');
-      button.setAttribute('aria-label', 'Play video with sound');
-      video.muted = true;
-      video.loop = true;
-      video.pause();
-      video.currentTime = 0;
-
-      if (!isDesktopCard) {
-        video.play().catch(() => {});
-      }
-
-      if (activeState.video === video) {
-        activeState.video = null;
-        activeState.button = null;
-      }
-    }
-    // ==========================================================================
-    // VIDEO TESTIMONIAL INLINE CONTROLS - END
-    // ==========================================================================
+      // ==========================================================================
+      // VIDEO CARD INLINE CONTROLS - END
+      // ==========================================================================
+    });
   }
 
   // ==========================================================================

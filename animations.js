@@ -146,26 +146,36 @@ function initScrollSmootherManager() {
 
 function initVideoTestimonialsAnimations() {
   if (videoTestimonialsAnimationsInitialized) return;
-  const section = document.querySelector(VIDEO_SECTION_SELECTOR);
-  if (!section || typeof gsap === 'undefined') return;
+  // Support both video-testimonials and moments sections
+  const sections = document.querySelectorAll(VIDEO_SECTION_SELECTOR + ', .moments-section');
+  if (!sections.length || typeof gsap === 'undefined') return;
   videoTestimonialsAnimationsInitialized = true;
 
-  // Setup reveal animations for desktop cards
-  setupVideoCardsReveal(section);
+  sections.forEach(section => {
+    // Setup reveal animations for desktop cards
+    setupVideoCardsReveal(section);
+    
+    // Keep mobile and text animations as they work fine
+    setupMobileSlideAnimations(section);
+    setupTextHideOnPlay(section);
+  });
   
-  // Setup reveal animations for feature cards  
+  // Setup reveal animations for feature cards (only once)
   setupFeatureCardsReveal();
-  
-  // Keep mobile and text animations as they work fine
-  setupMobileSlideAnimations(section);
-  setupTextHideOnPlay(section);
 }
 
 function setupVideoCardsReveal(section) {
-  const desktopCards = section.querySelectorAll('.cards.desktop-only .card');
+  // Support both video-testimonials and moments sections
+  // For video-testimonials: desktop cards
+  const desktopCards = section.querySelectorAll('.cards.desktop-only .video-card, .cards.desktop-only .card');
   
-  if (desktopCards.length > 0) {
-    desktopCards.forEach(card => {
+  // For moments section: all cards in the carousel (nested inside .moments-card)
+  const momentsCards = section.querySelectorAll('.moments-arc-carousel .swiper-slide .moments-card .video-card, .moments-arc-carousel .swiper-slide .moments-card .card, .moments-arc-carousel .swiper-slide .video-card, .moments-arc-carousel .swiper-slide .card');
+  
+  const allCards = [...desktopCards, ...momentsCards];
+  
+  if (allCards.length > 0) {
+    allCards.forEach(card => {
       card.classList.add('video-reveal-animation', 'card-clip-reveal');
     });
   }
@@ -182,10 +192,19 @@ function setupFeatureCardsReveal() {
 }
 
 function setupMobileSlideAnimations(section) {
-  const sliderEl = section.querySelector('.video-testimonials-swiper .swiper');
+  // Support both video-testimonials-swiper and moments-arc-carousel
+  // For video-testimonials: mobile swiper
+  let sliderEl = section.querySelector('.video-testimonials-swiper .swiper');
+  
+  // For moments section: the arc carousel (works for all screen sizes)
+  if (!sliderEl && section.classList.contains('moments-section')) {
+    sliderEl = section.querySelector('.moments-arc-carousel');
+  }
+  
   if (!sliderEl) return;
 
-  const cardContents = sliderEl.querySelectorAll('.card-content');
+  // Support both old and new class names
+  const cardContents = sliderEl.querySelectorAll('.video-card-content, .card-content');
   cardContents.forEach(content => {
     gsap.set(content, { y: 70, opacity: 0 });
   });
@@ -193,7 +212,9 @@ function setupMobileSlideAnimations(section) {
   const animateActiveSlide = () => {
     const activeSlide = sliderEl.querySelector('.swiper-slide-active');
     if (!activeSlide) return;
-    const cardContent = activeSlide.querySelector('.card-content');
+    // Support both old and new class names
+    // For moments section, content is nested inside .moments-card
+    const cardContent = activeSlide.querySelector('.moments-card .video-card-content, .moments-card .card-content, .video-card-content, .card-content');
     if (!cardContent) return;
 
     gsap.to(cardContent, {
@@ -220,7 +241,13 @@ function setupMobileSlideAnimations(section) {
     if (!swiperInstance) return false;
     const setCurrentContent = () => {
       const activeSlide = sliderEl.querySelector('.swiper-slide-active');
-      currentSlideContent = activeSlide?.querySelector('.card-content') || null;
+      if (!activeSlide) {
+        currentSlideContent = null;
+        return;
+      }
+      // Support both old and new class names
+      // For moments section, content is nested inside .moments-card
+      currentSlideContent = activeSlide.querySelector('.moments-card .video-card-content, .moments-card .card-content, .video-card-content, .card-content') || null;
     };
 
     setCurrentContent();
@@ -237,6 +264,10 @@ function setupMobileSlideAnimations(section) {
       animateActiveSlide();
     });
 
+    // Animate initial active slide
+    setCurrentContent();
+    animateActiveSlide();
+
     return true;
   };
 
@@ -246,14 +277,26 @@ function setupMobileSlideAnimations(section) {
         clearInterval(poll);
       }
     }, 200);
+  } else {
+    // If swiper is already available, animate initial slide immediately
+    const activeSlide = sliderEl.querySelector('.swiper-slide-active');
+    if (activeSlide) {
+      const cardContent = activeSlide.querySelector('.moments-card .video-card-content, .moments-card .card-content, .video-card-content, .card-content');
+      if (cardContent) {
+        gsap.set(cardContent, { y: 0, opacity: 1 });
+      }
+    }
   }
 }
 
 function setupTextHideOnPlay(section) {
-  const buttons = section.querySelectorAll('.play-button');
+  // Support both old and new class names for backward compatibility
+  const buttons = section.querySelectorAll('.video-card-play-button, .play-button');
   if (!buttons.length) return;
   buttons.forEach(button => {
-    const cardInfo = button.closest('.card')?.querySelector('.card-info');
+    // Support both old and new class names
+    const card = button.closest('.video-card, .card');
+    const cardInfo = card?.querySelector('.video-card-info, .card-info');
     if (cardInfo) {
       gsap.set(cardInfo, { x: 0, opacity: 1 });
     }
@@ -263,7 +306,9 @@ function setupTextHideOnPlay(section) {
     mutations.forEach(mutation => {
       if (mutation.type !== 'attributes' || mutation.attributeName !== 'class') return;
       const button = mutation.target;
-      const cardInfo = button.closest('.card')?.querySelector('.card-info');
+      // Support both old and new class names
+      const card = button.closest('.video-card, .card');
+      const cardInfo = card?.querySelector('.video-card-info, .card-info');
       if (!cardInfo) return;
 
       const isActive = button.classList.contains('is-active');

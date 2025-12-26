@@ -77,35 +77,35 @@
     gap: 0;
     margin-bottom: @spacing-lg;
     text-align: center;
+  }
 
-    &-script {
-      font-family: @font-script;
-      font-weight: @font-weight-regular;
-      font-size: @font-size-h1;
-      line-height: 1;
-      letter-spacing: 0;
-      color: @color-blue-dark;
-      text-align: center;
+  .title-script {
+    font-family: @font-script;
+    font-weight: @font-weight-regular;
+    font-size: @font-size-h1;
+    line-height: 1;
+    letter-spacing: 0;
+    color: @color-blue-dark;
+    text-align: center;
 
-      @media (max-width: (@breakpoint-md - 1)) {
-        font-size: clamp(36px, 8vw, 60px);
-      }
+    @media (max-width: (@breakpoint-md - 1)) {
+      font-size: clamp(36px, 8vw, 60px);
     }
+  }
 
-    &-bold {
-      font-family: @font-primary;
-      font-weight: @font-weight-extrabold;
-      font-size: @font-size-h1;
-      line-height: 1;
-      letter-spacing: -2px;
-      text-transform: uppercase;
-      color: @color-blue-dark;
-      text-align: center;
+  .title-bold {
+    font-family: @font-primary;
+    font-weight: @font-weight-extrabold;
+    font-size: @font-size-h1;
+    line-height: 1;
+    letter-spacing: -2px;
+    text-transform: uppercase;
+    color: @color-blue-dark;
+    text-align: center;
 
-      @media (max-width: (@breakpoint-md - 1)) {
-        font-size: clamp(36px, 8vw, 60px);
-        letter-spacing: -1.2px;
-      }
+    @media (max-width: (@breakpoint-md - 1)) {
+      font-size: clamp(36px, 8vw, 60px);
+      letter-spacing: -1.2px;
     }
   }
 
@@ -123,153 +123,53 @@
     }
   }
 
+  // Use reusable video-card component with legacy class name support
   .card {
-    width: 100%;
-    position: relative;
-    border: 7.063px solid @color-white;
-    border-radius: 20px;
-    overflow: hidden;
-    flex-shrink: 0;
-
-    @media (max-width: (@breakpoint-md - 1)) {
-      width: 100%;
-      max-width: 300px;
-      height: auto;
-      aspect-ratio: 300 / 503.731;
-    }
+    &:extend(.video-card all);
   }
 
   .card-inner {
-    position: relative;
-    width: 100%;
-    height: 100%;
-    border-radius: 20px;
-    overflow: hidden;
-
+    &:extend(.video-card-inner all);
+    
     .media {
-      display: flex;
-      height: 100%;
-
-      .testimonial-video,
-      img {
-        width: 100%;
-        height: 100%;
-        aspect-ratio: 300/504;
-        object-fit: cover;
-        object-position: center;
-      }
+      &:extend(.video-card-media all);
     }
   }
 
   .card-overlay {
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    margin: auto;
-    background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 67.244%, rgba(0, 0, 0, 0.65) 100%);
-    border-radius: 20px;
-    pointer-events: none;
-    z-index: 1;
-    padding: 2rem;
-    display: flex;
-    align-items: flex-end;
+    &:extend(.video-card-overlay all);
+  }
 
+  .card-content {
+    &:extend(.video-card-content all);
+  }
 
-    .card-content {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 1rem;
-      width: 100%;
+  .card-info {
+    &:extend(.video-card-info all);
+  }
 
-      .card-info {
-        color: @color-white;
-        text-align: left;
-        pointer-events: auto;
+  .card-name {
+    &:extend(.video-card-name all);
+  }
 
-        .card-name {
-          font-family: @font-primary;
-          font-weight: @font-weight-bold;
-          font-size: 1.5625rem;
-          line-height: 1.1;
-          letter-spacing: -0.5px;
-          margin: 0 0 0 0;
+  .card-title {
+    &:extend(.video-card-title all);
+  }
 
-        }
+  .play-button-wrapper {
+    &:extend(.video-card-play-wrapper all);
+  }
 
-        .card-title {
-          font-family: @font-primary;
-          font-weight: @font-weight-regular;
-          font-size: 0.9375rem;
-          line-height: 1.4;
-          margin: 0;
+  .play-button {
+    &:extend(.video-card-play-button all);
+  }
 
-        }
+  .play-button-circle {
+    &:extend(.video-card-play-circle all);
+  }
 
-
-      }
-
-      .play-button-wrapper {
-        pointer-events: auto;
-
-        .play-button {
-          position: relative;
-          padding: 0;
-          border: none;
-          background: none;
-          vertical-align: bottom;
-          cursor: pointer;
-        }
-
-
-        .play-button-circle {
-          position: relative;
-          width: 3.375rem;
-          height: 3.375rem;
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          background: url(../../assets/images/circle-btn-bg.svg) no-repeat center;
-          background-size: cover;
-        }
-
-        .play-button-icon {
-          position: relative;
-          width: 1rem;
-          height: 1rem;
-          color: @color-white;
-
-          .icon {
-            position: absolute;
-            inset: 0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: opacity @transition-fast ease;
-          }
-
-          .icon-close {
-            opacity: 0;
-          }
-        }
-
-        .play-button.is-active {
-          .icon-play {
-            opacity: 0;
-          }
-
-          .icon-close {
-            opacity: 1;
-          }
-        }
-
-
-      }
-
-    }
-
+  .play-button-icon {
+    &:extend(.video-card-play-icon all);
   }
 
 
@@ -332,6 +232,7 @@
       justify-content: center;
       align-items: center;
 
+      .video-card,
       .card {
         max-width: 300px;
         height: auto;
@@ -372,6 +273,7 @@
       >.row{
         gap: 1.5rem 0;
       }
+      .video-card,
       .card {
         max-width: 100%;
         width: 100%;
