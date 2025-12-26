@@ -2278,7 +2278,7 @@ h1 .hero__title-script {
   .full-width-image-words-animation,
   .full-width-image-words-animation .container-fluid {
     height: 50vh;
-    min-height: 50vh;
+    min-height: 450px;
   }
 }
 .card-clip-reveal:not(.clip-animation-complete) {
@@ -2905,6 +2905,7 @@ h1 .hero__title-script {
 @media (min-width: 768px) and (max-width: 992px) {
   .co-curricular-carousel {
     height: 50vh;
+    min-height: 450px;
   }
 }
 .staff-section {
@@ -4598,6 +4599,9 @@ h1 .hero__title-script {
 @media (max-width: 767px) {
   .site-footer .footer__newsletter {
     margin-bottom: 5rem;
+    gap: 1rem;
+    display: flex;
+    flex-direction: column;
   }
   .site-footer .footer__bottom div > div {
     flex-direction: column;
@@ -4842,6 +4846,17 @@ h1 .hero__title-script {
   body .five-as-section__nav-item {
     min-width: 7rem;
     white-space: nowrap;
+  }
+}
+@media (min-width: 680px) and (max-width: 992px) {
+  body .edge-position.top-edge {
+    margin-bottom: -0.875rem;
+  }
+  body .edge-position.bottom-edge {
+    margin-top: -1.25rem;
+  }
+  .full-width-testimonial-audio .testimonial-audio-quote {
+    min-height: 16rem;
   }
 }
 @media (max-width: 400px) {
@@ -5996,6 +6011,7 @@ button {
   width: 249px;
   height: 39px;
   background: #ffffff;
+  mask-image: url('https://www.figma.com/api/mcp/asset/1a2c95c1-4489-4efd-a707-34757d71a156');
   mask-position: 5.858px 3px;
   mask-size: 475px 30px;
   mask-repeat: no-repeat;
