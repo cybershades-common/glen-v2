@@ -4795,19 +4795,17 @@ h1 .hero__title-script {
 .what-makes-glenaeon-special-curved-line {
   position: absolute;
   top: 0;
-  left: 0;
-  right: 0;
+  left: 4rem;
+  right: 4rem;
   bottom: 0;
-  z-index: 0;
-  pointer-events: none;
-  overflow: hidden;
+  z-index: 1;
+  margin: auto;
 }
 .what-makes-glenaeon-special-curved-line img {
-  width: 100%;
+  display: flex;
   height: 100%;
-  object-fit: contain;
-  object-position: center;
-  opacity: 0.3;
+  width: 100%;
+  opacity: 1;
 }
 .what-makes-glenaeon-special-title-group {
   position: relative;
@@ -5128,10 +5126,10 @@ h1 .hero__title-script {
   outline-offset: -2px;
 }
 .faq-question[aria-expanded="true"] .faq-arrow {
-  transform: rotate(90deg) scaleY(-1);
+  transform: rotate(180deg);
 }
 .faq-question[aria-expanded="false"] .faq-arrow {
-  transform: rotate(270deg);
+  transform: rotate(0deg);
 }
 .faq-question-text {
   font-family: 'Averta', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
@@ -6883,7 +6881,6 @@ h1 .hero__title-script {
     gap: 2rem;
   }
   body .masked-image-block .masked-image-content-block-wrap {
-    transform: scale(1.125);
     margin: -15% auto 0;
   }
   body .masked-image-content-block {
