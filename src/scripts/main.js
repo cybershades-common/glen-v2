@@ -22,6 +22,7 @@
     initVideoTestimonials();
     initCoCurricularCarousel();
     initStaffFilters();
+    initLatestNewsFilters();
     initFiveAsTabs();
     initFAQAccordion();
     // initFeaturesCardsSlider();
@@ -753,6 +754,104 @@
       const initialFilterSelector = initialFilterValue === 'all' ? '*' : '.' + initialFilterValue;
       applyFilterAndRefresh(initialFilterSelector);
     });
+  }
+
+  // ==========================================================================
+  // LATEST NEWS FILTERS
+  // ==========================================================================
+
+  function initLatestNewsFilters() {
+    // Check if jQuery and Isotope are available
+    if (typeof jQuery === 'undefined' || typeof jQuery.fn.isotope === 'undefined') {
+      console.warn('jQuery or Isotope is not loaded. Latest news filters will not work.');
+      return;
+    }
+
+    const $filtersSection = jQuery('.latest-news-filters-section');
+    if (!$filtersSection.length) return;
+
+    const $filterButtons = $filtersSection.find('.latest-news-filters-section__filter-btn');
+    if (!$filterButtons.length) return;
+
+    // Find the isotope grid (will be added later when section details are provided)
+    const $grid = jQuery('.latest-news-isotope-grid');
+    
+    // If grid exists, initialize Isotope
+    if ($grid.length) {
+      // Convert data-filter attributes to classes for Isotope
+      $grid.find('.latest-news-item').each(function() {
+        const $item = jQuery(this);
+        const filters = $item.attr('data-filter');
+        if (filters) {
+          const filterClasses = filters.split(' ').map(function(f) {
+            return f.trim();
+          }).filter(function(f) {
+            return f.length > 0;
+          });
+          $item.addClass(filterClasses.join(' '));
+        }
+      });
+
+      // Initialize Isotope
+      const $isoGrid = $grid.isotope({
+        itemSelector: '.latest-news-item',
+        layoutMode: 'fitRows',
+        transitionDuration: '0.36s'
+      });
+
+      // Function to apply filter and refresh scroll
+      const applyFilterAndRefresh = function(filterSelector) {
+        $isoGrid.isotope({ filter: filterSelector });
+
+        // Refresh scroll triggers after layout
+        setTimeout(function() {
+          try {
+            const smootherInstance =
+              window.ScrollSmoother &&
+              typeof window.ScrollSmoother.get === 'function' &&
+              window.ScrollSmoother.get();
+            if (smootherInstance && typeof smootherInstance.refresh === 'function') {
+              smootherInstance.refresh();
+            }
+          } catch (error) {
+            console.warn('ScrollSmoother refresh failed:', error);
+          }
+
+          if (window.ScrollTrigger && typeof window.ScrollTrigger.refresh === 'function') {
+            window.ScrollTrigger.refresh();
+          }
+        }, 400);
+      };
+
+      // Handle filter button clicks
+      $filterButtons.on('click', function() {
+        const $button = jQuery(this);
+        const filterValue = $button.attr('data-filter') || 'all';
+
+        // Update active state
+        $filterButtons.removeClass('latest-news-filters-section__filter-btn--active');
+        $button.addClass('latest-news-filters-section__filter-btn--active');
+
+        // Create filter selector - '*' shows all, otherwise filter by class
+        const filterSelector = filterValue === 'all' ? '*' : '.' + filterValue;
+
+        // Apply filter
+        applyFilterAndRefresh(filterSelector);
+      });
+
+      // Apply initial filter based on active button (or show all by default)
+      const $activeButton = $filterButtons.filter('.latest-news-filters-section__filter-btn--active');
+      const initialFilterValue = $activeButton.length ? ($activeButton.attr('data-filter') || 'all') : 'all';
+      const initialFilterSelector = initialFilterValue === 'all' ? '*' : '.' + initialFilterValue;
+      applyFilterAndRefresh(initialFilterSelector);
+    } else {
+      // Grid doesn't exist yet, just handle button active states
+      $filterButtons.on('click', function() {
+        const $button = jQuery(this);
+        $filterButtons.removeClass('latest-news-filters-section__filter-btn--active');
+        $button.addClass('latest-news-filters-section__filter-btn--active');
+      });
+    }
   }
 
   // ==========================================================================
