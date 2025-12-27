@@ -6218,20 +6218,21 @@ button {
   align-items: center;
   justify-content: center;
 }
-.masked-image-content-block .frame img {
+.masked-image-content-block .frame > img {
   z-index: 11;
   position: relative;
   object-fit: cover;
+  transform: scale(1.1);
 }
 .masked-image-content-block .image-wrap {
   position: absolute;
   border-radius: 50%;
   overflow: hidden;
-  max-width: 69%;
+  max-width: 73.75%;
   aspect-ratio: 1/1;
-  top: -2.5%;
+  top: 0;
   bottom: 0;
-  left: 0;
+  left: 1%;
   right: 0;
   margin: auto;
   z-index: 0;
