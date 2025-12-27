@@ -315,6 +315,7 @@ button {
 }
 
 @media (min-width:768px) and (max-width:992px) {
+
   .masked-image-content-block__title-script,
   h2,
   .masked-image-content-block__title-bold {
@@ -367,10 +368,11 @@ button {
     align-items: center;
     justify-content: center;
 
-    img {
+    >img {
       z-index: 11;
       position: relative;
       object-fit: cover;
+      transform: scale(1.1);
     }
   }
 
@@ -378,11 +380,11 @@ button {
     position: absolute;
     border-radius: 50%;
     overflow: hidden;
-    max-width: 69%;
+    max-width: 73.75%;
     aspect-ratio: 1/1;
-    top: -2.5%;
+    top: 0;
     bottom: 0;
-    left: 0;
+    left: 1%;
     right: 0;
     margin: auto;
     z-index: 0;
@@ -494,7 +496,7 @@ button {
     }
   }
 
- 
+
 
 
 
@@ -1571,7 +1573,7 @@ button {
       @media (max-width: (@breakpoint-md - 1)) {
         width: 3.5rem;
         height: 3.5rem;
-        min-width:3.5rem;
+        min-width: 3.5rem;
         min-height: 3.5rem;
       }
     }
@@ -2717,7 +2719,6 @@ button {
 }
 
 
-.row-reverse{
+.row-reverse {
   flex-direction: row-reverse;
 }
-
