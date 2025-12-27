@@ -1703,7 +1703,7 @@ body.mega-menu-open {
   position: absolute;
   inset: 0;
   background: linear-gradient(0deg, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0.2) 100%);
-  padding: 6.5rem 2.875rem 7.5rem;
+  padding: 6.5rem 2.875rem 4.5rem;
   align-items: flex-end;
   display: flex;
   height: 100%;
@@ -1916,7 +1916,7 @@ h1 .hero__title-script {
   align-items: center;
   z-index: 4;
   pointer-events: none;
-  bottom: -4rem;
+  bottom: -2rem;
   right: 0;
 }
 .arrow-navigation button {
@@ -5300,7 +5300,7 @@ h1 .hero__title-script {
 }
 .core-value-item {
   display: flex;
-  gap: 20px;
+  gap: 1.25rem;
   align-items: center;
 }
 @media (max-width: 767px) {
