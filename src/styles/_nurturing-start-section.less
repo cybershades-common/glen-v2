@@ -1,51 +1,88 @@
 // ==========================================================================
 // NURTURING START SECTION
 // ==========================================================================
+// Pixel-perfect match to Figma design
+// Figma: https://www.figma.com/design/qVOIfc8UCZR1QPkIwhbRIX/Glenaeon-Concordia-Kit?node-id=9162-9987
+// ==========================================================================
 
 .nurturing-start-section {
   position: relative;
   width: 100%;
-  min-height: 900px;
+  height: 900px;
   overflow: hidden;
-  background-image: url('../../assets/images/section-bg.jpg');
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
+  background-color: #fff1b0;
 
   @media (max-width: (@breakpoint-lg - 1)) {
-    min-height: 700px;
+    height: 700px;
   }
 
   @media (max-width: (@breakpoint-md - 1)) {
-    min-height: 600px;
+    height: 600px;
   }
 }
 
-.nurturing-start__background {
+// Background image layer - positioned behind everything
+.nurturing-start-bg-images {
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
+  left: -8.4146%; // -121.17px / 1440px
+  top: -9.2778%; // -83.5px / 900px
+  width: 109.0972%; // 1571px / 1440px
+  height: 118.5556%; // 1067px / 900px
+  overflow: hidden;
   z-index: 0;
+  pointer-events: none;
 }
 
-.nurturing-start__yellow-bg {
+.nurturing-start-bg-image-1 {
   position: absolute;
+  inset: 0;
+  background-image: url('../../assets/images/Frame-49.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.nurturing-start-bg-image-2 {
+  position: absolute;
+  inset: 0;
+  background-image: url('../../assets/images/bg-nurturing.jpg');
+  background-size: cover;
+  background-position: -15.93% center;
+  background-repeat: no-repeat;
+  overflow: hidden;
+}
+
+// Yellow background layer 1
+.nurturing-start-bg-yellow-1 {
+  position: absolute;
+  left: 0.1014%; // 1.46px / 1440px
   top: 0;
-  left: 0;
-  width: 62.5%; // ~902px / 1440px
-  height: 100%;
+  width: 100%; // 1440px
+  height: 99.486%; // 895.624px / 900px
   background-color: #fff1b0;
   z-index: 1;
+  pointer-events: none;
 }
 
-.nurturing-start__gradient-bg {
+// Yellow background layer 2
+.nurturing-start-bg-yellow-2 {
   position: absolute;
+  left: 62.6389%; // 902.46px / 1440px
   top: 0;
-  left: 33.65%; // ~484px / 1440px
-  width: 29%; // ~418px / 1440px
-  height: 100%;
+  width: 37.3611%; // 539px / 1440px
+  height: 100%; // 900px
+  background-color: #fff1b0;
+  z-index: 1;
+  pointer-events: none;
+}
+
+// Gradient transition layer
+.nurturing-start-bg-gradient {
+  position: absolute;
+  left: 33.6111%; // 484.46px / 1440px
+  top: 0;
+  width: 29.0278%; // 418px / 1440px
+  height: 100%; // 900px
   background: linear-gradient(
     to right,
     #fff1b0 0%,
@@ -53,129 +90,140 @@
     rgba(255, 241, 176, 0) 100%
   );
   z-index: 2;
+  pointer-events: none;
 }
 
-.nurturing-start__peach-bg {
+// Peach gradient with watercolor overlay
+.nurturing-start-bg-peach {
   position: absolute;
+  left: 50.7639%; // 731.46px / 1440px
   top: 0;
-  right: 0;
-  width: 49.3%; // ~710px / 1440px
-  height: 100%;
+  width: 49.3056%; // 710px / 1440px
+  height: 100%; // 900px
   background: linear-gradient(
     to left,
     #ffc1aa 0%,
     rgba(255, 193, 170, 0) 100%
   );
   z-index: 3;
+  pointer-events: none;
+  overflow: hidden;
 }
 
-.nurturing-start__watercolor-overlay {
+.nurturing-start-bg-peach-overlay {
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-image: url('../images/nurturing-start-watercolor.png');
+  inset: 0;
+  mix-blend-mode: multiply;
+  opacity: 0.3;
+  background-image: url('../../assets/images/big-bg-nurturing.jpg');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  mix-blend-mode: multiply;
-  opacity: 0.3;
   pointer-events: none;
 }
 
-.nurturing-start__image-col {
-  position: relative;
-  z-index: 4;
-  padding: 77px 80px;
+// Rotated image container
+.nurturing-start-image-container {
+  position: absolute;
+  left: 43.0%; // 619.06px / 1440px
+  top: 8.6%; // 77.41px / 900px
+  width: 34.5%; // 496.85px / 1440px
+  height: 82.8%; // 745.185px / 900px
   display: flex;
   align-items: center;
   justify-content: center;
-  min-height: 900px;
+  mix-blend-mode: multiply;
+  z-index: 4;
+  pointer-events: none;
 
   @media (max-width: (@breakpoint-lg - 1)) {
-    padding: 60px 40px;
-    min-height: 700px;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 50%;
+    height: 70%;
   }
 
   @media (max-width: (@breakpoint-md - 1)) {
-    padding: 40px 30px;
-    min-height: 500px;
+    width: 60%;
+    height: 60%;
   }
 }
 
-.nurturing-start__image-wrapper {
-  position: relative;
-  width: 100%;
-  max-width: 600px;
-  aspect-ratio: 4 / 3;
-  border-radius: 20px;
-  overflow: hidden;
-  margin: 0 auto;
-
-  @media (max-width: (@breakpoint-lg - 1)) {
-    max-width: 100%;
-  }
-}
-
-.nurturing-start__image {
+.nurturing-start-image-rotated {
   width: 100%;
   height: 100%;
-  object-fit: cover;
-  object-position: center;
-}
-
-.nurturing-start__content-col {
-  position: relative;
-  z-index: 4;
-  padding: 120px 80px;
+  transform: rotate(270deg);
+  transform-origin: center center;
   display: flex;
   align-items: center;
   justify-content: center;
-  min-height: 900px;
-
-  @media (max-width: (@breakpoint-lg - 1)) {
-    padding: 80px 40px;
-    min-height: 700px;
-  }
-
-  @media (max-width: (@breakpoint-md - 1)) {
-    padding: 60px 30px;
-    min-height: auto;
-    text-align: center;
-  }
 }
 
-.nurturing-start__content {
+.nurturing-start-image {
+  // After 270deg rotation, the image dimensions swap
+  // Container is 496.85px x 745.185px
+  // Image needs to be 745.185px x 496.85px to fill after rotation
+  width: 150.1%; // 745.185px / 496.85px
+  height: 66.7%; // 496.85px / 745.185px
+  object-fit: cover;
+  object-position: center;
+  display: block;
+}
+
+// Text content container
+.nurturing-start-content {
+  position: absolute;
+  left: 51.77%; // 745.46px / 1440px
+  top: 29.94%; // 269.5px / 900px
+  width: 41.39%; // 596px / 1440px
+  height: 48.89%; // 440px / 900px
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: flex-start;
   gap: 34px;
-  max-width: 564px;
-  width: 100%;
+  z-index: 5;
+
+  @media (max-width: (@breakpoint-lg - 1)) {
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 90%;
+    height: auto;
+  }
 
   @media (max-width: (@breakpoint-md - 1)) {
-    max-width: 100%;
+    width: 95%;
+    gap: 24px;
+    padding: 0 20px;
   }
 }
 
-.nurturing-start__text-group {
+// Text group
+.nurturing-start-text-group {
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 10px;
-  width: 100%;
+  width: 94.63%; // 564px / 596px
+  text-align: center;
+
+  @media (max-width: (@breakpoint-lg - 1)) {
+    width: 100%;
+  }
 }
 
-.nurturing-start__script {
-  font-family: @font-script;
+.nurturing-start-script {
+  font-family: @font-family-born-ready;
   font-size: 60px;
   font-weight: @font-weight-regular;
-  line-height: 1;
+  line-height: @line-height-none;
   letter-spacing: 0;
-  color: @color-coral;
+  color: @primary-coral;
   margin: 0;
   text-align: center;
+  width: 100%;
 
   @media (max-width: (@breakpoint-lg - 1)) {
     font-size: clamp(40px, 8vw, 60px);
@@ -186,24 +234,20 @@
   }
 }
 
-.nurturing-start__heading {
-  font-family: @font-primary;
+.nurturing-start-heading {
+  font-family: @font-family-averta;
   font-weight: @font-weight-extrabold;
   font-size: 60px;
-  line-height: 1;
+  line-height: @line-height-none;
   letter-spacing: -1.2px;
   text-transform: uppercase;
-  color: @color-coral;
+  color: @primary-coral;
   margin: 0;
   display: flex;
   flex-direction: column;
   gap: 0;
   text-align: center;
   width: 100%;
-
-  span {
-    display: block;
-  }
 
   @media (max-width: (@breakpoint-lg - 1)) {
     font-size: clamp(36px, 7vw, 60px);
@@ -216,22 +260,28 @@
   }
 }
 
-.nurturing-start__info-group {
+.nurturing-start-heading p {
+  margin: 0;
+}
+
+// Info group
+.nurturing-start-info-group {
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 7px;
   width: 100%;
+  text-align: center;
 }
 
-.nurturing-start__year {
-  font-family: @font-primary;
+.nurturing-start-year {
+  font-family: @font-family-averta;
   font-weight: @font-weight-extrabold;
   font-size: 35px;
-  line-height: 1;
+  line-height: @line-height-none;
   letter-spacing: 0;
   text-transform: uppercase;
-  color: @color-blue-dark;
+  color: #005e9c;
   margin: 0;
   text-align: center;
 
@@ -244,14 +294,14 @@
   }
 }
 
-.nurturing-start__urgency {
-  font-family: @font-primary;
+.nurturing-start-urgency {
+  font-family: @font-family-averta;
   font-weight: @font-weight-regular;
   font-size: 35px;
-  line-height: 1;
+  line-height: @line-height-none;
   letter-spacing: 3.5px;
   text-transform: uppercase;
-  color: @color-blue-dark;
+  color: #005e9c;
   margin: 0;
   text-align: center;
 
@@ -266,38 +316,31 @@
   }
 }
 
-.nurturing-start__buttons {
-  display: flex;
-  gap: 15px;
-  flex-wrap: wrap;
-  justify-content: center;
-  width: 100%;
-
-  @media (max-width: (@breakpoint-md - 1)) {
-    flex-direction: column;
-    align-items: stretch;
-  }
-}
-
-.nurturing-start__button {
+// Button
+.nurturing-start-button {
   padding: 20px 25px;
-  font-family: @font-primary;
+  font-family: @font-family-averta;
   font-size: 15px;
   font-weight: @font-weight-regular;
   line-height: 1.4;
-  color: @color-white;
-  background-color: @color-blue-dark;
+  color: @base-white;
+  background-color: @tertiary-blue-dark;
   border-radius: 10px;
   text-decoration: none;
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   text-align: center;
   transition: background-color @transition-fast, transform @transition-fast;
-  flex: 0 1 auto;
+  border: none;
+  cursor: pointer;
+  white-space: nowrap;
 
   &:hover {
-    background-color: darken(@color-blue-dark, 5%);
-    color: @color-white;
+    background-color: darken(@tertiary-blue-dark, 5%);
+    color: @base-white;
     transform: translateY(-1px);
+    text-decoration: none;
   }
 
   &:active {
@@ -308,6 +351,6 @@
     padding: 15px 20px;
     font-size: 14px;
     width: 100%;
+    white-space: normal;
   }
 }
-
