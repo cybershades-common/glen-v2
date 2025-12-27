@@ -94,7 +94,7 @@
       menuTimeline.staggerFromTo(
         mobileElements,
         0.5,
-        { y: 100, opacity: 0 },
+        { y: 0, opacity: 0 },
         { y: 0, opacity: 1 },
         0.1,
         0.4 // Start slightly after buttons

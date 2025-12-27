@@ -1,0 +1,317 @@
+// ==========================================================================
+// CORE VALUES SECTION
+// ==========================================================================
+
+.core-values-section {
+  position: relative;
+  padding: 3rem 0;
+  overflow: hidden;
+
+  @media (max-width: (@breakpoint-lg - 1)) {
+    padding: 3.75rem 0;
+  }
+}
+
+.core-values-content {
+  display: flex;
+  flex-direction: column;
+  gap: 21px;
+  padding: 0 2.125rem;
+
+  @media (max-width: (@breakpoint-lg - 1)) {
+    padding: 0 1rem;
+    margin-bottom: 2rem;
+  }
+}
+
+// Title Group
+.core-values-title-group {
+  margin-bottom: 0;
+}
+
+.core-values-title {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 17px;
+  margin: 0;
+  line-height: @line-height-none;
+  color: @tertiary-blue-dark;
+  font-size: 60px;
+
+  @media (max-width: (@breakpoint-md - 1)) {
+    font-size: clamp(2.5rem, 8vw, 60px);
+    gap: 12px;
+  }
+}
+
+.core-values-title-script {
+  font-family: @font-family-born-ready;
+  font-weight: @font-weight-regular;
+  font-size: 60px;
+  line-height: @line-height-none;
+  letter-spacing: 0;
+  color: @tertiary-blue-dark;
+
+  @media (max-width: (@breakpoint-md - 1)) {
+    font-size: clamp(2.5rem, 8vw, 60px);
+  }
+}
+
+.core-values-title-bold {
+  font-family: @font-family-averta;
+  font-weight: @font-weight-extrabold;
+  font-size: 60px;
+  line-height: @line-height-none;
+  letter-spacing: -1.2px;
+  text-transform: uppercase;
+  color: @tertiary-blue-dark;
+
+  @media (max-width: (@breakpoint-md - 1)) {
+    font-size: clamp(2.5rem, 8vw, 60px);
+    letter-spacing: -0.8px;
+  }
+}
+
+// Subtitle
+.core-values-subtitle {
+  font-family: @font-family-averta;
+  font-weight: @font-weight-regular;
+  font-size: 20px;
+  line-height: 1.3;
+  letter-spacing: -0.4px;
+  color: @tertiary-blue-dark;
+  margin: 0;
+}
+
+// Description
+.core-values-description {
+  font-family: @font-family-averta;
+  font-weight: @font-weight-regular;
+  font-size: 15px;
+  line-height: 1.4;
+  color: @tertiary-blue-dark;
+  margin: 0;
+  width: 333px;
+
+  @media (max-width: (@breakpoint-md - 1)) {
+    width: 100%;
+  }
+}
+
+// Values List
+.core-values-list {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  margin-top: 21px;
+}
+
+.core-value-item {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+
+  @media (max-width: (@breakpoint-md - 1)) {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 15px;
+  }
+}
+
+.core-value-item-wisdom {
+  gap: 29px;
+}
+
+.core-value-item-heart {
+  align-items: flex-end;
+  gap: 25px;
+}
+
+.core-value-icon-wrapper {
+  position: relative;
+  display: inline-block;
+  line-height: 0;
+  flex-shrink: 0;
+}
+
+.core-value-icon-frame {
+  position: relative;
+  z-index: 1;
+  display: block;
+}
+
+.core-value-icon-frame-img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+// Frame sizes from Figma
+.core-value-icon-frame[data-frame="integrity"] {
+  width: 94.5px;
+  height: 84px;
+}
+
+.core-value-icon-frame-wisdom {
+  width: 85.5px;
+  height: 71.25px;
+  transform: rotate(180deg) scaleY(-1);
+}
+
+.core-value-icon-frame[data-frame="courage"] {
+  width: 90px;
+  height: 75px;
+}
+
+.core-value-icon-frame[data-frame="heart"] {
+  width: 90px;
+  height: 79.5px;
+}
+
+// Integrity Icon
+.core-value-icon-integrity {
+  position: absolute;
+  left: 14.25px;
+  top: 11.25px;
+  width: 66px;
+  height: 84.75px;
+  overflow: hidden;
+  z-index: 2;
+}
+
+.core-value-icon-integrity .core-value-icon {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.core-value-icon-integrity .core-value-icon:first-child {
+  inset: -0.01% 0.02% 0.08% -0.01%;
+}
+
+.core-value-icon-integrity .core-value-icon:last-child {
+  inset: 14.24% 23.57% 50.18% 27.52%;
+}
+
+// Wisdom Icon
+.core-value-icon-wisdom {
+  position: absolute;
+  left: 12px;
+  top: 4.5px;
+  width: 62.25px;
+  height: 66.75px;
+  overflow: hidden;
+  z-index: 2;
+}
+
+.core-value-icon-wisdom .core-value-icon {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.core-value-icon-wisdom .core-value-icon:nth-child(1) {
+  inset: 18.42% 20.03% 0 19.98%;
+}
+
+.core-value-icon-wisdom .core-value-icon:nth-child(2) {
+  inset: 0.05% 45.8% 84.39% 49.31%;
+}
+
+.core-value-icon-wisdom .core-value-icon:nth-child(3) {
+  inset: 43.86% 0.05% 51.58% 83.24%;
+}
+
+.core-value-icon-wisdom .core-value-icon:nth-child(4) {
+  inset: 43.86% 83.26% 51.58% 0.03%;
+}
+
+.core-value-icon-wisdom .core-value-icon:nth-child(5) {
+  inset: 14.24% 10.38% 73.05% 76.49%;
+}
+
+.core-value-icon-wisdom .core-value-icon:nth-child(6) {
+  inset: 12.95% 74.81% 74.33% 12.25%;
+}
+
+.core-value-icon-wisdom .core-value-icon:nth-child(7) {
+  inset: 29.36% 56.95% 45.86% 30.6%;
+}
+
+// Courage Icon
+.core-value-icon-courage {
+  position: absolute;
+  left: 6px;
+  top: 9.75px;
+  width: 65.25px;
+  height: 73.5px;
+  overflow: hidden;
+  z-index: 2;
+}
+
+.core-value-icon-courage .core-value-icon {
+  position: absolute;
+  inset: -0.06% -0.05% -0.01% 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+// Heart Icon
+.core-value-icon-heart {
+  position: absolute;
+  left: 9.75px;
+  top: 0;
+  width: 62.25px;
+  height: 70.5px;
+  overflow: hidden;
+  z-index: 2;
+}
+
+.core-value-icon-heart .core-value-icon {
+  position: absolute;
+  inset: 0.01% -0.06% 0.06% 0.02%;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+// Value Text
+.core-value-text {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  flex: 1;
+}
+
+.core-value-title {
+  font-family: @font-family-averta;
+  font-weight: @font-weight-bold;
+  font-size: 35px;
+  line-height: 1.1;
+  letter-spacing: -1.05px;
+  color: @tertiary-blue-dark;
+  margin: 0;
+
+  @media (max-width: (@breakpoint-md - 1)) {
+    font-size: clamp(24px, 5vw, 35px);
+  }
+}
+
+.core-value-title-heart {
+  color: @primary-coral;
+}
+
+.core-value-description {
+  font-family: @font-family-averta;
+  font-weight: @font-weight-regular;
+  font-size: 15px;
+  line-height: 1.4;
+  color: @tertiary-blue-dark;
+  margin: 0;
+}
+
