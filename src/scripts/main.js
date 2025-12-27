@@ -23,6 +23,7 @@
     initCoCurricularCarousel();
     initStaffFilters();
     initFiveAsTabs();
+    initFAQAccordion();
     // initFeaturesCardsSlider();
    
   });
@@ -968,7 +969,44 @@
   //   });
   // }
 
- 
-  
+  // ==========================================================================
+  // FAQ ACCORDION
+  // ==========================================================================
 
+  function initFAQAccordion() {
+    const faqQuestions = document.querySelectorAll('.faq-question');
+    
+    if (!faqQuestions.length) return;
+
+    faqQuestions.forEach(function(question) {
+      question.addEventListener('click', function() {
+        const faqItem = this.closest('.faq-item');
+        const answer = faqItem.querySelector('.faq-answer');
+        const isExpanded = this.getAttribute('aria-expanded') === 'true';
+
+        // Close all other FAQ items
+        faqQuestions.forEach(function(otherQuestion) {
+          if (otherQuestion !== question) {
+            const otherItem = otherQuestion.closest('.faq-item');
+            const otherAnswer = otherItem.querySelector('.faq-answer');
+            otherQuestion.setAttribute('aria-expanded', 'false');
+            otherAnswer.style.display = 'none';
+          }
+        });
+
+        // Toggle current item
+        if (isExpanded) {
+          this.setAttribute('aria-expanded', 'false');
+          answer.style.display = 'none';
+        } else {
+          this.setAttribute('aria-expanded', 'true');
+          answer.style.display = 'block';
+        }
+      });
+    });
+  }
+
+ 
+
+  
 })();

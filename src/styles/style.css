@@ -4782,6 +4782,426 @@ h1 .hero__title-script {
     height: 100%;
   }
 }
+.what-makes-glenaeon-special-section {
+  position: relative;
+  padding: 3rem 0;
+  overflow: hidden;
+}
+@media (max-width: 991px) {
+  .what-makes-glenaeon-special-section {
+    padding: 3.75rem 0;
+  }
+}
+.what-makes-glenaeon-special-curved-line {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+.what-makes-glenaeon-special-curved-line img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center;
+  opacity: 0.3;
+}
+.what-makes-glenaeon-special-title-group {
+  position: relative;
+  z-index: 1;
+  margin-bottom: 3rem;
+  text-align: center;
+}
+@media (max-width: 767px) {
+  .what-makes-glenaeon-special-title-group {
+    margin-bottom: 2rem;
+  }
+}
+.what-makes-glenaeon-special-title {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+  margin: 0;
+  line-height: 1;
+  color: #1c3666;
+  font-size: 60px;
+}
+@media (max-width: 767px) {
+  .what-makes-glenaeon-special-title {
+    font-size: clamp(2.5rem, 8vw, 60px);
+  }
+}
+.what-makes-glenaeon-special-title-script {
+  font-family: 'Born Ready', cursive;
+  font-weight: 400;
+  font-size: 60px;
+  line-height: 1;
+  letter-spacing: 0;
+  color: #1c3666;
+}
+@media (max-width: 767px) {
+  .what-makes-glenaeon-special-title-script {
+    font-size: clamp(2.5rem, 8vw, 60px);
+  }
+}
+.what-makes-glenaeon-special-title-bold {
+  font-family: 'Averta', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-weight: 800;
+  font-size: 60px;
+  line-height: 1;
+  letter-spacing: -1.2px;
+  text-transform: uppercase;
+  color: #1c3666;
+}
+@media (max-width: 767px) {
+  .what-makes-glenaeon-special-title-bold {
+    font-size: clamp(2.5rem, 8vw, 60px);
+    letter-spacing: -0.8px;
+  }
+}
+.what-makes-glenaeon-special-item {
+  position: relative;
+  z-index: 1;
+  margin-bottom: 4rem;
+}
+@media (max-width: 991px) {
+  .what-makes-glenaeon-special-item {
+    margin-bottom: 3rem;
+  }
+}
+@media (max-width: 767px) {
+  .what-makes-glenaeon-special-item {
+    margin-bottom: 2.5rem;
+  }
+}
+.what-makes-glenaeon-special-content {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 0 2.125rem;
+}
+@media (max-width: 991px) {
+  .what-makes-glenaeon-special-content {
+    padding: 0 1rem;
+    margin-top: 2rem;
+  }
+}
+.what-makes-glenaeon-special-subtitle {
+  font-family: 'Born Ready', cursive;
+  font-weight: 400;
+  font-size: 25px;
+  line-height: 0.9;
+  letter-spacing: 0;
+  color: #1c3666;
+  margin: 0;
+}
+@media (max-width: 767px) {
+  .what-makes-glenaeon-special-subtitle {
+    font-size: clamp(20px, 4vw, 25px);
+  }
+}
+.what-makes-glenaeon-special-heading {
+  font-family: 'Averta', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-weight: 800;
+  font-size: 35px;
+  line-height: 1;
+  letter-spacing: 0;
+  text-transform: uppercase;
+  color: #1c3666;
+  margin: 0;
+}
+@media (max-width: 767px) {
+  .what-makes-glenaeon-special-heading {
+    font-size: clamp(24px, 5vw, 35px);
+  }
+}
+.what-makes-glenaeon-special-age {
+  font-family: 'Averta', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 1.3;
+  letter-spacing: -0.4px;
+  color: #1c3666;
+  margin: 0;
+}
+@media (max-width: 767px) {
+  .what-makes-glenaeon-special-age {
+    font-size: clamp(16px, 3.5vw, 20px);
+  }
+}
+.what-makes-glenaeon-special-description {
+  font-family: 'Averta', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-weight: 400;
+  font-size: 15px;
+  line-height: 1.4;
+  color: #1c3666;
+  margin: 0;
+}
+@media (max-width: 767px) {
+  .what-makes-glenaeon-special-description {
+    font-size: 14px;
+  }
+}
+.what-makes-glenaeon-special-button {
+  padding: 15px 25px;
+  font-family: 'Averta', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 1.4;
+  color: #ffffff;
+  background-color: #db574e;
+  border-radius: 10px;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  transition: background-color 150ms ease, transform 150ms ease;
+  border: none;
+  cursor: pointer;
+  white-space: nowrap;
+  align-self: flex-start;
+}
+.what-makes-glenaeon-special-button:hover {
+  background-color: #d74339;
+  color: #ffffff;
+  transform: translateY(-1px);
+  text-decoration: none;
+}
+.what-makes-glenaeon-special-button:active {
+  transform: translateY(0);
+}
+@media (max-width: 767px) {
+  .what-makes-glenaeon-special-button {
+    padding: 12px 20px;
+    font-size: 14px;
+    width: 100%;
+    white-space: normal;
+  }
+}
+.what-makes-glenaeon-special-cta-wrapper {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  margin-top: 3rem;
+}
+@media (max-width: 767px) {
+  .what-makes-glenaeon-special-cta-wrapper {
+    margin-top: 2rem;
+  }
+}
+.what-makes-glenaeon-special-cta-button {
+  padding: 15px 25px;
+  font-family: 'Averta', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 1.4;
+  color: #ffffff;
+  background-color: #db574e;
+  border-radius: 10px;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  transition: background-color 150ms ease, transform 150ms ease;
+  border: none;
+  cursor: pointer;
+  white-space: nowrap;
+}
+.what-makes-glenaeon-special-cta-button:hover {
+  background-color: #d74339;
+  color: #ffffff;
+  transform: translateY(-1px);
+  text-decoration: none;
+}
+.what-makes-glenaeon-special-cta-button:active {
+  transform: translateY(0);
+}
+@media (max-width: 767px) {
+  .what-makes-glenaeon-special-cta-button {
+    padding: 12px 20px;
+    font-size: 14px;
+    width: 100%;
+    max-width: 300px;
+    white-space: normal;
+  }
+}
+.faq-section {
+  position: relative;
+  padding: 3rem 0;
+  overflow: hidden;
+}
+@media (max-width: 991px) {
+  .faq-section {
+    padding: 3.75rem 0;
+  }
+}
+.faq-title-group {
+  position: relative;
+  margin-bottom: 0;
+}
+@media (max-width: 991px) {
+  .faq-title-group {
+    margin-bottom: 2rem;
+  }
+}
+.faq-title {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin: 0;
+  line-height: 1;
+  color: #1c3666;
+  font-size: 60px;
+}
+@media (max-width: 767px) {
+  .faq-title {
+    font-size: clamp(2.5rem, 8vw, 60px);
+    gap: 6px;
+  }
+}
+.faq-title-script {
+  font-family: 'Born Ready', cursive;
+  font-weight: 400;
+  font-size: 60px;
+  line-height: 1;
+  letter-spacing: 0;
+  color: #1c3666;
+}
+@media (max-width: 767px) {
+  .faq-title-script {
+    font-size: clamp(2.5rem, 8vw, 60px);
+  }
+}
+.faq-title-bold {
+  font-family: 'Averta', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-weight: 800;
+  font-size: 60px;
+  line-height: 1;
+  letter-spacing: -1.2px;
+  text-transform: uppercase;
+  color: #1c3666;
+}
+@media (max-width: 767px) {
+  .faq-title-bold {
+    font-size: clamp(2.5rem, 8vw, 60px);
+    letter-spacing: -0.8px;
+  }
+}
+.faq-list {
+  display: flex;
+  flex-direction: column;
+  gap: 13px;
+}
+.faq-item {
+  background-color: #ffffff;
+  border-radius: 10px;
+  overflow: hidden;
+  transition: box-shadow 150ms ease;
+}
+.faq-item:hover {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+.faq-question {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 25px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  gap: 20px;
+  transition: background-color 150ms ease;
+}
+.faq-question:hover {
+  background-color: rgba(0, 0, 0, 0.02);
+}
+.faq-question:focus {
+  outline: 2px solid #db574e;
+  outline-offset: -2px;
+}
+.faq-question[aria-expanded="true"] .faq-arrow {
+  transform: rotate(90deg) scaleY(-1);
+}
+.faq-question[aria-expanded="false"] .faq-arrow {
+  transform: rotate(270deg);
+}
+.faq-question-text {
+  font-family: 'Averta', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 1.3;
+  letter-spacing: -0.4px;
+  color: #1c3666;
+  flex: 1;
+}
+@media (max-width: 767px) {
+  .faq-question-text {
+    font-size: clamp(16px, 3.5vw, 20px);
+  }
+}
+.faq-arrow {
+  position: relative;
+  width: 21px;
+  height: 27px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 150ms ease;
+}
+.faq-arrow-line {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+.faq-arrow-head {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+.faq-answer {
+  padding: 0 25px 20px 25px;
+  display: none;
+  animation: faqSlideDown 0.3s ease-out;
+}
+.faq-answer p {
+  font-family: 'Averta', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-weight: 400;
+  font-size: 15px;
+  line-height: 1.4;
+  color: #1c3666;
+  margin: 0;
+}
+@media (max-width: 767px) {
+  .faq-answer p {
+    font-size: 14px;
+  }
+}
+.faq-item .faq-question[aria-expanded="true"] + .faq-answer {
+  display: block;
+}
+@keyframes faqSlideDown {
+  from {
+    opacity: 0;
+    max-height: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    max-height: 500px;
+    transform: translateY(0);
+  }
+}
 .core-values-section {
   position: relative;
   padding: 3rem 0;
