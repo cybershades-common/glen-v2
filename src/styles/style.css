@@ -2282,8 +2282,7 @@ h1 .hero__title-script {
   }
 }
 .video-card,
-.video-testimonials .card,
-.moments-section .moments-card .card {
+.video-testimonials .card {
   width: 100%;
   position: relative;
   border: 7.063px solid #ffffff;
@@ -2293,8 +2292,7 @@ h1 .hero__title-script {
 }
 @media (max-width: 767px) {
   .video-card,
-  .video-testimonials .card,
-  .moments-section .moments-card .card {
+  .video-testimonials .card {
     width: 100%;
     max-width: 300px;
     height: auto;
@@ -2302,8 +2300,7 @@ h1 .hero__title-script {
   }
 }
 .video-card-inner,
-.video-testimonials .card-inner,
-.moments-section .moments-card .card-inner {
+.video-testimonials .card-inner {
   position: relative;
   width: 100%;
   height: 100%;
@@ -2312,9 +2309,7 @@ h1 .hero__title-script {
 }
 .video-card-inner .video-card-media,
 .video-testimonials .card-inner .video-card-media,
-.video-card-inner .video-testimonials .card-inner .media,
-.moments-section .moments-card .card-inner .video-card-media,
-.video-card-inner .moments-section .moments-card .card-inner .media {
+.video-card-inner .video-testimonials .card-inner .media {
   display: flex;
   height: 100%;
 }
@@ -2323,11 +2318,7 @@ h1 .hero__title-script {
 .video-testimonials .card-inner .video-card-media .testimonial-video,
 .video-testimonials .card-inner .video-card-media img,
 .video-card-inner .video-testimonials .card-inner .media .testimonial-video,
-.video-card-inner .video-testimonials .card-inner .media img,
-.moments-section .moments-card .card-inner .video-card-media .testimonial-video,
-.moments-section .moments-card .card-inner .video-card-media img,
-.video-card-inner .moments-section .moments-card .card-inner .media .testimonial-video,
-.video-card-inner .moments-section .moments-card .card-inner .media img {
+.video-card-inner .video-testimonials .card-inner .media img {
   width: 100%;
   height: 100%;
   aspect-ratio: 300/504;
@@ -2335,8 +2326,7 @@ h1 .hero__title-script {
   object-position: center;
 }
 .video-card-overlay,
-.video-testimonials .card-overlay,
-.moments-section .moments-card .card-overlay {
+.video-testimonials .card-overlay {
   position: absolute;
   top: 0;
   bottom: 0;
@@ -2352,8 +2342,7 @@ h1 .hero__title-script {
   align-items: flex-end;
 }
 .video-card-content,
-.video-testimonials .card-content,
-.moments-section .moments-card .card-content {
+.video-testimonials .card-content {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -2361,15 +2350,13 @@ h1 .hero__title-script {
   width: 100%;
 }
 .video-card-info,
-.video-testimonials .card-info,
-.moments-section .moments-card .card-info {
+.video-testimonials .card-info {
   color: #ffffff;
   text-align: left;
   pointer-events: auto;
 }
 .video-card-name,
-.video-testimonials .card-name,
-.moments-section .moments-card .card-name {
+.video-testimonials .card-name {
   font-family: 'Averta', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   font-weight: 700;
   font-size: 1.5625rem;
@@ -2378,8 +2365,7 @@ h1 .hero__title-script {
   margin: 0 0 0 0;
 }
 .video-card-title,
-.video-testimonials .card-title,
-.moments-section .moments-card .card-title {
+.video-testimonials .card-title {
   font-family: 'Averta', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   font-weight: 400;
   font-size: 0.9375rem;
@@ -2387,13 +2373,11 @@ h1 .hero__title-script {
   margin: 0;
 }
 .video-card-play-wrapper,
-.video-testimonials .play-button-wrapper,
-.moments-section .moments-card .play-button-wrapper {
+.video-testimonials .play-button-wrapper {
   pointer-events: auto;
 }
 .video-card-play-button,
-.video-testimonials .play-button,
-.moments-section .moments-card .play-button {
+.video-testimonials .play-button {
   position: relative;
   padding: 0;
   border: none;
@@ -2402,8 +2386,7 @@ h1 .hero__title-script {
   cursor: pointer;
 }
 .video-card-play-circle,
-.video-testimonials .play-button-circle,
-.moments-section .moments-card .play-button-circle {
+.video-testimonials .play-button-circle {
   position: relative;
   width: 3.375rem;
   height: 3.375rem;
@@ -2414,16 +2397,14 @@ h1 .hero__title-script {
   background-size: cover;
 }
 .video-card-play-icon,
-.video-testimonials .play-button-icon,
-.moments-section .moments-card .play-button-icon {
+.video-testimonials .play-button-icon {
   position: relative;
   width: 1rem;
   height: 1rem;
   color: #ffffff;
 }
 .video-card-play-icon .icon,
-.video-testimonials .play-button-icon .icon,
-.moments-section .moments-card .play-button-icon .icon {
+.video-testimonials .play-button-icon .icon {
   position: absolute;
   inset: 0;
   display: flex;
@@ -2432,18 +2413,15 @@ h1 .hero__title-script {
   transition: opacity 150ms ease ease;
 }
 .video-card-play-icon .icon-close,
-.video-testimonials .play-button-icon .icon-close,
-.moments-section .moments-card .play-button-icon .icon-close {
+.video-testimonials .play-button-icon .icon-close {
   opacity: 0;
 }
 .video-card-play-button.is-active .icon-play,
-.video-testimonials .play-button.is-active .icon-play,
-.moments-section .moments-card .play-button.is-active .icon-play {
+.video-testimonials .play-button.is-active .icon-play {
   opacity: 0;
 }
 .video-card-play-button.is-active .icon-close,
-.video-testimonials .play-button.is-active .icon-close,
-.moments-section .moments-card .play-button.is-active .icon-close {
+.video-testimonials .play-button.is-active .icon-close {
   opacity: 1;
 }
 .card-clip-reveal:not(.clip-animation-complete) {
@@ -2604,8 +2582,7 @@ h1 .hero__title-script {
 }
 .video-testimonials .video-testimonials-swiper .swiper-slide .video-card,
 .video-testimonials .video-testimonials-swiper .swiper-slide .card,
-.video-testimonials .video-testimonials-swiper .swiper-slide .video-testimonials .card,
-.video-testimonials .video-testimonials-swiper .swiper-slide .moments-section .moments-card .card {
+.video-testimonials .video-testimonials-swiper .swiper-slide .video-testimonials .card {
   max-width: 300px;
   height: auto;
   aspect-ratio: 300 / 503.731;
@@ -2635,8 +2612,7 @@ h1 .hero__title-script {
   }
   .video-testimonials .cards .video-card,
   .video-testimonials .cards .card,
-  .video-testimonials .cards .video-testimonials .card,
-  .video-testimonials .cards .moments-section .moments-card .card {
+  .video-testimonials .cards .video-testimonials .card {
     max-width: 100%;
     width: 100%;
   }
@@ -3049,18 +3025,8 @@ h1 .hero__title-script {
 .staff-section .grid.row > div {
   padding: 0 1.5625rem;
 }
-.staff-section .grid.row > div.is-hidden {
+.staff-section .grid.row > div.isotope-hidden {
   display: none !important;
-}
-.staff-section .grid.row > div.is-filtering-in,
-.staff-section .grid.row > div.is-filtering-out {
-  display: block !important;
-}
-.staff-section .grid.row > div.is-filtering-in .grid_card {
-  animation: staff-card-in 0.36s ease forwards;
-}
-.staff-section .grid.row > div.is-filtering-out .grid_card {
-  animation: staff-card-out 0.36s ease forwards;
 }
 .staff-section .grid.row > div .grid_card {
   display: flex;
@@ -3068,9 +3034,6 @@ h1 .hero__title-script {
   align-items: center;
   text-align: center;
   width: 100%;
-  clip-path: inset(0 0 0 0);
-  -webkit-clip-path: inset(0 0 0 0);
-  will-change: clip-path, opacity, transform;
 }
 .staff-section .grid.row > div .grid_card .image {
   width: 100%;
@@ -3120,40 +3083,27 @@ h1 .hero__title-script {
     font-size: 0.8125rem;
   }
 }
-@keyframes staff-card-in {
-  from {
-    opacity: 0;
-    transform: translateY(-40px) scale(0.98);
-    clip-path: inset(0 0 100% 0);
-    -webkit-clip-path: inset(0 0 100% 0);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-    clip-path: inset(0 0 0 0);
-    -webkit-clip-path: inset(0 0 0 0);
-  }
-}
-@keyframes staff-card-out {
-  from {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-    clip-path: inset(0 0 0 0);
-    -webkit-clip-path: inset(0 0 0 0);
-  }
-  to {
-    opacity: 0;
-    transform: translateY(-35px) scale(0.95);
-    clip-path: inset(0 0 100% 0);
-    -webkit-clip-path: inset(0 0 100% 0);
-  }
-}
 @media (max-width: 767px) {
   .staff-section .grid.row {
     margin: inherit;
+    position: relative !important;
+    height: auto !important;
+    display: flex !important;
+    flex-wrap: wrap !important;
   }
   .staff-section .grid.row > div {
     padding: inherit;
+    position: relative !important;
+    left: auto !important;
+    top: auto !important;
+    right: auto !important;
+    bottom: auto !important;
+    width: 50% !important;
+    max-width: 50% !important;
+    flex: 0 0 50% !important;
+    margin: 0 !important;
+    box-sizing: border-box !important;
+    transition: transform 0.36s ease, opacity 0.36s ease !important;
   }
   .staff-section .grid.row > div .grid_card .image {
     max-width: 90%;
@@ -4518,6 +4468,169 @@ h1 .hero__title-script {
 .moments-section .moments-card .card {
   width: 100%;
   height: 100%;
+  position: relative;
+  border-radius: 20px;
+  overflow: hidden;
+  cursor: grab;
+  user-select: none;
+  will-change: transform;
+  background: white;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+.moments-section .moments-card .card:active {
+  cursor: grabbing;
+}
+.moments-section .moments-card .card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border-radius: 20px;
+  overflow: hidden;
+}
+.moments-section .moments-card .media {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  border-radius: 20px;
+}
+.moments-section .moments-card .media video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+.moments-section .moments-card .card-overlay {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 67.244%, rgba(0, 0, 0, 0.65) 100%);
+  border-radius: 20px;
+  pointer-events: none;
+  z-index: 1;
+  padding: 2rem;
+  display: flex;
+  align-items: flex-end;
+  transform: none !important;
+  transition: none !important;
+}
+.moments-section .moments-card .card-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  width: 100%;
+  transform: none !important;
+  transition: none !important;
+}
+.moments-section .moments-card .card-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  transform: none !important;
+  transition: none !important;
+}
+.moments-section .moments-card .card-name {
+  font-family: 'Averta', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-size: 1.25rem;
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.025rem;
+  color: #ffffff;
+  margin: 0;
+  transform: none !important;
+  transition: none !important;
+}
+.moments-section .moments-card .card-title {
+  font-family: 'Averta', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-size: 0.875rem;
+  font-weight: 400;
+  line-height: 1.3;
+  letter-spacing: -0.0125rem;
+  color: #ffffff;
+  margin: 0;
+  opacity: 0.9;
+  transform: none !important;
+  transition: none !important;
+}
+.moments-section .moments-card .play-button-wrapper {
+  pointer-events: all;
+  transform: none !important;
+  transition: none !important;
+}
+.moments-section .moments-card .play-button {
+  background: transparent;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  position: relative;
+  transition: none !important;
+  transform: none !important;
+}
+.moments-section .moments-card .play-button:hover {
+  transform: none !important;
+}
+.moments-section .moments-card .play-button-circle {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background-color: #db574e;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: none !important;
+  box-shadow: 0 4px 12px rgba(231, 76, 60, 0.4);
+  transform: none !important;
+}
+.moments-section .moments-card .play-button-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  transform: none !important;
+  transition: none !important;
+}
+.moments-section .moments-card .play-button-icon .icon-play {
+  opacity: 1;
+  transition: none !important;
+  transform: none !important;
+}
+.moments-section .moments-card .play-button-icon .icon-play::before {
+  content: '';
+  width: 0;
+  height: 0;
+  border-left: 12px solid white;
+  border-top: 8px solid transparent;
+  border-bottom: 8px solid transparent;
+  margin-left: 2px;
+}
+.moments-section .moments-card .play-button-icon .icon-close {
+  position: absolute;
+  opacity: 0;
+  transition: none !important;
+  transform: none !important;
+}
+.moments-section .moments-card .play-button-icon .icon-close svg {
+  width: 16px;
+  height: 16px;
+  stroke: white;
+  stroke-width: 2;
+  fill: none;
+}
+.moments-section .moments-card .play-button.is-active .play-button-circle {
+  background-color: #cc342a;
+}
+.moments-section .moments-card .play-button.is-active .icon-play {
+  opacity: 0;
+}
+.moments-section .moments-card .play-button.is-active .icon-close {
+  opacity: 1;
 }
 .moments-section .moments-card-center {
   z-index: 10;
@@ -4578,11 +4691,7 @@ h1 .hero__title-script {
   .moments-section .moments-card .video-testimonials .card-overlay,
   .moments-section .moments-card .video-testimonials .card-content,
   .moments-section .moments-card .video-testimonials .card-info,
-  .moments-section .moments-card .video-testimonials .play-button-wrapper,
-  .moments-section .moments-card .moments-section .moments-card .card-overlay,
-  .moments-section .moments-card .moments-section .moments-card .card-content,
-  .moments-section .moments-card .moments-section .moments-card .card-info,
-  .moments-section .moments-card .moments-section .moments-card .play-button-wrapper {
+  .moments-section .moments-card .video-testimonials .play-button-wrapper {
     opacity: 1 !important;
     visibility: visible !important;
   }

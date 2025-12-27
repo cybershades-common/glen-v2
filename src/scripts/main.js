@@ -668,24 +668,50 @@
   // ==========================================================================
 
   function initStaffFilters() {
-    const staffSections = document.querySelectorAll('.staff-section');
-    if (!staffSections.length) return;
+    // Check if jQuery and Isotope are available
+    if (typeof jQuery === 'undefined' || typeof jQuery.fn.isotope === 'undefined') {
+      console.warn('jQuery or Isotope is not loaded. Staff filters will not work.');
+      return;
+    }
 
-    staffSections.forEach(section => {
-      const filterButtons = Array.from(section.querySelectorAll('.filters .filter-tab'));
-      const staffCards = Array.from(section.querySelectorAll('[data-staff-card]'));
-      if (!filterButtons.length || !staffCards.length) return;
+    const $staffSections = jQuery('.staff-section');
+    if (!$staffSections.length) return;
 
-      const animationTimers = new WeakMap();
-      const animationDuration = 360;
-      let refreshTimeoutId = null;
+    $staffSections.each(function() {
+      const $section = jQuery(this);
+      const $grid = $section.find('.staff-isotope-grid');
+      const $filterButtons = $section.find('.filters .filter-tab');
 
-      const scheduleScrollRefresh = (delay = 0) => {
-        if (refreshTimeoutId) {
-          clearTimeout(refreshTimeoutId);
+      if (!$grid.length || !$filterButtons.length) return;
+
+      // Convert data-filter attributes to classes for Isotope
+      $grid.find('.staff-item').each(function() {
+        const $item = jQuery(this);
+        const filters = $item.attr('data-filter');
+        if (filters) {
+          const filterClasses = filters.split(' ').map(function(f) {
+            return f.trim();
+          }).filter(function(f) {
+            return f.length > 0;
+          });
+          $item.addClass(filterClasses.join(' '));
         }
+      });
 
-        refreshTimeoutId = setTimeout(() => {
+      // Initialize Isotope - fitRows works with Bootstrap responsive columns
+      // CSS will override Isotope positioning on mobile to preserve Bootstrap grid
+      const $isoGrid = $grid.isotope({
+        itemSelector: '.staff-item',
+        layoutMode: 'fitRows',
+        transitionDuration: '0.36s'
+      });
+
+      // Function to apply filter and refresh scroll
+      const applyFilterAndRefresh = function(filterSelector) {
+        $isoGrid.isotope({ filter: filterSelector });
+
+        // Refresh scroll triggers after layout
+        setTimeout(function() {
           try {
             const smootherInstance =
               window.ScrollSmoother &&
@@ -701,126 +727,30 @@
           if (window.ScrollTrigger && typeof window.ScrollTrigger.refresh === 'function') {
             window.ScrollTrigger.refresh();
           }
-        }, delay);
+        }, 400);
       };
 
-      let activeFilter =
-        section.querySelector('.filter-tab.filter-tab--active')?.getAttribute('data-filter') || 'all';
+      // Handle filter button clicks
+      $filterButtons.on('click', function() {
+        const $button = jQuery(this);
+        const filterValue = $button.attr('data-filter') || 'all';
 
-      filterButtons.forEach(button => {
-        button.addEventListener('click', () => {
-          const filterValue = button.getAttribute('data-filter') || 'all';
-          if (filterValue === activeFilter) return;
-          activeFilter = filterValue;
-          filterButtons.forEach(btn => btn.classList.toggle('filter-tab--active', btn === button));
-          applyFilter(filterValue);
-        });
+        // Update active state
+        $filterButtons.removeClass('filter-tab--active');
+        $button.addClass('filter-tab--active');
+
+        // Create filter selector - '*' shows all, otherwise filter by class
+        const filterSelector = filterValue === 'all' ? '*' : '.' + filterValue;
+
+        // Apply filter
+        applyFilterAndRefresh(filterSelector);
       });
 
-      applyFilter(activeFilter, { skipAnimation: true });
-
-      function cardGroups(card) {
-        return (card.getAttribute('data-groups') || '')
-          .split(',')
-          .map(group => group.trim())
-          .filter(Boolean);
-      }
-
-      function clearTimer(card) {
-        const timer = animationTimers.get(card);
-        if (timer) {
-          clearTimeout(timer);
-          animationTimers.delete(card);
-        }
-      }
-
-      function showCard(card, skipAnimation) {
-        clearTimer(card);
-        card.classList.remove('is-hidden');
-        card.setAttribute('aria-hidden', 'false');
-
-        if (skipAnimation) {
-          card.classList.remove('is-filtering-in', 'is-filtering-out');
-          return;
-        }
-
-        card.classList.remove('is-filtering-out');
-        card.classList.add('is-filtering-in');
-        const timer = setTimeout(() => {
-          card.classList.remove('is-filtering-in');
-          animationTimers.delete(card);
-        }, animationDuration);
-        animationTimers.set(card, timer);
-      }
-
-      function hideCard(card, skipAnimation) {
-        clearTimer(card);
-
-        if (skipAnimation) {
-          card.classList.add('is-hidden');
-          card.classList.remove('is-filtering-in', 'is-filtering-out');
-          card.setAttribute('aria-hidden', 'true');
-          return;
-        }
-
-        card.classList.remove('is-filtering-in');
-        card.classList.add('is-filtering-out');
-        const timer = setTimeout(() => {
-          card.classList.remove('is-filtering-out');
-          card.classList.add('is-hidden');
-          card.setAttribute('aria-hidden', 'true');
-          animationTimers.delete(card);
-        }, animationDuration);
-        animationTimers.set(card, timer);
-      }
-
-      function applyFilter(filterValue, options = {}) {
-        const { skipAnimation = false } = options;
-
-        if (skipAnimation) {
-          staffCards.forEach(card => {
-            const shouldShow =
-              filterValue === 'all' || cardGroups(card).some(group => group === filterValue);
-
-            if (shouldShow) {
-              showCard(card, true);
-            } else {
-              hideCard(card, true);
-            }
-          });
-          scheduleScrollRefresh(0);
-          return;
-        }
-
-        const cardsToHide = staffCards.filter(card => !card.classList.contains('is-hidden'));
-        const cardsToShow = staffCards.filter(card => {
-          const shouldShow =
-            filterValue === 'all' || cardGroups(card).some(group => group === filterValue);
-          return shouldShow;
-        });
-
-        if (!cardsToShow.length && !cardsToHide.length) return;
-
-        cardsToHide.forEach(card => hideCard(card, false));
-
-        const startShow = () => {
-          staffCards.forEach(card => {
-            const shouldShow = cardsToShow.includes(card);
-            if (shouldShow) {
-              showCard(card, false);
-            } else {
-              // ensure cards not in this filter remain hidden after the cycle
-              card.classList.add('is-hidden');
-              card.setAttribute('aria-hidden', 'true');
-            }
-          });
-        };
-
-        setTimeout(() => {
-          startShow();
-          scheduleScrollRefresh(animationDuration + 50);
-        }, animationDuration);
-      }
+      // Apply initial filter based on active button (or show all by default)
+      const $activeButton = $filterButtons.filter('.filter-tab--active');
+      const initialFilterValue = $activeButton.length ? ($activeButton.attr('data-filter') || 'all') : 'all';
+      const initialFilterSelector = initialFilterValue === 'all' ? '*' : '.' + initialFilterValue;
+      applyFilterAndRefresh(initialFilterSelector);
     });
   }
 

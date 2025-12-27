@@ -94,7 +94,6 @@
 
   // Staff Grid
 
-
   .grid.row {
     margin: 0 -1.5625rem;
     gap: 3.125rem 0;
@@ -102,21 +101,9 @@
     >div {
       padding: 0 1.5625rem;
 
-      &.is-hidden {
+      // Isotope hidden items - only hide, don't affect layout
+      &.isotope-hidden {
         display: none !important;
-      }
-
-      &.is-filtering-in,
-      &.is-filtering-out {
-        display: block !important;
-      }
-
-      &.is-filtering-in .grid_card {
-        animation: staff-card-in 0.36s ease forwards;
-      }
-
-      &.is-filtering-out .grid_card {
-        animation: staff-card-out 0.36s ease forwards;
       }
 
       .grid_card {
@@ -125,9 +112,6 @@
         align-items: center;
         text-align: center;
         width: 100%;
-        clip-path: inset(0 0 0 0);
-        -webkit-clip-path: inset(0 0 0 0);
-        will-change: clip-path, opacity, transform;
 
 
         .image {
@@ -193,46 +177,37 @@
   }
 }
 
-@keyframes staff-card-in {
-  from {
-    opacity: 0;
-    transform: translateY(-40px) scale(0.98);
-    clip-path: inset(0 0 100% 0);
-    -webkit-clip-path: inset(0 0 100% 0);
-  }
-
-  to {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-    clip-path: inset(0 0 0 0);
-    -webkit-clip-path: inset(0 0 0 0);
-  }
-}
-
-@keyframes staff-card-out {
-  from {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-    clip-path: inset(0 0 0 0);
-    -webkit-clip-path: inset(0 0 0 0);
-  }
-
-  to {
-    opacity: 0;
-    transform: translateY(-35px) scale(0.95);
-    clip-path: inset(0 0 100% 0);
-    -webkit-clip-path: inset(0 0 100% 0);
-  }
-}
+// Custom animations removed - Isotope handles transitions
 
 
 @media (max-width:767px) {
   .staff-section {
-    .grid.row> {
+    .grid.row {
       margin: inherit;
+      // Reset Isotope container styles on mobile - restore Bootstrap flex layout
+      position: relative !important;
+      height: auto !important;
+      display: flex !important;
+      flex-wrap: wrap !important;
 
       >div {
         padding: inherit;
+        // Allow Isotope to animate but ensure Bootstrap controls final layout
+        position: relative !important;
+        // Don't force transform to none - allow Isotope animations
+        // But ensure left/top don't interfere with flexbox
+        left: auto !important;
+        top: auto !important;
+        right: auto !important;
+        bottom: auto !important;
+        // Preserve Bootstrap col-6 width (2 cards per row = 50% each)
+        width: 50% !important;
+        max-width: 50% !important;
+        flex: 0 0 50% !important;
+        margin: 0 !important;
+        box-sizing: border-box !important;
+        // Ensure transitions work for smooth animations
+        transition: transform 0.36s ease, opacity 0.36s ease !important;
 
         .grid_card .image {
           max-width: 90%;
