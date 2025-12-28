@@ -146,8 +146,8 @@ function initScrollSmootherManager() {
 
 function initVideoTestimonialsAnimations() {
   if (videoTestimonialsAnimationsInitialized) return;
-  // Support both video-testimonials and moments sections
-  const sections = document.querySelectorAll(VIDEO_SECTION_SELECTOR + ', .moments-section');
+  // Only apply to video-testimonials section (moments-section uses only Swiper)
+  const sections = document.querySelectorAll(VIDEO_SECTION_SELECTOR);
   if (!sections.length || typeof gsap === 'undefined') return;
   videoTestimonialsAnimationsInitialized = true;
 
@@ -165,17 +165,11 @@ function initVideoTestimonialsAnimations() {
 }
 
 function setupVideoCardsReveal(section) {
-  // Support both video-testimonials and moments sections
-  // For video-testimonials: desktop cards
+  // Only for video-testimonials section
   const desktopCards = section.querySelectorAll('.cards.desktop-only .video-card, .cards.desktop-only .card');
   
-  // For moments section: all cards in the carousel (nested inside .moments-card)
-  const momentsCards = section.querySelectorAll('.moments-arc-carousel .swiper-slide .moments-card .video-card, .moments-arc-carousel .swiper-slide .moments-card .card, .moments-arc-carousel .swiper-slide .video-card, .moments-arc-carousel .swiper-slide .card');
-  
-  const allCards = [...desktopCards, ...momentsCards];
-  
-  if (allCards.length > 0) {
-    allCards.forEach(card => {
+  if (desktopCards.length > 0) {
+    desktopCards.forEach(card => {
       card.classList.add('video-reveal-animation', 'card-clip-reveal');
     });
   }
@@ -192,15 +186,8 @@ function setupFeatureCardsReveal() {
 }
 
 function setupMobileSlideAnimations(section) {
-  // Support both video-testimonials-swiper and moments-arc-carousel
-  // For video-testimonials: mobile swiper
-  let sliderEl = section.querySelector('.video-testimonials-swiper .swiper');
-  
-  // For moments section: the arc carousel (works for all screen sizes)
-  if (!sliderEl && section.classList.contains('moments-section')) {
-    sliderEl = section.querySelector('.moments-arc-carousel');
-  }
-  
+  // Only for video-testimonials section
+  const sliderEl = section.querySelector('.video-testimonials-swiper .swiper');
   if (!sliderEl) return;
 
   // Support both old and new class names
@@ -213,8 +200,7 @@ function setupMobileSlideAnimations(section) {
     const activeSlide = sliderEl.querySelector('.swiper-slide-active');
     if (!activeSlide) return;
     // Support both old and new class names
-    // For moments section, content is nested inside .moments-card
-    const cardContent = activeSlide.querySelector('.moments-card .video-card-content, .moments-card .card-content, .video-card-content, .card-content');
+    const cardContent = activeSlide.querySelector('.video-card-content, .card-content');
     if (!cardContent) return;
 
     gsap.to(cardContent, {
@@ -246,8 +232,7 @@ function setupMobileSlideAnimations(section) {
         return;
       }
       // Support both old and new class names
-      // For moments section, content is nested inside .moments-card
-      currentSlideContent = activeSlide.querySelector('.moments-card .video-card-content, .moments-card .card-content, .video-card-content, .card-content') || null;
+      currentSlideContent = activeSlide.querySelector('.video-card-content, .card-content') || null;
     };
 
     setCurrentContent();
@@ -281,7 +266,7 @@ function setupMobileSlideAnimations(section) {
     // If swiper is already available, animate initial slide immediately
     const activeSlide = sliderEl.querySelector('.swiper-slide-active');
     if (activeSlide) {
-      const cardContent = activeSlide.querySelector('.moments-card .video-card-content, .moments-card .card-content, .video-card-content, .card-content');
+      const cardContent = activeSlide.querySelector('.video-card-content, .card-content');
       if (cardContent) {
         gsap.set(cardContent, { y: 0, opacity: 1 });
       }

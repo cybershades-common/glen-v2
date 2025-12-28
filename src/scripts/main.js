@@ -264,8 +264,8 @@
   // ==========================================================================
 
   function initVideoTestimonials() {
-    // Initialize video cards universally - works for video-testimonials and moments sections
-    const sections = document.querySelectorAll('.video-testimonials, .moments-section');
+    // Initialize video cards - only for video-testimonials section (moments-section uses only Swiper)
+    const sections = document.querySelectorAll('.video-testimonials');
     if (!sections.length) return;
 
     sections.forEach(section => {
@@ -308,14 +308,14 @@
       };
 
       cardList.forEach(card => {
+      // Support both old and new video/button class names
       const video = card.querySelector('.testimonial-video, .learner-video');
-      // Support both old and new class names
       const controlButton = card.querySelector('.video-card-play-button, .play-button');
+      
       if (!video || !controlButton) return;
 
       const isDesktopCard = Boolean(card.closest('.desktop-only'));
-      const isMomentsCard = Boolean(card.closest('.moments-section'));
-      const shouldHaveHover = isDesktopCard || (isMomentsCard && window.innerWidth >= 1024);
+      const shouldHaveHover = isDesktopCard;
       
       setupDefaultState(video, shouldHaveHover);
 
@@ -434,6 +434,7 @@
       // ==========================================================================
     });
   }
+
 
   // ==========================================================================
   // CO-CURRICULAR OPPORTUNITIES CAROUSEL
