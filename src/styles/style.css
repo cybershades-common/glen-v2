@@ -4523,18 +4523,20 @@ h1 .hero__title-script {
   transform: translate(-50%, -50%) scale(1.05);
 }
 .moments-section .moments-play-circle {
-  width: 4.25rem;
-  height: 4.25rem;
-  border-radius: 50%;
-  background-color: #db574e;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0 0.25rem 0.75rem rgba(219, 87, 78, 0.4);
-  transition: background-color 0.3s ease;
-}
-.moments-section .moments-play-circle:hover {
-  background-color: #d74339;
+  /* width: 4.25rem; // 68px = 4.25rem
+    height: 4.25rem; // 68px = 4.25rem
+    border-radius: 50%;
+    background-color: @primary-coral;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 0.25rem 0.75rem rgba(219, 87, 78, 0.4); // 4px 12px = 0.25rem 0.75rem
+    transition: background-color 0.3s ease;
+
+    &:hover {
+      background-color: darken(@primary-coral, 5%);
+    }
+      */
 }
 .moments-section .moments-play-icon {
   display: flex;
@@ -4542,7 +4544,7 @@ h1 .hero__title-script {
   justify-content: center;
   width: 2.1875rem;
   height: 2.1875rem;
-  transform: rotate(90deg);
+  /*   transform: rotate(90deg);*/
 }
 .moments-section .moments-play-icon svg {
   width: 100%;
