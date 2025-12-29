@@ -6452,6 +6452,7 @@ h1 .hero__title-script {
 .about-glenaeon-section__cards-grid {
   --bs-gutter-x: 6.625rem;
   margin-bottom: -6.625rem;
+  justify-content: center;
 }
 @media (max-width: 991px) {
   .about-glenaeon-section__cards-grid {
@@ -6466,7 +6467,7 @@ h1 .hero__title-script {
   }
 }
 .about-glenaeon-section__card-col {
-  margin-bottom: 6.625rem;
+  margin-bottom: 4.375rem;
 }
 @media (max-width: 991px) {
   .about-glenaeon-section__card-col {
@@ -6552,6 +6553,7 @@ h1 .hero__title-script {
   gap: 0.625rem;
   flex: 1;
   min-width: 0;
+  padding-left: 0.5rem;
 }
 @media (max-width: 767px) {
   .about-glenaeon-section__card-content {
@@ -6626,8 +6628,8 @@ h1 .hero__title-script {
   transform: rotate(180deg);
 }
 .about-glenaeon-section__separator {
-  padding: 1.875rem 0;
-  margin: 0;
+  padding: 0;
+  margin: 9rem auto 3rem;
   width: 100%;
   overflow: hidden;
 }
@@ -6717,7 +6719,7 @@ h1 .hero__title-script {
 }
 .about-glenaeon-section-part2__cards-row {
   margin-bottom: 3.125rem;
-  --bs-gutter-x: 5.875rem;
+  --bs-gutter-x: 5rem;
 }
 @media (max-width: 991px) {
   .about-glenaeon-section-part2__cards-row {
@@ -6795,9 +6797,9 @@ h1 .hero__title-script {
   display: flex;
   flex-direction: column;
   gap: 0.625rem;
-  align-items: flex-start;
+  align-items: center;
   width: 100%;
-  text-align: left;
+  text-align: center;
 }
 @media (max-width: 767px) {
   .about-glenaeon-section-part2__card-content {
@@ -10251,4 +10253,11 @@ button {
 }
 .row-reverse {
   flex-direction: row-reverse;
+}
+.landing-page .what-makes-glenaeon-special-section {
+  padding: 14rem 0 8rem;
+}
+.landing-page .what-makes-glenaeon-special-section .masked-image-content-block {
+  padding: 0;
+  margin: 0 auto;
 }
