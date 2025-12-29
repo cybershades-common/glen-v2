@@ -6742,6 +6742,11 @@ h1 .hero__title-script {
     margin-bottom: 2.5rem;
   }
 }
+@media (max-width: 767px) {
+  .about-glenaeon-section-part2__card-col {
+    padding: 0 0.5rem;
+  }
+}
 .about-glenaeon-section-part2__card-col:last-child {
   margin-bottom: 0;
 }
