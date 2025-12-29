@@ -7002,6 +7002,11 @@ h1 .hero__title-script {
     border-radius: 2px;
   }
 }
+@media (max-width: 767px) {
+  .latest-news-filters-section__filters .latest-news-filters-section__filters {
+    align-items: center;
+  }
+}
 .latest-news-filters-section__filter-btn {
   font-family: 'Averta', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   font-weight: 700;
@@ -7135,9 +7140,9 @@ h1 .hero__title-script {
   display: flex;
   flex-direction: column;
   gap: 0.625rem;
-  align-items: flex-start;
+  align-items: center;
   width: 100%;
-  text-align: left;
+  text-align: center;
 }
 @media (max-width: 767px) {
   .latest-news-grid-section__card-content {

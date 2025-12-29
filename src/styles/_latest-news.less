@@ -114,6 +114,11 @@
         border-radius: 2px;
       }
     }
+    @media (max-width:767px){
+      .latest-news-filters-section__filters{
+        align-items: center;
+      }
+    }
   }
 
   &__filter-btn {
@@ -270,9 +275,9 @@
     display: flex;
     flex-direction: column;
     gap: @spacing-sm; // 0.625rem (10px) gap from Figma
-    align-items: flex-start;
+    align-items: center;
     width: 100%;
-    text-align: left;
+    text-align: center;
 
     @media (max-width: (@breakpoint-md - 1)) {
       align-items: center;
