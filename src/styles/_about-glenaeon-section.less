@@ -62,7 +62,7 @@
     // Use Bootstrap's gutter system with custom gap
     --bs-gutter-x: 6.625rem; // 106px horizontal gap
     margin-bottom: -6.625rem; // Negative margin to offset last row
-    
+    justify-content: center;
     @media (max-width: (@breakpoint-lg - 1)) {
       --bs-gutter-x: 3.75rem;
       margin-bottom: -3.75rem;
@@ -75,7 +75,7 @@
   }
 
   &__card-col {
-    margin-bottom: 6.625rem; // 106px gap between rows
+    margin-bottom:4.375rem; // 106px gap between rows
     
     @media (max-width: (@breakpoint-lg - 1)) {
       margin-bottom: 3.75rem;
@@ -168,6 +168,7 @@
     gap: @spacing-sm; // 0.625rem (10px) gap between elements
     flex: 1;
     min-width: 0;
+    padding-left: 0.5rem;
     
     @media (max-width: (@breakpoint-md - 1)) {
       align-items: center; // Center content on mobile
@@ -247,8 +248,8 @@
 
   // Separator
   &__separator {
-    padding: 1.875rem 0; // 30px gap (top and bottom)
-    margin: 0;
+    padding:  0; 
+    margin:9rem auto 3rem;
     width: 100%;
     overflow: hidden;
   }
@@ -347,7 +348,7 @@
   // Cards Row
   &__cards-row {
     margin-bottom: 3.125rem; // 50px gap to button
-    --bs-gutter-x: 5.875rem; // 94px gap between cards from Figma
+    --bs-gutter-x: 5rem; 
 
     @media (max-width: (@breakpoint-lg - 1)) {
       --bs-gutter-x: 3rem;
@@ -378,6 +379,7 @@
     gap: 1.5rem; // 24px gap from Figma
     align-items: center;
     width: 100%;
+   
   }
 
   // Image Wrapper with rotation
@@ -433,9 +435,9 @@
     display: flex;
     flex-direction: column;
     gap: @spacing-sm; // 0.625rem (10px) gap from Figma
-    align-items: flex-start;
+    align-items: center;
     width: 100%;
-    text-align: left;
+    text-align: center;
 
     @media (max-width: (@breakpoint-md - 1)) {
       align-items: center;
