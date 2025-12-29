@@ -1,3 +1,149 @@
+let swiper_tl_speech = null; // global reference
+let testimonial_audio = null;
+const WORD_DURATION = 0.4;
+
+function setAudioGraphicProgress(audio) {
+    
+}
+function formatTime(seconds) {
+  if (isNaN(seconds)) return "00:00";
+
+  const mins = Math.floor(seconds / 60);
+  const secs = Math.floor(seconds % 60);
+
+  return `${String(mins).padStart(2, "0")}:${String(secs).padStart(2, "0")}`;
+}
+
+function playTestimonialAudio() {
+
+    // 🔴 Kill previous timeline
+    if (swiper_tl_speech) {
+        swiper_tl_speech.kill();
+        swiper_tl_speech = null;
+    }
+
+    if (testimonial_audio) {
+        testimonial_audio.pause();
+        testimonial_audio.currentTime = 0;
+    }
+
+    const activeSlide = document.querySelector(
+        ".testimonial-audio-slide.swiper-slide-active"
+    );
+
+    if (!activeSlide) return;
+
+    // 🔴 Reset word states
+    activeSlide
+        .querySelectorAll(".word.active")
+        .forEach(el => el.classList.remove("active"));
+
+    // 🟢 Create new timeline
+    swiper_tl_speech = gsap.timeline({ paused: true });
+
+    const words = activeSlide.querySelectorAll(".word");
+    testimonial_audio = activeSlide.querySelector(".audio");
+
+    const currentTimeEl = activeSlide.querySelector(".audio-current-time");
+    const durationEl = activeSlide.querySelector(".testimonial-audio-duration");
+    console.log('durationEl:', durationEl);
+
+    if (testimonial_audio) {
+
+        // ▶️ Play audio
+        testimonial_audio.play().catch(() => {});
+        if (durationEl) {
+                
+                durationEl.innerHTML = formatTime(testimonial_audio.duration);
+            }
+
+        const waveform = activeSlide.querySelector(".waveform");
+        waveform.innerHTML = ""; // 🔴 important reset
+
+        const BAR_COUNT = 60;
+
+        const heights = Array.from({ length: BAR_COUNT }, () =>
+            Math.floor(Math.random() * 60) + 20
+        );
+
+        heights.forEach(h => {
+            const bar = document.createElement("div");
+            bar.className = "bar";
+            bar.style.height = h + "%";
+            waveform.appendChild(bar);
+        });
+
+        const bars = waveform.querySelectorAll(".bar");
+
+        // 🔘 Click on waveform bar → seek audio
+        bars.forEach((bar, index) => {
+            bar.addEventListener("click", () => {
+
+                if (!testimonial_audio.duration) return;
+
+                const percent = index / bars.length;
+                const newTime = percent * testimonial_audio.duration;
+
+                // 🎧 Seek audio
+                testimonial_audio.currentTime = newTime;
+                testimonial_audio.play().catch(() => {});
+
+                // 🔥 SYNC GSAP TIMELINE
+                if (swiper_tl_speech) {
+                    swiper_tl_speech.pause();
+                    swiper_tl_speech.time(newTime);
+                    swiper_tl_speech.play();
+                }
+
+                // 🔄 update waveform UI
+                bars.forEach((b, i) => {
+                    b.classList.toggle("played", i <= index);
+                });
+            });
+        });
+
+
+        // ⏱️ Update progress + time
+        testimonial_audio.addEventListener("timeupdate", () => {
+
+            const current = testimonial_audio.currentTime;
+
+            // 🎯 Sync GSAP continuously
+            if (swiper_tl_speech && Math.abs(swiper_tl_speech.time() - current) > 0.1) {
+                swiper_tl_speech.time(current);
+            }
+
+            const progress = current / testimonial_audio.duration;
+            const activeBars = Math.floor(progress * bars.length);
+
+            bars.forEach((bar, i) => {
+                bar.classList.toggle("played", i < activeBars);
+            });
+
+            if (currentTimeEl) {
+                currentTimeEl.textContent = formatTime(current);
+            }
+        });
+
+        // 🔁 Reset when ended
+        testimonial_audio.addEventListener("ended", () => {
+            if (currentTimeEl) currentTimeEl.textContent = "00:00";
+        }, { once: true });
+    }
+
+    // 📝 Word animation
+    words.forEach((el, i) => {
+        swiper_tl_speech.to(el, {
+            opacity: 1,
+            duration: WORD_DURATION,
+            onStart: () => el.classList.add("active"),
+            onComplete: () => el.classList.remove("active")
+        }, i * WORD_DURATION);
+    });
+
+    swiper_tl_speech.play();
+}
+
 // Swiper Initialization
 document.addEventListener('DOMContentLoaded', function() {
     
@@ -161,10 +307,10 @@ document.addEventListener('DOMContentLoaded', function() {
         },
         
         // Autoplay (optional - can be enabled if needed)
-        autoplay: {
+        autoplay:false, /*{
             delay: 5000,
             disableOnInteraction: true,
-        },
+        },*/
         
         // Effect
         effect: 'slide',
@@ -185,13 +331,17 @@ document.addEventListener('DOMContentLoaded', function() {
         
         // Events
         on: {
-            init: function() {},
-            slideChange: function() {}
-        }
+            init: function() {
+               // playTestimonialAudio()
+            },
+            slideChangeTransitionEnd: function () {
+                playTestimonialAudio();    
+            }
+        }   
     });
     
     // Audio player functionality (basic implementation)
-    const audioPlayers = document.querySelectorAll('.testimonial-audio-player');
+    /*const audioPlayers = document.querySelectorAll('.testimonial-audio-player');
     
     audioPlayers.forEach(player => {
         const waveform = player.querySelector('.testimonial-audio-waveform');
@@ -222,7 +372,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 progressBar.style.width = '0%';
             }
         });
-    });
+    });*/
     
     // ==========================================================================
     // MOMENTS ARC CAROUSEL

@@ -2182,6 +2182,29 @@
           <div class="testimonial-audio-bg" aria-hidden="true">
             <div class="testimonial-audio-overlay"></div>
           </div>
+          <style>
+            .waveform {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  height: 60px;
+  margin-top: 10px;
+}
+
+.bar {
+  width: 4px;
+  background: #d9d9d9;
+  cursor: pointer;
+
+  border-radius: 4px;
+}
+.word.active,
+.bar.played {
+  background: #ff5c6c;
+}
+.testimonial-audio-player audio { display: none; }
+
+          </style>
 
           <!-- Swiper Slider -->
           <div class="swiper testimonial-audio-slider">
@@ -2221,10 +2244,12 @@
 
                         <!-- Audio Player -->
                         <div class="testimonial-audio-player">
+                          
                           <div class="testimonial-audio-waveform">
-                            <img src="assets/figma/5184ebea-e47d-4526-bea8-b44cdef221ce.svg" alt=""
-                              class="testimonial-audio-waveform-bg" aria-hidden="true" />
-                            <div class="testimonial-audio-waveform-progress"></div>
+                            <audio class="audio" src="ElevenLabs_Text_to_Speech_audio (1).mp3" controls></audio>
+                          <div class="waveform" id="waveform"></div>
+                          
+                            
                           </div>
                           <span class="testimonial-audio-duration">00:58</span>
                         </div>
@@ -2274,9 +2299,9 @@
                         <!-- Audio Player -->
                         <div class="testimonial-audio-player">
                           <div class="testimonial-audio-waveform">
-                            <img src="assets/figma/5184ebea-e47d-4526-bea8-b44cdef221ce.svg" alt=""
-                              class="testimonial-audio-waveform-bg" aria-hidden="true" />
-                            <div class="testimonial-audio-waveform-progress"></div>
+                            <audio class="audio" src="ElevenLabs_Text_to_Speech_audio (1).mp3" controls></audio>
+                          <div class="waveform" id="waveform"></div>
+                            
                           </div>
                           <span class="testimonial-audio-duration">01:23</span>
                         </div>
@@ -2326,9 +2351,9 @@
                         <!-- Audio Player -->
                         <div class="testimonial-audio-player">
                           <div class="testimonial-audio-waveform">
-                            <img src="assets/figma/5184ebea-e47d-4526-bea8-b44cdef221ce.svg" alt=""
-                              class="testimonial-audio-waveform-bg" aria-hidden="true" />
-                            <div class="testimonial-audio-waveform-progress"></div>
+                            <audio class="audio" src="ElevenLabs_Text_to_Speech_audio (1).mp3" controls></audio>
+                          <div class="waveform" id="waveform"></div>
+                            
                           </div>
                           <span class="testimonial-audio-duration">02:15</span>
                         </div>
@@ -3064,6 +3089,7 @@
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.1/dist/ScrollSmoother.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.1/dist/SplitText.min.js"></script>
   <script>
 
 

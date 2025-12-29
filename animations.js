@@ -49,7 +49,7 @@ let videoTestimonialsAnimationsInitialized = false;
 const hasScrollTrigger = typeof ScrollTrigger !== 'undefined';
 
 if (hasScrollTrigger) {
-  gsap.registerPlugin(ScrollTrigger, ScrollSmoother);
+  gsap.registerPlugin(ScrollTrigger, ScrollSmoother, SplitText);
 }
 
 const SCROLL_SMOOTHER_BREAKPOINT = 1024;
@@ -392,6 +392,15 @@ function initAnimations() {
   if (typeof gsap === 'undefined') {
     return;
   }
+
+  if (document.querySelector(".testimonial-audio-slide .testimonial-audio-quote")) {
+    let split = SplitText.create(".testimonial-audio-slide .testimonial-audio-quote",{
+        type: "words",
+        wordsClass: "word"
+      }
+    );
+  }
+
   // Create the ScrollSmoother (desktop/fine pointer only) before ScrollTriggers
   initScrollSmootherManager();
   initMarqueeAnimation();
