@@ -8007,7 +8007,7 @@ h1 .hero__title-script {
     margin: -2rem auto;
   }
   body.landing-page .about-glenaeon-section__card-link {
-    align-self: center ;
+    align-self: center;
   }
   body.landing-page .about-glenaeon-section__image-wrapper {
     width: 85%;
@@ -8016,6 +8016,9 @@ h1 .hero__title-script {
   }
   body.landing-page .about-glenaeon-section__image-inner {
     width: 100%;
+  }
+  body.landing-page .about-glenaeon-section__separator {
+    margin: 2rem auto 0rem;
   }
   body.landing-page .masked-image-content-block {
     padding: 0;
