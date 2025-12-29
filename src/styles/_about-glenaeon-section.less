@@ -63,11 +63,12 @@
     --bs-gutter-x: 6.625rem; // 106px horizontal gap
     margin-bottom: -6.625rem; // Negative margin to offset last row
     justify-content: center;
+
     @media (max-width: (@breakpoint-lg - 1)) {
       --bs-gutter-x: 3.75rem;
       margin-bottom: -3.75rem;
     }
-    
+
     @media (max-width: (@breakpoint-md - 1)) {
       --bs-gutter-x: 0;
       margin-bottom: -2.5rem;
@@ -75,8 +76,8 @@
   }
 
   &__card-col {
-    margin-bottom:4.375rem; // 106px gap between rows
-    
+    margin-bottom: 4.375rem; // 106px gap between rows
+
     @media (max-width: (@breakpoint-lg - 1)) {
       margin-bottom: 3.75rem;
     }
@@ -154,7 +155,7 @@
     position: relative;
     z-index: 1;
     aspect-ratio: 1/1; // Ensure perfect circle to prevent distortion
-    
+
     @media (max-width: (@breakpoint-md - 1)) {
       width: 98%;
       height: 98%;
@@ -169,7 +170,7 @@
     flex: 1;
     min-width: 0;
     padding-left: 0.5rem;
-    
+
     @media (max-width: (@breakpoint-md - 1)) {
       align-items: center; // Center content on mobile
       text-align: center;
@@ -248,8 +249,8 @@
 
   // Separator
   &__separator {
-    padding:  0; 
-    margin:9rem auto 3rem;
+    padding: 0;
+    margin: 9rem auto 3rem;
     width: 100%;
     overflow: hidden;
   }
@@ -348,7 +349,7 @@
   // Cards Row
   &__cards-row {
     margin-bottom: 3.125rem; // 50px gap to button
-    --bs-gutter-x: 5rem; 
+    --bs-gutter-x: 5rem;
 
     @media (max-width: (@breakpoint-lg - 1)) {
       --bs-gutter-x: 3rem;
@@ -379,7 +380,7 @@
     gap: 1.5rem; // 24px gap from Figma
     align-items: center;
     width: 100%;
-   
+
   }
 
   // Image Wrapper with rotation
@@ -533,4 +534,5 @@
     }
   }
 }
+
 

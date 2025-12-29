@@ -5197,12 +5197,14 @@ h1 .hero__title-script {
     gap: 15px;
   }
 }
+@media (max-width: 767px) {
+  .core-value-item {
+    align-items: center;
+    text-align: center;
+  }
+}
 .core-value-item-wisdom {
   gap: 29px;
-}
-.core-value-item-heart {
-  align-items: flex-end;
-  gap: 25px;
 }
 .core-value-icon-wrapper {
   position: relative;
@@ -7995,6 +7997,28 @@ h1 .hero__title-script {
     min-width: 7rem;
     white-space: nowrap;
   }
+  body.landing-page .what-makes-glenaeon-special-section .masked-image-content-block {
+    padding: 0;
+    margin: -2rem auto;
+  }
+  body.landing-page .about-glenaeon-section__card-link {
+    align-self: center ;
+  }
+  body.landing-page .about-glenaeon-section__image-wrapper {
+    width: 85%;
+    height: auto;
+    margin: auto;
+  }
+  body.landing-page .about-glenaeon-section__image-inner {
+    width: 100%;
+  }
+  body.landing-page .masked-image-content-block {
+    padding: 0;
+    margin: -2rem auto 0;
+  }
+  body .column-reverse-mobile {
+    flex-direction: column-reverse;
+  }
 }
 @media (min-width: 680px) and (max-width: 992px) {
   body .edge-position.top-edge {
@@ -8068,7 +8092,6 @@ html [contenteditable="true"] {
 }
 #smooth-content a:focus,
 #smooth-content input:focus {
-  border: none;
   outline: none;
   box-shadow: none;
 }
