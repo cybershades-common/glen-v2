@@ -6985,7 +6985,7 @@ h1 .hero__title-script {
 @media (max-width: 767px) {
   .latest-news-filters-section__filters {
     gap: 0.5rem;
-    justify-content: flex-start;
+    justify-content: center;
     overflow-x: auto;
     padding-bottom: 0.5rem;
     -webkit-overflow-scrolling: touch;
@@ -7003,8 +7003,9 @@ h1 .hero__title-script {
   }
 }
 @media (max-width: 767px) {
-  .latest-news-filters-section__filters .latest-news-filters-section__filters {
+  .latest-news-filters-section__filters body .latest-news-filters-section__filters {
     align-items: center;
+    justify-content: center;
   }
 }
 .latest-news-filters-section__filter-btn {
