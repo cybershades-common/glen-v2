@@ -1,34 +1,32 @@
 // ==========================================================================
-// MOMENTS THAT MATTER SECTION - Arc Carousel with New Card Design
+// MOMENTS THAT MATTER SECTION - Arc Carousel
 // ==========================================================================
 
 .moments-section {
   
-  padding: 12rem 0 10rem 0; // Only bottom padding, no top padding (80px = 5rem)
+  padding: 80px 0;
   position: relative;
   overflow: hidden;
 
   // Title Section
   .moments-title {
-    margin-bottom: 4rem;
-  
+    margin-bottom: 60px;
   }
 
   .moments-title-script {
     font-family: @font-family-born-ready;
-    font-size: 5rem; // 80px = 5rem
+    font-size: 80px;
     line-height: 0.9;
     color: @tertiary-blue-dark;
     margin-bottom: 0;
-    font-weight: normal;
   }
 
   .moments-title-bold {
     font-family: @font-family-averta;
-    font-size: 3.75rem; // 60px = 3.75rem
+    font-size: 60px;
     font-weight: 800;
     line-height: 1;
-    letter-spacing: -0.075rem; // -1.2px = -0.075rem
+    letter-spacing: -1.2px;
     text-transform: uppercase;
     color: @tertiary-blue-dark;
     margin-bottom: 0;
@@ -38,15 +36,14 @@
   .moments-carousel-wrapper {
     position: relative;
     width: 100%;
-    height: auto; 
+    height: 850px; // Increased from 650px to 850px for more vertical space
     display: flex;
     align-items: center;
     justify-content: center;
-    perspective: 125rem; // 2000px = 125rem
-    margin-bottom: 3.75rem; // 60px = 3.75rem
-    margin-top: 0; 
-    padding: 0;
-    overflow: visible;
+    perspective: 2000px;
+    margin-bottom: 60px;
+    padding: 100px 0; // Add padding top and bottom for card movement space
+    overflow: visible; // Allow cards to move beyond boundaries
   }
 
   // Swiper Container
@@ -63,8 +60,8 @@
     }
 
     .swiper-slide {
-      width: 20.9375rem !important; // 335px = 20.9375rem
-      height: 35.15625rem; // 562.5px = 35.15625rem
+      width: 335px !important;
+      height: 562.5px;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -76,95 +73,226 @@
       -webkit-backface-visibility: hidden;
       transform: translateZ(0);
       -webkit-transform: translateZ(0);
-      opacity: 1 !important;
+      opacity: 1 !important; // Force visibility for all slides
     }
   }
 
-  // Card Styles - New Figma Design
+  // Card Styles - Using reusable video-card component
   .moments-card {
-    width: 20.9375rem; // 335px = 20.9375rem
-    height: 35.15625rem; // 562.5px = 35.15625rem
+    width: 335px;
+    height: 562.5px;
     position: relative;
     transform-origin: center center;
-    opacity: 1 !important;
-  }
-
-  // Reel Inner (Card Content) - New Design
-  .moments-reel-inner {
-    position: relative;
-    width: 100%;
-    height: 100%;
-    border-radius: 1.25rem; // 20px = 1.25rem (from Figma var(--radius/base,20px))
-    overflow: hidden;
-    background: white;
-    border: 0.0625rem solid rgba(0, 0, 0, 0.1); // 1px = 0.0625rem
-  }
-
-  .moments-reel-video {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center;
-    display: block;
-  }
-
-  // Play Button (only on specific slides)
-  .moments-play-button {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background: transparent;
-    border: none;
-    padding: 0;
-    cursor: pointer;
-    z-index: 2;
-    pointer-events: all;
-    transition: transform 0.2s ease;
-
-    &:hover {
-      transform: translate(-50%, -50%) scale(1.05);
+    opacity: 1 !important; // Force visibility for all cards
+    
+    // Ensure all child elements are visible
+    * {
+      opacity: 1 !important;
     }
-  }
 
-  .moments-play-circle {
-   /* width: 4.25rem; // 68px = 4.25rem
-    height: 4.25rem; // 68px = 4.25rem
-    border-radius: 50%;
-    background-color: @primary-coral;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow: 0 0.25rem 0.75rem rgba(219, 87, 78, 0.4); // 4px 12px = 0.25rem 0.75rem
-    transition: background-color 0.3s ease;
-
-    &:hover {
-      background-color: darken(@primary-coral, 5%);
-    }
-      */
-  }
-
-  .moments-play-icon {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 5.75rem; // 35px = 2.1875rem
-    height: 5.75rem; // 35px = 2.1875rem
- /*   transform: rotate(90deg);*/
-
-    svg {
+    // Direct styles matching backup-internal.html structure
+    .card {
       width: 100%;
       height: 100%;
+      position: relative;
+      border-radius: 20px;
+      overflow: hidden;
+      cursor: grab;
+      user-select: none;
+      will-change: transform;
+      background: white;
+      box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+      
+      &:active {
+        cursor: grabbing;
+      }
     }
-  }
 
-  // Active state for play button
-  .moments-play-button.is-active {
-    .moments-play-circle {
-      background-color: darken(@primary-coral, 10%);
+    .card-inner {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      border-radius: 20px;
+      overflow: hidden;
+    }
+    
+    .media {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      border-radius: 20px;
+      
+      video {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center;
+      }
+    }
+
+    .card-overlay {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      margin: auto;
+      background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 67.244%, rgba(0, 0, 0, 0.65) 100%);
+      border-radius: 20px;
+      pointer-events: none;
+      z-index: 1;
+      padding: 2rem;
+      display: flex;
+      align-items: flex-end;
+      // Remove any transform animations
+      transform: none !important;
+      transition: none !important;
+    }
+
+    .card-content {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      width: 100%;
+      // Remove any transform animations
+      transform: none !important;
+      transition: none !important;
+    }
+
+    .card-info {
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+      // Remove any transform animations
+      transform: none !important;
+      transition: none !important;
+    }
+
+    .card-name {
+      font-family: @font-family-averta;
+      font-size: 1.25rem;
+      font-weight: @font-weight-bold;
+      line-height: 1.2;
+      letter-spacing: -0.025rem;
+      color: @base-white;
+      margin: 0;
+      // Remove any transform animations
+      transform: none !important;
+      transition: none !important;
+    }
+
+    .card-title {
+      font-family: @font-family-averta;
+      font-size: 0.875rem;
+      font-weight: @font-weight-regular;
+      line-height: 1.3;
+      letter-spacing: -0.0125rem;
+      color: @base-white;
+      margin: 0;
+      opacity: 0.9;
+      // Remove any transform animations
+      transform: none !important;
+      transition: none !important;
+    }
+
+    .play-button-wrapper {
+      pointer-events: all;
+      // Remove any transform animations
+      transform: none !important;
+      transition: none !important;
+    }
+
+    .play-button {
+      background: transparent;
+      border: none;
+      padding: 0;
+      cursor: pointer;
+      position: relative;
+      // Remove hover animations but keep basic transitions
+      transition: none !important;
+      transform: none !important;
+      
+      &:hover {
+        // Remove hover transform
+        transform: none !important;
+      }
+    }
+
+    .play-button-circle {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background-color: @primary-coral;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      // Remove background color transition
+      transition: none !important;
+      box-shadow: 0 4px 12px rgba(231, 76, 60, 0.4);
+      // Remove any transform animations
+      transform: none !important;
+    }
+
+    .play-button-icon {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      // Remove any transform animations
+      transform: none !important;
+      transition: none !important;
+      
+      .icon-play {
+        opacity: 1;
+        // Remove opacity transition
+        transition: none !important;
+        transform: none !important;
+        
+        &::before {
+          content: '';
+          width: 0;
+          height: 0;
+          border-left: 12px solid white;
+          border-top: 8px solid transparent;
+          border-bottom: 8px solid transparent;
+          margin-left: 2px;
+        }
+      }
+      
+      .icon-close {
+        position: absolute;
+        opacity: 0;
+        // Remove opacity transition
+        transition: none !important;
+        transform: none !important;
+        
+        svg {
+          width: 16px;
+          height: 16px;
+          stroke: white;
+          stroke-width: 2;
+          fill: none;
+        }
+      }
+    }
+
+    .play-button.is-active {
+      .play-button-circle {
+        background-color: darken(@primary-coral, 10%);
+      }
+      
+      .icon-play {
+        opacity: 0;
+      }
+      
+      .icon-close {
+        opacity: 1;
+      }
     }
   }
 
@@ -172,22 +300,25 @@
     z-index: 10;
   }
 
+  // Arc Effect - Applied via JavaScript
+  // Opacity and transforms are controlled by JavaScript
+
   // CTA Section
   .moments-cta {
-    margin-top: 3.5rem; // 56px = 3.5rem
+    margin-top: 60px;
 
     .d-flex {
-      gap: 1.625rem; // 26px = 1.625rem (from Figma gap-[26px])
+      gap: 26px;
     }
 
     .moments-btn {
       background-color: @primary-coral;
       color: @base-white;
-      padding: 0.9375rem 1.5625rem; // 15px 25px = 0.9375rem 1.5625rem (from Figma py-[15px] px-[25px])
-      border-radius: 0.625rem; // 10px = 0.625rem (from Figma rounded-[10px])
+      padding: 15px 25px;
+      border-radius: 10px;
       text-decoration: none;
       font-family: @font-family-averta;
-      font-size: 0.9375rem; // 15px = 0.9375rem (from Figma text-[15px])
+      font-size: 15px;
       font-weight: @font-weight-regular;
       line-height: 1.4;
       transition: background-color 0.3s ease;
@@ -207,7 +338,7 @@
       text-underline-position: from-font;
       text-decoration-skip-ink: none;
       font-family: @font-family-averta;
-      font-size: 1.25rem; // 20px = 1.25rem (from Figma text-[20px])
+      font-size: 20px;
       font-weight: @font-weight-regular;
       line-height: 1.3;
       transition: color 0.3s ease;
@@ -232,81 +363,88 @@
     .moments-card {
       opacity: 1 !important;
       visibility: visible !important;
+      
+      .video-card-overlay,
+      .video-card-content,
+      .video-card-info,
+      .video-card-play-wrapper {
+        opacity: 1 !important;
+        visibility: visible !important;
+      }
     }
   }
 
   @media (max-width: (@breakpoint-lg - 1)) {
-    padding: 0 0 3.75rem 0; // 60px = 3.75rem
+    padding: 60px 0;
 
     .moments-title {
-      margin-bottom: 0;
-      margin-top: 2.5rem; // 40px = 2.5rem
-    }
-
-    .moments-carousel-wrapper {
-      margin-top: 2.8125rem; // 45px = 2.8125rem
-      height: 46.875rem; // 750px = 46.875rem
+      margin-bottom: 40px;
     }
 
     .moments-title-script {
-      font-size: 3.75rem; // 60px = 3.75rem
+      font-size: 60px;
     }
 
     .moments-title-bold {
-      font-size: 2.8125rem; // 45px = 2.8125rem
+      font-size: 45px;
+    }
+
+    .moments-carousel-wrapper {
+      height: 750px; // Increased mobile height too
+      padding: 80px 0; // Add padding for mobile too
     }
 
     .moments-arc-carousel .swiper-slide {
-      width: 17.5rem !important; // 280px = 17.5rem
-      height: 29.375rem; // 470px = 29.375rem
+      width: 280px !important;
+      height: 470px;
     }
 
     .moments-card {
-      width: 17.5rem; // 280px = 17.5rem
-      height: 29.375rem; // 470px = 29.375rem
+      width: 280px;
+      height: 470px;
+
+      .card {
+        width: 100%;
+        height: 100%;
+      }
     }
   }
 
   @media (max-width: (@breakpoint-md - 1)) {
-    padding: 0 0 2.5rem 0; // 40px = 2.5rem
+    padding: 40px 0;
 
     .moments-title {
-      margin-bottom: 0;
-      margin-top: 1.875rem; // 30px = 1.875rem
-    }
-
-    .moments-carousel-wrapper {
-      margin-top: 2.1875rem; // 35px = 2.1875rem
-      height: 40.625rem; // 650px = 40.625rem
+      margin-bottom: 30px;
     }
 
     .moments-title-script {
-      font-size: 2.8125rem; // 45px = 2.8125rem
+      font-size: 45px;
     }
 
     .moments-title-bold {
-      font-size: 2rem; // 32px = 2rem
-      letter-spacing: -0.05rem; // -0.8px = -0.05rem
+      font-size: 32px;
+      letter-spacing: -0.8px;
+    }
+
+    .moments-carousel-wrapper {
+      height: 650px; // Increased mobile height too
+      padding: 60px 0; // Add padding for mobile too
     }
 
     .moments-arc-carousel .swiper-slide {
-      width: 15rem !important; // 240px = 15rem
-      height: 25rem; // 400px = 25rem
+      width: 240px !important;
+      height: 400px;
     }
 
     .moments-card {
-      width: 15rem; // 240px = 15rem
-      height: 25rem; // 400px = 25rem
-    }
+      width: 240px;
+      height: 400px;
 
-    .moments-play-circle {
-      width: 3.5rem; // 56px = 3.5rem
-      height: 3.5rem; // 56px = 3.5rem
-    }
-
-    .moments-play-icon {
-      width: 1.75rem; // 28px = 1.75rem
-      height: 1.75rem; // 28px = 1.75rem
+      .card {
+        width: 100%;
+        height: 100%;
+      }
     }
   }
 }
+

@@ -25,6 +25,7 @@
     initLatestNewsFilters();
     initFiveAsTabs();
     initFAQAccordion();
+    initLocalNavFilters();
     // initFeaturesCardsSlider();
    
   });
@@ -264,8 +265,8 @@
   // ==========================================================================
 
   function initVideoTestimonials() {
-    // Initialize video cards - only for video-testimonials section (moments-section uses only Swiper)
-    const sections = document.querySelectorAll('.video-testimonials');
+    // Initialize video cards universally - works for video-testimonials and moments sections
+    const sections = document.querySelectorAll('.video-testimonials, .moments-section');
     if (!sections.length) return;
 
     sections.forEach(section => {
@@ -308,14 +309,14 @@
       };
 
       cardList.forEach(card => {
-      // Support both old and new video/button class names
       const video = card.querySelector('.testimonial-video, .learner-video');
+      // Support both old and new class names
       const controlButton = card.querySelector('.video-card-play-button, .play-button');
-      
       if (!video || !controlButton) return;
 
       const isDesktopCard = Boolean(card.closest('.desktop-only'));
-      const shouldHaveHover = isDesktopCard;
+      const isMomentsCard = Boolean(card.closest('.moments-section'));
+      const shouldHaveHover = isDesktopCard || (isMomentsCard && window.innerWidth >= 1024);
       
       setupDefaultState(video, shouldHaveHover);
 
@@ -434,7 +435,6 @@
       // ==========================================================================
     });
   }
-
 
   // ==========================================================================
   // CO-CURRICULAR OPPORTUNITIES CAROUSEL
@@ -1106,7 +1106,69 @@
     });
   }
 
- 
+  // ==========================================================================
+  // LOCAL NAVIGATION / FILTER SECTION - ISOTOPE
+  // ==========================================================================
 
+  function initLocalNavFilters() {
+    // Check if Isotope is available
+    if (typeof Isotope === 'undefined') {
+      console.warn('Isotope is not loaded. Local navigation filters will not work.');
+      return;
+    }
+
+    const filterButtons = document.querySelectorAll('.local-nav-item');
+    const contentContainer = document.querySelector('.local-nav-content-container');
+    
+    if (!contentContainer || filterButtons.length === 0) return;
+    
+    // Get the default filter from the active button
+    const activeButton = document.querySelector('.local-nav-item.is-active');
+    const defaultFilter = activeButton ? activeButton.getAttribute('data-filter') : '.welcome-head';
+    
+    // Initialize Isotope on the content container (not the buttons)
+    const iso = new Isotope(contentContainer, {
+      itemSelector: '.local-nav-content-item',
+      layoutMode: 'vertical',
+      transitionDuration: '0.4s',
+      filter: defaultFilter // Show only the default/active content
+    });
+    
+    // Filter button click handlers
+    filterButtons.forEach(function(button) {
+      button.addEventListener('click', function() {
+        // Remove active class from all buttons
+        filterButtons.forEach(function(btn) {
+          btn.classList.remove('is-active');
+        });
+        
+        // Add active class to clicked button
+        this.classList.add('is-active');
+        
+        // Get filter value
+        const filterValue = this.getAttribute('data-filter');
+        
+        // Filter Isotope content (not buttons)
+        iso.arrange({ 
+          filter: filterValue 
+        });
+      });
+    });
+    
+    // Re-layout on window resize
+    let resizeTimer;
+    window.addEventListener('resize', function() {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(function() {
+        iso.layout();
+      }, 250);
+    });
+  }
+
+  // ==========================================================================
+  // END LOCAL NAVIGATION / FILTER SECTION - ISOTOPE
+  // ==========================================================================
+
+ 
   
 })();

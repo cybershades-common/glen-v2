@@ -1,0 +1,118 @@
+// ==========================================================================
+// LOCAL NAVIGATION / FILTER SECTION
+// ==========================================================================
+
+.local-nav-section {
+  padding: @spacing-3xl @spacing-xl @spacing-2xl; // Extra gap on top
+  position: relative;
+
+  @media (max-width: (@breakpoint-md - 1)) {
+    padding: @spacing-2xl @spacing-md @spacing-xl;
+  }
+
+  .container-fluid {
+    position: relative;
+    z-index: 1;
+  }
+
+  // Navigation Container (Filter Buttons - NOT Isotope container)
+  .local-nav-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.625rem; // 10px
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+  }
+
+  // Navigation Item (Filter Button) - NOT an Isotope item
+  .local-nav-item {
+    background-color: @base-white;
+    border: 1px solid @base-white;
+    border-style: solid;
+    border-radius: @radius-lg; // 10px (0.625rem) - matches Figma rounded-[var(--radius/sm,10px)]
+    padding: 0.9375rem @spacing-md; // 15px vertical, 20px horizontal (matches Figma)
+    font-family: @font-family-averta;
+    font-weight: @font-weight-bold;
+    font-size: @font-size-base;
+    line-height: @line-height-none;
+    color: @tertiary-blue-dark;
+    cursor: pointer;
+    transition: all @transition-base;
+    white-space: nowrap;
+    position: relative;
+    z-index: 1;
+    box-sizing: border-box; // Ensure border is included in width/height
+
+    // Hover state
+    &:hover {
+      background-color: @tints-sand-20;
+      border-color: @tints-sand-20;
+    }
+
+    // Active state
+    &.is-active {
+      background-color: @tertiary-blue-dark;
+      border: 1px solid @tertiary-blue-dark;
+      border-style: solid;
+      color: @base-white;
+
+      &:hover {
+        background-color: @tertiary-blue-dark;
+        border-color: @tertiary-blue-dark;
+        opacity: 0.9;
+      }
+    }
+
+    // Focus state for accessibility
+    &:focus {
+      outline: 2px solid @tertiary-blue-dark;
+      outline-offset: 2px;
+    }
+
+    @media (max-width: (@breakpoint-md - 1)) {
+      font-size: @font-size-sm;
+      padding: 12px @spacing-md;
+    }
+  }
+}
+
+// ==========================================================================
+// LOCAL NAVIGATION CONTENT SECTION (Filterable Content)
+// ==========================================================================
+
+.local-nav-content-section {
+  padding: 0;
+  position: relative;
+
+  .container-fluid {
+    position: relative;
+    z-index: 1;
+  }
+
+  // Content Container (Isotope container)
+  .local-nav-content-container {
+    position: relative;
+    width: 100%;
+  }
+
+  // Content Item (Isotope item)
+  .local-nav-content-item {
+    width: 100%;
+    margin-bottom: 0;
+
+    // Ensure welcome-head-section inside doesn't have extra padding
+    .welcome-head-section {
+      padding: 5rem 0;
+
+      @media (max-width: (@breakpoint-lg - 1)) {
+        padding: 3.75rem 0;
+      }
+
+      @media (max-width: (@breakpoint-md - 1)) {
+        padding: 2.5rem 0;
+      }
+    }
+  }
+}
+
