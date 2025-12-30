@@ -3405,6 +3405,7 @@ h1 .hero__title-script {
 .five-as-section__image-wrapper {
   max-width: 92.75%;
   position: relative;
+  margin: auto;
 }
 .five-as-section__image-wrapper .five-as-section__image-outer-circle {
   display: flex;
@@ -4164,7 +4165,7 @@ h1 .hero__title-script {
   width: 100%;
   min-height: 100vh;
   overflow: hidden;
-  padding: 5rem;
+  padding: 6rem 5rem;
 }
 .three-campuses-section__background {
   position: absolute;
@@ -4226,7 +4227,7 @@ h1 .hero__title-script {
   flex-direction: column;
   align-items: center;
   gap: 0.5rem;
-  margin: 0 auto 2.4375rem;
+  margin: 0 auto 4.5rem;
   max-width: 100%;
   text-align: center;
   position: relative;
@@ -4542,8 +4543,8 @@ h1 .hero__title-script {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 2.1875rem;
-  height: 2.1875rem;
+  width: 5.75rem;
+  height: 5.75rem;
   /*   transform: rotate(90deg);*/
 }
 .moments-section .moments-play-icon svg {
@@ -8154,12 +8155,15 @@ button {
 }
 .masked-image-content-block {
   position: relative;
-  padding: 3rem 0;
+  padding: 7.8125rem 0;
   overflow: hidden;
 }
 .masked-image-content-block .container-fluid {
   position: relative;
   z-index: 1;
+}
+.masked-image-content-block .container-fluid .masked-image-block.row-reverse {
+  justify-content: space-between;
 }
 @media (max-width: 991px) {
   .masked-image-content-block {
@@ -8187,7 +8191,7 @@ button {
   display: flex;
   flex-direction: column;
   gap: 1.25rem;
-  padding: 0 2.125rem;
+  padding: 0 2.5rem;
 }
 .masked-image-content-block__content p.lead {
   color: var(--tertiary-blue-dark, #1C3666);
@@ -8331,7 +8335,7 @@ button {
   vertical-align: top;
 }
 .what-we-do-section {
-  padding: 3.75rem 0;
+  padding: 7.625rem 0 4.25rem;
   position: relative;
 }
 .what-we-do-section .container-fluid {
@@ -8405,7 +8409,7 @@ button {
   position: relative;
   max-width: 100%;
   margin: 0 auto;
-  padding: clamp(2.5rem, 4vw, 4rem) 0 clamp(2rem, 3vw, 3.5rem);
+  padding: clamp(2.5rem, 4vw, 4.6875rem) 0 clamp(2rem, 3vw, 3.5rem);
   overflow: hidden;
 }
 .what-we-do-section .features-cards-slider .features-cards-carousel {

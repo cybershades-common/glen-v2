@@ -123,7 +123,7 @@ html {
   a,
   input {
     &:focus {
-    
+
       outline: none;
       box-shadow: none;
     }
@@ -204,18 +204,27 @@ button {
 
 .masked-image-content-block {
   position: relative;
-  padding: 3rem 0;
+  padding: 7.8125rem 0;
   overflow: hidden;
 
   .container-fluid {
     position: relative;
     z-index: 1; // Ensure content is above the overlay
+
+    .masked-image-block {
+      &.row-reverse {
+        justify-content: space-between;
+      }
+    }
   }
 
   @media (max-width: (@breakpoint-lg - 1)) {
     padding: 3.75rem 0;
   }
 }
+
+
+
 
 // --------------------------------------------------------------------------
 // IMAGE (LEFT SIDE)
@@ -247,7 +256,7 @@ button {
   display: flex;
   flex-direction: column;
   gap: 1.25rem;
-  padding: 0 2.125rem;
+  padding: 0 2.5rem;
 
   p.lead {
     color: var(--tertiary-blue-dark, #1C3666);
@@ -431,7 +440,7 @@ button {
 // ==========================================================================
 
 .what-we-do-section {
-  padding: 3.75rem 0;
+  padding: 7.625rem 0 4.25rem;
   position: relative;
 
   .container-fluid {
@@ -529,7 +538,7 @@ button {
     position: relative;
     max-width: 100%;
     margin: 0 auto;
-    padding: clamp(2.5rem, 4vw, 4rem) 0 clamp(2rem, 3vw, 3.5rem);
+    padding: clamp(2.5rem, 4vw, 4.6875rem) 0 clamp(2rem, 3vw, 3.5rem);
     overflow: hidden;
 
     .features-cards-carousel {
