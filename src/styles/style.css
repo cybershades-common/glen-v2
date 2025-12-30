@@ -3845,6 +3845,18 @@ h1 .hero__title-script {
     height: auto;
   }
 }
+.nurturing-start-section .nurturing-background-image {
+  background-repeat: no-repeat;
+  background-size: center;
+  background-size: cover;
+}
+@media (max-width: 767px) {
+  .nurturing-start-section .nurturing-background-image {
+    padding-top: 60%;
+    background-size: 125%;
+    background-position: left top;
+  }
+}
 .nurturing-start-bg-images {
   position: absolute;
   left: -8.4146%;
@@ -4011,8 +4023,8 @@ h1 .hero__title-script {
   .nurturing-start-content {
     width: 100%;
     transform: none;
-    min-height: auto;
     padding: 3rem 1.5rem;
+    min-height: auto;
   }
 }
 .nurturing-start-text-group {

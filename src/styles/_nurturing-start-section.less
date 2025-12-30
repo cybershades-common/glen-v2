@@ -18,6 +18,20 @@
   @media (max-width: (@breakpoint-md - 1)) {
     height: auto;
   }
+
+  .nurturing-background-image {
+    background-repeat: no-repeat;
+    background-size: center;
+    background-size: cover;
+
+    @media (max-width:767px) {
+      padding-top: 60%;
+      background-size: 125%;
+      background-position: left top;
+    }
+  }
+
+
 }
 
 // Background image layer - positioned behind everything
@@ -186,7 +200,7 @@
     gap: 2.125rem;
     align-items: center;
 
-    @media (max-width:767px){
+    @media (max-width:767px) {
       width: 100%;
       gap: 1.5rem;
     }
@@ -206,11 +220,11 @@
     padding: 0 20px;
   }
 
-  @media (max-width:767px){
+  @media (max-width:767px) {
     width: 100%;
     transform: none;
+    padding: 3rem 1.5rem;
     min-height: auto;
-    padding:  3rem 1.5rem;
   }
 }
 
