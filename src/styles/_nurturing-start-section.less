@@ -16,7 +16,7 @@
   }
 
   @media (max-width: (@breakpoint-md - 1)) {
-    height: 600px;
+    height: auto;
   }
 }
 
@@ -176,14 +176,20 @@
   padding: 6rem 0;
   z-index: 5;
   background: url(../../assets/images/back-img.png) right center no-repeat;
-
   min-height: 100vh;
+
+
 
   .content-box {
     display: inline-flex;
     flex-direction: column;
     gap: 2.125rem;
     align-items: center;
+
+    @media (max-width:767px){
+      width: 100%;
+      gap: 1.5rem;
+    }
   }
 
   @media (max-width: (@breakpoint-lg - 1)) {
@@ -199,6 +205,13 @@
     gap: 24px;
     padding: 0 20px;
   }
+
+  @media (max-width:767px){
+    width: 100%;
+    transform: none;
+    min-height: auto;
+    padding:  3rem 1.5rem;
+  }
 }
 
 // Text group
@@ -213,6 +226,9 @@
   @media (max-width: (@breakpoint-lg - 1)) {
     width: 100%;
   }
+
+
+
 }
 
 .nurturing-start-script {
