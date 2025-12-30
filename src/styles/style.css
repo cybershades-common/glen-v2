@@ -4866,6 +4866,21 @@ h1 .hero__title-script {
   position: relative;
   transform-origin: center center;
   opacity: 1 !important;
+  border-radius: 1.25rem;
+  overflow: hidden;
+}
+.moments-section .moments-card video {
+  max-width: 100%;
+  height: auto;
+}
+.moments-section .moments-card .moments-play-button {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  background: none;
+  border: none;
 }
 .moments-section .moments-card * {
   opacity: 1 !important;

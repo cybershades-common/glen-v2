@@ -3,7 +3,7 @@
 // ==========================================================================
 
 .moments-section {
-  
+
   padding: 80px 0;
   position: relative;
   overflow: hidden;
@@ -84,6 +84,25 @@
     position: relative;
     transform-origin: center center;
     opacity: 1 !important; // Force visibility for all cards
+    border-radius: 1.25rem;
+    overflow: hidden;
+
+    
+
+    video {
+      max-width: 100%;
+      height: auto;
+
+    }
+.moments-play-button{
+  position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    background: none;
+    border: none;
+}
     
     // Ensure all child elements are visible
     * {
@@ -102,7 +121,7 @@
       will-change: transform;
       background: white;
       box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
-      
+
       &:active {
         cursor: grabbing;
       }
@@ -115,14 +134,14 @@
       border-radius: 20px;
       overflow: hidden;
     }
-    
+
     .media {
       position: relative;
       width: 100%;
       height: 100%;
       overflow: hidden;
       border-radius: 20px;
-      
+
       video {
         position: absolute;
         top: 0;
@@ -216,7 +235,7 @@
       // Remove hover animations but keep basic transitions
       transition: none !important;
       transform: none !important;
-      
+
       &:hover {
         // Remove hover transform
         transform: none !important;
@@ -246,13 +265,13 @@
       // Remove any transform animations
       transform: none !important;
       transition: none !important;
-      
+
       .icon-play {
         opacity: 1;
         // Remove opacity transition
         transition: none !important;
         transform: none !important;
-        
+
         &::before {
           content: '';
           width: 0;
@@ -263,14 +282,14 @@
           margin-left: 2px;
         }
       }
-      
+
       .icon-close {
         position: absolute;
         opacity: 0;
         // Remove opacity transition
         transition: none !important;
         transform: none !important;
-        
+
         svg {
           width: 16px;
           height: 16px;
@@ -285,11 +304,11 @@
       .play-button-circle {
         background-color: darken(@primary-coral, 10%);
       }
-      
+
       .icon-play {
         opacity: 0;
       }
-      
+
       .icon-close {
         opacity: 1;
       }
@@ -352,6 +371,7 @@
 
   // Responsive Styles  
   @media (min-width: @breakpoint-lg) {
+
     // Desktop specific overrides to ensure visibility
     .moments-arc-carousel {
       .swiper-slide {
@@ -359,11 +379,11 @@
         visibility: visible !important;
       }
     }
-    
+
     .moments-card {
       opacity: 1 !important;
       visibility: visible !important;
-      
+
       .video-card-overlay,
       .video-card-content,
       .video-card-info,
@@ -426,7 +446,7 @@
 
     .moments-carousel-wrapper {
       margin-top: 2.1875rem; // 35px = 2.1875rem
-     
+
     }
 
     .moments-title-script {
@@ -459,4 +479,3 @@
     }
   }
 }
-
