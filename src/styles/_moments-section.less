@@ -4,14 +4,14 @@
 
 .moments-section {
   
-  padding: 0 0 5rem 0; // Only bottom padding, no top padding (80px = 5rem)
+  padding: 12rem 0 10rem 0; // Only bottom padding, no top padding (80px = 5rem)
   position: relative;
   overflow: hidden;
 
   // Title Section
   .moments-title {
-    margin-bottom: 0;
-    margin-top: 3.64rem; // Match Figma: title starts at 58.24px = 3.64rem
+    margin-bottom: 4rem;
+  
   }
 
   .moments-title-script {
@@ -20,6 +20,7 @@
     line-height: 0.9;
     color: @tertiary-blue-dark;
     margin-bottom: 0;
+    font-weight: normal;
   }
 
   .moments-title-bold {
@@ -37,13 +38,13 @@
   .moments-carousel-wrapper {
     position: relative;
     width: 100%;
-    height: 53.125rem; // 850px = 53.125rem
+    height: auto; 
     display: flex;
     align-items: center;
     justify-content: center;
     perspective: 125rem; // 2000px = 125rem
     margin-bottom: 3.75rem; // 60px = 3.75rem
-    margin-top: 3.9375rem; // Gap from Figma: 63px = 3.9375rem (card top 253.5px - title top 58.24px - title height ~132px)
+    margin-top: 0; 
     padding: 0;
     overflow: visible;
   }
@@ -173,7 +174,7 @@
 
   // CTA Section
   .moments-cta {
-    margin-top: 3.75rem; // 60px = 3.75rem
+    margin-top: 3.5rem; // 56px = 3.5rem
 
     .d-flex {
       gap: 1.625rem; // 26px = 1.625rem (from Figma gap-[26px])
