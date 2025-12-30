@@ -3630,6 +3630,12 @@ h1 .hero__title-script {
   background-size: cover;
   min-height: 100vh;
 }
+.nurturing-start-content .content-box {
+  display: inline-flex;
+  flex-direction: column;
+  gap: 2.125rem;
+  align-items: center;
+}
 @media (max-width: 991px) {
   .nurturing-start-content {
     left: 50%;
