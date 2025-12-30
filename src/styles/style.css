@@ -3626,8 +3626,7 @@ h1 .hero__title-script {
   gap: 34px;
   padding: 6rem 0;
   z-index: 5;
-  background: url(../../assets/images/bg-right.png) right center no-repeat;
-  background-size: cover;
+  background: url(../../assets/images/back-img.png) right center no-repeat;
   min-height: 100vh;
 }
 .nurturing-start-content .content-box {
