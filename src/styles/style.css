@@ -4810,6 +4810,7 @@ h1 .hero__title-script {
   line-height: 0.9;
   color: #1c3666;
   margin-bottom: 0;
+  font-weight: normal;
 }
 .moments-section .moments-title-bold {
   font-family: 'Averta', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
@@ -4824,13 +4825,12 @@ h1 .hero__title-script {
 .moments-section .moments-carousel-wrapper {
   position: relative;
   width: 100%;
-  height: 850px;
+  height: auto;
   display: flex;
   align-items: center;
   justify-content: center;
   perspective: 2000px;
   margin-bottom: 60px;
-  padding: 100px 0;
   overflow: visible;
 }
 .moments-section .moments-arc-carousel {
