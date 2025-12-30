@@ -3,21 +3,9 @@
 // ==========================================================================
 
 .welcome-head-section {
-  padding: 5rem 0;
+  padding: 0;
   position: relative;
-
-  @media (max-width: (@breakpoint-lg - 1)) {
-    padding: 3.75rem 0;
-  }
-
-  @media (max-width: (@breakpoint-md - 1)) {
-    padding: 2.5rem 0;
-  }
-
-  .container-fluid {
-    position: relative;
-    z-index: 1;
-  }
+  width: 100%;
 
   // Left Side Container
   .welcome-head__left {
@@ -25,6 +13,7 @@
     flex-direction: column;
     gap: 0;
     align-items: center;
+    padding-top: 0;
 
     @media (max-width: (@breakpoint-lg - 1)) {
       margin-bottom: 3rem;
@@ -35,6 +24,7 @@
   .masked-image-content-block-wrap {
     width: 100%;
     margin: 0 auto 2.5rem;
+    max-width: 100%;
 
     @media (max-width: (@breakpoint-lg - 1)) {
       margin-bottom: 2rem;
@@ -155,13 +145,15 @@
     flex-direction: column;
     gap: 2.5625rem; // 41px
     align-items: flex-start;
-    padding-left: 2.5rem;
+    padding-left: 4.5rem; // 72px - matches Figma spacing
+    padding-top: 0;
 
     @media (max-width: (@breakpoint-lg - 1)) {
-      padding-left: 0;
+      padding-left: 2.5rem; // 40px
     }
 
     @media (max-width: (@breakpoint-md - 1)) {
+      padding-left: 0;
       gap: 2rem;
     }
   }

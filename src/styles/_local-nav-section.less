@@ -3,11 +3,20 @@
 // ==========================================================================
 
 .local-nav-section {
-  padding: @spacing-3xl @spacing-xl @spacing-2xl; // Extra gap on top
+  padding: 7.5rem 0 5rem; // 120px top, 80px bottom (gap to content)
   position: relative;
 
+  @media (max-width: (@breakpoint-lg - 1)) {
+    padding: 5.625rem 0 3.75rem; // 90px top, 60px bottom
+  }
+
   @media (max-width: (@breakpoint-md - 1)) {
-    padding: @spacing-2xl @spacing-md @spacing-xl;
+    padding: 3.75rem 0 2.5rem; // 60px top, 40px bottom
+  }
+
+  // Ensure buttons are properly centered
+  .local-nav-container {
+    max-width: 100%;
   }
 
   .container-fluid {
@@ -82,8 +91,16 @@
 // ==========================================================================
 
 .local-nav-content-section {
-  padding: 0;
+  padding: 0 0 7.5rem; // 0 top (gap handled by filter section), 120px bottom
   position: relative;
+
+  @media (max-width: (@breakpoint-lg - 1)) {
+    padding: 0 0 5.625rem; // 90px bottom
+  }
+
+  @media (max-width: (@breakpoint-md - 1)) {
+    padding: 0 0 3.75rem; // 60px bottom
+  }
 
   .container-fluid {
     position: relative;
@@ -101,16 +118,13 @@
     width: 100%;
     margin-bottom: 0;
 
-    // Ensure welcome-head-section inside doesn't have extra padding
+    // Remove nested container-fluid padding to align properly
     .welcome-head-section {
-      padding: 5rem 0;
+      padding: 0;
 
-      @media (max-width: (@breakpoint-lg - 1)) {
-        padding: 3.75rem 0;
-      }
-
-      @media (max-width: (@breakpoint-md - 1)) {
-        padding: 2.5rem 0;
+      .container-fluid {
+        padding-left: 0;
+        padding-right: 0;
       }
     }
   }

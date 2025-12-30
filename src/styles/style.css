@@ -2146,13 +2146,21 @@ h1 .hero__title-script {
   }
 }
 .local-nav-section {
-  padding: 5rem 2.5rem 3.75rem;
+  padding: 7.5rem 0 5rem;
   position: relative;
+}
+@media (max-width: 991px) {
+  .local-nav-section {
+    padding: 5.625rem 0 3.75rem;
+  }
 }
 @media (max-width: 767px) {
   .local-nav-section {
-    padding: 3.75rem 1.25rem 2.5rem;
+    padding: 3.75rem 0 2.5rem;
   }
+}
+.local-nav-section .local-nav-container {
+  max-width: 100%;
 }
 .local-nav-section .container-fluid {
   position: relative;
@@ -2210,8 +2218,18 @@ h1 .hero__title-script {
   }
 }
 .local-nav-content-section {
-  padding: 0;
+  padding: 0 0 7.5rem;
   position: relative;
+}
+@media (max-width: 991px) {
+  .local-nav-content-section {
+    padding: 0 0 5.625rem;
+  }
+}
+@media (max-width: 767px) {
+  .local-nav-content-section {
+    padding: 0 0 3.75rem;
+  }
 }
 .local-nav-content-section .container-fluid {
   position: relative;
@@ -2226,41 +2244,23 @@ h1 .hero__title-script {
   margin-bottom: 0;
 }
 .local-nav-content-section .local-nav-content-item .welcome-head-section {
-  padding: 5rem 0;
+  padding: 0;
 }
-@media (max-width: 991px) {
-  .local-nav-content-section .local-nav-content-item .welcome-head-section {
-    padding: 3.75rem 0;
-  }
-}
-@media (max-width: 767px) {
-  .local-nav-content-section .local-nav-content-item .welcome-head-section {
-    padding: 2.5rem 0;
-  }
+.local-nav-content-section .local-nav-content-item .welcome-head-section .container-fluid {
+  padding-left: 0;
+  padding-right: 0;
 }
 .welcome-head-section {
-  padding: 5rem 0;
+  padding: 0;
   position: relative;
-}
-@media (max-width: 991px) {
-  .welcome-head-section {
-    padding: 3.75rem 0;
-  }
-}
-@media (max-width: 767px) {
-  .welcome-head-section {
-    padding: 2.5rem 0;
-  }
-}
-.welcome-head-section .container-fluid {
-  position: relative;
-  z-index: 1;
+  width: 100%;
 }
 .welcome-head-section .welcome-head__left {
   display: flex;
   flex-direction: column;
   gap: 0;
   align-items: center;
+  padding-top: 0;
 }
 @media (max-width: 991px) {
   .welcome-head-section .welcome-head__left {
@@ -2270,6 +2270,7 @@ h1 .hero__title-script {
 .welcome-head-section .masked-image-content-block-wrap {
   width: 100%;
   margin: 0 auto 2.5rem;
+  max-width: 100%;
 }
 @media (max-width: 991px) {
   .welcome-head-section .masked-image-content-block-wrap {
@@ -2384,15 +2385,17 @@ h1 .hero__title-script {
   flex-direction: column;
   gap: 2.5625rem;
   align-items: flex-start;
-  padding-left: 2.5rem;
+  padding-left: 4.5rem;
+  padding-top: 0;
 }
 @media (max-width: 991px) {
   .welcome-head-section .welcome-head__content {
-    padding-left: 0;
+    padding-left: 2.5rem;
   }
 }
 @media (max-width: 767px) {
   .welcome-head-section .welcome-head__content {
+    padding-left: 0;
     gap: 2rem;
   }
 }
@@ -3985,6 +3988,7 @@ h1 .hero__title-script {
 @media (max-width: 767px) {
   .nurturing-start-content .content-box {
     width: 100%;
+    gap: 1.5rem;
   }
 }
 @media (max-width: 991px) {
