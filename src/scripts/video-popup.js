@@ -122,16 +122,12 @@
       }
 
       .glass-video-container {
-        background: rgba(0, 0, 0, 0.3);
-        backdrop-filter: blur(20px);
-        -webkit-backdrop-filter: blur(20px);
-        border: 1px solid rgba(255, 255, 255, 0.1);
-        border-radius: 24px;
-        padding: 8px;
-        box-shadow: 
-          0 25px 80px rgba(0, 0, 0, 0.4),
-          0 10px 40px rgba(0, 0, 0, 0.3),
-          inset 0 1px 0 rgba(255, 255, 255, 0.1);
+        background: transparent;
+        backdrop-filter: none;
+        -webkit-backdrop-filter: none;
+        border: 1px solid black;
+        border-radius: 10px;
+        padding: 0;
         max-width: 90vw;
         max-height: 80vh;
         width: 900px;
@@ -141,17 +137,12 @@
       }
 
       .glass-video-container:hover {
-        box-shadow: 
-          0 30px 100px rgba(0, 0, 0, 0.5),
-          0 15px 50px rgba(0, 0, 0, 0.4),
-          inset 0 1px 0 rgba(255, 255, 255, 0.15);
-        border-color: rgba(255, 255, 255, 0.15);
       }
 
       .glass-video-container video {
         width: 100%;
         height: 100%;
-        border-radius: 16px;
+        border-radius: 10px;
         display: block;
         background: #000;
         object-fit: contain;
@@ -170,12 +161,12 @@
         .glass-video-container {
           width: 95vw;
           max-height: 70vh;
-          border-radius: 16px;
-          padding: 6px;
+          border-radius: 10px;
+          padding: 0;
         }
         
         .glass-video-container video {
-          border-radius: 12px;
+          border-radius: 10px;
         }
         
         .glass-close-btn {
@@ -189,12 +180,12 @@
         .glass-video-container {
           width: 98vw;
           max-height: 60vh;
-          border-radius: 12px;
-          padding: 4px;
+          border-radius: 10px;
+          padding: 0;
         }
         
         .glass-video-container video {
-          border-radius: 8px;
+          border-radius: 10px;
         }
         
         .glass-close-btn {
