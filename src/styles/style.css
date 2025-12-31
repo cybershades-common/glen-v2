@@ -9324,8 +9324,6 @@ button {
   position: relative;
   width: 100%;
   overflow: hidden;
-  padding-top: 13rem;
-  padding-bottom: 9.25rem;
 }
 .wellbeing-section .five-as-section__image-wrapper {
   max-width: 99%;
@@ -9339,31 +9337,12 @@ button {
   }
 }
 .wellbeing-section .wellbeing-bg {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  z-index: 0;
+  background-repeat: no-repeat;
+  padding: 13.5rem 0 7.5rem;
+  background-size: cover;
 }
-.wellbeing-section .wellbeing-bg .wellbeing-gradient {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(to bottom, #fff1b0 0%, #ffc1aa 100%);
-}
-.wellbeing-section .wellbeing-bg .wellbeing-texture {
-  position: absolute;
-  inset: 0;
-  mix-blend-mode: multiply;
-  opacity: 0.3;
-  overflow: hidden;
-}
-.wellbeing-section .wellbeing-bg .wellbeing-texture img {
-  position: absolute;
-  width: 103.6%;
-  height: 110.51%;
-  left: -1.8%;
-  top: 41.41%;
-  max-width: none;
-  object-fit: cover;
+.wellbeing-section .wellbeing-bg.dark-theme * {
+  color: var(--color-white);
 }
 .wellbeing-section .container-fluid {
   position: relative;
@@ -9433,7 +9412,6 @@ button {
   font-weight: 400;
   font-size: 3.75rem;
   line-height: 1;
-  color: #1c3666;
   margin: 0;
 }
 @media (max-width: 991px) {
@@ -9448,7 +9426,6 @@ button {
   line-height: 1;
   letter-spacing: -1.2px;
   text-transform: uppercase;
-  color: #1c3666;
   margin: 0;
 }
 @media (max-width: 991px) {
@@ -9497,7 +9474,6 @@ button {
   line-height: 1.1;
   letter-spacing: 2px;
   text-transform: uppercase;
-  color: #1c3666;
   margin: 0;
 }
 @media (max-width: 991px) {
@@ -9518,7 +9494,6 @@ button {
   font-weight: 400;
   font-size: 0.9375rem;
   line-height: 1.4;
-  color: #1c3666;
   margin: 0;
   width: min-content;
   min-width: 100%;
