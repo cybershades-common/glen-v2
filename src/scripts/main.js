@@ -1074,34 +1074,133 @@
   // ==========================================================================
 
   function initFAQAccordion() {
-    const faqQuestions = document.querySelectorAll('.faq-question');
+    const faqItems = document.querySelectorAll('.faq-item');
     
-    if (!faqQuestions.length) return;
+    if (!faqItems.length) return;
 
-    faqQuestions.forEach(function(question) {
-      question.addEventListener('click', function() {
-        const faqItem = this.closest('.faq-item');
-        const answer = faqItem.querySelector('.faq-answer');
+    let faqToggles = [];
+    let arrowAnimations = [];
+
+    // Create GSAP animations for each FAQ item
+    faqItems.forEach(function(item, index) {
+      const question = item.querySelector('.faq-question');
+      const answer = item.querySelector('.faq-answer');
+      const arrow = item.querySelector('.faq-arrow');
+      
+      // Initialize answer state - completely hidden when closed
+      answer.style.overflow = 'hidden';
+      
+      // Create inner wrapper for content to handle padding properly
+      const innerContent = answer.querySelector('p');
+      if (innerContent && !answer.querySelector('.faq-inner-wrapper')) {
+        const wrapper = document.createElement('div');
+        wrapper.className = 'faq-inner-wrapper';
+        wrapper.style.padding = '0 25px 20px 25px';
+        
+        // Move content into wrapper
+        while (answer.firstChild) {
+          wrapper.appendChild(answer.firstChild);
+        }
+        answer.appendChild(wrapper);
+        
+        // Remove padding from answer
+        answer.style.padding = '0';
+      }
+      
+      // Set up GSAP content animation
+      gsap.set(answer, { height: "auto" });
+      
+      let contentAnimation = gsap.timeline()
+        .from(answer, { 
+          height: 0, 
+          duration: 0.5, 
+          ease: "power2.inOut",
+          onReverseComplete: function() {
+            // Ensure completely hidden when animation completes
+            gsap.set(answer, { height: 0 });
+          }
+        })
+        .reverse();
+
+      // Store animation functions
+      faqToggles.push(function(clickedQuestion) {
+        if (clickedQuestion === question) {
+          contentAnimation.reversed(!contentAnimation.reversed());
+        } else {
+          contentAnimation.reverse();
+        }
+      });
+
+      // Store arrow animation function with proper rotation direction
+      arrowAnimations.push(function(clickedQuestion, isOpening) {
+        if (clickedQuestion === question) {
+          if (isOpening) {
+            // Opening: rotate clockwise to 180°
+            gsap.to(arrow, {
+              rotation: 180,
+              duration: 0.4,
+              ease: "power2.inOut"
+            });
+          } else {
+            // Closing: rotate counter-clockwise back to 0°
+            gsap.to(arrow, {
+              rotation: 0,
+              duration: 0.4,
+              ease: "power2.inOut"
+            });
+          }
+        } else {
+          // Close other arrows
+          gsap.to(arrow, {
+            rotation: 0,
+            duration: 0.4,
+            ease: "power2.inOut"
+          });
+        }
+      });
+
+      // Set initial state (first item open)
+      if (index === 0) {
+        question.setAttribute('aria-expanded', 'true');
+        contentAnimation.play();
+        gsap.set(arrow, { rotation: 180 });
+      } else {
+        question.setAttribute('aria-expanded', 'false');
+        gsap.set(answer, { height: 0 });
+        gsap.set(arrow, { rotation: 0 });
+      }
+    });
+
+    // Add click event listeners
+    faqItems.forEach(function(item) {
+      const question = item.querySelector('.faq-question');
+      
+      question.addEventListener('click', function(e) {
+        e.preventDefault();
+        
         const isExpanded = this.getAttribute('aria-expanded') === 'true';
-
+        
         // Close all other FAQ items
-        faqQuestions.forEach(function(otherQuestion) {
+        faqItems.forEach(function(otherItem) {
+          const otherQuestion = otherItem.querySelector('.faq-question');
           if (otherQuestion !== question) {
-            const otherItem = otherQuestion.closest('.faq-item');
-            const otherAnswer = otherItem.querySelector('.faq-answer');
             otherQuestion.setAttribute('aria-expanded', 'false');
-            otherAnswer.style.display = 'none';
           }
         });
-
+        
         // Toggle current item
-        if (isExpanded) {
-          this.setAttribute('aria-expanded', 'false');
-          answer.style.display = 'none';
-        } else {
-          this.setAttribute('aria-expanded', 'true');
-          answer.style.display = 'block';
-        }
+        const willBeOpen = !isExpanded;
+        this.setAttribute('aria-expanded', willBeOpen ? 'true' : 'false');
+        
+        // Execute all toggle functions
+        faqToggles.forEach(function(toggleFn) {
+          toggleFn(question);
+        });
+        
+        // Execute arrow animations with direction
+        arrowAnimations.forEach(function(arrowFn) {
+          arrowFn(question, willBeOpen);
+        });
       });
     });
   }
