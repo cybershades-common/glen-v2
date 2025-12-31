@@ -3283,7 +3283,7 @@ h1 .hero__title-script {
   }
 }
 .staff-section {
-  padding: 6.5rem 0;
+  padding: 6.5rem 0 12rem;
 }
 .staff-section .title {
   display: flex;
@@ -5433,7 +5433,7 @@ h1 .hero__title-script {
 }
 .faq-section {
   position: relative;
-  padding: 3rem 0;
+  padding: 3rem 0 10rem;
   overflow: hidden;
 }
 @media (max-width: 991px) {
