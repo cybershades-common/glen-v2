@@ -3847,12 +3847,23 @@ h1 .hero__title-script {
   background-repeat: no-repeat;
   background-size: center;
   background-size: cover;
+  position: relative;
 }
 @media (max-width: 767px) {
   .nurturing-start-section .nurturing-background-image {
     padding-top: 60%;
     background-size: 125%;
     background-position: left top;
+  }
+  .nurturing-start-section .nurturing-background-image::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(to bottom, rgba(255, 233, 175, 0) 30%, rgba(255, 233, 176, 0.96) 36%, #ffe8af 35%, #fbb28e 100%);
+    z-index: 1;
   }
 }
 .nurturing-start-bg-images {
@@ -3986,14 +3997,32 @@ h1 .hero__title-script {
   gap: 34px;
   padding: 6rem 0;
   z-index: 5;
-  background: url(../../assets/images/back-img.png) right center no-repeat;
   min-height: 100vh;
+}
+.nurturing-start-content:before {
+  display: block;
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+  z-index: 0;
+  background: url(../../assets/images/back-img.png) right center no-repeat;
+}
+@media (max-width: 767px) {
+  .nurturing-start-content:before {
+    top: 38%;
+  }
 }
 .nurturing-start-content .content-box {
   display: inline-flex;
   flex-direction: column;
   gap: 2.125rem;
   align-items: center;
+  position: relative;
+  z-index: 1;
 }
 @media (max-width: 767px) {
   .nurturing-start-content .content-box {
@@ -4021,7 +4050,7 @@ h1 .hero__title-script {
   .nurturing-start-content {
     width: 100%;
     transform: none;
-    padding: 3rem 1.5rem;
+    padding: 0rem 1.5rem 2rem;
     min-height: auto;
   }
 }
