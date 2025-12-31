@@ -2303,68 +2303,26 @@
 
         // === EASY CONTROLS (Adjust these values) ===
         const ANIMATION_SETTINGS = {
-          startPosition: "top 50%",     // When animation starts
-          endPosition: "bottom 30%",    // When animation ends
-          curveSpeed: 2.8,             // Speed multiplier for curves (increased for shorter scroll)
-          straightSpeed: 1.2,          // Speed multiplier for straight sections (increased)
-          lastSectionSpeed: 4.94       // Speed multiplier for last 2 sections (3.8 + 30% = 4.94)
+          startPosition: "top 80%",     // When animation starts (adjust this)
+          endPosition: "bottom 20%",    // When animation ends (adjust this)
+          animationSpeed: 1,           // Overall speed (1 = normal, 2 = faster, 0.5 = slower)
+          easing: "none"               // Animation easing (none, power2.out, etc.)
         };
 
         gsap.to(maskPath, {
           strokeDashoffset: 0,
-          ease: "none",
+          ease: ANIMATION_SETTINGS.easing,
           scrollTrigger: {
             trigger: ".what-makes-glenaeon-special-section",
             start: ANIMATION_SETTINGS.startPosition,
             end: ANIMATION_SETTINGS.endPosition,
-            scrub: 1,
+            scrub: ANIMATION_SETTINGS.animationSpeed,
             onUpdate: function (self) {
+              // Simple linear progress based on scroll
               const progress = self.progress;
-              let adjustedProgress = 0;
-
-              // Calculate cumulative progress section by section
-              if (progress <= 0.25) {
-                // Initial curves (0-25%)
-                adjustedProgress = progress * ANIMATION_SETTINGS.curveSpeed;
-              } else if (progress <= 0.4) {
-                // First straight (25-40%)  
-                const section1 = 0.25 * ANIMATION_SETTINGS.curveSpeed;
-                const section2 = (progress - 0.25) * ANIMATION_SETTINGS.straightSpeed;
-                adjustedProgress = section1 + section2;
-              } else if (progress <= 0.7) {
-                // Middle curves (40-70%)
-                const section1 = 0.25 * ANIMATION_SETTINGS.curveSpeed;
-                const section2 = 0.15 * ANIMATION_SETTINGS.straightSpeed;
-                const section3 = (progress - 0.4) * ANIMATION_SETTINGS.curveSpeed;
-                adjustedProgress = section1 + section2 + section3;
-              } else if (progress <= 0.85) {
-                // Second straight (70-85%) - FASTER
-                const section1 = 0.25 * ANIMATION_SETTINGS.curveSpeed;
-                const section2 = 0.15 * ANIMATION_SETTINGS.straightSpeed;
-                const section3 = 0.3 * ANIMATION_SETTINGS.curveSpeed;
-                const section4 = (progress - 0.7) * ANIMATION_SETTINGS.lastSectionSpeed;
-                adjustedProgress = section1 + section2 + section3 + section4;
-              } else {
-                // Final curves (85-100%) - FASTER
-                const section1 = 0.25 * ANIMATION_SETTINGS.curveSpeed;
-                const section2 = 0.15 * ANIMATION_SETTINGS.straightSpeed;
-                const section3 = 0.3 * ANIMATION_SETTINGS.curveSpeed;
-                const section4 = 0.15 * ANIMATION_SETTINGS.lastSectionSpeed;
-                const section5 = (progress - 0.85) * ANIMATION_SETTINGS.lastSectionSpeed;
-                adjustedProgress = section1 + section2 + section3 + section4 + section5;
-              }
-
-              // Calculate total possible progress for normalization
-              const totalProgress = 0.25 * ANIMATION_SETTINGS.curveSpeed +
-                0.15 * ANIMATION_SETTINGS.straightSpeed +
-                0.3 * ANIMATION_SETTINGS.curveSpeed +
-                0.3 * ANIMATION_SETTINGS.lastSectionSpeed;
-
-              // Normalize to 0-1 and apply
-              const finalProgress = Math.min(1, adjustedProgress / totalProgress);
-
+              
               gsap.set(maskPath, {
-                strokeDashoffset: pathLength * (1 - finalProgress)
+                strokeDashoffset: pathLength * (1 - progress)
               });
             }
           }
