@@ -1095,7 +1095,7 @@
       if (innerContent && !answer.querySelector('.faq-inner-wrapper')) {
         const wrapper = document.createElement('div');
         wrapper.className = 'faq-inner-wrapper';
-        wrapper.style.padding = '0 25px 20px 25px';
+        wrapper.style.padding = '0 1.5625rem 1.25rem 1.5625rem';
         
         // Move content into wrapper
         while (answer.firstChild) {
