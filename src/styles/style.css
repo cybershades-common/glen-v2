@@ -2330,7 +2330,6 @@ h1 .hero__title-script {
   line-height: 0.9;
   color: #1c3666;
   margin: 0;
-  white-space: pre-wrap;
   min-width: 100%;
 }
 @media (max-width: 767px) {
@@ -2407,7 +2406,6 @@ h1 .hero__title-script {
   letter-spacing: -0.028125rem;
   color: #1c3666;
   margin: 0;
-  white-space: pre-wrap;
   min-width: 100%;
 }
 @media (max-width: 991px) {
@@ -4810,6 +4808,7 @@ h1 .hero__title-script {
   line-height: 0.9;
   color: #1c3666;
   margin-bottom: 0;
+  font-weight: normal;
 }
 .moments-section .moments-title-bold {
   font-family: 'Averta', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
@@ -4824,13 +4823,12 @@ h1 .hero__title-script {
 .moments-section .moments-carousel-wrapper {
   position: relative;
   width: 100%;
-  height: 850px;
+  height: auto;
   display: flex;
   align-items: center;
   justify-content: center;
   perspective: 2000px;
   margin-bottom: 60px;
-  padding: 100px 0;
   overflow: visible;
 }
 .moments-section .moments-arc-carousel {
@@ -4866,6 +4864,21 @@ h1 .hero__title-script {
   position: relative;
   transform-origin: center center;
   opacity: 1 !important;
+  border-radius: 1.25rem;
+  overflow: hidden;
+}
+.moments-section .moments-card video {
+  max-width: 100%;
+  height: auto;
+}
+.moments-section .moments-card .moments-play-button {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  background: none;
+  border: none;
 }
 .moments-section .moments-card * {
   opacity: 1 !important;
@@ -5268,8 +5281,8 @@ h1 .hero__title-script {
 .what-makes-glenaeon-special-content {
   display: flex;
   flex-direction: column;
-  gap: 20px;
-  padding: 0 2.125rem;
+  gap: 1.25rem;
+  padding: 0 2.5rem;
 }
 @media (max-width: 991px) {
   .what-makes-glenaeon-special-content {
@@ -9311,8 +9324,6 @@ button {
   position: relative;
   width: 100%;
   overflow: hidden;
-  padding-top: 13rem;
-  padding-bottom: 9.25rem;
 }
 .wellbeing-section .five-as-section__image-wrapper {
   max-width: 99%;
@@ -9326,31 +9337,12 @@ button {
   }
 }
 .wellbeing-section .wellbeing-bg {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  z-index: 0;
+  background-repeat: no-repeat;
+  padding: 13.5rem 0 7.5rem;
+  background-size: cover;
 }
-.wellbeing-section .wellbeing-bg .wellbeing-gradient {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(to bottom, #fff1b0 0%, #ffc1aa 100%);
-}
-.wellbeing-section .wellbeing-bg .wellbeing-texture {
-  position: absolute;
-  inset: 0;
-  mix-blend-mode: multiply;
-  opacity: 0.3;
-  overflow: hidden;
-}
-.wellbeing-section .wellbeing-bg .wellbeing-texture img {
-  position: absolute;
-  width: 103.6%;
-  height: 110.51%;
-  left: -1.8%;
-  top: 41.41%;
-  max-width: none;
-  object-fit: cover;
+.wellbeing-section .wellbeing-bg.dark-theme * {
+  color: var(--color-white);
 }
 .wellbeing-section .container-fluid {
   position: relative;
@@ -9420,7 +9412,6 @@ button {
   font-weight: 400;
   font-size: 3.75rem;
   line-height: 1;
-  color: #1c3666;
   margin: 0;
 }
 @media (max-width: 991px) {
@@ -9435,7 +9426,6 @@ button {
   line-height: 1;
   letter-spacing: -1.2px;
   text-transform: uppercase;
-  color: #1c3666;
   margin: 0;
 }
 @media (max-width: 991px) {
@@ -9484,7 +9474,6 @@ button {
   line-height: 1.1;
   letter-spacing: 2px;
   text-transform: uppercase;
-  color: #1c3666;
   margin: 0;
 }
 @media (max-width: 991px) {
@@ -9505,7 +9494,6 @@ button {
   font-weight: 400;
   font-size: 0.9375rem;
   line-height: 1.4;
-  color: #1c3666;
   margin: 0;
   width: min-content;
   min-width: 100%;
@@ -10795,5 +10783,93 @@ button {
 }
 .landing-page .what-makes-glenaeon-special-section .masked-image-content-block {
   padding: 0;
-  margin: 0 auto;
+  margin: -4rem auto;
+}
+.fullwidth-media-section {
+  position: relative;
+}
+.fullwidth-media-section .fullwidth-media-content .overlay {
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.2);
+  z-index: 2;
+  padding: 5rem;
+  display: flex;
+  align-items: flex-end;
+  padding: 5rem 4.5rem;
+}
+.fullwidth-media-section .fullwidth-media-content .play-button {
+  display: flex;
+  width: 11.61563rem;
+  height: 11.69806rem;
+  border: none;
+  position: relative;
+  background: none;
+}
+.fullwidth-media-section .fullwidth-media-content .play-button:focus-visible {
+  outline: 2px solid #ffffff;
+  outline-offset: 4px;
+  border-radius: 50%;
+}
+@media (max-width: 767px) {
+  .fullwidth-media-section .fullwidth-media-content .play-button {
+    display: none;
+  }
+}
+.fullwidth-media-section .fullwidth-media-content .play-button__text-ring {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+  animation: rotateText 25s linear infinite;
+  pointer-events: none;
+}
+.fullwidth-media-section .fullwidth-media-content .play-button__text-ring text {
+  text-transform: uppercase;
+  font-weight: 500;
+}
+@keyframes rotateText {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+.fullwidth-media-section .fullwidth-media-content .play-button__circle {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  pointer-events: none;
+}
+.fullwidth-media-section .fullwidth-media-content .play-button__circle--outer {
+  width: 100%;
+  height: 100%;
+}
+.fullwidth-media-section .fullwidth-media-content .play-button__circle--inner {
+  top: 1.5%;
+  left: 1.5%;
+  width: 97%;
+  height: 97%;
+}
+.fullwidth-media-section .fullwidth-media-content .play-button__icon {
+  position: absolute;
+  top: 50%;
+  left: 54%;
+  transform: translate(-50%, -50%) rotate(90deg);
+  width: 26%;
+  height: auto;
+  aspect-ratio: 49 / 42;
+  z-index: 3;
+  transition: transform 250ms ease;
+  pointer-events: none;
+}
+.fullwidth-media-section .fullwidth-media-content .play-button:hover .hero .play-button__icon {
+  transform: translate(-50%, -50%) rotate(90deg) scale(1.15);
 }

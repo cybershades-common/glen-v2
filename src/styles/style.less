@@ -1011,8 +1011,7 @@ button {
   position: relative;
   width: 100%;
   overflow: hidden;
-  padding-top: 13rem;
-  padding-bottom: 9.25rem;
+ 
 
 
   .five-as-section__image-wrapper {
@@ -1028,34 +1027,17 @@ button {
 
   // Background gradient and texture
   .wellbeing-bg {
-    position: absolute;
-    inset: 0;
-    pointer-events: none;
-    z-index: 0;
+    background-repeat: no-repeat;
+    padding: 13.5rem 0 7.5rem;
+    background-size: cover;
 
-    .wellbeing-gradient {
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(to bottom, #fff1b0 0%, #ffc1aa 100%);
-    }
-
-    .wellbeing-texture {
-      position: absolute;
-      inset: 0;
-      mix-blend-mode: multiply;
-      opacity: 0.3;
-      overflow: hidden;
-
-      img {
-        position: absolute;
-        width: 103.6%;
-        height: 110.51%;
-        left: -1.8%;
-        top: 41.41%;
-        max-width: none;
-        object-fit: cover;
+    &.dark-theme {
+      * {
+        color: var(--color-white);
       }
     }
+
+
   }
 
   // Main content container
@@ -1135,7 +1117,7 @@ button {
       font-weight: @font-weight-regular;
       font-size: @font-size-h1; // 60px
       line-height: @line-height-none; // 1
-      color: @tertiary-blue-dark; // #1c3666
+
       margin: 0;
 
 
@@ -1151,7 +1133,6 @@ button {
       line-height: @line-height-none; // 1
       letter-spacing: -1.2px;
       text-transform: uppercase;
-      color: @tertiary-blue-dark; // #1c3666
       margin: 0;
 
 
@@ -1206,7 +1187,6 @@ button {
       line-height: 1.1;
       letter-spacing: 2px;
       text-transform: uppercase;
-      color: @tertiary-blue-dark; // #1c3666
       margin: 0;
 
 
@@ -1229,8 +1209,7 @@ button {
       font-family: @font-primary;
       font-weight: @font-weight-regular;
       font-size: 0.9375rem;
-      line-height: @line-height-normal; // 1.4
-      color: @tertiary-blue-dark; // #1c3666
+      line-height: @line-height-normal; // 1.4     
       margin: 0;
 
       width: min-content;
@@ -2744,7 +2723,115 @@ button {
 
     .masked-image-content-block {
       padding: 0;
-      margin: 0 auto;
+      margin: -4rem auto;
     }
   }
+}
+
+
+.fullwidth-media-section {
+  position: relative;
+
+  .fullwidth-media-content {
+    .overlay {
+      position: absolute;
+      left: 0;
+      top: 0;
+      height: 100%;
+      width: 100%;
+      background: rgba(0, 0, 0, 0.2);
+      z-index: 2;
+      padding: 5rem;
+      display: flex;
+      align-items: flex-end;
+      padding: 5rem 4.5rem;
+
+    }
+
+
+    .play-button {
+      display: flex;
+      width: 11.61563rem;
+      height: 11.69806rem;
+      border: none;
+      position: relative;
+      background: none;
+    }
+
+    .play-button:focus-visible {
+      outline: 2px solid #ffffff;
+      outline-offset: 4px;
+      border-radius: 50%;
+    }
+
+    @media (max-width: 767px) {
+      .play-button {
+        display: none;
+      }
+    }
+
+    .play-button__text-ring {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 2;
+      animation: rotateText 25s linear infinite;
+      pointer-events: none;
+    }
+
+    .play-button__text-ring text {
+      text-transform: uppercase;
+      font-weight: 500;
+    }
+
+    @keyframes rotateText {
+      from {
+        transform: rotate(0deg);
+      }
+
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    .play-button__circle {
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    .play-button__circle--outer {
+      width: 100%;
+      height: 100%;
+    }
+
+    .play-button__circle--inner {
+      top: 1.5%;
+      left: 1.5%;
+      width: 97%;
+      height: 97%;
+    }
+
+    .play-button__icon {
+      position: absolute;
+      top: 50%;
+      left: 54%;
+      transform: translate(-50%, -50%) rotate(90deg);
+      width: 26%;
+      height: auto;
+      aspect-ratio: 49 / 42;
+      z-index: 3;
+      transition: transform 250ms ease;
+      pointer-events: none;
+    }
+
+    .play-button:hover .hero .play-button__icon {
+      transform: translate(-50%, -50%) rotate(90deg) scale(1.15);
+    }
+  }
+
 }
