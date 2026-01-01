@@ -9762,40 +9762,43 @@ button {
 }
 .full-width-testimonial-audio .testimonial-audio-controls .row {
   align-items: center;
+  justify-content: space-between;
   margin: 0;
+  display: flex;
+  width: 100%;
+}
+.full-width-testimonial-audio .testimonial-audio-pagination-wrapper {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  pointer-events: none;
 }
 .full-width-testimonial-audio .testimonial-audio-pagination {
   display: flex;
-  gap: 10px;
+  gap: 0.625rem;
   align-items: center;
+  position: relative;
+  justify-content: flex-start;
+  pointer-events: all;
 }
 .full-width-testimonial-audio .testimonial-audio-pagination-dot {
-  width: 10px;
-  height: 10px;
+  width: 0.625rem;
+  height: 0.625rem;
   border-radius: 50%;
   background-color: #ffffff;
-  border: 2px solid #ffffff;
+  border: 0.125rem solid #ffffff;
   cursor: pointer;
-  transition: all 250ms ease;
+  transition: all 0.3s ease;
   flex-shrink: 0;
   position: relative;
-}
-.full-width-testimonial-audio .testimonial-audio-pagination-dot::before {
-  content: '';
-  position: absolute;
-  inset: -0.05% -0.2% 0.24% 0.15%;
-  background: url('https://www.figma.com/api/mcp/asset/172c5e71-4a39-4891-ba6a-cfce38d9d31c') no-repeat center;
-  background-size: contain;
-  opacity: 0;
-  transition: opacity 250ms ease;
+  opacity: 1;
 }
 .full-width-testimonial-audio .testimonial-audio-pagination-dot--active {
-  width: 40px;
-  height: 10px;
-  border-radius: 1000px;
-}
-.full-width-testimonial-audio .testimonial-audio-pagination-dot--active::before {
-  opacity: 0;
+  width: 2.5rem;
+  height: 0.625rem;
+  border-radius: 62.5rem;
+  background-color: #ffffff;
+  border: 0.125rem solid #ffffff;
 }
 .full-width-testimonial-audio .testimonial-audio-pagination-dot:hover {
   opacity: 0.8;

@@ -1491,46 +1491,48 @@ button {
 
     .row {
       align-items: center;
+      justify-content: space-between;
       margin: 0;
+      display: flex;
+      width: 100%;
     }
   }
 
   // Pagination
+  .testimonial-audio-pagination-wrapper {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    pointer-events: none;
+  }
+
   .testimonial-audio-pagination {
     display: flex;
-    gap: 10px;
+    gap: 0.625rem; // 10px
     align-items: center;
+    position: relative;
+    justify-content: flex-start;
+    pointer-events: all;
   }
 
   .testimonial-audio-pagination-dot {
-    width: 10px;
-    height: 10px;
+    width: 0.625rem; // 10px
+    height: 0.625rem; // 10px
     border-radius: 50%;
     background-color: @color-white;
-    border: 2px solid @color-white;
+    border: 0.125rem solid @color-white; // 2px
     cursor: pointer;
-    transition: all @transition-base;
+    transition: all 0.3s ease;
     flex-shrink: 0;
     position: relative;
-
-    &::before {
-      content: '';
-      position: absolute;
-      inset: -0.05% -0.2% 0.24% 0.15%;
-      background: url('https://www.figma.com/api/mcp/asset/172c5e71-4a39-4891-ba6a-cfce38d9d31c') no-repeat center;
-      background-size: contain;
-      opacity: 0;
-      transition: opacity @transition-base;
-    }
+    opacity: 1;
 
     &--active {
-      width: 40px;
-      height: 10px;
-      border-radius: 1000px;
-
-      &::before {
-        opacity: 0;
-      }
+      width: 2.5rem; // 40px
+      height: 0.625rem; // 10px
+      border-radius: 62.5rem; // 1000px
+      background-color: @color-white;
+      border: 0.125rem solid @color-white; // 2px
     }
 
     &:hover {

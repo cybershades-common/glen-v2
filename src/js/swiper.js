@@ -300,10 +300,12 @@ document.addEventListener('DOMContentLoaded', function() {
             prevEl: '.testimonial-audio-navigation .arrow-navigation__arrow--left',
         },
         
-        // Pagination (optional - can be added if needed)
+        // Pagination
         pagination: {
-            el: '.swiper-pagination',
+            el: '.testimonial-audio-pagination',
             clickable: true,
+            bulletClass: 'testimonial-audio-pagination-dot',
+            bulletActiveClass: 'testimonial-audio-pagination-dot--active',
         },
         
         // Autoplay (optional - can be enabled if needed)
