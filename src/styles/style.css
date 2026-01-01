@@ -2045,6 +2045,7 @@ h1 .hero__title-script {
     bottom: 2rem;
     left: 0;
     right: 0;
+    transform: translateZ(0);
   }
 }
 .hero__video-btn {
