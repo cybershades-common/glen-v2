@@ -8454,7 +8454,7 @@ h1 .hero__title-script {
     padding-top: 6rem;
   }
   body .mega-menu .mobile-only {
-    display: flex;
+    display: block;
   }
   body .header-quick-links {
     display: none;
