@@ -514,6 +514,12 @@ h1 {
     gap: @spacing-sm;   
     width: 100%;
     z-index: 3;    
+    position: absolute;
+    max-width: 94%;
+    margin:auto;
+    bottom: 2rem;
+    left: 0;
+    right: 0;
   }
 }
 
@@ -635,15 +641,18 @@ h1 {
     }
 
     .hero__slider .hero__slide-overlay {
+       padding-bottom: 8.5rem;
       .container-fluid {
         display: flex;
         height: 100%;  
+       
+        
       }
     }
   }
 
   .internal-page .hero .hero__slider .hero__slide-overlay {
-    padding-bottom: 2rem;
+    padding-bottom: 1rem;
 
     .container-fluid {
       height: 100%;
@@ -653,6 +662,7 @@ h1 {
       }
     }
   }
+  
 }
 
 

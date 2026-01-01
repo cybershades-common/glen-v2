@@ -2039,6 +2039,12 @@ h1 .hero__title-script {
     gap: 0.625rem;
     width: 100%;
     z-index: 3;
+    position: absolute;
+    max-width: 94%;
+    margin: auto;
+    bottom: 2rem;
+    left: 0;
+    right: 0;
   }
 }
 .hero__video-btn {
@@ -2134,12 +2140,15 @@ h1 .hero__title-script {
   .hero .arrow-navigation {
     display: none;
   }
+  .hero .hero__slider .hero__slide-overlay {
+    padding-bottom: 8.5rem;
+  }
   .hero .hero__slider .hero__slide-overlay .container-fluid {
     display: flex;
     height: 100%;
   }
   .internal-page .hero .hero__slider .hero__slide-overlay {
-    padding-bottom: 2rem;
+    padding-bottom: 1rem;
   }
   .internal-page .hero .hero__slider .hero__slide-overlay .container-fluid {
     height: 100%;
@@ -8352,7 +8361,7 @@ h1 .hero__title-script {
   display: none;
 }
 .mobile-only .hero__mobile-actions {
-  position: relative;
+  position: absolute;
   z-index: 11111;
 }
 @media (min-width: 992px) and (max-width: 1400px) {
@@ -8690,7 +8699,7 @@ button {
 }
 .masked-image-content-block {
   position: relative;
-  padding: 7.8125rem 0;
+  padding: 1rem 0 7.8125rem 0;
   overflow: hidden;
 }
 .masked-image-content-block .container-fluid {
@@ -9423,6 +9432,18 @@ button {
   align-items: flex-start;
   margin-bottom: 5.25rem;
 }
+.wellbeing-section .wellbeing-title-group p.lead {
+  color: #1c3666;
+  /* Desktop/Lead */
+  font-family: var(--font-family-averta, Averta);
+  font-size: var(--font-size-lead, 45px);
+  font-style: normal;
+  font-weight: 400;
+  line-height: 120%;
+  /* 54px */
+  letter-spacing: -0.45px;
+  margin-bottom: 2rem;
+}
 @media (max-width: 991px) {
   .wellbeing-section .wellbeing-title-group {
     margin-bottom: 3rem;
@@ -9526,6 +9547,27 @@ button {
   .wellbeing-section .wellbeing-text-block .wellbeing-text-body {
     font-size: clamp(0.875rem, 2vw, 0.9375rem);
   }
+}
+.wellbeing-section.with-lead-para {
+  padding: 10rem 0;
+}
+.wellbeing-section.with-lead-para .wellbeing-title-group {
+  margin-bottom: 2.5rem;
+}
+.wellbeing-section.with-lead-para .wellbeing-content-row {
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem 0;
+}
+.wellbeing-section.with-lead-para .wellbeing-text-blocks-row {
+  gap: 2.125rem;
+}
+.wellbeing-section.with-lead-para .wellbeing-text-blocks-row .wellbeing-text-block.wellbeing-text-block {
+  flex: 51% 0 0;
+}
+.wellbeing-section.with-lead-para .five-as-section__image-wrapper {
+  max-width: 92.75%;
+  margin: auto;
 }
 .full-width-testimonial-audio {
   position: relative;
@@ -10896,4 +10938,22 @@ button {
 }
 .fullwidth-media-section .fullwidth-media-content .play-button:hover .hero .play-button__icon {
   transform: translate(-50%, -50%) rotate(90deg) scale(1.15);
+}
+.cta-blocks-section {
+  padding: 10rem 0;
+}
+.cta-blocks-section .cta-blocks .row {
+  margin: 0 -0.625rem;
+}
+.cta-blocks-section .cta-blocks .row > div {
+  padding: 0 0.625rem;
+}
+.cta-blocks-section .cta-blocks .row > div .image-frame {
+  border-radius: 1.25rem;
+  overflow: hidden;
+  border: 0.5rem solid #fff;
+}
+.cta-blocks-section .cta-blocks .row > div .image-frame img {
+  aspect-ratio: 600/400;
+  object-fit: cover;
 }

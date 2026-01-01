@@ -116,7 +116,7 @@
 
 
 
-<body>
+<body class="homepage">
 
   <style>
     body.loaded:not(.mega-menu-open) {
@@ -514,8 +514,7 @@
                         </svg>
                       </span>
                     </li>
-                    <li class="mega-menu__subnav-item"
-                      data-next-layer="about">
+                    <li class="mega-menu__subnav-item" data-next-layer="about">
                       <a href="internal-page.html" onclick="return false;">internal page 1</a>
                       <span class="mega-menu__subnav-icon">
                         <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -958,7 +957,8 @@
                                   Glenaeon is a co-educational Preschool to Year 12 school across three leafy campuses,
                                   where
                                   children grow
-                                  through a meaningful, creative and nature-connected education that nurtures purpose and
+                                  through a meaningful, creative and nature-connected education that nurtures purpose
+                                  and
                                   possibility.
                                 </p>
                               </div>
@@ -1044,42 +1044,34 @@
               </div>
             </div>
 
-          <!-- Fixed Arrow Navigation -->
-          <div class="arrow-navigation">
-            <!-- Left Arrow -->
-            <button class="arrow-navigation__arrow arrow-navigation__arrow--left" type="button"
-              aria-label="Previous">
-              <div class="arrow-navigation__main">
-                <img src="assets/images/arrow-left-main.svg" alt=""
-                  class="arrow-navigation__main-img">
-              </div>
-              <div class="arrow-navigation__line">
-                <img src="assets/images/arrow-left-line.svg" alt=""
-                  class="arrow-navigation__line-img">
-              </div>
-              <div class="arrow-navigation__feather">
-                <img src="assets/images/arrow-left-feather.svg" alt=""
-                  class="arrow-navigation__feather-img">
-              </div>
-            </button>
+            <!-- Fixed Arrow Navigation -->
+            <div class="arrow-navigation">
+              <!-- Left Arrow -->
+              <button class="arrow-navigation__arrow arrow-navigation__arrow--left" type="button" aria-label="Previous">
+                <div class="arrow-navigation__main">
+                  <img src="assets/images/arrow-left-main.svg" alt="" class="arrow-navigation__main-img">
+                </div>
+                <div class="arrow-navigation__line">
+                  <img src="assets/images/arrow-left-line.svg" alt="" class="arrow-navigation__line-img">
+                </div>
+                <div class="arrow-navigation__feather">
+                  <img src="assets/images/arrow-left-feather.svg" alt="" class="arrow-navigation__feather-img">
+                </div>
+              </button>
 
-            <!-- Right Arrow -->
-            <button class="arrow-navigation__arrow arrow-navigation__arrow--right" type="button"
-              aria-label="Next">
-              <div class="arrow-navigation__main">
-                <img src="assets/images/arrow-right-main.svg" alt=""
-                  class="arrow-navigation__main-img">
-              </div>
-              <div class="arrow-navigation__line">
-                <img src="assets/images/arrow-right-line.svg" alt=""
-                  class="arrow-navigation__line-img">
-              </div>
-              <div class="arrow-navigation__feather">
-                <img src="assets/images/arrow-right-feather.svg" alt=""
-                  class="arrow-navigation__feather-img">
-              </div>
-            </button>
-          </div>
+              <!-- Right Arrow -->
+              <button class="arrow-navigation__arrow arrow-navigation__arrow--right" type="button" aria-label="Next">
+                <div class="arrow-navigation__main">
+                  <img src="assets/images/arrow-right-main.svg" alt="" class="arrow-navigation__main-img">
+                </div>
+                <div class="arrow-navigation__line">
+                  <img src="assets/images/arrow-right-line.svg" alt="" class="arrow-navigation__line-img">
+                </div>
+                <div class="arrow-navigation__feather">
+                  <img src="assets/images/arrow-right-feather.svg" alt="" class="arrow-navigation__feather-img">
+                </div>
+              </button>
+            </div>
 
           </div>
 
@@ -1125,6 +1117,22 @@
                 fill="#ffffff" />
             </svg>
           </button>
+
+          <div class="col-12">
+            <div class="hero__mobile-actions">
+              <a href="#" class="hero__video-btn" aria-label="Watch video">
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                  <circle cx="10" cy="10" r="9" stroke="currentColor" stroke-width="1.5" fill="none" />
+                  <path d="M8 6L13 10L8 14V6Z" fill="currentColor" />
+                </svg>
+                Video: See the magic in action
+              </a>
+              <div class="hero__mobile-cta">
+                <a href="#apply" class="btn-primary-blue">Apply to Enrol</a>
+                <a href="#tour" class="btn-primary-coral">Book a Tour</a>
+              </div>
+            </div>
+          </div>
         </section>
 
 
@@ -2367,7 +2375,7 @@
 
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.1/dist/ScrollSmoother.min.js"></script>
- 
+
 
   <!-- Swiper JS -->
   <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>

@@ -206,7 +206,7 @@ button {
 
 .masked-image-content-block {
   position: relative;
-  padding: 7.8125rem 0;
+  padding: 1rem 0 7.8125rem 0;
   overflow: hidden;
 
   .container-fluid {
@@ -1108,6 +1108,21 @@ button {
     align-items: flex-start;
     margin-bottom: 5.25rem;
 
+    p.lead {
+      color: @tertiary-blue-dark;
+      /* Desktop/Lead */
+      font-family: var(--font-family-averta, Averta);
+      font-size: var(--font-size-lead, 45px);
+      font-style: normal;
+      font-weight: 400;
+      line-height: 120%;
+      /* 54px */
+      letter-spacing: -0.45px;
+      margin-bottom: 2rem;
+
+    }
+
+
     @media (max-width: (@breakpoint-lg - 1)) {
       margin-bottom: 3rem;
     }
@@ -1222,6 +1237,34 @@ button {
       @media (max-width: (@breakpoint-lg - 1)) {
         font-size: clamp(0.875rem, 2vw, 0.9375rem);
       }
+    }
+  }
+
+  &.with-lead-para {
+    padding: 10rem 0;
+
+    .wellbeing-title-group {
+      margin-bottom: 2.5rem;
+    }
+
+    .wellbeing-content-row {
+      align-items: center;
+      justify-content: space-between;
+      gap: 2rem 0;
+    }
+
+    .wellbeing-text-blocks-row {
+      gap: 2.125rem;
+
+      .wellbeing-text-block.wellbeing-text-block {
+        flex: 51% 0 0;
+      }
+    }
+
+    .five-as-section__image-wrapper {
+      max-width: 92.75%;
+      margin: auto;
+
     }
   }
 }
@@ -2836,4 +2879,29 @@ button {
     }
   }
 
+}
+
+.cta-blocks-section {
+  padding: 10rem 0;
+
+  .cta-blocks {
+    .row {
+      margin: 0 -0.625rem;
+
+      >div {
+        padding: 0 0.625rem;
+
+        .image-frame {
+          border-radius: 1.25rem;
+          overflow: hidden;
+          border: .5rem solid #fff;
+
+          img {
+            aspect-ratio: 600/400;
+            object-fit: cover;
+          }
+        }
+      }
+    }
+  }
 }
