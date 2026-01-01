@@ -17,7 +17,6 @@
     const modal = document.createElement('div');
     modal.className = 'elegant-video-modal';
     modal.innerHTML = `
-      <div class="video-modal-backdrop"></div>
       <div class="video-modal-wrapper">
         <button class="glass-close-btn" aria-label="Close video">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -27,6 +26,7 @@
         <div class="glass-video-container">
           <video 
             controls 
+            autoplay
             preload="metadata"
             width="100%" 
             height="100%"
@@ -49,9 +49,7 @@
         left: 0;
         width: 100%;
         height: 100%;
-        background: rgba(15, 23, 42, 0.4);
-        backdrop-filter: blur(20px);
-        -webkit-backdrop-filter: blur(20px);
+        background: transparent;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -66,14 +64,6 @@
         visibility: visible;
       }
 
-      .video-modal-backdrop {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        cursor: pointer;
-      }
 
       .video-modal-wrapper {
         position: relative;
@@ -136,25 +126,25 @@
         transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
       }
 
-      .glass-video-container:hover {
-      }
 
       .glass-video-container video {
         width: 100%;
         height: 100%;
         border-radius: 10px;
         display: block;
-        background: #000;
+        background: transparent;
         object-fit: contain;
       }
 
+      
+
       /* Ensure video controls are visible */
       .glass-video-container video {
-        background: #000;
+        background: transparent;
       }
       
       .glass-video-container video::-webkit-media-controls-panel {
-        background: rgba(0, 0, 0, 0.8);
+        background: rgba(255, 255, 255, 0.1);
       }
 
       @media (max-width: 768px) {
@@ -214,10 +204,15 @@
 
     function setupEventListeners() {
       const closeButton = videoModal.querySelector('.glass-close-btn');
-      const backdrop = videoModal.querySelector('.video-modal-backdrop');
       
       closeButton.addEventListener('click', closeVideo);
-      backdrop.addEventListener('click', closeVideo);
+      
+      // Click outside video container to close
+      videoModal.addEventListener('click', (e) => {
+        if (e.target === videoModal) {
+          closeVideo();
+        }
+      });
       
       // ESC key to close
       document.addEventListener('keydown', (e) => {
@@ -245,6 +240,8 @@
         
         video.addEventListener('loadeddata', () => {
           console.log('Video loaded successfully');
+          // Autoplay video when loaded
+          video.play().catch(e => console.warn('Autoplay prevented:', e));
         });
       }
       
@@ -312,13 +309,14 @@
 
     // Initialize video button click handler
     function initVideoButton() {
-      const videoButton = document.querySelector('.hero__video-btn');
-      if (videoButton) {
-        videoButton.addEventListener('click', (e) => {
+      // Handle both mobile video button and desktop play button
+      const videoButtons = document.querySelectorAll('.hero__video-btn, .play-button');
+      videoButtons.forEach(button => {
+        button.addEventListener('click', (e) => {
           e.preventDefault();
           openVideo();
         });
-      }
+      });
     }
 
     // Initialize when DOM is ready
