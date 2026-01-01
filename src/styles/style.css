@@ -3862,7 +3862,7 @@ h1 .hero__title-script {
     left: 0;
     right: 0;
     bottom: 0;
-    background: linear-gradient(to bottom, rgba(255, 233, 175, 0) 30%, rgba(255, 233, 176, 0.96) 36%, #ffe8af 35%, #fbb28e 100%);
+    background: linear-gradient(to bottom, rgba(255, 233, 175, 0) 31%, rgba(255, 233, 176, 0.96) 35%, #ffe8af 30%, #fbb28e 100%);
     z-index: 1;
   }
 }
@@ -8713,7 +8713,7 @@ button {
   display: flex;
   flex-direction: column;
   gap: 1.25rem;
-  padding: 0 2.5rem;
+  padding: 0 3.5rem 0 0.5rem;
 }
 .masked-image-content-block__content p.lead {
   color: var(--tertiary-blue-dark, #1C3666);
