@@ -8619,6 +8619,14 @@ h1 .hero__title-script {
   --transition-fast: 150ms ease;
   --transition-base: 250ms ease;
 }
+:root {
+  box-sizing: border-box;
+}
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
 *,
 *::before,
 *::after {
