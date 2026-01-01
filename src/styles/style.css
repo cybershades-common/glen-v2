@@ -1724,7 +1724,7 @@ body.mega-menu-open {
     padding: 6rem 0 2rem;
     align-items: flex-start;
     position: relative;
-    height: 100%;
+    height: calc(100% - 5rem);
   }
 }
 .hero .play-button {
@@ -2037,11 +2037,14 @@ h1 .hero__title-script {
 }
 @media (max-width: 767px) {
   .hero__mobile-actions {
-    display: flex;
     flex-direction: column;
     gap: 0.625rem;
     width: 100%;
     z-index: 3;
+    display: flex;
+    position: relative;
+    max-width: 94%;
+    margin: 1rem auto;
   }
 }
 .hero__video-btn {
