@@ -1658,6 +1658,7 @@ body.mega-menu-open {
   height: 100vh;
   height: 100svh;
   max-height: 900px;
+  display: flex;
 }
 @media (min-width: 1920px) {
   .hero {
@@ -2039,7 +2040,7 @@ h1 .hero__title-script {
     gap: 0.625rem;
     width: 100%;
     z-index: 3;
-    position: absolute;
+    position: relative;
     max-width: 94%;
     margin: auto;
     bottom: 2rem;
@@ -8362,7 +8363,7 @@ h1 .hero__title-script {
   display: none;
 }
 .mobile-only .hero__mobile-actions {
-  position: absolute;
+  position: relative;
   z-index: 11111;
 }
 @media (min-width: 992px) and (max-width: 1400px) {
