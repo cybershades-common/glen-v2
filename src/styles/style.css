@@ -8359,11 +8359,12 @@ h1 .hero__title-script {
     display: none;
   }
 }
-.mobile-only {
+.mega-menu .mobile-only {
   display: none;
 }
-.mobile-only .hero__mobile-actions {
+.mega-menu .mobile-only .hero__mobile-actions {
   position: relative;
+  bottom: 1rem;
   z-index: 11111;
 }
 @media (min-width: 992px) and (max-width: 1400px) {
