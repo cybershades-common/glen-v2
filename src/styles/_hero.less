@@ -41,11 +41,20 @@
     z-index: 0;
     width: 100%;
     height: 100%;
+    overflow: hidden; // Enable smooth parallax
 
     .hero__slide {
       position: relative;
       width: 100%;
       height: 100%;
+      overflow: hidden; // Enhanced slide visibility for parallax effect
+
+      // Parallax inner wrapper
+      &-inner {
+        width: 100%;
+        height: 100vh;
+        position: relative;
+      }
 
       &-image,
       &-video {
@@ -341,19 +350,18 @@ h1 {
 
 
 // --------------------------------------------------------------------------
-// ARROW NAVIGATION
+// ARROW NAVIGATION - Match exact styling from compiled CSS
 // --------------------------------------------------------------------------
 
 .arrow-navigation {
   position: absolute;
- 
   display: flex;
   gap: @arrow-gap;
   align-items: center;
   z-index: 4; // Above play button
   pointer-events: none; // Allow clicks to pass through container
-      bottom: -2rem;
-      right: 0;
+  bottom: -2rem;
+  right: 0;
 
   // Enable pointer events on buttons
   button {
@@ -378,6 +386,8 @@ h1 {
   cursor: pointer;
   flex-shrink: 0;
   transition: opacity @transition-base;
+  bottom: 4.5rem;
+  right: 3.6rem;
 
   &:hover {
     opacity: 0.8;
@@ -486,6 +496,12 @@ h1 {
   width: 100%;
   height: 100%;
   z-index: 2;
+
+  // Enhanced content positioning for parallax
+  &[data-swiper-parallax] {
+    position: relative;
+    z-index: 2;
+  }
 }
 
 // Mobile Actions (Buttons Section)

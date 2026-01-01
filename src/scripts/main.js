@@ -18,7 +18,7 @@
     }
     initStickyHeader();
     initSmoothScroll();
-    // initHeroSlider();
+    initHeroSlider();
     initVideoTestimonials();
     initCoCurricularCarousel();
     initStaffFilters();
@@ -166,99 +166,35 @@
   // HERO SLIDER (Swiper)
   // ==========================================================================
 
-  // function initHeroSlider() {
-  //   // Check if Swiper is loaded
-  //   if (typeof Swiper === 'undefined') {
-  //     console.warn('Swiper not loaded');
-  //     return;
-  //   }
+  function initHeroSlider() {
+    // Check if Swiper is loaded
+    if (typeof Swiper === 'undefined') {
+      console.warn('Swiper not loaded');
+      return;
+    }
 
-  //   const heroSlider = document.querySelector('.hero__slider');
-  //   if (!heroSlider) return;
+    const heroSlider = document.querySelector('.hero__slider');
+    if (!heroSlider) return;
 
-  //   // Initialize Swiper
-  //   const swiper = new Swiper('.hero__slider', {
-  //     // Slider settings
-  //     loop: true,
-  //     speed: 1200,
-  //     effect: 'slide',
-  //     slidesPerView: 1,
-  //     spaceBetween: 0,
-      
-  //     // Smooth sliding with easing
-  //     resistanceRatio: 0,
-  //     touchRatio: 1,
-  //     threshold: 5,
-      
-  //     autoplay: {
-  //       delay: 5000,
-  //       disableOnInteraction: false,
-  //       pauseOnMouseEnter: true
-  //     },
-      
-  //     // Pagination
-  //     pagination: {
-  //       el: '.swiper-pagination',
-  //       clickable: true,
-  //       dynamicBullets: false
-  //     },
-
-  //     // Accessibility
-  //     a11y: {
-  //       prevSlideMessage: 'Previous slide',
-  //       nextSlideMessage: 'Next slide',
-  //       paginationBulletMessage: 'Go to slide {{index}}'
-  //     },
-
-  //     // Keyboard control
-  //     keyboard: {
-  //       enabled: true,
-  //       onlyInViewport: true
-  //     }
-  //   });
-
-  //   // Connect arrow navigation buttons to Swiper
-  //   const prevArrow = document.querySelector('.arrow-navigation__arrow--left');
-  //   const nextArrow = document.querySelector('.arrow-navigation__arrow--right');
-
-  //   if (prevArrow) {
-  //     prevArrow.addEventListener('click', function() {
-  //       swiper.slidePrev();
-  //     });
-  //   }
-
-  //   if (nextArrow) {
-  //     nextArrow.addEventListener('click', function() {
-  //       swiper.slideNext();
-  //     });
-  //   }
-
-  //   // Pause autoplay when play button is clicked
-  //   const playButton = document.querySelector('.play-button');
-  //   if (playButton) {
-  //     playButton.addEventListener('click', function() {
-  //       swiper.autoplay.stop();
-  //     });
-  //   }
-
-  //   // Handle video slides
-  //   swiper.on('slideChange', function () {
-  //     // Pause all videos
-  //     const videos = document.querySelectorAll('.hero__slide-video');
-  //     videos.forEach(video => {
-  //       video.pause();
-  //     });
-
-  //     // Play video in active slide if it exists
-  //     const activeSlide = swiper.slides[swiper.activeIndex];
-  //     const activeVideo = activeSlide?.querySelector('.hero__slide-video');
-  //     if (activeVideo) {
-  //       activeVideo.play().catch(err => {
-  //         console.log('Video autoplay prevented:', err);
-  //       });
-  //     }
-  //   });
-  // }
+    // Initialize Swiper with parallax and existing navigation
+    const swiper = new Swiper('.hero__slider', {
+      speed: 1600,
+      parallax: true,
+      autoplay: {
+        delay: 10000,
+        disableOnInteraction: false,
+      },
+      navigation: {
+        nextEl: '.arrow-navigation__arrow--right',
+        prevEl: '.arrow-navigation__arrow--left',
+      },
+      keyboard: {
+        enabled: true,
+        onlyInViewport: true,
+      },
+      loop: true,
+    });
+  }
 
   // ==========================================================================
   // VIDEO TESTIMONIALS
