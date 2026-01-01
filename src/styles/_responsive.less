@@ -51,17 +51,18 @@
     display: none;
   }
 }
-.mega-menu{
-.mobile-only {
-  display: none;
 
-  .hero__mobile-actions {
-    position: relative;
-    bottom: 1rem;
-    z-index: 11111;
+.mega-menu {
+  .mobile-only {
+    display: none;
+
+    .hero__mobile-actions {
+      position: relative;    
+      z-index: 11111;
+    }
   }
 }
-}
+
 @media (min-width:992px) and (max-width:1400px) {
   body {
 
@@ -197,13 +198,16 @@
       height: 5rem;
       min-height: 5rem;
 
-      .mega-menu {
+    
+    }
+  .mega-menu {
         .mega-menu__inner {
           padding-top: 6rem;
         }
+        .mobile-only{
+          display: flex;
+        }
       }
-    }
-
     .header-quick-links {
       display: none;
       opacity: 0;
@@ -222,13 +226,7 @@
       }
     }
 
-    .mobile-only {
-      display: block;
-
-      input[placeholder*="Search Glenaeon"] {
-        pointer-events: none;
-      }
-    }
+  
 
     .three-stages-section .three-stages-list,
     .three-stages-section .three-stages-item,
@@ -388,7 +386,7 @@
   .hero .hero__content .hero__description {
     margin-bottom: 1rem;
   }
- 
+
 
 }
 

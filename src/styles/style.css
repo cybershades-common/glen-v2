@@ -2040,13 +2040,6 @@ h1 .hero__title-script {
     gap: 0.625rem;
     width: 100%;
     z-index: 3;
-    position: relative;
-    max-width: 94%;
-    margin: auto;
-    bottom: 2rem;
-    left: 0;
-    right: 0;
-    transform: translateZ(0);
   }
 }
 .hero__video-btn {
@@ -2142,15 +2135,12 @@ h1 .hero__title-script {
   .hero .arrow-navigation {
     display: none;
   }
-  .hero .hero__slider .hero__slide-overlay {
-    padding-bottom: 8.5rem;
-  }
   .hero .hero__slider .hero__slide-overlay .container-fluid {
     display: flex;
     height: 100%;
   }
   .internal-page .hero .hero__slider .hero__slide-overlay {
-    padding-bottom: 1rem;
+    padding-bottom: 2rem;
   }
   .internal-page .hero .hero__slider .hero__slide-overlay .container-fluid {
     height: 100%;
@@ -8364,7 +8354,6 @@ h1 .hero__title-script {
 }
 .mega-menu .mobile-only .hero__mobile-actions {
   position: relative;
-  bottom: 1rem;
   z-index: 11111;
 }
 @media (min-width: 992px) and (max-width: 1400px) {
@@ -8456,8 +8445,11 @@ h1 .hero__title-script {
     height: 5rem;
     min-height: 5rem;
   }
-  body .site-header .mega-menu .mega-menu__inner {
+  body .mega-menu .mega-menu__inner {
     padding-top: 6rem;
+  }
+  body .mega-menu .mobile-only {
+    display: flex;
   }
   body .header-quick-links {
     display: none;
@@ -8471,12 +8463,6 @@ h1 .hero__title-script {
   }
   body .mega-menu__nav-item a {
     font-size: 2.5rem;
-  }
-  body .mobile-only {
-    display: block;
-  }
-  body .mobile-only input[placeholder*="Search Glenaeon"] {
-    pointer-events: none;
   }
   body .three-stages-section .three-stages-list,
   body .three-stages-section .three-stages-item,
