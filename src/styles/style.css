@@ -8661,6 +8661,10 @@ h1 .hero__title-script {
 *::before,
 *::after {
   box-sizing: border-box;
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
 }
 html {
   scroll-behavior: smooth;
@@ -8670,6 +8674,10 @@ html input,
 html textarea,
 html [contenteditable="true"] {
   caret-color: initial;
+  user-select: text;
+  -webkit-user-select: text;
+  -moz-user-select: text;
+  -ms-user-select: text;
 }
 ::-webkit-scrollbar {
   display: none;
