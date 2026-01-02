@@ -224,8 +224,20 @@ button {
     z-index: 1; // Ensure content is above the overlay
 
     .masked-image-block {
+
+      .frame{
+        left: 5%;
+      }
       &.row-reverse {
         justify-content: space-between;
+
+        .frame {
+          left: -5%;
+        }
+
+        .masked-image-content-block__content {
+          padding: 0 1.5rem 0 2.5rem;
+        }
       }
     }
   }
@@ -268,7 +280,7 @@ button {
   display: flex;
   flex-direction: column;
   gap: 1.25rem;
-  padding: 0 3.5rem 0 0.5rem;
+  padding:0 1.5rem 0 2.5rem;
 
   p.lead {
     color: var(--tertiary-blue-dark, #1C3666);
