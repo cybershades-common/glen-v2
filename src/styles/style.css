@@ -7093,7 +7093,7 @@ h1 .hero__title-script {
 }
 .about-glenaeon-section__frame-img {
   width: 100%;
-  height: 100%;
+  height: 101%;
   object-fit: contain;
 }
 .about-glenaeon-section__image {
@@ -8570,12 +8570,12 @@ h1 .hero__title-script {
     min-width: 7rem;
     white-space: nowrap;
   }
+  body .about-glenaeon-section__card-link {
+    align-self: center;
+  }
   body.landing-page .what-makes-glenaeon-special-section .masked-image-content-block {
     padding: 0;
     margin: -2rem auto;
-  }
-  body.landing-page .about-glenaeon-section__card-link {
-    align-self: center;
   }
   body.landing-page .about-glenaeon-section__image-wrapper {
     width: 85%;
