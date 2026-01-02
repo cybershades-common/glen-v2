@@ -3793,7 +3793,12 @@ h1 .hero__title-script {
   object-fit: cover;
   object-position: center;
   border-radius: 50%;
-  padding: 0.1875rem;
+  padding: 0.25rem 0.25rem 0.5rem;
+}
+@media (max-width: 767px) {
+  .five-as-section__image-wrapper .five-as-section__image-inner-circle img {
+    padding: 0.125rem 0.125rem 0.25rem;
+  }
 }
 .five-as-section__content {
   padding: 0 2rem;
@@ -5219,8 +5224,8 @@ h1 .hero__title-script {
     letter-spacing: -0.8px;
   }
   .moments-section .moments-carousel-wrapper {
-    height: 650px;
-    padding: 60px 0;
+    height: auto;
+    padding: 0;
   }
   .moments-section .moments-arc-carousel .swiper-slide {
     width: 240px !important;
@@ -8460,7 +8465,6 @@ h1 .hero__title-script {
   }
   body .breadcrumb-wrap {
     padding: 1rem;
-    margin-bottom: 5rem;
   }
   body .site-header {
     height: 5rem;
@@ -8581,6 +8585,19 @@ h1 .hero__title-script {
   }
   body .column-reverse-mobile {
     flex-direction: column-reverse;
+  }
+  body .wellbeing-section.with-lead-para .five-as-section__image-wrapper {
+    max-width: 84%;
+    margin: 2.5rem auto 0;
+  }
+  body .wellbeing-section.with-lead-para .wellbeing-content {
+    text-align: center;
+  }
+  body .wellbeing-section.with-lead-para .wellbeing-content .wellbeing-title-group {
+    margin-bottom: 0;
+  }
+  body .wellbeing-section.with-lead-para .wellbeing-content .wellbeing-title-group p.lead {
+    font-size: 1.875rem;
   }
 }
 @media (min-width: 680px) and (max-width: 992px) {
@@ -8727,14 +8744,30 @@ button {
 .masked-image-content-block .container-fluid .masked-image-block .frame {
   left: 5%;
 }
+@media (max-width: 767px) {
+  .masked-image-content-block .container-fluid .masked-image-block .frame {
+    left: 0;
+  }
+}
 .masked-image-content-block .container-fluid .masked-image-block.row-reverse {
   justify-content: space-between;
 }
 .masked-image-content-block .container-fluid .masked-image-block.row-reverse .frame {
   left: -5%;
 }
+@media (max-width: 767px) {
+  .masked-image-content-block .container-fluid .masked-image-block.row-reverse .frame {
+    left: 0;
+  }
+}
 .masked-image-content-block .container-fluid .masked-image-block.row-reverse .masked-image-content-block__content {
   padding: 0 1.5rem 0 2.5rem;
+}
+@media (max-width: 767px) {
+  .masked-image-content-block .container-fluid .masked-image-block.row-reverse .masked-image-content-block__content {
+    padding: 0 2rem;
+    text-align: center;
+  }
 }
 @media (max-width: 991px) {
   .masked-image-content-block {
@@ -8874,7 +8907,7 @@ button {
   position: absolute;
   border-radius: 50%;
   overflow: hidden;
-  max-width: 73.75%;
+  max-width: 73.25%;
   aspect-ratio: 1/1;
   top: 0;
   bottom: 0;
@@ -9401,6 +9434,11 @@ button {
 .wellbeing-section .wellbeing-bg.dark-theme * {
   color: var(--color-white);
 }
+@media (max-width: 767px) {
+  .wellbeing-section .wellbeing-bg {
+    padding: 2rem 0 4rem;
+  }
+}
 .wellbeing-section .container-fluid {
   position: relative;
   z-index: 1;
@@ -9595,6 +9633,11 @@ button {
 .wellbeing-section.with-lead-para .five-as-section__image-wrapper {
   max-width: 92.75%;
   margin: auto;
+}
+@media (max-width: 767px) {
+  .wellbeing-section.with-lead-para {
+    padding: 3rem 0;
+  }
 }
 .full-width-testimonial-audio {
   position: relative;
@@ -10983,4 +11026,20 @@ button {
 .cta-blocks-section .cta-blocks .row > div .image-frame img {
   aspect-ratio: 600/400;
   object-fit: cover;
+}
+@media (max-width: 767px) {
+  .cta-blocks-section {
+    padding: 3rem 0;
+  }
+  .cta-blocks-section .cta-blocks .row {
+    gap: 1.5rem;
+  }
+}
+.full-width-testimonial-audio .five-as-section__image-wrapper .five-as-section__image-inner-circle img {
+  padding: 0.25rem 0.2rem 0.25rem;
+}
+@media (max-width: 767px) {
+  .full-width-testimonial-audio .five-as-section__image-wrapper .five-as-section__image-inner-circle img {
+    padding: 0.125rem 0.125rem 0.25rem;
+  }
 }
