@@ -460,7 +460,7 @@ button {
     z-index: 11;
 
     &.bottom-edge {
-      bottom: 0;
+      bottom: -1px;
     }
 
     &.top-edge {
@@ -1925,8 +1925,16 @@ button {
     width: 100%;
     margin-top: 0;
 
+    .graph-image {
+      display: none;
+    }
+
     @media (max-width: (@breakpoint-lg - 1)) {
       gap: 3rem;
+
+      .graph-image {
+        display: block;
+      }
     }
   }
 
@@ -2584,7 +2592,7 @@ button {
       flex-direction: column;
       align-items: center;
       gap: 2rem;
-      padding: 0 1.875rem;
+      padding: 0 0.5rem;
     }
   }
 
@@ -2598,7 +2606,7 @@ button {
 
     @media (max-width: (@breakpoint-lg - 1)) {
       width: 100%;
-      max-width: 325.095px;
+      max-width: 100%;
     }
   }
 

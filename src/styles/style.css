@@ -4849,6 +4849,9 @@ h1 .hero__title-script {
     padding: 0;
     margin: 0;
   }
+  .three-campuses-section .graph-image {
+    display: block;
+  }
 }
 .moments-section {
   padding: 80px 0;
@@ -8930,7 +8933,7 @@ button {
   z-index: 11;
 }
 .section .edge-image.bottom-edge {
-  bottom: 0;
+  bottom: -1px;
 }
 .section .edge-image.top-edge {
   top: 0;
@@ -10160,9 +10163,15 @@ button {
   width: 100%;
   margin-top: 0;
 }
+.three-stages-section .three-stages-diagram-cards-wrapper .graph-image {
+  display: none;
+}
 @media (max-width: 991px) {
   .three-stages-section .three-stages-diagram-cards-wrapper {
     gap: 3rem;
+  }
+  .three-stages-section .three-stages-diagram-cards-wrapper .graph-image {
+    display: block;
   }
 }
 .three-stages-section .three-stages-diagram {
@@ -10722,7 +10731,7 @@ button {
     flex-direction: column;
     align-items: center;
     gap: 2rem;
-    padding: 0 1.875rem;
+    padding: 0 0.5rem;
   }
 }
 .three-stages-section .three-stages-card {
@@ -10736,7 +10745,7 @@ button {
 @media (max-width: 991px) {
   .three-stages-section .three-stages-card {
     width: 100%;
-    max-width: 325.095px;
+    max-width: 100%;
   }
 }
 .three-stages-section .three-stages-card-header {
