@@ -1660,6 +1660,10 @@ body.mega-menu-open {
   max-height: 900px;
   display: flex;
 }
+.hero .arrow-navigation__arrow {
+  bottom: 4.5rem;
+  right: 3.6rem;
+}
 @media (min-width: 1920px) {
   .hero {
     max-height: 1080px;
@@ -1947,8 +1951,6 @@ h1 .hero__title-script {
   cursor: pointer;
   flex-shrink: 0;
   transition: opacity 250ms ease;
-  bottom: 4.5rem;
-  right: 3.6rem;
 }
 .arrow-navigation__arrow:hover {
   opacity: 0.8;
@@ -3284,6 +3286,9 @@ h1 .hero__title-script {
   height: 3.5rem;
   min-width: 3.5rem;
   min-height: 3.5rem;
+}
+.co-curricular-carousel .navigation .arrow-navigation__arrow.swiper-button-lock {
+  display: block;
 }
 @media (max-width: 767px) {
   .co-curricular-carousel .navigation.arrow-navigation {
@@ -9873,20 +9878,18 @@ button {
   bottom: 80px;
   z-index: 3;
   width: 100%;
+  padding-left: 4.5rem;
 }
 @media (max-width: 991px) {
   .full-width-testimonial-audio .testimonial-audio-controls {
     bottom: 40px;
+    padding-left: 0;
   }
 }
 @media (max-width: 767px) {
   .full-width-testimonial-audio .testimonial-audio-controls {
     bottom: 70px;
   }
-}
-.full-width-testimonial-audio .testimonial-audio-controls .container-fluid {
-  padding-left: 629.08px;
-  padding-right: 80px;
 }
 @media (max-width: 1199px) {
   .full-width-testimonial-audio .testimonial-audio-controls .container-fluid {
@@ -9920,6 +9923,7 @@ button {
   position: relative;
   justify-content: flex-start;
   pointer-events: all;
+  bottom: 0;
 }
 .full-width-testimonial-audio .testimonial-audio-pagination-dot {
   width: 0.625rem;

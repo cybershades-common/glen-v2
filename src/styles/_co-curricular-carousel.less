@@ -295,6 +295,8 @@
     opacity: 0.8;
   }
 
+
+
   // Navigation Arrows
   .navigation {
     display: flex;
@@ -316,6 +318,7 @@
       right: auto;
       bottom: auto;
       pointer-events: auto;
+
     }
 
     .arrow-navigation__arrow {
@@ -324,6 +327,9 @@
       height: @arrow-width;
       min-width: @arrow-width;
       min-height: @arrow-width;
+      &.swiper-button-lock{
+        display: block;
+      }
     }
   }
 
