@@ -1310,7 +1310,6 @@ body.mega-menu-open .site-header .hamburger .hamburger .line:nth-child(3) {
 }
 .mega-menu__subnav-item--title {
   margin-bottom: 15px;
-  display: none;
 }
 .mega-menu__subnav-item--title span {
   font-family: 'Averta', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
@@ -1512,7 +1511,6 @@ body.mega-menu-open {
   }
   .mega-menu .mega-menu__inner .mega-menu__subnav-container h4,
   .mega-menu .mega-menu__inner .mega-menu__subnav-container .mega-menu__subnav-item--title span {
-    display: none;
     color: var(--tertiary-blue-dark, #1C3666);
     /* Desktop/H2 Caps Bold */
     font-family: var(--font-family-averta, Averta);
