@@ -1707,6 +1707,7 @@ body.mega-menu-open {
   height: 100%;
   object-fit: cover;
   object-position: top center;
+  aspect-ratio: 1440/900;
 }
 .hero .hero__slider .hero__slide-video {
   pointer-events: none;
@@ -8931,6 +8932,9 @@ button {
   right: 0;
   margin: auto;
   z-index: 0;
+}
+.masked-image-content-block .image-wrap img {
+  object-fit: cover;
 }
 .masked-image-content-block img,
 .masked-image-content-block video {
