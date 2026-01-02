@@ -2556,7 +2556,7 @@
       yPercent: preloaderSettings.blobRiseTarget,
       scale: preloaderSettings.blobScale,
       duration: preloaderSettings.animationDuration,
-      ease: 'none',
+      ease: 'easeout',
       delay: 0,
       onComplete: function () {
         riseAnimationComplete = true;
@@ -2606,14 +2606,14 @@
         opacity: 0,
         duration: 0.3,
         ease: 'power2.inOut'
-      }, 0);
+      }, 0.7);
 
       if (useCurtainClipReveal) {
         tl.to(preloaderCurtain, {
           '--curtain-clip-value': '100%',
           duration: 0.3,
           ease: "power1.in"
-        }, 0);
+        }, .8);
       }
     }
   </script>
