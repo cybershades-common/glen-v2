@@ -9506,7 +9506,7 @@ button {
   font-weight: 400;
   line-height: 120%;
   /* 54px */
-  letter-spacing: -0.45px;
+  letter-spacing: -1.875px;
   margin-bottom: 2rem;
 }
 @media (max-width: 991px) {
@@ -9566,9 +9566,6 @@ button {
     width: 100%;
   }
 }
-.wellbeing-section .wellbeing-text-block.wellbeing-text-block-right {
-  width: 300px;
-}
 @media (max-width: 767px) {
   .wellbeing-section .wellbeing-text-block.wellbeing-text-block-right {
     width: 100%;
@@ -9619,11 +9616,8 @@ button {
 .wellbeing-section.with-lead-para .wellbeing-title-group {
   margin-bottom: 0;
 }
-.wellbeing-section.with-lead-para .wellbeing-title-group p.lead {
-  padding-right: 2.5rem;
-}
 .wellbeing-section.with-lead-para .wellbeing-content-row {
-  align-items: center;
+  align-items: flex-end;
   justify-content: space-between;
   gap: 2rem 0;
 }
@@ -9631,7 +9625,7 @@ button {
   gap: 2.125rem;
 }
 .wellbeing-section.with-lead-para .wellbeing-text-blocks-row .wellbeing-text-block.wellbeing-text-block {
-  flex: 43.5% 0 0;
+  flex: 51.5% 0 0;
 }
 .wellbeing-section.with-lead-para .five-as-section__image-wrapper {
   max-width: 92.75%;
@@ -9650,6 +9644,8 @@ button {
 }
 .wellbeing-section.with-lead-para.left-content-right-image .masked-image-content-block {
   left: 10%;
+  padding-bottom: 0;
+  margin: -2rem 0;
 }
 @media (max-width: 767px) {
   .wellbeing-section.with-lead-para.left-content-right-image .masked-image-content-block {
