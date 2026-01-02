@@ -1285,7 +1285,10 @@ button {
 
 
     .wellbeing-title-group {
-      margin-bottom: 2.5rem;
+      margin-bottom: 0;
+      p.lead{
+        padding-right: 2.5rem;
+      }
     }
 
     .wellbeing-content-row {
@@ -1298,7 +1301,7 @@ button {
       gap: 2.125rem;
 
       .wellbeing-text-block.wellbeing-text-block {
-        flex: 51% 0 0;
+        flex: 43.5% 0 0;
       }
     }
 
@@ -1308,8 +1311,40 @@ button {
 
     }
 
+
+
+
     @media (max-width: 767px) {
       padding: 3rem 0;
+      .wellbeing-title-group {
+      margin-bottom: 0;
+      p.lead{
+        padding-right: 0;
+      }
+    }
+    }
+
+    &.left-content-right-image {
+      .masked-image-content-block {
+        left: 10%;
+      
+      }
+
+
+
+
+      @media (max-width: 767px) {
+
+        .masked-image-content-block {
+          left: 0;
+          padding-bottom: 0;
+        }
+
+        .wellbeing-content-row {
+          flex-direction: column-reverse;
+        }
+
+      }
     }
   }
 }
@@ -2962,10 +2997,12 @@ button {
 }
 
 .full-width-testimonial-audio {
+
+
   .five-as-section__image-wrapper .five-as-section__image-inner-circle img {
     padding: 0.25rem 0.2rem 0.25rem;
 
-    @media (max-width:767px){
+    @media (max-width:767px) {
       padding: 0.125rem 0.125rem 0.25rem;
     }
   }

@@ -9617,7 +9617,10 @@ button {
   padding: 6rem 0;
 }
 .wellbeing-section.with-lead-para .wellbeing-title-group {
-  margin-bottom: 2.5rem;
+  margin-bottom: 0;
+}
+.wellbeing-section.with-lead-para .wellbeing-title-group p.lead {
+  padding-right: 2.5rem;
 }
 .wellbeing-section.with-lead-para .wellbeing-content-row {
   align-items: center;
@@ -9628,7 +9631,7 @@ button {
   gap: 2.125rem;
 }
 .wellbeing-section.with-lead-para .wellbeing-text-blocks-row .wellbeing-text-block.wellbeing-text-block {
-  flex: 51% 0 0;
+  flex: 43.5% 0 0;
 }
 .wellbeing-section.with-lead-para .five-as-section__image-wrapper {
   max-width: 92.75%;
@@ -9637,6 +9640,24 @@ button {
 @media (max-width: 767px) {
   .wellbeing-section.with-lead-para {
     padding: 3rem 0;
+  }
+  .wellbeing-section.with-lead-para .wellbeing-title-group {
+    margin-bottom: 0;
+  }
+  .wellbeing-section.with-lead-para .wellbeing-title-group p.lead {
+    padding-right: 0;
+  }
+}
+.wellbeing-section.with-lead-para.left-content-right-image .masked-image-content-block {
+  left: 10%;
+}
+@media (max-width: 767px) {
+  .wellbeing-section.with-lead-para.left-content-right-image .masked-image-content-block {
+    left: 0;
+    padding-bottom: 0;
+  }
+  .wellbeing-section.with-lead-para.left-content-right-image .wellbeing-content-row {
+    flex-direction: column-reverse;
   }
 }
 .full-width-testimonial-audio {
