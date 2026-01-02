@@ -49,14 +49,15 @@
         left: 0;
         width: 100%;
         height: 100%;
-        background: transparent;
+        background: rgba(0, 0, 0, 0.6);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
         display: flex;
         align-items: center;
         justify-content: center;
         z-index: 10000;
         opacity: 0;
         visibility: hidden;
-        transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
       }
 
       .elegant-video-modal.active {
@@ -72,13 +73,8 @@
         align-items: center;
         max-width: 95vw;
         max-height: 95vh;
-        transform: scale(0.8);
-        transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
       }
 
-      .elegant-video-modal.active .video-modal-wrapper {
-        transform: scale(1);
-      }
 
       .glass-close-btn {
         background: rgba(255, 255, 255, 0.1);
@@ -94,7 +90,6 @@
         align-items: center;
         justify-content: center;
         margin-bottom: 20px;
-        transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
         box-shadow: 
           0 8px 32px rgba(0, 0, 0, 0.3),
           inset 0 1px 0 rgba(255, 255, 255, 0.2);
@@ -123,7 +118,6 @@
         width: 900px;
         position: relative;
         overflow: hidden;
-        transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
       }
 
 
@@ -250,20 +244,21 @@
       video.setAttribute('controls', 'controls');
       video.style.display = 'block';
       
-      videoModal.classList.add('active');
-      document.body.style.overflow = 'hidden';
-      
       // GSAP smooth animations
       if (typeof gsap !== 'undefined') {
         const wrapper = videoModal.querySelector('.video-modal-wrapper');
         const closeBtn = videoModal.querySelector('.glass-close-btn');
         const videoContainer = videoModal.querySelector('.glass-video-container');
         
-        // Set initial states
+        // Set initial states BEFORE adding active class to prevent flickering
         gsap.set(videoModal, { opacity: 0 });
         gsap.set(wrapper, { scale: 0.7, y: 50, opacity: 0 });
-        gsap.set(closeBtn, { scale: 0, rotation: -180, opacity: 0 });
+        gsap.set(closeBtn, { scale: 0, opacity: 0 });
         gsap.set(videoContainer, { scale: 0.8, y: 30, opacity: 0 });
+        
+        // Now add the active class and set overflow
+        videoModal.classList.add('active');
+        document.body.style.overflow = 'hidden';
         
         // Animate in with stagger
         const tl = gsap.timeline();
@@ -271,6 +266,10 @@
           .to(wrapper, { scale: 1, y: 0, opacity: 1, duration: 0.6, ease: "back.out(1.2)" }, 0.1)
           .to(closeBtn, { scale: 1, rotation: 0, opacity: 1, duration: 0.4, ease: "back.out(1.5)" }, 0.3)
           .to(videoContainer, { scale: 1, y: 0, opacity: 1, duration: 0.5, ease: "power3.out" }, 0.4);
+      } else {
+        // Fallback: add active class for non-GSAP users
+        videoModal.classList.add('active');
+        document.body.style.overflow = 'hidden';
       }
     }
 

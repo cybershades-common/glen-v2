@@ -1049,7 +1049,7 @@
       let contentAnimation = gsap.timeline()
         .from(answer, { 
           height: 0, 
-          duration: 0.5, 
+          duration: 0.3, 
           ease: "power2.inOut",
           onReverseComplete: function() {
             // Ensure completely hidden when animation completes
