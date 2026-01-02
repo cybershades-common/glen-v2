@@ -895,39 +895,41 @@
             <div class="position-absolute top-0 start-0 w-100 h-100" style="background-color: rgba(0, 0, 0, 0.3)"></div>
           </div>
 
-          <!-- Text Content -->
+          
+
+           <!-- Text Content -->
           <div class="container-fluid position-relative">
             <div class="marquee">
               <div class="marquee__inner" aria-hidden="true">
                 <div class="marquee__part">
-                  <span class="word bold">Play.</span>
-                  <span class="word script">Laugh.</span>
-                  <span class="word bold">Sing.</span>
+                  <span class="word bold">Discover</span>
+                  <span class="word script">Express.</span>
+                  <span class="word bold">Grow.</span>
                 </div>
                 <div class="marquee__part">
-                  <span class="word script">Dance.</span>
-                  <span class="word bold">Climb.</span>
-                  <span class="word script">Cook.</span>
+                  <span class="word bold">Discover</span>
+                  <span class="word script">Express.</span>
+                  <span class="word bold">Grow.</span>
                 </div>
                 <div class="marquee__part">
-                  <span class="word bold">Paint.</span>
-                  <span class="word script">Bake.</span>
-                  <span class="word bold">Play.</span>
+                  <span class="word bold">Discover</span>
+                  <span class="word script">Express.</span>
+                  <span class="word bold">Grow.</span>
                 </div>
                 <div class="marquee__part">
-                  <span class="word script">Laugh.</span>
-                  <span class="word bold">Sing.</span>
-                  <span class="word script">Dance.</span>
+                  <span class="word bold">Discover</span>
+                  <span class="word script">Express.</span>
+                  <span class="word bold">Grow.</span>
                 </div>
                 <div class="marquee__part">
-                  <span class="word bold">Climb.</span>
-                  <span class="word script">Cook.</span>
-                  <span class="word bold">Paint.</span>
+                  <span class="word bold">Discover</span>
+                  <span class="word script">Express.</span>
+                  <span class="word bold">Grow.</span>
                 </div>
                 <div class="marquee__part">
-                  <span class="word script">Bake.</span>
-                  <span class="word bold">Play.</span>
-                  <span class="word script">Laugh.</span>
+                  <span class="word bold">Discover</span>
+                  <span class="word script">Express.</span>
+                  <span class="word bold">Grow.</span>
                 </div>
               </div>
             </div>
@@ -1905,6 +1907,7 @@
 
 
 
+ 
   <!-- GSAP -->
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
   <script>
@@ -1919,139 +1922,6 @@
       return CSS.supports('clip-path', insetValue) || CSS.supports('-webkit-clip-path', insetValue);
     }
 
-    // --------------------------------------------------------------------
-    // Preloader knobs (adjust values here instead of deep in the logic)
-    // --------------------------------------------------------------------
-    const PRELOADER_CONFIG = {
-      desktop: {
-        logoWidth: '33vw',
-        logoTop: '50%',
-        logoLeft: '50%',
-        blobScale: 1,
-        blobRiseTarget: 40, // yPercent
-        blobInitialY: 110,
-        animationDuration: 3.5
-      },
-      mobile: {
-        logoWidth: '66vw',
-        logoTop: '50%',
-        logoLeft: '50%',
-        blobScale: 2.7,
-        blobRiseTarget: 100,
-        blobInitialY: 250,
-        animationDuration: 3
-      }
-    };
-
-    const isMobilePreloader = window.matchMedia('(max-width: 768px)').matches;
-    const preloaderSettings = isMobilePreloader ? PRELOADER_CONFIG.mobile : PRELOADER_CONFIG.desktop;
-
-    // Track animation and loading states
-    let riseAnimationComplete = false;
-    let pageLoaded = false;
-    const preloaderCurtain = document.getElementById('preloader');
-    const useCurtainClipReveal = preloaderCurtain && supportsCurtainClip();
-    const logoEl = document.querySelector('.logo');
-    if (logoEl) {
-      if (preloaderSettings.logoWidth) {
-        logoEl.style.width = preloaderSettings.logoWidth;
-      }
-      if (preloaderSettings.logoTop) {
-        logoEl.style.top = preloaderSettings.logoTop;
-      }
-      if (preloaderSettings.logoLeft) {
-        logoEl.style.left = preloaderSettings.logoLeft;
-      }
-    }
-
-    if (useCurtainClipReveal) {
-      const curtainClipValue = 'inset(0 0 var(--curtain-clip-value, 0%) 0)';
-      preloaderCurtain.style.setProperty('--curtain-clip-value', '0%');
-      preloaderCurtain.style.clipPath = curtainClipValue;
-      preloaderCurtain.style.webkitClipPath = curtainClipValue;
-      preloaderCurtain.style.willChange = 'clip-path';
-    }
-
-    // Function to check if both conditions are met
-    function checkAndUnveil() {
-      if (riseAnimationComplete && pageLoaded) {
-        startUnveilAnimation();
-      }
-    }
-
-    // Set initial state - hide preloader and position gradient below screen
-    gsap.set('#preloader', {
-      visibility: 'visible'
-    });
-
-    gsap.set('#gradient-blob', {
-      yPercent: preloaderSettings.blobInitialY,
-      opacity: 1,
-      scale: preloaderSettings.blobScale
-    });
-
-    // Start animation immediately - no delay
-    gsap.to('#gradient-blob', {
-      yPercent: preloaderSettings.blobRiseTarget,
-      scale: preloaderSettings.blobScale,
-      duration: preloaderSettings.animationDuration,
-      ease: 'none',
-      delay: 0,
-      onComplete: function () {
-        riseAnimationComplete = true;
-        checkAndUnveil();
-      }
-    });
-
-    // Fade in logo while gradient rises
-    gsap.to('.logo', {
-      opacity: 1,
-      duration: 2,
-      ease: 'none',
-      delay: 0
-    });
-
-    // Set logo initial opacity to 0  
-    gsap.set('.logo', {
-      opacity: 0
-    });
-
-    // Listen for window load event
-    window.addEventListener('load', function () {
-      pageLoaded = true;
-      checkAndUnveil();
-    });
-
-    // Unveil animation function
-    function startUnveilAnimation() {
-      const tl = gsap.timeline({
-        onComplete: function () {
-          // Enable scrolling
-          document.body.classList.add('loaded');
-
-          // Remove preloader and logo from DOM after animation
-          if (preloaderCurtain) {
-            preloaderCurtain.style.display = 'none';
-          }
-          document.querySelector('.logo').style.display = 'none';
-        }
-      });
-
-      // Fade out logo and slide up preloader together
-      tl.to('.logo', {
-        opacity: 0,
-        duration: 0.3,
-        ease: 'power2.inOut'
-      }, 0);
-
-      if (useCurtainClipReveal) {
-        tl.to(preloaderCurtain, {
-          '--curtain-clip-value': '100%',
-          duration: 0.3,
-          ease: "power1.in"
-        }, 0);
-      }
-    }
   </script>
 
   <!-- jQuery -->
@@ -2065,7 +1935,7 @@
   <script src="https://unpkg.com/isotope-layout@3/dist/isotope.pkgd.min.js"></script>
 
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
-  <!-- <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.1/dist/ScrollSmoother.min.js"></script> -->
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.1/dist/ScrollSmoother.min.js"></script>
 
 
   <!-- Swiper JS -->
@@ -2075,8 +1945,6 @@
   <!-- Search -->
   <script src="src/scripts/website-search.js"></script>
 
-  <!-- Video Popup -->
-  <script src="src/scripts/video-popup.js"></script>
 
   <!-- Custom Scripts -->
   <script src="src/scripts/megamenu-animations.js"></script>
@@ -2085,8 +1953,17 @@
   <!-- Animations -->
   <script src="animations.js"></script>
 
-  <!-- Glen Preloader Script moved to animations.js -->
-
+  <!-- Enable scrolling on page load -->
+  <script>
+    // Enable scrolling immediately on page load
+    window.addEventListener('load', function() {
+      document.body.classList.add('loaded');
+    });
+    // Also enable on DOMContentLoaded for faster response
+    document.addEventListener('DOMContentLoaded', function() {
+      document.body.classList.add('loaded');
+    });
+  </script>
 
 </body>
 
