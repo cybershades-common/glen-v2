@@ -8344,6 +8344,14 @@ h1 .hero__title-script {
     display: block !important;
   }
 }
+.mobile-only {
+  display: none;
+}
+@media (max-width: 767px) {
+  .mobile-only {
+    display: block;
+  }
+}
 .desktop-only {
   display: block;
 }
