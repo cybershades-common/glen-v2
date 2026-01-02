@@ -5255,6 +5255,11 @@ h1 .hero__title-script {
   width: 100%;
   opacity: 1;
 }
+@media (max-width: 767px) {
+  .what-makes-glenaeon-special-curved-line {
+    display: none !important;
+  }
+}
 .what-makes-glenaeon-special-title-group {
   position: relative;
   z-index: 1;
