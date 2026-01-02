@@ -9442,8 +9442,6 @@ button {
 @media (max-width: 991px) {
   .wellbeing-section {
     min-height: auto;
-    padding-top: 4rem;
-    padding-bottom: 4rem;
   }
 }
 .wellbeing-section .wellbeing-bg {
