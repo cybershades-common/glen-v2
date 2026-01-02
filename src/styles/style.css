@@ -468,7 +468,7 @@ body.mega-menu-open .site-header .hamburger .hamburger .line:nth-child(2) {
   opacity: 0;
 }
 body.mega-menu-open .site-header .hamburger .hamburger .line:nth-child(3) {
-  transform: translateY(-0.40625rem) rotate(-45deg);
+  transform: translateY(-0.5rem) rotate(-45deg);
 }
 .header-logo {
   display: flex;
@@ -8480,7 +8480,7 @@ h1 .hero__title-script {
     min-height: 5rem;
   }
   body .mega-menu .mega-menu__inner {
-    padding-top: 6rem;
+    padding-top: 4.5rem;
   }
   body .mega-menu .mobile-only {
     display: block;
