@@ -8828,6 +8828,7 @@ button {
 @media (max-width: 991px) {
   .masked-image-content-block__content {
     max-width: 100%;
+    text-align: center;
   }
 }
 .masked-image-content-block__heading {
