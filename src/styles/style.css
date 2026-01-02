@@ -8933,7 +8933,7 @@ button {
   z-index: 11;
 }
 .section .edge-image.bottom-edge {
-  bottom: -1px;
+  bottom: 0;
 }
 .section .edge-image.top-edge {
   top: 0;
