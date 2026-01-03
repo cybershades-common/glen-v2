@@ -2366,31 +2366,31 @@
       if (scriptWords.length) {
         gsap.set(scriptWords, {
           opacity: 0,
-          yPercent: 140,
-          rotationZ: -4,
-          filter: 'blur(10px)',
-          transformOrigin: 'left bottom',
+          x: -30,
+          y: 20,
+          rotation: -3,
+          scale: 0.8,
+          transformOrigin: 'left center',
           force3D: true,
-          willChange: 'transform, opacity, filter'
+          willChange: 'transform, opacity'
         });
       }
 
       if (heroTextSplit.mainChars.length) {
         gsap.set(heroTextSplit.mainChars, {
           opacity: 0,
-          yPercent: 130,
-          rotationX: 85,
-          rotationZ: 6,
-          filter: 'blur(12px)',
+          y: 100,
+          scaleY: 0,
+          skewX: 8,
           transformOrigin: 'center bottom',
           force3D: true,
-          willChange: 'transform, opacity, filter'
+          willChange: 'transform, opacity'
         });
       } else if (heroTextSplit.title) {
         gsap.set(heroTextSplit.title, {
           opacity: 0,
-          y: 34,
-          skewY: 2,
+          y: 80,
+          scale: 0.7,
           transformOrigin: 'left center'
         });
       }
@@ -2398,8 +2398,10 @@
       if (heroTextSplit.description) {
         gsap.set(heroTextSplit.description, {
           opacity: 0,
-          y: 26,
-          filter: 'blur(6px)',
+          y: 20,
+          scale: 0.95,
+          filter: 'blur(2px)',
+          transformOrigin: 'left top',
           willChange: 'transform, opacity, filter'
         });
       }
@@ -2428,40 +2430,74 @@
         title: elements.title
       };
 
-      const tl = gsap.timeline({ defaults: { ease: 'power4.out' } });
+      const tl = gsap.timeline({ 
+        defaults: { 
+          ease: 'power2.out'
+        }
+      });
+      
+      // Script text - Elegant handwritten flourish
       if (split.scriptWords.length) {
         tl.to(split.scriptWords, {
           opacity: 1,
-          yPercent: 0,
-          rotationZ: 0,
-          filter: 'blur(0px)',
-          duration: 0.85,
-          stagger: 0.08
+          x: 0,
+          y: 0,
+          rotation: 0,
+          scale: 1,
+          duration: 1.8,
+          stagger: { 
+            each: 0.15, 
+            ease: 'power1.out' 
+          },
+          ease: 'back.out(1.2)'
         }, 0);
       }
 
+      // Bold text - Powerful architectural reveal
       if (split.mainChars.length) {
         tl.to(split.mainChars, {
           opacity: 1,
-          yPercent: 0,
-          rotationX: 0,
-          rotationZ: 0,
-          filter: 'blur(0px)',
-          duration: 0.9,
-          stagger: { each: 0.02, from: 'start' }
-        }, split.scriptWords.length ? 0.1 : 0);
+          y: 0,
+          scaleY: 1,
+          skewX: 0,
+          duration: 1.5,
+          stagger: { 
+            each: 0.025, 
+            ease: 'power2.inOut',
+            from: 'center'
+          },
+          ease: 'expo.out'
+        }, 0.6);
       } else if (split.title) {
-        tl.to(split.title, { opacity: 1, y: 0, skewY: 0, duration: 0.85 }, 0);
+        tl.to(split.title, { 
+          opacity: 1, 
+          y: 0, 
+          scale: 1,
+          duration: 2.0,
+          ease: 'expo.out'
+        }, 0);
       }
 
+      // Description - Sophisticated fade reveal
       if (split.description) {
         tl.to(split.description, {
           opacity: 1,
           y: 0,
+          scale: 1,
           filter: 'blur(0px)',
-          duration: 0.6
-        }, '-=0.5');
+          duration: 2.2,
+          ease: 'power3.out'
+        }, '-=0.8');
       }
+      
+      // Premium finish - subtle scale settle
+      tl.to([split.scriptWords, split.mainChars, split.description].flat().filter(Boolean), {
+        scale: 1.02,
+        duration: 0.6,
+        ease: 'power1.out',
+        yoyo: true,
+        repeat: 1
+      }, '+=0.2');
 
       const clearTargets = [];
       if (split.scriptWords.length) {
