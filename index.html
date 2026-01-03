@@ -131,7 +131,11 @@
       display: inline-block;
       position: relative;
       padding-right: 0.02em;
-      will-change: transform, opacity, filter;
+      will-change: transform, opacity;
+    }
+
+    .hero .hero__title-line {
+      overflow: visible;
     }
 
   </style>
@@ -2267,8 +2271,7 @@
     const HERO_BOLD_ANIM = {
       yFrom: 140,
       duration: 1400,
-      baseDelay: 28,
-      blurFrom: 8
+      baseDelay: 28
     };
 
     function getHeroBoldEase() {
@@ -2401,9 +2404,8 @@
         gsap.set(chars, {
           yPercent: HERO_BOLD_ANIM.yFrom,
           opacity: 0,
-          filter: `blur(${HERO_BOLD_ANIM.blurFrom}px)`,
           force3D: true,
-          willChange: 'transform, opacity, filter'
+          willChange: 'transform, opacity'
         });
         return;
       }
@@ -2411,7 +2413,6 @@
       chars.forEach(char => {
         char.style.transform = `translateY(${HERO_BOLD_ANIM.yFrom}%)`;
         char.style.opacity = '0';
-        char.style.filter = `blur(${HERO_BOLD_ANIM.blurFrom}px)`;
       });
     }
 
@@ -2427,7 +2428,6 @@
       gsap.to(chars, {
         yPercent: 0,
         opacity: 1,
-        filter: 'blur(0px)',
         duration,
         ease,
         stagger: {
@@ -2435,7 +2435,7 @@
           from: 'random'
         },
         onComplete: () => {
-          gsap.set(chars, { clearProps: 'filter,will-change' });
+          gsap.set(chars, { clearProps: 'will-change' });
         }
       });
     }
@@ -2487,9 +2487,8 @@
           opacity: 0,
           y: 14,
           scale: 0.98,
-          filter: 'blur(2px)',
           transformOrigin: 'left top',
-          willChange: 'transform, opacity, filter'
+          willChange: 'transform, opacity'
         });
       }
 
@@ -2505,21 +2504,19 @@
       if (prefersReducedMotion) {
         const reducedTargets = [elements.title, elements.script, elements.description].filter(Boolean);
         if (reducedTargets.length) {
-          gsap.set(reducedTargets, { opacity: 1, clearProps: 'transform,filter' });
+          gsap.set(reducedTargets, { opacity: 1, clearProps: 'transform' });
         }
         if (elements.main && Array.isArray(elements.main.__heroChars)) {
           if (typeof gsap !== 'undefined') {
             gsap.set(elements.main.__heroChars, {
               yPercent: 0,
               opacity: 1,
-              filter: 'blur(0px)',
               clearProps: 'will-change'
             });
           } else {
             elements.main.__heroChars.forEach(char => {
               char.style.transform = 'translateY(0%)';
               char.style.opacity = '1';
-              char.style.filter = 'blur(0)';
             });
           }
         }
@@ -2569,7 +2566,6 @@
           opacity: 1,
           y: 0,
           scale: 1,
-          filter: 'blur(0px)',
           duration: 0.9,
           ease: 'power2.out'
         }, split.scriptWords.length ? 0.35 : 0.2);
@@ -2583,7 +2579,7 @@
         clearTargets.push(split.description);
       }
       if (clearTargets.length) {
-        tl.set(clearTargets, { clearProps: 'filter,will-change' });
+        tl.set(clearTargets, { clearProps: 'will-change' });
       }
 
       gsap.delayedCall(4, () => {
@@ -2595,12 +2591,11 @@
           gsap.set(split.boldTarget.__heroChars, {
             yPercent: 0,
             opacity: 1,
-            filter: 'blur(0px)',
             clearProps: 'will-change'
           });
         }
         if (split.description) {
-          gsap.set(split.description, { opacity: 1, clearProps: 'transform,filter' });
+          gsap.set(split.description, { opacity: 1, clearProps: 'transform' });
         }
         heroTextAnimated = true;
       });
