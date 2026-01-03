@@ -10,13 +10,17 @@
 .news-detail-hero {
   position: relative;
   width: 100%;
-  height: 56.25rem; // 900px from Figma
-  max-height: 100vh;
+  height: 100vh;
   overflow: hidden;
 
   @media (max-width: (@breakpoint-md - 1)) {
     height: 70vh;
     min-height: 25rem;
+  }
+  .bottom-edge{
+     position: absolute;
+    bottom: -1.25rem;
+    width: 100%;
   }
 }
 
@@ -42,6 +46,9 @@
   inset: 0;
   background: rgba(0, 0, 0, 0.3); // 30% opacity overlay from Figma
   z-index: 1;
+  padding: 6.5rem 2.875rem 4.5rem;
+  display: flex;
+  align-items: flex-end;
 }
 
 .news-detail-hero .news-detail-hero__content {
@@ -49,15 +56,14 @@
   width: 100%;
   height: 100%;
   z-index: 2;
+  display: flex;
+  flex-direction: column;
   padding: 0;
+  gap: 2.75rem;
 }
 
 .news-detail-hero .news-detail-hero__title {
-  position: absolute;
-  left: 2.6925rem; // 43.08px from left from Figma
-  top: 36.15625rem; // 578.5px from top from Figma
-  width: 54.2955625rem; // 868.729px from Figma
-  max-width: calc(100% - 5.385rem); // Account for left padding and right space
+
   font-family: @font-family-averta;
   font-weight: @font-weight-extrabold; // 800
   font-size: @font-size-h1; // 3.75rem (60px)
@@ -66,7 +72,7 @@
   text-transform: uppercase;
   color: @base-white;
   margin: 0;
-  white-space: pre-wrap;
+
 
   @media (max-width: (@breakpoint-md - 1)) {
     position: relative;
@@ -80,9 +86,6 @@
 }
 
 .news-detail-hero .news-detail-hero__metadata {
-  position: absolute;
-  left: 2.5rem; // 40px from left from Figma
-  top: 50.125rem; // 802px from top from Figma
   display: flex;
   gap: 2.5833333333333335rem; // Gap between items (453.5px - 40px - 138px = 275.5px, but visual gap is ~41.5px)
   align-items: flex-start;
@@ -101,6 +104,7 @@
   display: flex;
   flex-direction: column;
   gap: 0.4375rem; // 7px gap from Figma
+  flex: 41% 0 0;
 }
 
 .news-detail-hero .news-detail-hero__meta-label {
@@ -219,7 +223,7 @@
   text-transform: uppercase;
   color: @tertiary-blue-dark; // #1c3666
   margin: 0;
-  white-space: pre-wrap;
+
   width: 100%;
 }
 
@@ -266,7 +270,7 @@
   letter-spacing: 0;
   color: @tertiary-blue-dark; // #1c3666
   margin: 0;
-  white-space: pre-wrap;
+
   width: 100%;
 }
 
@@ -318,7 +322,7 @@
   letter-spacing: -0.04375rem; // -0.7px
   color: @tertiary-blue-dark; // #1c3666
   margin: 0;
-  white-space: pre-wrap;
+
   width: 100%;
 }
 
@@ -359,4 +363,3 @@
     border-radius: 1.5rem;
   }
 }
-
