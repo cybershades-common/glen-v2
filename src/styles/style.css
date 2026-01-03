@@ -1730,6 +1730,11 @@ body.mega-menu-open {
     height: calc(100% - 5rem);
   }
 }
+.hero .hero__slider .hero__slide-overlay .audio-btn {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+}
 .hero .play-button {
   display: flex;
   width: 11.61563rem;
@@ -2232,10 +2237,6 @@ h1 .hero__title-script {
   background-color: #1c3666;
   border-color: #1c3666;
   opacity: 0.9;
-}
-.local-nav-section .local-nav-item:focus {
-  outline: 0.125rem solid #1c3666;
-  outline-offset: 0.125rem;
 }
 @media (max-width: 767px) {
   .local-nav-section .local-nav-item {
