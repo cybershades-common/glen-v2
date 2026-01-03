@@ -1871,6 +1871,7 @@ h1 .hero__title-script {
   display: block;
   margin: 0 0 1.5rem 0;
   padding: 0;
+  overflow: visible;
   font-family: 'Born Ready', cursive;
   font-size: 6.25rem;
   font-style: normal;
@@ -1899,8 +1900,12 @@ h1 .hero__title-script {
     white-space: normal;
   }
 }
+.hero h1 {
+  overflow: visible;
+}
 .hero__title-line {
   display: block;
+  overflow: visible;
 }
 @media (max-width: 767px) {
   .hero__title-line {

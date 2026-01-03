@@ -277,6 +277,7 @@ h1 {
     display: block;
     margin: 0 0 1.5rem 0; // Negative margin to bring bold text closer
     padding: 0;
+    overflow: visible;
 
     // Typography
     font-family: @font-script;
@@ -309,9 +310,14 @@ h1 {
 
 }
 
+.hero h1 {
+  overflow: visible;
+}
+
 // Each line as a block
 .hero__title-line {
   display: block;
+  overflow: visible;
 
   @media (max-width: (@breakpoint-md - 1)) {
 

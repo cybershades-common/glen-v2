@@ -134,7 +134,9 @@
       will-change: transform, opacity;
     }
 
-    .hero .hero__title-line {
+    .hero-script-text {
+      display: inline-block;
+      position: relative;
       overflow: visible;
     }
 
@@ -2308,43 +2310,31 @@
       return text.replace(/\s+/g, ' ').trim();
     }
 
-    function splitWords(element, wordClass) {
-      if (!element || element.dataset.split === 'true') return [];
-      const text = normalizeText(element.textContent || '');
-      if (!text) return [];
-
-      element.textContent = '';
-      element.setAttribute('aria-label', text);
-      element.setAttribute('role', 'text');
-      element.dataset.split = 'true';
-
-      const words = text.split(' ');
-      const wordSpans = [];
-
-      words.forEach((word, index) => {
-        const wordSpan = document.createElement('span');
-        wordSpan.className = wordClass;
-        wordSpan.style.display = 'inline-block';
-        wordSpan.style.whiteSpace = 'pre';
-        wordSpan.textContent = word;
-        wordSpan.setAttribute('aria-hidden', 'true');
-        element.appendChild(wordSpan);
-        wordSpans.push(wordSpan);
-
-        if (index < words.length - 1) {
-          element.appendChild(document.createTextNode(' '));
-        }
-      });
-
-      return wordSpans;
-    }
-
     function shuffle(array) {
       for (let i = array.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
         [array[i], array[j]] = [array[j], array[i]];
       }
       return array;
+    }
+
+    function prepareHeroScriptWriting(element) {
+      if (!element || element.dataset.scriptWrite === 'true') return null;
+      const text = normalizeText(element.textContent || '');
+      if (!text) return null;
+
+      element.textContent = '';
+      element.dataset.scriptWrite = 'true';
+      element.setAttribute('aria-label', text);
+      element.setAttribute('role', 'text');
+
+      const textSpan = document.createElement('span');
+      textSpan.className = 'hero-script-text';
+      textSpan.textContent = text;
+      textSpan.setAttribute('aria-hidden', 'true');
+      element.appendChild(textSpan);
+
+      return { container: element, text: textSpan };
     }
 
     function buildHeroBoldText(element) {
@@ -2472,11 +2462,11 @@
         elements.main.style.overflow = 'visible';
       }
 
-      const scriptWords = elements.script ? splitWords(elements.script, 'hero-word hero-word--script') : [];
+      const scriptWrite = elements.script ? prepareHeroScriptWriting(elements.script) : null;
       const boldChars = elements.main ? buildHeroBoldText(elements.main) : [];
 
       heroTextSplit = {
-        scriptWords,
+        scriptWrite,
         boldTarget: elements.main,
         boldChars,
         description: elements.description,
@@ -2487,16 +2477,14 @@
         gsap.set(heroTextSplit.title, { perspective: 800 });
       }
 
-      if (scriptWords.length) {
-        gsap.set(scriptWords, {
+      if (scriptWrite) {
+        const clipStart = 'inset(-0.4em 100% -0.4em 0)';
+        gsap.set(scriptWrite.text, {
+          clipPath: clipStart,
+          webkitClipPath: clipStart,
           opacity: 0,
-          x: -10,
-          y: 12,
-          rotation: -2,
-          scale: 0.98,
-          transformOrigin: 'left center',
-          force3D: true,
-          willChange: 'transform, opacity'
+          y: 6,
+          willChange: 'clip-path, transform, opacity'
         });
       }
 
@@ -2520,9 +2508,19 @@
       heroTextStarted = true;
 
       if (prefersReducedMotion) {
-        const reducedTargets = [elements.title, elements.script, elements.description].filter(Boolean);
+        const reducedTargets = [elements.title, elements.description].filter(Boolean);
         if (reducedTargets.length) {
           gsap.set(reducedTargets, { opacity: 1, clearProps: 'transform' });
+        }
+        if (elements.script) {
+          const scriptText = elements.script.querySelector('.hero-script-text');
+          if (scriptText) {
+            gsap.set(scriptText, {
+              opacity: 1,
+              y: 0,
+              clearProps: 'clip-path,webkitClipPath,transform,opacity'
+            });
+          }
         }
         if (elements.main && Array.isArray(elements.main.__heroChars)) {
           if (typeof gsap !== 'undefined') {
@@ -2543,7 +2541,7 @@
       }
 
       const split = heroTextSplit || {
-        scriptWords: [],
+        scriptWrite: null,
         boldTarget: elements.main,
         boldChars: elements.main && Array.isArray(elements.main.__heroChars) ? elements.main.__heroChars : [],
         description: elements.description,
@@ -2556,26 +2554,22 @@
         }
       });
       
-      // Script text - subtle glide
-      if (split.scriptWords.length) {
-        tl.to(split.scriptWords, {
+      // Script text - handwriting reveal
+      if (split.scriptWrite && split.scriptWrite.text) {
+        const clipEnd = 'inset(-0.4em 0% -0.4em 0)';
+        tl.to(split.scriptWrite.text, {
+          duration: 1.1,
+          ease: 'power2.out',
           opacity: 1,
-          x: 0,
           y: 0,
-          rotation: 0,
-          scale: 1,
-          duration: 0.65,
-          stagger: {
-            each: 0.05,
-            ease: 'power1.out'
-          },
-          ease: 'power2.out'
+          clipPath: clipEnd,
+          webkitClipPath: clipEnd
         }, 0);
       }
 
       
       if (split.boldTarget && split.boldChars && split.boldChars.length) {
-        tl.add(() => animateHeroBoldText(split.boldTarget), split.scriptWords.length ? 0.12 : 0);
+        tl.add(() => animateHeroBoldText(split.boldTarget), split.scriptWrite ? 0.2 : 0);
       }
 
       // Description - soft fade
@@ -2586,12 +2580,12 @@
           scale: 1,
           duration: 0.9,
           ease: 'power2.out'
-        }, split.scriptWords.length ? 0.35 : 0.2);
+        }, split.scriptWrite ? 0.45 : 0.2);
       }
 
       const clearTargets = [];
-      if (split.scriptWords.length) {
-        clearTargets.push(...split.scriptWords);
+      if (split.scriptWrite && split.scriptWrite.text) {
+        clearTargets.push(split.scriptWrite.text);
       }
       if (split.description) {
         clearTargets.push(split.description);
@@ -2602,8 +2596,12 @@
 
       gsap.delayedCall(4, () => {
         if (heroTextAnimated) return;
-        if (split.scriptWords.length) {
-          gsap.set(split.scriptWords, { opacity: 1, clearProps: 'transform' });
+        if (split.scriptWrite && split.scriptWrite.text) {
+          gsap.set(split.scriptWrite.text, {
+            opacity: 1,
+            y: 0,
+            clearProps: 'clip-path,webkitClipPath,transform,opacity'
+          });
         }
         if (split.boldTarget && Array.isArray(split.boldTarget.__heroChars)) {
           gsap.set(split.boldTarget.__heroChars, {
