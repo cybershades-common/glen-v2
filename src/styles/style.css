@@ -1912,6 +1912,7 @@ h1 .hero__title-script {
     z-index: 2;
     padding: 0;
     margin-bottom: 1.125rem;
+    margin-top: 5rem;
   }
   .hero__description p {
     margin: 0;
