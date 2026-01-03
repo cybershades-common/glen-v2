@@ -689,7 +689,9 @@
         <!-- ========================================================================
          HERO SECTION 
          ======================================================================== -->
-        <section class="hero" id="hero">
+   
+
+            <section class="hero" id="hero">
           <!-- Background Slider -->
           <div class="hero__slider swiper">
             <div class="swiper-wrapper">
@@ -697,7 +699,8 @@
               <div class="swiper-slide">
                 <div class="hero__slide">
                   <img src="assets/images/latest-news-hero.png" alt="Glenaeon students outdoor learning"
-                    class="hero__slide-image full" loading="eager" fetchpriority="high" />
+                    class="hero__slide-image full" loading="eager" fetchpriority="high"
+                    style="object-position: bottom center;" />
                   <div class="hero__slide-overlay" aria-hidden="true">
                     <div class="container-fluid">
                       <div class="hero__content">
@@ -707,7 +710,7 @@
 
                             <h1 class="hero__title-line">
                               <span class="hero__title-script" id="hero-script-text-t">
-                                Whats Happening </span>Latest News
+                              What’s happening </span>Latest News
                             </h1>
                           </div>
 
@@ -729,23 +732,7 @@
                             </div>
                           </div>
 
-                          <!-- Mobile Buttons - Hidden on desktop -->
-                          <div class="col-12 d-md-none">
-                            <div class="hero__mobile-actions">
-                              <a href="#" class="hero__video-btn" aria-label="Watch video">
-                                <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor"
-                                  xmlns="http://www.w3.org/2000/svg">
-                                  <circle cx="10" cy="10" r="9" stroke="currentColor" stroke-width="1.5" fill="none" />
-                                  <path d="M8 6L13 10L8 14V6Z" fill="currentColor" />
-                                </svg>
-                                Video: See the magic in action
-                              </a>
-                              <div class="hero__mobile-cta">
-                                <a href="#apply" class="btn-primary-blue">Apply to Enrol</a>
-                                <a href="#tour" class="btn-primary-coral">Book a Tour</a>
-                              </div>
-                            </div>
-                          </div>
+
                         </div>
                       </div>
                     </div>
@@ -755,23 +742,23 @@
 
               <!-- Example: Video Slide (commented out) -->
               <!-- 
-          <div class="swiper-slide">
-            <div class="hero__slide hero__slide--video">
-              <video 
-                class="hero__slide-video"
-                autoplay 
-                muted 
-                loop 
-                playsinline
-                poster="assets/images/video-poster.jpg"
-              >
-                <source src="assets/videos/hero-video.mp4" type="video/mp4">
-                <source src="assets/videos/hero-video.webm" type="video/webm">
-              </video>
-              <div class="hero__slide-overlay" aria-hidden="true"></div>
-            </div>
+        <div class="swiper-slide">
+          <div class="hero__slide hero__slide--video">
+            <video 
+              class="hero__slide-video"
+              autoplay 
+              muted 
+              loop 
+              playsinline
+              poster="assets/images/video-poster.jpg"
+            >
+              <source src="assets/videos/hero-video.mp4" type="video/mp4">
+              <source src="assets/videos/hero-video.webm" type="video/webm">
+            </video>
+            <div class="hero__slide-overlay" aria-hidden="true"></div>
           </div>
-          -->
+        </div>
+        -->
             </div>
           </div>
 
@@ -780,6 +767,23 @@
             <object data="assets/images/hero-bottom-edge.svg" type="image/svg+xml" class="full">
               <img src="assets/images/hero-bottom-edge.png" class="full" alt="" />
             </object>
+          </div>
+
+          <!-- Mobile Buttons - Hidden on desktop -->
+          <div class="col-12 mt-auto">
+            <div class="hero__mobile-actions">
+              <a href="#" class="hero__video-btn" aria-label="Watch video">
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                  <circle cx="10" cy="10" r="9" stroke="currentColor" stroke-width="1.5" fill="none" />
+                  <path d="M8 6L13 10L8 14V6Z" fill="currentColor" />
+                </svg>
+                Video: See the magic in action
+              </a>
+              <div class="hero__mobile-cta">
+                <a href="#apply" class="btn-primary-blue">Apply to Enrol</a>
+                <a href="#tour" class="btn-primary-coral">Book a Tour</a>
+              </div>
+            </div>
           </div>
         </section>
         <!-- ========================================================================

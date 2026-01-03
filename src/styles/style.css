@@ -1734,10 +1734,10 @@ body.mega-menu-open {
 @media (max-width: 767px) {
   .hero .hero__slider .hero__slide-overlay {
     background: rgba(0, 0, 0, 0.3);
-    padding: 6rem 0 2rem;
+    padding: 6rem 0 8rem;
     align-items: flex-start;
     position: relative;
-    height: calc(100% - 5rem);
+    height: 100%;
   }
 }
 .hero .hero__slider .hero__slide-overlay .audio-btn {
@@ -2078,7 +2078,7 @@ h1 .hero__title-script {
     display: flex;
     position: relative;
     max-width: 100%;
-    margin: 1rem auto;
+    margin: 1rem auto 2rem;
     order: 2;
   }
 }
@@ -2180,9 +2180,6 @@ h1 .hero__title-script {
   .hero .hero__slider .hero__slide-overlay .container-fluid {
     display: flex;
     height: 100%;
-  }
-  .internal-page .hero .hero__slider .hero__slide-overlay {
-    padding-bottom: 2rem;
   }
   .internal-page .hero .hero__slider .hero__slide-overlay .container-fluid {
     height: 100%;
@@ -8422,6 +8419,7 @@ h1 .hero__title-script {
 .mega-menu .mobile-only .hero__mobile-actions {
   position: relative;
   z-index: 11111;
+  margin-bottom: 1rem;
   width: 100%;
 }
 @media (min-width: 992px) and (max-width: 1400px) {
