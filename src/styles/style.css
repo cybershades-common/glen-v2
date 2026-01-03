@@ -2043,12 +2043,9 @@ h1 .hero__title-script {
     width: 94%;
     z-index: 3;
     display: flex;
-    position: absolute;
-    bottom: 0;
+    position: relative;
     max-width: 100%;
-    margin: 1rem auto 1.5rem;
-    left: 0;
-    right: 0;
+    margin: auto auto 1.5rem;
   }
 }
 .hero__video-btn {
@@ -8396,6 +8393,7 @@ h1 .hero__title-script {
 .mega-menu .mobile-only .hero__mobile-actions {
   position: relative;
   z-index: 11111;
+  width: 100%;
 }
 @media (min-width: 992px) and (max-width: 1400px) {
   body .masked-image-content-block__title,
