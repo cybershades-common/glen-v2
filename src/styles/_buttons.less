@@ -103,6 +103,17 @@
   }
 }
 
+.btn-solid-white {
+  &:extend(.btn-custom);
+  background-color: @color-white;
+  color: @color-navy;
+  padding: 0.9375rem 1.5rem;
+  &:hover {
+    background-color: @color-navy;
+    color: @color-white;
+  }
+}
+
 // --------------------------------------------------------------------------
 // BUTTON SIZES
 // --------------------------------------------------------------------------
