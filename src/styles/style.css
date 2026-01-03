@@ -8394,15 +8394,8 @@ h1 .hero__title-script {
   display: none;
 }
 .mega-menu .mobile-only .hero__mobile-actions {
-  position: absolute;
+  position: relative;
   z-index: 11111;
-  bottom: auto;
-  top: 100%;
-  left: 0;
-  right: 0;
-  margin: 0;
-  width: 100%;
-  max-width: 100%;
 }
 @media (min-width: 992px) and (max-width: 1400px) {
   body .masked-image-content-block__title,
