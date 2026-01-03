@@ -1904,13 +1904,14 @@ h1 .hero__title-script {
 @media (max-width: 991px) and (max-width: 767px) {
   .hero__description {
     display: block;
-    position: absolute;
-    left: 1.125rem;
-    top: 26.03125rem;
-    width: 22.603125rem;
-    max-width: calc(100% - 2.25rem);
+    position: relative;
+    left: inherit;
+    top: inherit;
+    width: auto;
+    max-width: 100%;
     z-index: 2;
     padding: 0;
+    margin-bottom: 1.125rem;
   }
   .hero__description p {
     margin: 0;
@@ -2046,6 +2047,7 @@ h1 .hero__title-script {
     position: relative;
     max-width: 100%;
     margin: 1rem auto;
+    order: 2;
   }
 }
 .hero__video-btn {
@@ -2121,12 +2123,14 @@ h1 .hero__title-script {
     width: 100%;
     z-index: 2;
     display: flex;
+    flex-direction: column;
     padding: 1rem 0 0;
   }
   .hero .hero__content > .row {
     display: flex;
     justify-content: space-between;
     flex-direction: column;
+    order: 1;
   }
   .hero .hero__content h1 {
     font-size: 3.5rem;

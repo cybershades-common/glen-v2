@@ -326,15 +326,16 @@ h1 {
     }
 
     @media (max-width: (@breakpoint-md - 1)) {
-      // Show and reposition on mobile
+      // Show and reposition on mobile - work with parallax
       display: block;
-      position: absolute;
-      left: 1.125rem;
-      top: 26.03125rem;
-      width: 22.603125rem;
-      max-width: calc(100% - 2.25rem);
+      position: relative;
+      left: inherit;
+      top: inherit;
+      width: auto;
+      max-width: 100%;
       z-index: 2;
       padding: 0;
+      margin-bottom: 1.125rem;
 
       p {
         margin: 0;
@@ -527,6 +528,7 @@ h1 {
     position: relative;
     max-width:100%;
     margin: 1rem auto;
+    order: 2;
   }
 }
 
@@ -622,12 +624,14 @@ h1 {
       width: 100%;
       z-index: 2;
       display: flex;
+      flex-direction: column;
       padding: 1rem 0 0;
 
       >.row {
         display: flex;
         justify-content: space-between;
         flex-direction: column;
+        order: 1;
       }
 
       h1 {
