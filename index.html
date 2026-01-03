@@ -2271,25 +2271,11 @@
     let heroTextSplit = null;
 
     const HERO_BOLD_ANIM = {
-      yFrom: 140,
-      duration: 900,
-      baseDelay: 18,
-      driftY: 54,
-      driftX: 10,
-      driftRotation: 6,
-      driftScale: 0.02
+      yFromPercent: 100,
+      duration: 1.2,
+      stagger: 0.1,
+      ease: 'power4.out'
     };
-
-    function getHeroBoldEase() {
-      if (typeof gsap !== 'undefined' && typeof gsap.parseEase === 'function') {
-        return gsap.parseEase('cubic-bezier(0.16, 1, 0.3, 1)');
-      }
-      return 'power3.out';
-    }
-
-    function randomBetween(min, max) {
-      return Math.random() * (max - min) + min;
-    }
 
     function getActiveHeroTextElements() {
       const heroSlider = document.querySelector('.hero__slider');
@@ -2308,14 +2294,6 @@
 
     function normalizeText(text) {
       return text.replace(/\s+/g, ' ').trim();
-    }
-
-    function shuffle(array) {
-      for (let i = array.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [array[i], array[j]] = [array[j], array[i]];
-      }
-      return array;
     }
 
     function prepareHeroScriptWriting(element) {
@@ -2386,11 +2364,6 @@
         }
       });
 
-      const order = shuffle([...Array(chars.length)].map((_, i) => i + 1));
-      chars.forEach((char, i) => {
-        char.style.setProperty('--hero-anim-char-index', order[i]);
-      });
-
       setHeroBoldCharDefaults(chars);
       element.__heroChars = chars;
       return chars;
@@ -2400,23 +2373,15 @@
       if (!chars.length) return;
       if (typeof gsap !== 'undefined') {
         gsap.set(chars, {
-          yPercent: () => HERO_BOLD_ANIM.yFrom + randomBetween(-HERO_BOLD_ANIM.driftY, HERO_BOLD_ANIM.driftY),
-          x: () => randomBetween(-HERO_BOLD_ANIM.driftX, HERO_BOLD_ANIM.driftX),
-          rotation: () => randomBetween(-HERO_BOLD_ANIM.driftRotation, HERO_BOLD_ANIM.driftRotation),
-          scale: () => 1 - HERO_BOLD_ANIM.driftScale + randomBetween(-HERO_BOLD_ANIM.driftScale, HERO_BOLD_ANIM.driftScale),
+          yPercent: HERO_BOLD_ANIM.yFromPercent,
           opacity: 0,
-          force3D: true,
           willChange: 'transform, opacity'
         });
         return;
       }
 
       chars.forEach(char => {
-        const y = HERO_BOLD_ANIM.yFrom + randomBetween(-HERO_BOLD_ANIM.driftY, HERO_BOLD_ANIM.driftY);
-        const x = randomBetween(-HERO_BOLD_ANIM.driftX, HERO_BOLD_ANIM.driftX);
-        const rotation = randomBetween(-HERO_BOLD_ANIM.driftRotation, HERO_BOLD_ANIM.driftRotation);
-        const scale = 1 - HERO_BOLD_ANIM.driftScale + randomBetween(-HERO_BOLD_ANIM.driftScale, HERO_BOLD_ANIM.driftScale);
-        char.style.transform = `translate(${x}px, ${y}%) rotate(${rotation}deg) scale(${scale})`;
+        char.style.transform = `translateY(${HERO_BOLD_ANIM.yFromPercent}%)`;
         char.style.opacity = '0';
       });
     }
@@ -2425,23 +2390,13 @@
       if (!element || !Array.isArray(element.__heroChars) || typeof gsap === 'undefined') return;
 
       const chars = element.__heroChars;
-      const duration = HERO_BOLD_ANIM.duration / 1000;
-      const baseDelay = HERO_BOLD_ANIM.baseDelay / 1000;
-      const ease = getHeroBoldEase();
-
       gsap.killTweensOf(chars);
       gsap.to(chars, {
-        yPercent: 0,
-        x: 0,
-        rotation: 0,
-        scale: 1,
+        duration: HERO_BOLD_ANIM.duration,
         opacity: 1,
-        duration,
-        ease,
-        delay: (index, target) => {
-          const idx = parseInt(target.style.getPropertyValue('--hero-anim-char-index'), 10);
-          return Number.isFinite(idx) ? idx * baseDelay : 0;
-        },
+        ease: HERO_BOLD_ANIM.ease,
+        yPercent: 0,
+        stagger: HERO_BOLD_ANIM.stagger,
         onComplete: () => {
           gsap.set(chars, { clearProps: 'will-change' });
         }
