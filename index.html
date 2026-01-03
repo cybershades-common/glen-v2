@@ -2554,11 +2554,15 @@
         }
       });
       
+      const scriptDuration = 1.1;
+      const scriptGap = 0.2;
+      const scriptEnd = split.scriptWrite ? scriptDuration + scriptGap : 0;
+
       // Script text - handwriting reveal
       if (split.scriptWrite && split.scriptWrite.text) {
         const clipEnd = 'inset(-0.4em 0% -0.4em 0)';
         tl.to(split.scriptWrite.text, {
-          duration: 1.1,
+          duration: scriptDuration,
           ease: 'power2.out',
           opacity: 1,
           y: 0,
@@ -2569,7 +2573,7 @@
 
       
       if (split.boldTarget && split.boldChars && split.boldChars.length) {
-        tl.add(() => animateHeroBoldText(split.boldTarget), split.scriptWrite ? 0.2 : 0);
+        tl.add(() => animateHeroBoldText(split.boldTarget), scriptEnd);
       }
 
       // Description - soft fade
@@ -2580,7 +2584,7 @@
           scale: 1,
           duration: 0.9,
           ease: 'power2.out'
-        }, split.scriptWrite ? 0.45 : 0.2);
+        }, scriptEnd ? scriptEnd + 0.25 : 0.2);
       }
 
       const clearTargets = [];
