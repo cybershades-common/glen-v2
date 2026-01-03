@@ -1724,10 +1724,10 @@ body.mega-menu-open {
 @media (max-width: 767px) {
   .hero .hero__slider .hero__slide-overlay {
     background: rgba(0, 0, 0, 0.3);
-    padding: 6rem 0 2rem;
+    padding: 6rem 0 ;
     align-items: flex-start;
     position: relative;
-    height: calc(100% - 6rem);
+    height: 100%;
   }
 }
 .hero .play-button {
