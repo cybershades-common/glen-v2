@@ -447,7 +447,8 @@ button {
     right: 0;
     margin: auto;
     z-index: 0;
-    img{
+
+    img {
       object-fit: cover;
     }
   }
@@ -1603,11 +1604,11 @@ button {
     bottom: 80px;
     z-index: 3;
     width: 100%;
-    padding-left:4.5rem ;
+    padding-left: 4.5rem;
 
     @media (max-width: (@breakpoint-lg - 1)) {
       bottom: 40px;
-      padding-left:0;
+      padding-left: 0;
     }
 
     @media (max-width: (@breakpoint-md - 1)) {
@@ -1615,7 +1616,7 @@ button {
     }
 
     .container-fluid {
-     
+
 
       @media (max-width: (@breakpoint-xl - 1)) {
         padding-left: 40px;
@@ -2823,7 +2824,7 @@ button {
 
 
 .breadcrumb-wrap {
-  padding: 1rem 0;
+  padding: 2rem 0 0;
 
   .breadcrumb {
     li {
@@ -2835,6 +2836,23 @@ button {
       font-style: normal;
       font-weight: 400;
       line-height: 140%;
+
+      &+li {
+
+
+        &:before {
+          color: var(--tertiary-blue-dark, #1C3666);
+        }
+
+        span {
+          opacity: .5;
+
+
+          &:hover {
+            opacity: 1;
+          }
+        }
+      }
 
       /* 21px */
       a {
@@ -3033,6 +3051,6 @@ button {
   }
 }
 
-.swiper  .swiper-button-lock{
+.swiper .swiper-button-lock {
   display: block;
 }
