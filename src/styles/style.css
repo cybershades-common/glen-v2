@@ -1724,10 +1724,10 @@ body.mega-menu-open {
 @media (max-width: 767px) {
   .hero .hero__slider .hero__slide-overlay {
     background: rgba(0, 0, 0, 0.3);
-    padding: 6rem 0 8rem;
+    padding: 6rem 0 2rem;
     align-items: flex-start;
     position: relative;
-    height: 100%;
+    height: calc(100% - 5rem);
   }
 }
 .hero .play-button {
@@ -2045,7 +2045,7 @@ h1 .hero__title-script {
     display: flex;
     position: relative;
     max-width: 100%;
-    margin: auto auto 1.5rem;
+    margin: 1rem auto;
   }
 }
 .hero__video-btn {
@@ -2112,9 +2112,6 @@ h1 .hero__title-script {
 @media (max-width: 767px) {
   .hero {
     max-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
   }
   .hero .bottom-edge {
     bottom: -0.375rem;
