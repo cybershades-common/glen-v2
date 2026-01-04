@@ -216,51 +216,9 @@
     text-decoration: none;
     margin-top: 0; // No extra margin, gap handled by parent
     align-self: flex-start;
-    text-decoration: none;
+    transition: opacity @transition-base;
 
-    &:hover,
-    &:focus-visible {
-      text-decoration: none;
-    }
-
-    &:hover .about-glenaeon-section__link-text,
-    &:focus-visible .about-glenaeon-section__link-text {
-      color: darken(@primary-coral, 10%);
-    }
-
-    &:hover svg,
-    &:focus-visible svg {
-      transform: translateX(0.6rem);
-    }
-
-    &:hover .about-glenaeon-section__link-arrow,
-    &:focus-visible .about-glenaeon-section__link-arrow {
-      transform: translateX(0.6rem) rotate(180deg);
-    }
-
-    &:hover svg path,
-    &:focus-visible svg path {
-      fill: darken(@primary-coral, 10%);
-    }
-
-    svg,
-    .about-glenaeon-section__link-arrow {
-      display: block;
-      transition: transform 420ms ease;
-    }
-
-    svg path {
-      transition: fill 420ms ease;
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      &:hover svg,
-      &:focus-visible svg,
-      &:hover .about-glenaeon-section__link-arrow,
-      &:focus-visible .about-glenaeon-section__link-arrow {
-        transform: none;
-      }
-    }
+    
   }
 
   &__link-text {
@@ -270,20 +228,10 @@
     line-height: 1.3;
     letter-spacing: -0.025rem; // -0.4px
     color: @primary-coral; // #db574e
-    text-decoration: none;
-    display: inline-block;
-    background-image:
-      linear-gradient(currentColor, currentColor),
-      linear-gradient(currentColor, currentColor);
-    background-repeat: no-repeat;
-    background-position: 0 100%, 0 100%;
-    background-size: 100% 0.04em, 0% 0.08em;
-    transition: color 420ms ease, background-size 420ms ease;
-
-    .about-glenaeon-section__card-link:hover &,
-    .about-glenaeon-section__card-link:focus-visible & {
-      background-size: 100% 0.04em, 100% 0.08em;
-    }
+    text-decoration: underline;
+    text-decoration-thickness: 0.04em;
+    text-underline-position: from-font;
+    text-decoration-skip-ink: none;
 
     @media (max-width: (@breakpoint-md - 1)) {
       font-size: 1.125rem;
