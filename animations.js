@@ -49,7 +49,10 @@ let videoTestimonialsAnimationsInitialized = false;
 const hasScrollTrigger = typeof ScrollTrigger !== 'undefined';
 
 if (hasScrollTrigger) {
-  gsap.registerPlugin(ScrollTrigger, ScrollSmoother);
+  gsap.registerPlugin(ScrollTrigger);
+  if (typeof ScrollSmoother !== 'undefined') {
+    gsap.registerPlugin(ScrollSmoother);
+  }
 }
 
 const SCROLL_SMOOTHER_BREAKPOINT = 1024;
@@ -403,6 +406,76 @@ function initParallaxBackgrounds() {
 // PARALLAX BACKGROUND - END
 // ==========================================================================
 
+// ==========================================================================
+// FOOTER BRAND TEXT REVEAL - START
+// ==========================================================================
+function initFooterBrandReveal() {
+  if (typeof gsap === 'undefined' || !hasScrollTrigger) {
+    return;
+  }
+
+  const prefersReducedMotion = reduceMotionMediaQuery ? reduceMotionMediaQuery.matches : false;
+  const brandItems = document.querySelectorAll('.footer__brand-inner');
+  if (!brandItems.length) {
+    return;
+  }
+
+  brandItems.forEach((item) => {
+    let textSpan = item.querySelector('.footer__brand-text');
+    if (!textSpan) {
+      const textContent = item.textContent;
+      item.textContent = '';
+      textSpan = document.createElement('span');
+      textSpan.className = 'footer__brand-text';
+      textSpan.textContent = textContent;
+      item.appendChild(textSpan);
+    }
+
+    if (textSpan.dataset.split !== 'true') {
+      const text = textSpan.textContent || '';
+      textSpan.textContent = '';
+      const fragment = document.createDocumentFragment();
+      Array.from(text).forEach((char) => {
+        const wrap = document.createElement('span');
+        wrap.className = 'footer__brand-char-wrap';
+        const inner = document.createElement('span');
+        inner.className = 'footer__brand-char';
+        inner.textContent = char;
+        wrap.appendChild(inner);
+        fragment.appendChild(wrap);
+      });
+      textSpan.appendChild(fragment);
+      textSpan.dataset.split = 'true';
+    }
+
+    const chars = textSpan.querySelectorAll('.footer__brand-char');
+
+    if (prefersReducedMotion) {
+      gsap.set(chars, { yPercent: 0, clearProps: 'transform' });
+      return;
+    }
+
+    gsap.set(chars, { yPercent: 120 });
+
+    gsap.timeline({
+      scrollTrigger: {
+        trigger: item,
+        start: 'top 90%',
+        end: 'top 30%',
+        scrub: true
+      }
+    }).to(chars, {
+      yPercent: 0,
+      duration: 2.6,
+      stagger: 0,
+      ease: 'back.out(1)'
+    });
+  });
+}
+// ==========================================================================
+// FOOTER BRAND TEXT REVEAL - END
+// ==========================================================================
+
 function initAnimations() {
   if (typeof gsap === 'undefined') {
     return;
@@ -412,6 +485,7 @@ function initAnimations() {
   initMarqueeAnimation();
   initVideoTestimonialsAnimations();
   initRevealAnimations();
+  initFooterBrandReveal();
   initParallaxBackgrounds();
   // Featured cards now use swiper instead of GSAP scroll effect
 
