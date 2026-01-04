@@ -1477,9 +1477,16 @@
           <div class="col-lg-10 offset-lg-1">
             <svg xmlns="http://www.w3.org/2000/svg" width="1239" height="22" viewBox="0 0 1239 22" fill="none"
               class="full">
-              <path
-                d="M0.0761719 21.2405C55.4095 12.7405 186.076 -3.15951 266.076 1.24049C366.076 6.74049 450.076 21.2405 509.076 21.2405C568.076 21.2405 718.076 1.24046 770.076 1.24048C822.076 1.24049 980.076 21.2405 1048.08 21.2405C1116.08 21.2405 1206.08 1.24048 1238.08 1.24048"
-                stroke="#1C3666" stroke-dasharray="10 10" />
+              <defs>
+                <clipPath id="about-separator-clip" clipPathUnits="userSpaceOnUse">
+                  <rect class="about-glenaeon-section__separator-reveal" x="0" y="0" width="0" height="22" />
+                </clipPath>
+              </defs>
+              <g clip-path="url(#about-separator-clip)">
+                <path
+                  d="M0.0761719 21.2405C55.4095 12.7405 186.076 -3.15951 266.076 1.24049C366.076 6.74049 450.076 21.2405 509.076 21.2405C568.076 21.2405 718.076 1.24046 770.076 1.24048C822.076 1.24049 980.076 21.2405 1048.08 21.2405C1116.08 21.2405 1206.08 1.24048 1238.08 1.24048"
+                  stroke="#1C3666" stroke-dasharray="10 10" class="about-glenaeon-section__separator-line" />
+              </g>
             </svg>
           </div>
 
@@ -1779,7 +1786,7 @@
   <script src="https://unpkg.com/isotope-layout@3/dist/isotope.pkgd.min.js"></script>
 
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.1/dist/ScrollSmoother.min.js"></script>
+  <!-- <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.1/dist/ScrollSmoother.min.js"></script> -->
 
 
   <!-- Swiper JS -->
@@ -1873,6 +1880,38 @@
 
       tl.eventCallback('onComplete', () => {
         aboutHeroAnimated = true;
+      });
+    }
+
+    function initAboutSeparatorAnimation() {
+      if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') return;
+      const separator = document.querySelector('.about-glenaeon-section__separator');
+      const separatorSvg = separator ? separator.querySelector('svg') : null;
+      const revealRect = separator ? separator.querySelector('.about-glenaeon-section__separator-reveal') : null;
+      if (!separatorSvg || !revealRect) return;
+
+      const viewBox = separatorSvg.viewBox && separatorSvg.viewBox.baseVal;
+      const maxWidth = viewBox && viewBox.width ? viewBox.width : 0;
+      const maxHeight = viewBox && viewBox.height ? viewBox.height : 0;
+
+      gsap.set(revealRect, {
+        attr: {
+          width: 0,
+          height: maxHeight || 22
+        }
+      });
+
+      gsap.to(revealRect, {
+        attr: {
+          width: maxWidth || 1239
+        },
+        ease: 'none',
+        scrollTrigger: {
+          trigger: separator,
+          start: 'top bottom',
+          end: 'bottom 30%',
+          scrub: true
+        }
       });
     }
 
@@ -1982,6 +2021,7 @@
     // Unveil animation function
     function startUnveilAnimation() {
       prepAboutHeroTextAnimation();
+      initAboutSeparatorAnimation();
 
       const tl = gsap.timeline({
         onComplete: function () {
