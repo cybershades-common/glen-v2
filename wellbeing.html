@@ -26,6 +26,35 @@
   <!-- Custom Styles (Compiled from LESS) -->
   <link rel="stylesheet" href="src/styles/style.css" />
 
+  <script>
+    document.documentElement.classList.add('js');
+  </script>
+
+  <style>
+    .wellbeing-hero-line {
+      display: block;
+    }
+
+    .wellbeing-hero-text {
+      display: inline-block;
+    }
+
+    .wellbeing-hero-word {
+      display: inline-block;
+    }
+
+    .js .wellbeing-hero-text {
+      opacity: 0;
+    }
+
+    .wellbeing-hero-char {
+      display: inline-block;
+      transform: translateY(20px);
+      opacity: 0;
+      will-change: transform, opacity;
+    }
+  </style>
+
 
 
 
@@ -828,8 +857,12 @@
                             <!-- Hero Text Block -->
 
                             <h1 class="hero__title-line">
-                              <span class="hero__title-script" id="hero-script-text-t">
-                                Our Cornerstone</span>Wellbeing at Glenaeon
+                              <span class="hero__title-script wellbeing-hero-line" id="hero-script-text-t">
+                                <span class="wellbeing-hero-text">Our Cornerstone</span>
+                              </span>
+                              <span class="hero__title-main wellbeing-hero-line">
+                                <span class="wellbeing-hero-text">Wellbeing at Glenaeon</span>
+                              </span>
                             </h1>
                           </div>
 
@@ -1787,6 +1820,87 @@
 
   <!-- Animations -->
   <script src="animations.js"></script>
+
+  <script>
+    (function () {
+      function splitToChars(element) {
+        const text = element.textContent || '';
+        const tokens = text.split(/(\s+)/);
+        const fragment = document.createDocumentFragment();
+
+        tokens.forEach((token) => {
+          if (!token) {
+            return;
+          }
+          if (/^\s+$/.test(token)) {
+            fragment.appendChild(document.createTextNode(token));
+            return;
+          }
+
+          const word = document.createElement('span');
+          word.className = 'wellbeing-hero-word';
+
+          for (let i = 0; i < token.length; i += 1) {
+            const span = document.createElement('span');
+            span.className = 'wellbeing-hero-char';
+            span.textContent = token[i];
+            word.appendChild(span);
+          }
+
+          fragment.appendChild(word);
+        });
+
+        element.textContent = '';
+        element.appendChild(fragment);
+      }
+
+      function runWellbeingHeroAnimation() {
+        const textBlocks = document.querySelectorAll('.wellbeing-hero-text');
+        if (!textBlocks.length) {
+          return;
+        }
+
+        const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        const allChars = [];
+
+        textBlocks.forEach((block) => {
+          splitToChars(block);
+          block.style.opacity = '1';
+          allChars.push(...block.querySelectorAll('.wellbeing-hero-char'));
+        });
+
+        if (prefersReducedMotion || typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') {
+          allChars.forEach((char) => {
+            char.style.opacity = '1';
+            char.style.transform = 'none';
+          });
+          return;
+        }
+
+        gsap.registerPlugin(ScrollTrigger);
+        gsap.set(allChars, { opacity: 0, y: 20 });
+
+        gsap.to(allChars, {
+          scrollTrigger: {
+            trigger: '#hero',
+            start: 'top 80%',
+            toggleActions: 'play reverse play reverse'
+          },
+          opacity: 1,
+          y: 0,
+          stagger: 0.05,
+          duration: 0.6,
+          ease: 'power2.out'
+        });
+      }
+
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', runWellbeingHeroAnimation);
+      } else {
+        runWellbeingHeroAnimation();
+      }
+    })();
+  </script>
 
   <!-- Enable scrolling on page load -->
   <script>

@@ -1,307 +1,55 @@
-<!-- Toggle -->
-<a herf="#link-to-search" class="button button-open">
-  <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" class="icon">
-    <rect class="fill-none" width="32" height="32"/>
-    <path class="fill-currentcolor" d="M29.82861,24.17139,25.56519,19.908A13.0381,13.0381,0,1,0,19.908,25.56525l4.26343,4.26337a4.00026,4.00026,0,0,0,5.65723-5.65723ZM5,14a9,9,0,1,1,9,9A9.00984,9.00984,0,0,1,5,14Z"/>
-  </svg>
-</a>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+  <script src="https://unpkg.com/split-type"></script>
 
-<!-- Search form overlay -->
-<div class="overlay hiding">
-  <button class="button button-close">
-    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" class="icon">
-      <rect class="fill-none" width="32" height="32"/>
-      <path class="fill-currentcolor" d="M18.82813,16,29.41406,5.41406a1.99979,1.99979,0,0,0-2.82812-2.82812L16,13.17188,5.41406,2.58594A1.99979,1.99979,0,0,0,2.58594,5.41406L13.17188,16,2.58594,26.58594a1.99979,1.99979,0,1,0,2.82813,2.82813L16,18.82813,26.58594,29.41406a1.99979,1.99979,0,0,0,2.82813-2.82812Z"/>
-    </svg>
-  </button>
-  <form action="#" class="form-search">
-    <label for="keywords" class="visuallyhidden">Search</label>
-    <input class="input input-search" id="keywords" name="keywords" type="search" placeholder="Find something…" autocorrect="off" autocapitalize="off" required>
-    <button type="submit" class="button button-search">
-      <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" class="icon">
-        <rect class="fill-none" width="32" height="32"/>
-        <path class="fill-currentcolor" d="M29.82861,24.17139,25.56519,19.908A13.0381,13.0381,0,1,0,19.908,25.56525l4.26343,4.26337a4.00026,4.00026,0,0,0,5.65723-5.65723ZM5,14a9,9,0,1,1,9,9A9.00984,9.00984,0,0,1,5,14Z"/>
-      </svg>
-    </button>
-  </form>
-</div>
-// Variables
-$base-px: 8px;
-$breakpoint: 768px;
-$breakpoint-max: $breakpoint - 1px;
+<div class="spacer"></div>
 
-// Colours
-$background: #F7FBFB;
-$background-2: #EAF5F5;
-$background-3: #BBD8D8;
-$primary: #FD7F71;
-$primary-2: #C3D8D7;
-$white: #fff;
+  <h1 class="reveal-text">Smooth Scroll Animation</h1>
 
-// Font stack
-$system: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  <div class="spacer"></div>
 
-// Basics
-// ----------------------
-body {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  align-content: center;
-  background-color: $background;
-  height: 100vh;
-  font-family: $system; }
 
-// For hiding the label
-// ----------------------
-.visuallyhidden {
-  position: absolute;
-  overflow: hidden;
-  clip: rect(0 0 0 0);
-  width: 1px;
-  height: 1px;
-  margin: -1px;
-  padding: 0;
-  border: 0; }
-
-// Input/button reset
-// ---------------------------
-.input,
-.button {
-  display: inline-block;
-  -webkit-appearance: none;
-	-moz-appearance: none;
-  appearance: none;
-  line-height: normal;
-  border: none;
-  outline: none;
-	max-width: 100%;
-  font-family: $system; }
-
-// SVG Helpers
-// ---------------------------
-.fill-currentcolor {
-  fill: currentcolor; }
-
-.fill-none {
-  fill: none; }
-
-// Icon
-// ---------------------------
-.icon {
-  width: 24px;
-  height: 24px;
-  transition: .3s ease-out;
-  
-  @media (min-width: $breakpoint) {
-    width: 32px;
-    height: 32px; } }
-
-// Button
-// ---------------------------
-.button {
-  cursor: pointer;
-  color: $primary;
-  transition: .3s ease-out;
-  
-  &:hover,
-  &:focus { 
-    transform: scale(1.125);
-    
-    .icon {
-      transform: scale(1.25); } } }
-
-// Button (open)
-// ---------------------------
-.button-open {
-  // Display/alignment
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  align-content: center;
-  
-  // Sizing
-  width: 96px;
-  height: 96px;
-  border-radius: 48px;
-  
-  // Style
-  background-color: $white;
-  box-shadow:
-    0 1px 1px rgba($background-3, .6),
-    0 3px 3px rgba($background-3, .4),
-    0 8px 16px rgba($background-3, .3);
-  
-  &:hover,
-  &:focus {
-    box-shadow:
-      0 2px 2px rgba($background-3, .4),
-      0 4px 4px rgba($background-3, .3),
-      0 12px 32px rgba($background-3, .3); } }
-
-// Button (close)
-// ---------------------------
-.button-close {
-  position: absolute;
-  top: 7.5vw;
-  right: 7.5vw;
-  padding: 0;
-  background-color: transparent; }
-
-.button-search {
-  position: absolute;
-  z-index: 2;
-  top: 0;
-  right: 0;
-  background-color: transparent;
-  cursor: pointer;
-  padding: 25px $base-px*2 21px;
-
-  // Same horizontal padding .input-search
-  @media (min-width: $breakpoint) {
-    padding: 30px ($base-px*6); } }
-
-// Search
-// ---------------------------
-.form-search {
-  position: relative;
-  width: 100%;
-
-  @media (min-width: $breakpoint) {
-    max-width: 720px; } }
-
-// Input
-// ---------------------------
-.input-search {
-  // Sizing
-  padding: 26px ($base-px*2) 25px; // 72px height
-  width: 100%;
-  
-  // Style
-  font-size: 18px;
-  font-weight: 600;
-  color: $primary;
-  background-color: $white;
-  box-shadow:
-    0 1px 1px rgba($background-3, .6),
-    0 3px 3px rgba($background-3, .4),
-    0 8px 16px rgba($background-3, .3);
-
-  @media (min-width: $breakpoint) {
-    // Sizing
-    padding: 29px ($base-px*6);
-    
-    // Style
-    font-size: 32px;
-    border-radius: 30em; } }
-
-.input-search::placeholder {
-  color: $primary-2; }
-
-// Overlay
-// ---------------------------
-.overlay {
-  // Display
-  overflow: hidden;
-  display: flex;
-  justify-content: center;
-  align-items: flex-end;
-  align-content: flex-end;
-  
-  // Positioning
-  position: fixed;
-  z-index: 3;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  
-  // Style
-  background-image: linear-gradient(to top, $background, $background-2);
-  
-  @media (min-width: $breakpoint) {
-    align-items: center;
-    align-content: center; } }
-
-// Transition
-// ----------------------
-// Initial state
-.hiding {
-  max-height: 0;
-  opacity: 0;
-  bottom: 0;
-  
-  // This transition happens when the close button is clicked
-  // and should be faster than the .showing state
-  transition:
-    max-height .3s .2s cubic-bezier(0.215, 0.61, 0.355, 1),
-    opacity .6s ease-out;
-  
-  // When hiding inner elements should be invisible too
-  .button-search,
-  .input-search {
-    opacity: 0; }
-  
-  // Offset the button
-  .button-search {
-    transform: translate3d(0, 33%, 0); }
-
-  // Offset the input more 
-  .input-search {
-    transform: translate3d(0, 50%, 0); } }
-
-// Showing state
-.showing {
-  max-height: 100vh;
-  top: 0;
-  
-  // This happens when the open button is clicked
-  // max-height transition is to appear more subtle
-  transition:
-    max-height .4s .2s cubic-bezier(0.215, 0.61, 0.355, 1),
-    opacity .8s ease-out; }
-
-// Transitions
-.button-search {
-  transition: .4s .6s ease-out; }
-
-.input-search {
-  transition: .8s .3s ease-out; }
-
-  // Keep search toggling out of the global scope
-(function(window, document, undefined) {
-  // Variables
-  var open = document.querySelector('.button-open');
-  var close = document.querySelector('.button-close');
-  var overlay = document.querySelector('.overlay');
-  var search = document.querySelector('.input-search');
-  
-  // Focus on an element
-  var focusOn = function(element) {
-    // Only focus on the element if it contains the relevant
-    // class name that means it’s actually visible
-    if (overlay.classList.contains('showing')) {
-      element.focus();
+    body {
+      font-family: sans-serif;
+      padding: 0;
+      margin: 0;
+      background-color: #fdfdfd;
     }
-    // Otherwise remove the focus from the element
-    else {
-      element.blur();
+
+    .spacer {
+      height: 100vh;
     }
-  }
-  
-  // Toggles a set of class names on an element
-  var toggler = function() {
-    // Toggle the classes which set off the transition
-    overlay.classList.toggle('hiding');
-    overlay.classList.toggle('showing');
-    
-    // Once the overlay’s transition ends focus the search field
-    overlay.addEventListener('transitionend', focusOn.bind(null, search), false);
-    
-    // Prevent the clicks from navigating away
-    return false;
-  }
-  
-  // Add the event listener to the toggle
-  open.addEventListener('click', toggler, false);
-  close.addEventListener('click', toggler, false);
-})(window, document);
+
+    .reveal-text {
+      font-size: 3rem;
+      font-weight: bold;
+      text-align: center;
+      margin-top: 200px;
+    }
+
+    .char {
+      display: inline-block;
+      transform: translateY(20px);
+    }
+
+        document.addEventListener("DOMContentLoaded", () => {
+      const splitText = new SplitType('.reveal-text', {
+        types: 'chars',
+        charClass: 'char'
+      });
+
+      gsap.set('.char', { opacity: 0, y: 20 });
+
+      gsap.to('.char', {
+        scrollTrigger: {
+          trigger: '.reveal-text',
+          start: 'top 80%',
+          toggleActions: 'play reverse play reverse', // ✅ Animates every time on scroll
+        },
+        opacity: 1,
+        y: 0,
+        stagger: 0.05,
+        duration: 0.6,
+        ease: 'power2.out'
+      });
+    });

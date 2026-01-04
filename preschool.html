@@ -26,6 +26,40 @@
   <!-- Custom Styles (Compiled from LESS) -->
   <link rel="stylesheet" href="src/styles/style.css" />
 
+  <script>
+    document.documentElement.classList.add('js');
+  </script>
+
+  <style>
+    .js .hero__title-line {
+      opacity: 0;
+    }
+
+    h1 .hero__title-script,
+    h1 .hero__title-main {
+      display: block;
+      overflow: hidden;
+    }
+
+    h1 .hero__title-script {
+      line-height: 1;
+      padding-top: 0.14em;
+      padding-bottom: 0.34em;
+      margin-top: -0.14em;
+      margin-bottom: calc(1.5rem - 0.34em);
+    }
+
+    @media (max-width: 767px) {
+      h1 .hero__title-script {
+        margin-bottom: calc(1rem - 0.34em);
+      }
+    }
+
+    .preschool-hero-line {
+      display: inline-block;
+    }
+  </style>
+
 
 
 
@@ -830,7 +864,11 @@
 
                             <h1 class="hero__title-line">
                               <span class="hero__title-script" id="hero-script-text-t">
-                                Nurturing </span>imaginative journeys.
+                                <span class="preschool-hero-line">Nurturing</span>
+                              </span>
+                              <span class="hero__title-main">
+                                <span class="preschool-hero-line">imaginative journeys.</span>
+                              </span>
                             </h1>
                           </div>
 
@@ -1913,8 +1951,6 @@
   <!-- GSAP -->
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
   <script>
-
-
     function supportsCurtainClip() {
       if (typeof CSS === 'undefined' || typeof CSS.supports !== 'function') {
         return false;
@@ -1924,6 +1960,101 @@
       return CSS.supports('clip-path', insetValue) || CSS.supports('-webkit-clip-path', insetValue);
     }
 
+    const prefersReducedMotion = window.matchMedia
+      ? window.matchMedia('(prefers-reduced-motion: reduce)').matches
+      : false;
+    let preschoolHeroPrepared = false;
+    let preschoolHeroAnimated = false;
+
+    const PRESCHOOL_HERO_KNOBS = {
+      lineDuration: 0.8,
+      lineEase: 'power1.out',
+      lineFromY: '200%',
+      lineGap: 0.15
+    };
+
+    function getPreschoolHeroTextElements() {
+      const heroSlider = document.querySelector('.hero__slider');
+      if (!heroSlider) return null;
+
+      const activeSlide = heroSlider.querySelector('.swiper-slide-active') || heroSlider.querySelector('.swiper-slide');
+      if (!activeSlide) return null;
+
+      return {
+        title: activeSlide.querySelector('.hero__title-line'),
+        scriptLine: activeSlide.querySelector('.hero__title-script .preschool-hero-line'),
+        mainLine: activeSlide.querySelector('.hero__title-main .preschool-hero-line')
+      };
+    }
+
+    function prepPreschoolHeroText() {
+      const elements = getPreschoolHeroTextElements();
+      if (!elements) return;
+      if (elements.title) {
+        elements.title.style.opacity = '1';
+      }
+      if (preschoolHeroPrepared || typeof gsap === 'undefined') return;
+
+      const lines = [elements.scriptLine, elements.mainLine].filter(Boolean);
+      if (!lines.length) return;
+
+      gsap.set(lines, {
+        y: PRESCHOOL_HERO_KNOBS.lineFromY,
+        opacity: 0,
+        willChange: 'transform, opacity'
+      });
+
+      preschoolHeroPrepared = true;
+    }
+
+    function playPreschoolHeroText() {
+      if (preschoolHeroAnimated || typeof gsap === 'undefined') return;
+      const elements = getPreschoolHeroTextElements();
+      if (!elements) return;
+
+      const lines = [elements.scriptLine, elements.mainLine].filter(Boolean);
+      if (!lines.length) return;
+
+      if (prefersReducedMotion) {
+        if (elements.title) {
+          gsap.set(elements.title, { opacity: 1, clearProps: 'transform' });
+        }
+        gsap.set(lines, { opacity: 1, y: 0, clearProps: 'will-change' });
+        preschoolHeroAnimated = true;
+        return;
+      }
+
+      const tl = gsap.timeline();
+
+      if (elements.scriptLine) {
+        tl.to(elements.scriptLine, {
+          duration: PRESCHOOL_HERO_KNOBS.lineDuration,
+          y: 0,
+          opacity: 1,
+          ease: PRESCHOOL_HERO_KNOBS.lineEase
+        }, 0);
+      }
+
+      if (elements.mainLine) {
+        const startAt = elements.scriptLine ? `>+${PRESCHOOL_HERO_KNOBS.lineGap}` : 0;
+        tl.to(elements.mainLine, {
+          duration: PRESCHOOL_HERO_KNOBS.lineDuration,
+          y: 0,
+          opacity: 1,
+          ease: PRESCHOOL_HERO_KNOBS.lineEase
+        }, startAt);
+      }
+
+      tl.eventCallback('onComplete', () => {
+        gsap.set(lines, { clearProps: 'will-change' });
+        preschoolHeroAnimated = true;
+      });
+    }
+
+    prepPreschoolHeroText();
+    if (typeof gsap !== 'undefined') {
+      gsap.delayedCall(0, playPreschoolHeroText);
+    }
   </script>
 
   <!-- jQuery -->

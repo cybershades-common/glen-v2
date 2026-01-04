@@ -26,6 +26,44 @@
   <!-- Custom Styles (Compiled from LESS) -->
   <link rel="stylesheet" href="src/styles/style.css" />
 
+  <script>
+    document.documentElement.classList.add('js');
+  </script>
+
+  <style>
+    .js .hero__title-line {
+      opacity: 0;
+    }
+
+    .hero-anim-text {
+      display: block;
+      overflow: hidden;
+    }
+
+    .hero-anim-text__inner {
+      display: inline-block;
+    }
+
+    .hero-anim-text__word {
+      display: inline-block;
+      white-space: nowrap;
+      overflow: hidden;
+    }
+
+    .hero-anim-text__char {
+      display: inline-block;
+      position: relative;
+      padding-right: 0.02em;
+      will-change: transform, opacity;
+    }
+
+    .hero-script-text {
+      display: inline-block;
+      position: relative;
+      overflow: visible;
+    }
+  </style>
+
 
 
 
@@ -828,8 +866,8 @@
                             <!-- Hero Text Block -->
 
                             <h1 class="hero__title-line">
-                              <span class="hero__title-script" id="hero-script-text-t">
-                                Independent thinkers </span>and creative individuals.
+                              <span class="hero__title-script" id="hero-script-text-t">Independent thinkers</span>
+                              <span class="hero__title-main">and creative individuals.</span>
                             </h1>
                           </div>
 
@@ -2213,17 +2251,333 @@
   <!-- GSAP -->
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
   <script>
+    const prefersReducedMotion = window.matchMedia
+      ? window.matchMedia('(prefers-reduced-motion: reduce)').matches
+      : false;
+    let heroTextPrepared = false;
+    let heroTextAnimated = false;
+    let heroTextStarted = false;
+    let heroTextSplit = null;
 
+    const HERO_BOLD_ANIM = {
+      yFromPercent: 100,
+      duration: 1.2,
+      stagger: 0.1,
+      ease: 'power4.out'
+    };
 
-    function supportsCurtainClip() {
-      if (typeof CSS === 'undefined' || typeof CSS.supports !== 'function') {
-        return false;
-      }
+    function getActiveHeroTextElements() {
+      const heroSlider = document.querySelector('.hero__slider');
+      if (!heroSlider) return null;
 
-      const insetValue = 'inset(0 0 100% 0)';
-      return CSS.supports('clip-path', insetValue) || CSS.supports('-webkit-clip-path', insetValue);
+      const activeSlide = heroSlider.querySelector('.swiper-slide-active') || heroSlider.querySelector('.swiper-slide');
+      if (!activeSlide) return null;
+
+      return {
+        title: activeSlide.querySelector('.hero__title-line'),
+        script: activeSlide.querySelector('.hero__title-script'),
+        main: activeSlide.querySelector('.hero__title-main'),
+        description: activeSlide.querySelector('.hero__description')
+      };
     }
 
+    function normalizeText(text) {
+      return text.replace(/\\s+/g, ' ').trim();
+    }
+
+    function prepareHeroScriptWriting(element) {
+      if (!element || element.dataset.scriptWrite === 'true') return null;
+      const text = normalizeText(element.textContent || '');
+      if (!text) return null;
+
+      element.textContent = '';
+      element.dataset.scriptWrite = 'true';
+      element.setAttribute('aria-label', text);
+      element.setAttribute('role', 'text');
+
+      const textSpan = document.createElement('span');
+      textSpan.className = 'hero-script-text';
+      textSpan.textContent = text;
+      textSpan.setAttribute('aria-hidden', 'true');
+      element.appendChild(textSpan);
+
+      return { container: element, text: textSpan };
+    }
+
+    function buildHeroBoldText(element) {
+      if (!element) return [];
+      if (element.dataset.split === 'true' && Array.isArray(element.__heroChars)) {
+        return element.__heroChars;
+      }
+
+      const text = normalizeText(element.textContent || '');
+      if (!text) return [];
+
+      element.textContent = '';
+      element.dataset.split = 'true';
+      element.classList.add('hero-anim-text');
+      element.setAttribute('role', 'text');
+      element.setAttribute('aria-label', text);
+
+      const srText = document.createElement('span');
+      srText.className = 'visually-hidden';
+      srText.textContent = text;
+      element.appendChild(srText);
+
+      const inner = document.createElement('span');
+      inner.className = 'hero-anim-text__inner';
+      inner.setAttribute('aria-hidden', 'true');
+      element.appendChild(inner);
+
+      const chars = [];
+      const words = text.split(' ');
+
+      words.forEach((word, wIndex) => {
+        const wordEl = document.createElement('span');
+        wordEl.className = 'hero-anim-text__word';
+        wordEl.setAttribute('aria-hidden', 'true');
+
+        Array.from(word).forEach(char => {
+          const charEl = document.createElement('span');
+          charEl.className = 'hero-anim-text__char';
+          charEl.textContent = char;
+          charEl.setAttribute('aria-hidden', 'true');
+          wordEl.appendChild(charEl);
+          chars.push(charEl);
+        });
+
+        inner.appendChild(wordEl);
+
+        if (wIndex !== words.length - 1) {
+          inner.appendChild(document.createTextNode(' '));
+        }
+      });
+
+      setHeroBoldCharDefaults(chars);
+      element.__heroChars = chars;
+      return chars;
+    }
+
+    function setHeroBoldCharDefaults(chars) {
+      if (!chars.length) return;
+      if (typeof gsap !== 'undefined') {
+        gsap.set(chars, {
+          yPercent: HERO_BOLD_ANIM.yFromPercent,
+          opacity: 0,
+          willChange: 'transform, opacity'
+        });
+        return;
+      }
+
+      chars.forEach(char => {
+        char.style.transform = `translateY(${HERO_BOLD_ANIM.yFromPercent}%)`;
+        char.style.opacity = '0';
+      });
+    }
+
+    function animateHeroBoldText(element) {
+      if (!element || !Array.isArray(element.__heroChars) || typeof gsap === 'undefined') return;
+
+      const chars = element.__heroChars;
+      gsap.killTweensOf(chars);
+      gsap.to(chars, {
+        duration: HERO_BOLD_ANIM.duration,
+        opacity: 1,
+        ease: HERO_BOLD_ANIM.ease,
+        yPercent: 0,
+        stagger: HERO_BOLD_ANIM.stagger,
+        onComplete: () => {
+          gsap.set(chars, { clearProps: 'will-change' });
+        }
+      });
+    }
+
+    function prepareHeroTextReveal() {
+      const elements = getActiveHeroTextElements();
+      if (!elements) return;
+      if (heroTextPrepared) return;
+
+      if (elements.title) {
+        elements.title.style.opacity = '1';
+      }
+      if (typeof gsap === 'undefined') return;
+
+      if (elements.script) {
+        elements.script.style.display = 'block';
+        elements.script.style.overflow = 'visible';
+      }
+      if (elements.main) {
+        elements.main.style.display = 'block';
+        elements.main.style.overflow = 'visible';
+      }
+
+      const scriptWrite = elements.script ? prepareHeroScriptWriting(elements.script) : null;
+      const boldChars = elements.main ? buildHeroBoldText(elements.main) : [];
+
+      heroTextSplit = {
+        scriptWrite,
+        boldTarget: elements.main,
+        boldChars,
+        description: elements.description,
+        title: elements.title
+      };
+
+      if (heroTextSplit.title) {
+        gsap.set(heroTextSplit.title, { perspective: 800 });
+      }
+
+      if (scriptWrite) {
+        const clipStart = 'inset(-0.4em 100% -0.4em 0)';
+        gsap.set(scriptWrite.text, {
+          clipPath: clipStart,
+          webkitClipPath: clipStart,
+          opacity: 0,
+          y: 6,
+          willChange: 'clip-path, transform, opacity'
+        });
+      }
+
+      if (heroTextSplit.description) {
+        gsap.set(heroTextSplit.description, {
+          opacity: 0,
+          y: 14,
+          scale: 0.98,
+          transformOrigin: 'left top',
+          willChange: 'transform, opacity'
+        });
+      }
+
+      heroTextPrepared = true;
+    }
+
+    function playHeroTextReveal() {
+      if (heroTextStarted || typeof gsap === 'undefined') return;
+      const elements = getActiveHeroTextElements();
+      if (!elements) return;
+      heroTextStarted = true;
+
+      if (prefersReducedMotion) {
+        const reducedTargets = [elements.title, elements.description].filter(Boolean);
+        if (reducedTargets.length) {
+          gsap.set(reducedTargets, { opacity: 1, clearProps: 'transform' });
+        }
+        if (elements.script) {
+          const scriptText = elements.script.querySelector('.hero-script-text');
+          if (scriptText) {
+            gsap.set(scriptText, {
+              opacity: 1,
+              y: 0,
+              clearProps: 'clip-path,webkitClipPath,transform,opacity'
+            });
+          }
+        }
+        if (elements.main && Array.isArray(elements.main.__heroChars)) {
+          if (typeof gsap !== 'undefined') {
+            gsap.set(elements.main.__heroChars, {
+              yPercent: 0,
+              opacity: 1,
+              clearProps: 'will-change'
+            });
+          } else {
+            elements.main.__heroChars.forEach(char => {
+              char.style.transform = 'translateY(0%)';
+              char.style.opacity = '1';
+            });
+          }
+        }
+        heroTextAnimated = true;
+        return;
+      }
+
+      const split = heroTextSplit || {
+        scriptWrite: null,
+        boldTarget: elements.main,
+        boldChars: elements.main && Array.isArray(elements.main.__heroChars) ? elements.main.__heroChars : [],
+        description: elements.description,
+        title: elements.title
+      };
+
+      const tl = gsap.timeline({
+        defaults: {
+          ease: 'power2.out'
+        }
+      });
+
+      const scriptDuration = 1.1;
+      const scriptGap = 0.2;
+      const scriptEnd = split.scriptWrite ? scriptDuration + scriptGap : 0;
+
+      // Script text - handwriting reveal
+      if (split.scriptWrite && split.scriptWrite.text) {
+        const clipEnd = 'inset(-0.4em 0% -0.4em 0)';
+        tl.to(split.scriptWrite.text, {
+          duration: scriptDuration,
+          ease: 'power2.out',
+          opacity: 1,
+          y: 0,
+          clipPath: clipEnd,
+          webkitClipPath: clipEnd
+        }, 0);
+      }
+
+      if (split.boldTarget && split.boldChars && split.boldChars.length) {
+        tl.add(() => animateHeroBoldText(split.boldTarget), scriptEnd);
+      }
+
+      // Description - soft fade
+      if (split.description) {
+        tl.to(split.description, {
+          opacity: 1,
+          y: 0,
+          scale: 1,
+          duration: 0.9,
+          ease: 'power2.out'
+        }, scriptEnd ? scriptEnd + 0.25 : 0.2);
+      }
+
+      const clearTargets = [];
+      if (split.scriptWrite && split.scriptWrite.text) {
+        clearTargets.push(split.scriptWrite.text);
+      }
+      if (split.description) {
+        clearTargets.push(split.description);
+      }
+      if (clearTargets.length) {
+        tl.set(clearTargets, { clearProps: 'will-change' });
+      }
+
+      gsap.delayedCall(4, () => {
+        if (heroTextAnimated) return;
+        if (split.scriptWrite && split.scriptWrite.text) {
+          gsap.set(split.scriptWrite.text, {
+            opacity: 1,
+            y: 0,
+            clearProps: 'clip-path,webkitClipPath,transform,opacity'
+          });
+        }
+        if (split.boldTarget && Array.isArray(split.boldTarget.__heroChars)) {
+          gsap.set(split.boldTarget.__heroChars, {
+            yPercent: 0,
+            opacity: 1,
+            clearProps: 'will-change'
+          });
+        }
+        if (split.description) {
+          gsap.set(split.description, { opacity: 1, clearProps: 'transform' });
+        }
+        heroTextAnimated = true;
+      });
+
+      tl.eventCallback('onComplete', () => {
+        heroTextAnimated = true;
+      });
+    }
+
+    prepareHeroTextReveal();
+    window.addEventListener('load', () => {
+      if (typeof gsap === 'undefined') return;
+      gsap.delayedCall(0.1, playHeroTextReveal);
+    });
   </script>
 
   <!-- jQuery -->
