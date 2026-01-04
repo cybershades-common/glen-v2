@@ -7233,6 +7233,7 @@ h1 .hero__title-script {
   letter-spacing: -0.025rem;
   color: #db574e;
   text-decoration: underline;
+  text-decoration-thickness: 0.04em;
   text-underline-position: from-font;
   text-decoration-skip-ink: none;
 }
