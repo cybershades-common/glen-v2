@@ -1,297 +1,307 @@
-<!doctype html>
-<html lang="en">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>GSAP Hero – Handwritten + Big Title</title>
+<!-- Toggle -->
+<a herf="#link-to-search" class="button button-open">
+  <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" class="icon">
+    <rect class="fill-none" width="32" height="32"/>
+    <path class="fill-currentcolor" d="M29.82861,24.17139,25.56519,19.908A13.0381,13.0381,0,1,0,19.908,25.56525l4.26343,4.26337a4.00026,4.00026,0,0,0,5.65723-5.65723ZM5,14a9,9,0,1,1,9,9A9.00984,9.00984,0,0,1,5,14Z"/>
+  </svg>
+</a>
 
-  <!-- GSAP -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<!-- Search form overlay -->
+<div class="overlay hiding">
+  <button class="button button-close">
+    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" class="icon">
+      <rect class="fill-none" width="32" height="32"/>
+      <path class="fill-currentcolor" d="M18.82813,16,29.41406,5.41406a1.99979,1.99979,0,0,0-2.82812-2.82812L16,13.17188,5.41406,2.58594A1.99979,1.99979,0,0,0,2.58594,5.41406L13.17188,16,2.58594,26.58594a1.99979,1.99979,0,1,0,2.82813,2.82813L16,18.82813,26.58594,29.41406a1.99979,1.99979,0,0,0,2.82813-2.82812Z"/>
+    </svg>
+  </button>
+  <form action="#" class="form-search">
+    <label for="keywords" class="visuallyhidden">Search</label>
+    <input class="input input-search" id="keywords" name="keywords" type="search" placeholder="Find something…" autocorrect="off" autocapitalize="off" required>
+    <button type="submit" class="button button-search">
+      <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" class="icon">
+        <rect class="fill-none" width="32" height="32"/>
+        <path class="fill-currentcolor" d="M29.82861,24.17139,25.56519,19.908A13.0381,13.0381,0,1,0,19.908,25.56525l4.26343,4.26337a4.00026,4.00026,0,0,0,5.65723-5.65723ZM5,14a9,9,0,1,1,9,9A9.00984,9.00984,0,0,1,5,14Z"/>
+      </svg>
+    </button>
+  </form>
+</div>
+// Variables
+$base-px: 8px;
+$breakpoint: 768px;
+$breakpoint-max: $breakpoint - 1px;
 
-  <style>
-    :root{
-      --bg:#0b0b0b;
-      --ink:#ffffff;
-      --easeOut:cubic-bezier(.16,1,.3,1);
+// Colours
+$background: #F7FBFB;
+$background-2: #EAF5F5;
+$background-3: #BBD8D8;
+$primary: #FD7F71;
+$primary-2: #C3D8D7;
+$white: #fff;
+
+// Font stack
+$system: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+
+// Basics
+// ----------------------
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  background-color: $background;
+  height: 100vh;
+  font-family: $system; }
+
+// For hiding the label
+// ----------------------
+.visuallyhidden {
+  position: absolute;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  border: 0; }
+
+// Input/button reset
+// ---------------------------
+.input,
+.button {
+  display: inline-block;
+  -webkit-appearance: none;
+	-moz-appearance: none;
+  appearance: none;
+  line-height: normal;
+  border: none;
+  outline: none;
+	max-width: 100%;
+  font-family: $system; }
+
+// SVG Helpers
+// ---------------------------
+.fill-currentcolor {
+  fill: currentcolor; }
+
+.fill-none {
+  fill: none; }
+
+// Icon
+// ---------------------------
+.icon {
+  width: 24px;
+  height: 24px;
+  transition: .3s ease-out;
+  
+  @media (min-width: $breakpoint) {
+    width: 32px;
+    height: 32px; } }
+
+// Button
+// ---------------------------
+.button {
+  cursor: pointer;
+  color: $primary;
+  transition: .3s ease-out;
+  
+  &:hover,
+  &:focus { 
+    transform: scale(1.125);
+    
+    .icon {
+      transform: scale(1.25); } } }
+
+// Button (open)
+// ---------------------------
+.button-open {
+  // Display/alignment
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  
+  // Sizing
+  width: 96px;
+  height: 96px;
+  border-radius: 48px;
+  
+  // Style
+  background-color: $white;
+  box-shadow:
+    0 1px 1px rgba($background-3, .6),
+    0 3px 3px rgba($background-3, .4),
+    0 8px 16px rgba($background-3, .3);
+  
+  &:hover,
+  &:focus {
+    box-shadow:
+      0 2px 2px rgba($background-3, .4),
+      0 4px 4px rgba($background-3, .3),
+      0 12px 32px rgba($background-3, .3); } }
+
+// Button (close)
+// ---------------------------
+.button-close {
+  position: absolute;
+  top: 7.5vw;
+  right: 7.5vw;
+  padding: 0;
+  background-color: transparent; }
+
+.button-search {
+  position: absolute;
+  z-index: 2;
+  top: 0;
+  right: 0;
+  background-color: transparent;
+  cursor: pointer;
+  padding: 25px $base-px*2 21px;
+
+  // Same horizontal padding .input-search
+  @media (min-width: $breakpoint) {
+    padding: 30px ($base-px*6); } }
+
+// Search
+// ---------------------------
+.form-search {
+  position: relative;
+  width: 100%;
+
+  @media (min-width: $breakpoint) {
+    max-width: 720px; } }
+
+// Input
+// ---------------------------
+.input-search {
+  // Sizing
+  padding: 26px ($base-px*2) 25px; // 72px height
+  width: 100%;
+  
+  // Style
+  font-size: 18px;
+  font-weight: 600;
+  color: $primary;
+  background-color: $white;
+  box-shadow:
+    0 1px 1px rgba($background-3, .6),
+    0 3px 3px rgba($background-3, .4),
+    0 8px 16px rgba($background-3, .3);
+
+  @media (min-width: $breakpoint) {
+    // Sizing
+    padding: 29px ($base-px*6);
+    
+    // Style
+    font-size: 32px;
+    border-radius: 30em; } }
+
+.input-search::placeholder {
+  color: $primary-2; }
+
+// Overlay
+// ---------------------------
+.overlay {
+  // Display
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  align-content: flex-end;
+  
+  // Positioning
+  position: fixed;
+  z-index: 3;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  
+  // Style
+  background-image: linear-gradient(to top, $background, $background-2);
+  
+  @media (min-width: $breakpoint) {
+    align-items: center;
+    align-content: center; } }
+
+// Transition
+// ----------------------
+// Initial state
+.hiding {
+  max-height: 0;
+  opacity: 0;
+  bottom: 0;
+  
+  // This transition happens when the close button is clicked
+  // and should be faster than the .showing state
+  transition:
+    max-height .3s .2s cubic-bezier(0.215, 0.61, 0.355, 1),
+    opacity .6s ease-out;
+  
+  // When hiding inner elements should be invisible too
+  .button-search,
+  .input-search {
+    opacity: 0; }
+  
+  // Offset the button
+  .button-search {
+    transform: translate3d(0, 33%, 0); }
+
+  // Offset the input more 
+  .input-search {
+    transform: translate3d(0, 50%, 0); } }
+
+// Showing state
+.showing {
+  max-height: 100vh;
+  top: 0;
+  
+  // This happens when the open button is clicked
+  // max-height transition is to appear more subtle
+  transition:
+    max-height .4s .2s cubic-bezier(0.215, 0.61, 0.355, 1),
+    opacity .8s ease-out; }
+
+// Transitions
+.button-search {
+  transition: .4s .6s ease-out; }
+
+.input-search {
+  transition: .8s .3s ease-out; }
+
+  // Keep search toggling out of the global scope
+(function(window, document, undefined) {
+  // Variables
+  var open = document.querySelector('.button-open');
+  var close = document.querySelector('.button-close');
+  var overlay = document.querySelector('.overlay');
+  var search = document.querySelector('.input-search');
+  
+  // Focus on an element
+  var focusOn = function(element) {
+    // Only focus on the element if it contains the relevant
+    // class name that means it’s actually visible
+    if (overlay.classList.contains('showing')) {
+      element.focus();
     }
-    *{box-sizing:border-box;}
-    body{
-      margin:0;
-      min-height:200vh; /* for scroll testing */
-      background:var(--bg);
-      color:var(--ink);
-      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+    // Otherwise remove the focus from the element
+    else {
+      element.blur();
     }
-
-    /* ---------- HERO LAYOUT ---------- */
-    .wrap{
-      width:92vw;
-      max-width:1800px;
-      margin:0 auto;
-      padding-top:20vh;
-    }
-    .hero{
-      display:flex;
-      flex-direction:column;
-      gap: 1.4rem;
-    }
-
-    /* ---------- HANDWRITTEN LINE ---------- */
-    .hand{
-      position:relative;
-      display:inline-block;
-      width: fit-content;
-      max-width: 100%;
-      padding-bottom: 0.35em;
-    }
-
-    .hand__text{
-      font-family: "Segoe Script","Bradley Hand","Lucida Handwriting","Snell Roundhand","Brush Script MT",cursive;
-      font-weight: 400;
-      letter-spacing: -0.01em;
-      line-height: 1;
-      margin:0;
-
-      font-size: clamp(34px, 4.2vw, 88px);
-      color: var(--ink);
-      display:inline-block;
-      position:relative;
-      z-index:2;
-
-      /* reveal mask via clip-path (animated by GSAP) */
-      clip-path: inset(0 100% 0 0);
-      filter: blur(6px);
-      transform: translateY(10px);
-      opacity: 0;
-      will-change: clip-path, transform, filter, opacity;
-    }
-
-    /* underline svg */
-    .hand__underline{
-      position:absolute;
-      left: 0.02em;
-      right: 0.02em;
-      bottom: -0.05em;
-      height: 0.35em;
-      pointer-events:none;
-      z-index:1;
-      opacity: 0.95;
-    }
-    .hand__underline path{
-      fill:none;
-      stroke: var(--ink);
-      stroke-width: 4;
-      stroke-linecap: round;
-      stroke-linejoin: round;
-      opacity: 0.9;
-    }
-
-    /* ---------- BIG TITLE (CHAR REVEAL) ---------- */
-    .o-anim-text{
-      overflow:hidden;
-      line-height:1;
-    }
-    .c-heading.-h1 h1{
-      font-size: clamp(120px, 18vw, 320px);
-      font-weight: 600;
-      letter-spacing: -0.05em;
-      line-height: 0.9;
-      margin: 0;
-    }
-
-    .u-screen-reader-text{
-      position:absolute;
-      width:1px;height:1px;
-      padding:0;margin:-1px;
-      overflow:hidden;
-      clip:rect(0,0,0,0);
-      white-space:nowrap;border:0;
-    }
-
-    .o-anim-text_inner{ display:inline-block; }
-    .o-anim-text_word{ display:inline-block; white-space:nowrap; }
-    .o-anim-text_char{
-      display:inline-block;
-      padding-right: 0.02em;
-      will-change: transform, opacity, filter;
-    }
-
-    /* Mobile tweaks */
-    @media (max-width: 768px){
-      .wrap{ padding-top: 18vh; }
-      .hero{ gap: 1rem; }
-
-      .c-heading.-h1 h1{
-        font-size: clamp(72px, 22vw, 150px);
-        line-height: 0.95;
-        letter-spacing: -0.035em;
-      }
-      .hand__text{
-        font-size: clamp(26px, 7vw, 60px);
-      }
-      .hand__underline path{ stroke-width: 3; }
-    }
-  </style>
-</head>
-
-<body>
-  <div class="wrap">
-    <section class="hero" id="hero">
-
-      <!-- Handwritten line -->
-      <div class="hand">
-        <p class="hand__text" id="scriptLine">Independent Thinkers</p>
-
-        <!-- A slightly imperfect underline path (feels hand-drawn) -->
-        <svg class="hand__underline" viewBox="0 0 800 80" preserveAspectRatio="none" aria-hidden="true">
-          <path id="underlinePath"
-            d="M20,50
-               C110,65 170,35 250,50
-               C330,67 390,38 470,52
-               C560,72 630,40 780,52" />
-        </svg>
-      </div>
-
-      <!-- Big animated title -->
-      <div data-project-header="title">
-        <div class="o-anim-text c-heading -h1 -chars" data-module-anim-text="m4" data-anim-text-type="chars">
-          <h1 class="u-screen-reader-text">Belle-Mère</h1>
-          <div class="o-anim-text_inner" data-anim-text="inner"></div>
-        </div>
-      </div>
-
-    </section>
-  </div>
-
-  <script>
-    // ---------------------------
-    // EASY KNOBS (tune here)
-    // ---------------------------
-    const KNOBS = {
-      // Handwritten line
-      scriptRevealDur: 1.15,
-      scriptEase: "power3.out",
-      underlineDur: 0.9,
-      underlineDelay: 0.35,
-
-      // Big title chars
-      titleFromY: 120,       // px
-      titleBlurFrom: 10,     // px
-      titleDur: 1.0,
-      titleStaggerEach: 0.02,
-      titleStaggerFrom: "random" // "random" or "start" etc.
-    };
-
-    // ---------------------------
-    // Build chars for big title
-    // ---------------------------
-    function buildAnimText(el, text){
-      const inner = el.querySelector('[data-anim-text="inner"]');
-      inner.innerHTML = '';
-
-      const chars = [];
-      const words = text.split(' ');
-
-      words.forEach((word, wIndex) => {
-        const wordEl = document.createElement('div');
-        wordEl.className = 'o-anim-text_word';
-
-        [...word].forEach(char => {
-          const span = document.createElement('span');
-          span.className = 'o-anim-text_char';
-          span.textContent = char;
-          wordEl.appendChild(span);
-          chars.push(span);
-        });
-
-        inner.appendChild(wordEl);
-        if(wIndex !== words.length - 1){
-          inner.appendChild(document.createTextNode(' '));
-        }
-      });
-
-      return chars;
-    }
-
-    // ---------------------------
-    // Underline draw setup
-    // ---------------------------
-    function prepStroke(pathEl){
-      const len = pathEl.getTotalLength();
-      pathEl.style.strokeDasharray = len;
-      pathEl.style.strokeDashoffset = len;
-      return len;
-    }
-
-    // ---------------------------
-    // Init animation
-    // ---------------------------
-    function init(){
-      const hero = document.querySelector("#hero");
-
-      const scriptLine = document.querySelector("#scriptLine");
-      const underline = document.querySelector("#underlinePath");
-
-      const titleEl = document.querySelector('[data-module-anim-text="m4"]');
-      const titleChars = buildAnimText(titleEl, "Belle-Mère");
-
-      // Prep underline stroke
-      prepStroke(underline);
-
-      // Set initial states (GSAP)
-      gsap.set(titleChars, {
-        y: KNOBS.titleFromY,
-        opacity: 0,
-        filter: `blur(${KNOBS.titleBlurFrom}px)`
-      });
-
-      // Timeline
-      const tl = gsap.timeline({ paused: true });
-
-      // 1) Handwritten line reveal (clip-path feels like writing)
-      tl.to(scriptLine, {
-        duration: KNOBS.scriptRevealDur,
-        ease: KNOBS.scriptEase,
-        opacity: 1,
-        y: 0,
-        filter: "blur(0px)",
-        clipPath: "inset(0 0% 0 0)"
-      }, 0);
-
-      // 2) Underline draw
-      tl.to(underline, {
-        duration: KNOBS.underlineDur,
-        ease: "power2.out",
-        strokeDashoffset: 0
-      }, KNOBS.underlineDelay);
-
-      // 3) Big title chars (random stagger like the reference vibe)
-      tl.to(titleChars, {
-        duration: KNOBS.titleDur,
-        ease: "power3.out",
-        y: 0,
-        opacity: 1,
-        filter: "blur(0px)",
-        stagger: {
-          each: KNOBS.titleStaggerEach,
-          from: KNOBS.titleStaggerFrom
-        }
-      }, 0.22);
-
-      // Trigger when hero enters view
-      const io = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          if(entry.isIntersecting){
-            tl.play();
-            io.disconnect();
-          }
-        });
-      }, { threshold: 0.45 });
-
-      io.observe(hero);
-    }
-
-    init();
-  </script>
-</body>
-</html>
+  }
+  
+  // Toggles a set of class names on an element
+  var toggler = function() {
+    // Toggle the classes which set off the transition
+    overlay.classList.toggle('hiding');
+    overlay.classList.toggle('showing');
+    
+    // Once the overlay’s transition ends focus the search field
+    overlay.addEventListener('transitionend', focusOn.bind(null, search), false);
+    
+    // Prevent the clicks from navigating away
+    return false;
+  }
+  
+  // Add the event listener to the toggle
+  open.addEventListener('click', toggler, false);
+  close.addEventListener('click', toggler, false);
+})(window, document);

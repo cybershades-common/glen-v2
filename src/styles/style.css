@@ -347,6 +347,31 @@ h6,
 .btn-lg {
   padding: 1.25rem;
 }
+.audio-btn a,
+.audio-btn button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transform-origin: 50% 50%;
+  transition: transform 0.3s ease-out;
+}
+.audio-btn svg {
+  display: block;
+  transform-origin: 50% 50%;
+  transition: transform 0.3s ease-out;
+}
+.audio-btn a:hover,
+.audio-btn a:focus-visible,
+.audio-btn button:hover,
+.audio-btn button:focus-visible {
+  transform: scale(1.125);
+}
+.audio-btn a:hover svg,
+.audio-btn a:focus-visible svg,
+.audio-btn button:hover svg,
+.audio-btn button:focus-visible svg {
+  transform: scale(1.25);
+}
 .site-header {
   position: relative;
   z-index: 1020;
