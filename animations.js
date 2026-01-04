@@ -485,7 +485,7 @@ function initAnimations() {
   initMarqueeAnimation();
   initVideoTestimonialsAnimations();
   initRevealAnimations();
-  // initFooterBrandReveal();
+  initFooterBrandReveal();
   initParallaxBackgrounds();
   // Featured cards now use swiper instead of GSAP scroll effect
 

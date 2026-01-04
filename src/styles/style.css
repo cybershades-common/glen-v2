@@ -9931,11 +9931,60 @@ button {
     align-items: flex-start;
   }
 }
+.full-width-testimonial-audio .testimonial-audio-player audio {
+  display: none;
+}
+.full-width-testimonial-audio .testimonial-audio-toggle {
+  width: 44px;
+  height: 44px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  background: transparent;
+  color: #ffffff;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  transition: border-color 0.2s ease, background-color 0.2s ease, color 0.2s ease;
+}
+.full-width-testimonial-audio .testimonial-audio-toggle:hover,
+.full-width-testimonial-audio .testimonial-audio-toggle:focus-visible {
+  border-color: #ffffff;
+  background-color: rgba(255, 255, 255, 0.12);
+}
+.full-width-testimonial-audio .testimonial-audio-toggle .testimonial-audio-toggle-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+.full-width-testimonial-audio .testimonial-audio-toggle .testimonial-audio-toggle-icon--pause {
+  display: none;
+}
+.full-width-testimonial-audio .testimonial-audio-toggle.is-playing .testimonial-audio-toggle-icon--play {
+  display: none;
+}
+.full-width-testimonial-audio .testimonial-audio-toggle.is-playing .testimonial-audio-toggle-icon--pause {
+  display: inline-flex;
+}
 .full-width-testimonial-audio .testimonial-audio-waveform {
+  --wave-progress: 0%;
+  --wave-strong: #ffffff;
+  --wave-light: rgba(255, 255, 255, 0.6);
   position: relative;
   width: 475px;
   height: 30px;
   flex-shrink: 0;
+  cursor: pointer;
+  overflow: hidden;
+  background: linear-gradient(90deg, var(--wave-strong) 0%, var(--wave-strong) var(--wave-progress), var(--wave-light) var(--wave-progress), var(--wave-light) 100%);
+  mask-image: url('../../assets/figma/5184ebea-e47d-4526-bea8-b44cdef221ce.svg');
+  mask-position: center;
+  mask-size: 100% 100%;
+  mask-repeat: no-repeat;
+  -webkit-mask-image: url('../../assets/figma/5184ebea-e47d-4526-bea8-b44cdef221ce.svg');
+  -webkit-mask-position: center;
+  -webkit-mask-size: 100% 100%;
+  -webkit-mask-repeat: no-repeat;
 }
 @media (max-width: 991px) {
   .full-width-testimonial-audio .testimonial-audio-waveform {
@@ -9943,25 +9992,12 @@ button {
     max-width: 475px;
   }
 }
-.full-width-testimonial-audio .testimonial-audio-waveform .testimonial-audio-waveform-bg {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-.full-width-testimonial-audio .testimonial-audio-waveform .testimonial-audio-waveform-progress {
-  position: absolute;
-  left: -5.86px;
-  top: -3px;
-  width: 249px;
-  height: 39px;
-  background: #ffffff;
-  mask-image: url('https://www.figma.com/api/mcp/asset/1a2c95c1-4489-4efd-a707-34757d71a156');
-  mask-position: 5.858px 3px;
-  mask-size: 475px 30px;
-  mask-repeat: no-repeat;
-  z-index: 1;
+.full-width-testimonial-audio .testimonial-audio-time {
+  font-family: 'Averta', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-weight: 400;
+  font-size: 0.9375rem;
+  line-height: 1.4;
+  color: #ffffff;
 }
 .full-width-testimonial-audio .testimonial-audio-duration {
   font-family: 'Averta', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
@@ -9969,6 +10005,18 @@ button {
   font-size: 0.9375rem;
   line-height: 1.4;
   color: #ffffff;
+}
+.full-width-testimonial-audio .testimonial-audio-quote .word {
+  display: inline-block;
+  opacity: 1;
+  transition: opacity 0.2s ease;
+}
+.full-width-testimonial-audio .testimonial-audio-slide.is-audio-playing .testimonial-audio-quote .word {
+  opacity: 0.6;
+}
+.full-width-testimonial-audio .testimonial-audio-slide.is-audio-playing .testimonial-audio-quote .word.active {
+  opacity: 1;
+  color: white;
 }
 .full-width-testimonial-audio .testimonial-audio-author {
   font-family: 'Averta', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;

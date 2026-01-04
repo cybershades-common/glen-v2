@@ -1542,40 +1542,90 @@ button {
       gap: 15px;
       align-items: flex-start;
     }
+
+    audio {
+      display: none;
+    }
+  }
+
+  .testimonial-audio-toggle {
+    width: 44px;
+    height: 44px;
+    border-radius: 999px;
+    border: 1px solid fade(@color-white, 70%);
+    background: transparent;
+    color: @color-white;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    transition: border-color 0.2s ease, background-color 0.2s ease, color 0.2s ease;
+
+    &:hover,
+    &:focus-visible {
+      border-color: @color-white;
+      background-color: fade(@color-white, 12%);
+    }
+
+    .testimonial-audio-toggle-icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .testimonial-audio-toggle-icon--pause {
+      display: none;
+    }
+
+    &.is-playing {
+      .testimonial-audio-toggle-icon--play {
+        display: none;
+      }
+
+      .testimonial-audio-toggle-icon--pause {
+        display: inline-flex;
+      }
+    }
   }
 
   .testimonial-audio-waveform {
+    --wave-progress: 0%;
+    --wave-strong: rgba(255, 255, 255, 1);
+    --wave-light: rgba(255, 255, 255, 0.6);
     position: relative;
     width: 475px;
     height: 30px;
     flex-shrink: 0;
+    cursor: pointer;
+    overflow: hidden;
+    background: linear-gradient(
+      90deg,
+      var(--wave-strong) 0%,
+      var(--wave-strong) var(--wave-progress),
+      var(--wave-light) var(--wave-progress),
+      var(--wave-light) 100%
+    );
+    mask-image: url('../../assets/figma/5184ebea-e47d-4526-bea8-b44cdef221ce.svg');
+    mask-position: center;
+    mask-size: 100% 100%;
+    mask-repeat: no-repeat;
+    -webkit-mask-image: url('../../assets/figma/5184ebea-e47d-4526-bea8-b44cdef221ce.svg');
+    -webkit-mask-position: center;
+    -webkit-mask-size: 100% 100%;
+    -webkit-mask-repeat: no-repeat;
 
     @media (max-width: (@breakpoint-lg - 1)) {
       width: 100%;
       max-width: 475px;
     }
+  }
 
-    .testimonial-audio-waveform-bg {
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-
-    .testimonial-audio-waveform-progress {
-      position: absolute;
-      left: -5.86px;
-      top: -3px;
-      width: 249px;
-      height: 39px;
-      background: @color-white;
-      mask-image: url('https://www.figma.com/api/mcp/asset/1a2c95c1-4489-4efd-a707-34757d71a156');
-      mask-position: 5.858px 3px;
-      mask-size: 475px 30px;
-      mask-repeat: no-repeat;
-      z-index: 1;
-    }
+  .testimonial-audio-time {
+    font-family: @font-primary;
+    font-weight: @font-weight-regular;
+    font-size: 0.9375rem;
+    line-height: 1.4;
+    color: @color-white;
   }
 
   .testimonial-audio-duration {
@@ -1585,6 +1635,27 @@ button {
     line-height: 1.4;
     color: @color-white;
 
+  }
+
+  .testimonial-audio-quote {
+    .word {
+      display: inline-block;
+      opacity: 1;
+      transition: opacity 0.2s ease;
+    }
+  }
+
+  .testimonial-audio-slide.is-audio-playing {
+    .testimonial-audio-quote {
+      .word {
+        opacity: 0.6;
+      }
+
+      .word.active {
+        opacity: 1;
+        color: white;
+      }
+    }
   }
 
   .testimonial-audio-author {
