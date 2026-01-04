@@ -7219,7 +7219,44 @@ h1 .hero__title-script {
   text-decoration: none;
   margin-top: 0;
   align-self: flex-start;
-  transition: opacity 250ms ease;
+}
+.about-glenaeon-section__card-link:hover,
+.about-glenaeon-section__card-link:focus-visible {
+  text-decoration: none;
+}
+.about-glenaeon-section__card-link:hover .about-glenaeon-section__link-text,
+.about-glenaeon-section__card-link:focus-visible .about-glenaeon-section__link-text {
+  color: #cc342a;
+  text-decoration-color: #cc342a;
+}
+.about-glenaeon-section__card-link:hover svg,
+.about-glenaeon-section__card-link:focus-visible svg {
+  transform: translateX(0.65rem);
+}
+.about-glenaeon-section__card-link:hover .about-glenaeon-section__link-arrow,
+.about-glenaeon-section__card-link:focus-visible .about-glenaeon-section__link-arrow {
+  transform: translateX(0.65rem) rotate(180deg);
+}
+.about-glenaeon-section__card-link:hover svg path,
+.about-glenaeon-section__card-link:focus-visible svg path {
+  fill: #cc342a;
+}
+.about-glenaeon-section__card-link svg,
+.about-glenaeon-section__card-link .about-glenaeon-section__link-arrow {
+  display: block;
+  transition: transform 450ms ease;
+}
+.about-glenaeon-section__card-link svg path {
+  fill: #db574e;
+  transition: fill 450ms ease;
+}
+@media (prefers-reduced-motion: reduce) {
+  .about-glenaeon-section__card-link:hover svg,
+  .about-glenaeon-section__card-link:focus-visible svg,
+  .about-glenaeon-section__card-link:hover .about-glenaeon-section__link-arrow,
+  .about-glenaeon-section__card-link:focus-visible .about-glenaeon-section__link-arrow {
+    transform: none;
+  }
 }
 .about-glenaeon-section__link-text {
   font-family: 'Averta', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
@@ -7230,8 +7267,10 @@ h1 .hero__title-script {
   color: #db574e;
   text-decoration: underline;
   text-decoration-thickness: 0.04em;
+  text-decoration-color: currentColor;
   text-underline-position: from-font;
   text-decoration-skip-ink: none;
+  transition: color 450ms ease, text-decoration-color 450ms ease;
 }
 @media (max-width: 767px) {
   .about-glenaeon-section__link-text {

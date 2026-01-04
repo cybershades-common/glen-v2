@@ -216,9 +216,52 @@
     text-decoration: none;
     margin-top: 0; // No extra margin, gap handled by parent
     align-self: flex-start;
-    transition: opacity @transition-base;
 
-    
+    &:hover,
+    &:focus-visible {
+      text-decoration: none;
+    }
+
+    &:hover .about-glenaeon-section__link-text,
+    &:focus-visible .about-glenaeon-section__link-text {
+      color: darken(@primary-coral, 10%);
+      text-decoration-color: darken(@primary-coral, 10%);
+    }
+
+    &:hover svg,
+    &:focus-visible svg {
+      transform: translateX(0.65rem);
+    }
+
+    &:hover .about-glenaeon-section__link-arrow,
+    &:focus-visible .about-glenaeon-section__link-arrow {
+      transform: translateX(0.65rem) rotate(180deg);
+    }
+
+    &:hover svg path,
+    &:focus-visible svg path {
+      fill: darken(@primary-coral, 10%);
+    }
+
+    svg,
+    .about-glenaeon-section__link-arrow {
+      display: block;
+      transition: transform 450ms ease;
+    }
+
+    svg path {
+      fill: @primary-coral;
+      transition: fill 450ms ease;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      &:hover svg,
+      &:focus-visible svg,
+      &:hover .about-glenaeon-section__link-arrow,
+      &:focus-visible .about-glenaeon-section__link-arrow {
+        transform: none;
+      }
+    }
   }
 
   &__link-text {
@@ -230,8 +273,10 @@
     color: @primary-coral; // #db574e
     text-decoration: underline;
     text-decoration-thickness: 0.04em;
+    text-decoration-color: currentColor;
     text-underline-position: from-font;
     text-decoration-skip-ink: none;
+    transition: color 450ms ease, text-decoration-color 450ms ease;
 
     @media (max-width: (@breakpoint-md - 1)) {
       font-size: 1.125rem;
